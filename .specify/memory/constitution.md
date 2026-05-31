@@ -2,14 +2,14 @@
 Sync Impact Report
 Version change: template/unratified -> 1.0.0
 Modified principles:
-- Template principle 1 -> I. Простота, читаемость и поддерживаемость
-- Template principle 2 -> II. Разделение ответственности
-- Template principle 3 -> III. Риск-ориентированное тестирование
-- Template principle 4 -> IV. Последовательный пользовательский опыт
-- Template principle 5 -> V. Производительность без преждевременной оптимизации
+- Template principle 1 -> I. Simplicity, readability, and maintainability
+- Template principle 2 -> II. Separation of concerns
+- Template principle 3 -> III. Risk-based testing
+- Template principle 4 -> IV. Consistent user experience
+- Template principle 5 -> V. Performance without premature optimization
 Added sections:
-- Технические ограничения
-- Процесс разработки и проверки
+- Technical Constraints
+- Development and Verification Process
 Removed sections:
 - None
 Templates requiring updates:
@@ -23,112 +23,109 @@ Follow-up TODOs:
 - None
 -->
 
-# Куда в Курске Constitution
+# Kursk Places Map Constitution
 
 ## Core Principles
 
-### I. Простота, читаемость и поддерживаемость
+### I. Simplicity, Readability, and Maintainability
 
-Код ДОЛЖЕН следовать SOLID, KISS и DRY, когда эти принципы улучшают текущую
-задачу, а не создают церемонию ради формы. Читаемость и поддерживаемость
-ВАЖНЕЕ clever-решений: имена, структура и поток данных ДОЛЖНЫ быть понятны
-следующему инженеру без восстановления скрытого замысла. Новые абстракции
-ДОПУСТИМЫ только при явной пользе для текущей сложности, повторного
-использования или границ ответственности.
+Code MUST follow SOLID, KISS, and DRY when those principles improve the current
+task instead of creating ceremony for its own sake. Readability and
+maintainability are MORE IMPORTANT than clever solutions: names, structure, and
+data flow MUST be understandable to the next engineer without reconstructing
+hidden intent. New abstractions are ALLOWED only when they clearly benefit the
+current complexity, reuse, or responsibility boundaries.
 
-Обоснование: проект должен быстро развиваться без накопления хрупких решений,
-которые мешают выпуску карты и будущим продуктовым направлениям.
+Rationale: the project must evolve quickly without accumulating fragile
+solutions that block the map release or future product directions.
 
-### II. Разделение ответственности
+### II. Separation of Concerns
 
-Функции, хуки, helper-файлы, классы и React-компоненты ДОЛЖНЫ оставаться
-маленькими, сфокусированными и одноцелевыми. React-компоненты ДОЛЖНЫ отвечать
-за рендеринг, композицию UI и локальные состояния интерфейса; нетривиальная
-бизнес-логика, фильтрация, преобразование данных, импорт контента, аналитика и
-правила домена ДОЛЖНЫ выноситься в хуки, helpers, сервисы или другие
-сфокусированные модули. UI-логика и бизнес-логика НЕ ДОЛЖНЫ смешиваться, если
-это затрудняет тестирование, переиспользование или понимание поведения.
+Functions, hooks, helper files, classes, and React components MUST remain small,
+focused, and single-purpose. React components MUST be responsible for rendering,
+UI composition, and local interface state; non-trivial business logic,
+filtering, data transformation, content import, analytics, and domain rules
+MUST be moved into hooks, helpers, services, or other focused modules. UI logic
+and business logic MUST NOT be mixed when doing so makes behavior harder to
+test, reuse, or understand.
 
-Обоснование: карта, поиск, подборки, карточки мест и будущие сценарии должны
-оставаться проверяемыми и изменяемыми без переписывания интерфейсного слоя.
+Rationale: the map, search, collections, place cards, and future scenarios must
+remain testable and changeable without rewriting the interface layer.
 
-### III. Риск-ориентированное тестирование
+### III. Risk-Based Testing
 
-Тесты ОБЯЗАТЕЛЬНЫ для критичных пользовательских сценариев, бизнес-логики,
-граничных случаев, контрактов данных, регрессий и поведения, которое сложно
-проверить вручную. Простые UI- или контентные изменения МОГУТ ограничиваться
-ручной проверкой, если риск явно низкий и это зафиксировано в плане или задачах.
-Для исправления дефектов ДОЛЖЕН быть добавлен регрессионный тест, когда дефект
-можно воспроизвести автоматизированно разумной стоимостью. Тестовая стратегия
-ДОЛЖНА соответствовать риску: unit-тесты для чистой логики, integration/e2e или
-ручные сценарии для пользовательских потоков, где это даёт больше уверенности.
+Tests are REQUIRED for critical user scenarios, business logic, edge cases, data
+contracts, regressions, and behavior that is difficult to verify manually. Simple
+UI or content changes MAY rely on manual verification when the risk is clearly
+low and that choice is recorded in the plan or tasks. Defect fixes MUST add a
+regression test when the defect can be reproduced automatically at reasonable
+cost. The testing strategy MUST match the risk: unit tests for pure logic,
+integration/e2e tests or manual scenarios for user flows where those checks
+provide more confidence.
 
-Обоснование: тесты должны защищать важное поведение продукта, не превращая
-каждое малое изменение в непропорционально тяжёлый процесс.
+Rationale: tests should protect important product behavior without turning every
+small change into a disproportionately heavy process.
 
-### IV. Последовательный пользовательский опыт
+### IV. Consistent User Experience
 
-Интерфейс ДОЛЖЕН следовать существующим паттернам проекта, сохранять цельность
-визуального языка и одинаково объяснимое поведение на десктопных и мобильных
-экранах. Пользовательские потоки НЕ ДОЛЖНЫ содержать наложения контента,
-недоступные элементы управления, разнобой в состояниях, пустые заглушки вместо
-скрытых необязательных данных или визуальный шум, конкурирующий с основной
-ценностью карты. Новые состояния интерфейса ДОЛЖНЫ учитывать загрузку, пустые
-результаты, ошибки сторонних сервисов, мобильное управление и доступность
-основных действий.
+The interface MUST follow existing project patterns, preserve a coherent visual
+language, and keep behavior equally understandable on desktop and mobile
+screens. User flows MUST NOT contain content overlaps, inaccessible controls,
+inconsistent states, empty placeholders instead of hidden optional data, or
+visual noise that competes with the map's core value. New interface states MUST
+account for loading, empty results, third-party service errors, mobile
+interaction, and accessibility of primary actions.
 
-Обоснование: жители и туристы должны быстро понимать, куда сходить, а не
-разбираться в непоследовательном интерфейсе.
+Rationale: residents and tourists should quickly understand where to go instead
+of decoding an inconsistent interface.
 
-### V. Производительность без преждевременной оптимизации
+### V. Performance Without Premature Optimization
 
-Решения НЕ ДОЛЖНЫ оптимизироваться заранее без подтверждённой потребности, но
-ОБЯЗАНЫ избегать очевидно неэффективных алгоритмов, лишних перерендеров,
-неограниченной работы на каждый ввод и тяжёлых операций в критичном UI-пути.
-Функции карты, поиска, фильтров и карточек мест ДОЛЖНЫ учитывать целевой масштаб
-первой версии, включая публикацию не менее 500 мест и отклик, который
-воспринимается пользователем как быстрый. Производительные решения ДОЛЖНЫ
-оставаться читаемыми и оправданными текущими требованиями.
+Solutions MUST NOT be optimized in advance without a confirmed need, but they
+MUST avoid obviously inefficient algorithms, unnecessary rerenders, unbounded
+work on each input, and heavy operations in critical UI paths. Map, search,
+filter, and place-card features MUST account for the first release's target
+scale, including publication of at least 500 places and responses that users
+perceive as fast. Performance-oriented solutions MUST remain readable and
+justified by current requirements.
 
-Обоснование: полноэкранная карта и поиск должны ощущаться быстрыми, но проекту
-нельзя платить сложностью за гипотетические проблемы.
+Rationale: the full-screen map and search must feel fast, but the project must
+not pay complexity costs for hypothetical problems.
 
-## Технические ограничения
+## Technical Constraints
 
-Граничные случаи ДОЛЖНЫ обрабатываться явно: неполные данные места, разные
-варианты фотографий, неизвестные ссылки карт сообществ, ошибки внешних карт,
-мобильные размеры экрана, близкие координаты маркеров и особенности
-импортированных геоданных. Реализация ДОЛЖНА уважать существующие conventions,
-структуру проекта и уже выбранные паттерны. Будущие направления продукта
-(аккаунты, сохранённые места, Telegram-точки входа, пользовательские заявки)
-ДОЛЖНЫ учитываться как совместимость границ, но НЕ ДОЛЖНЫ усложнять первую
-версию без прямого требования.
+Edge cases MUST be handled explicitly: incomplete place data, different photo
+variants, unknown community-map links, external map errors, mobile screen sizes,
+nearby marker coordinates, and imported geodata details. Implementation MUST
+respect existing conventions, project structure, and already chosen patterns.
+Future product directions (accounts, saved places, Telegram entry points, user
+submissions) MUST be considered as compatibility boundaries, but MUST NOT
+complicate the first version without a direct requirement.
 
-## Процесс разработки и проверки
+## Development and Verification Process
 
-Каждый implementation plan ДОЛЖЕН проходить Constitution Check до исследования
-и повторно после проектирования. Review ДОЛЖЕН проверять простоту решения,
-границы ответственности, тестовую стратегию, явную обработку edge cases,
-последовательность UX и достаточную производительность для заявленного масштаба.
-Задачи ДОЛЖНЫ фиксировать риск-ориентированные проверки: автоматические тесты,
-ручные сценарии, визуальную проверку, проверку responsive-поведения или
-performance-проверку там, где это требуется риском. Отклонения от принципов
-ДОЛЖНЫ быть описаны в Complexity Tracking с причиной и отклонённой более
-простой альтернативой.
+Each implementation plan MUST pass the Constitution Check before research and
+again after design. Review MUST check solution simplicity, responsibility
+boundaries, testing strategy, explicit handling of edge cases, UX consistency,
+and sufficient performance for the stated scale. Tasks MUST record risk-based
+checks: automated tests, manual scenarios, visual verification, responsive
+behavior checks, or performance checks where risk requires them. Deviations from
+the principles MUST be described in Complexity Tracking with the reason and the
+simpler alternative that was rejected.
 
 ## Governance
 
-Эта конституция имеет приоритет над локальными привычками разработки и
-рекомендациями, которые с ней конфликтуют. Изменения конституции ДОЛЖНЫ
-включать описание причины, semver-изменение версии, обновление даты
-Last Amended и проверку зависимых шаблонов Spec Kit. MAJOR-версия используется
-для несовместимых изменений принципов или governance, MINOR-версия - для новых
-или существенно расширенных принципов и обязательных разделов, PATCH-версия -
-для уточнений без изменения смысла.
+This constitution takes priority over local development habits and
+recommendations that conflict with it. Constitution changes MUST include the
+reason, semver version change, updated Last Amended date, and verification of
+dependent Spec Kit templates. The MAJOR version is used for incompatible changes
+to principles or governance, the MINOR version is used for new or substantially
+expanded principles and required sections, and the PATCH version is used for
+clarifications that do not change meaning.
 
-Перед завершением feature-плана, задач или реализации исполнитель ДОЛЖЕН
-проверить соответствие текущей работе этой конституции. Если принцип нарушен
-осознанно, нарушение ДОЛЖНО быть явно задокументировано вместе с причиной,
-риском и более простой альтернативой, которая была отклонена.
+Before completing a feature plan, tasks, or implementation, the executor MUST
+verify that the current work complies with this constitution. If a principle is
+intentionally violated, the violation MUST be explicitly documented with the
+reason, risk, and simpler alternative that was rejected.
 
 **Version**: 1.0.0 | **Ratified**: 2026-05-28 | **Last Amended**: 2026-05-28

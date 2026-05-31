@@ -40,20 +40,20 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-- **Простота и абстракции**: решение следует SOLID/KISS/DRY без лишней
-  архитектурной церемонии; новые абстракции обоснованы текущей задачей.
-- **Разделение ответственности**: UI-компоненты отвечают за рендеринг и
-  композицию; нетривиальная бизнес-логика вынесена в хуки, helpers, сервисы или
-  сфокусированные модули.
-- **Тестовая стратегия по риску**: критичные сценарии, бизнес-логика, edge
-  cases, контракты данных и регрессии имеют автоматические тесты или явно
-  обоснованную проверку; низкорисковые UI/контентные изменения могут иметь
-  ручную проверку.
-- **Последовательный UX**: интерфейс следует существующим паттернам, не создаёт
-  наложений, недоступных элементов управления или разнобоя состояний на
-  десктопе и мобильных экранах.
-- **Производительность**: план избегает очевидно неэффективных решений и
-  учитывает заявленные цели отклика, масштаба и критичных UI-путей.
+- **Simplicity and abstractions**: the solution follows SOLID/KISS/DRY without
+  unnecessary architectural ceremony; new abstractions are justified by the
+  current task.
+- **Separation of concerns**: UI components handle rendering and composition;
+  non-trivial business logic is moved into hooks, helpers, services, or focused
+  modules.
+- **Risk-based testing strategy**: critical scenarios, business logic, edge
+  cases, data contracts, and regressions have automated tests or explicitly
+  justified verification; low-risk UI/content changes may use manual checks.
+- **Consistent UX**: the interface follows existing patterns and does not create
+  overlaps, inaccessible controls, or inconsistent states on desktop and mobile
+  screens.
+- **Performance**: the plan avoids obviously inefficient solutions and accounts
+  for the stated response, scale, and critical UI-path goals.
 
 ## Project Structure
 
