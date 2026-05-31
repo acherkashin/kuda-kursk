@@ -1,0 +1,52 @@
+{
+  "version": 8,
+  "name": "Kursk Positron",
+  "sources": {
+    "openfreemap": {
+      "type": "vector",
+      "url": "https://tiles.openfreemap.org/planet"
+    }
+  },
+  "glyphs": "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
+  "layers": [
+    { "id": "background", "type": "background", "paint": { "background-color": "#edf3ea" } },
+    {
+      "id": "landuse",
+      "type": "fill",
+      "source": "openfreemap",
+      "source-layer": "landuse",
+      "paint": { "fill-color": "#dfe8dd", "fill-opacity": 0.5 }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "openfreemap",
+      "source-layer": "water",
+      "paint": { "fill-color": "#b9d4d9" }
+    },
+    {
+      "id": "roads",
+      "type": "line",
+      "source": "openfreemap",
+      "source-layer": "transportation",
+      "paint": { "line-color": "#ffffff", "line-width": ["interpolate", ["linear"], ["zoom"], 10, 0.6, 15, 2.4] }
+    },
+    {
+      "id": "road-labels",
+      "type": "symbol",
+      "source": "openfreemap",
+      "source-layer": "transportation_name",
+      "minzoom": 13,
+      "layout": { "text-field": ["coalesce", ["get", "name:ru"], ["get", "name"]], "text-size": 11 },
+      "paint": { "text-color": "#6d7a70", "text-halo-color": "#edf3ea", "text-halo-width": 1 }
+    },
+    {
+      "id": "place-labels",
+      "type": "symbol",
+      "source": "openfreemap",
+      "source-layer": "place",
+      "layout": { "text-field": ["coalesce", ["get", "name:ru"], ["get", "name"]], "text-size": 13 },
+      "paint": { "text-color": "#46564d", "text-halo-color": "#edf3ea", "text-halo-width": 1.2 }
+    }
+  ]
+}

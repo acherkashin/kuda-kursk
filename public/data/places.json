@@ -1,0 +1,101 @@
+[
+  {
+    "type": "Feature",
+    "id": "boevka-sport",
+    "geometry": { "type": "Point", "coordinates": [36.2114, 51.7421] },
+    "properties": {
+      "id": "boevka-sport",
+      "categories": ["sport", "by-car"],
+      "collections": ["tourist", "summer-beaches"],
+      "badges": [{ "id": "verified-personally", "label": "Проверено лично", "tone": "verified" }],
+      "links": [{ "id": "boevka-info", "label": "Парк Боева дача", "url": "https://kursk.ru", "kind": "site" }],
+      "balloonContent": {
+        "image": "/pwa/icon-512.png",
+        "thumbnail": "/pwa/icon-192.png",
+        "images": [
+          { "src": "/pwa/icon-512.png", "thumbnail": "/pwa/icon-192.png", "caption": "Площадка и прогулочная зона", "order": 1 }
+        ],
+        "name": "Площадка на Боевке",
+        "description": "Открытая спортивная площадка рядом с прогулочными маршрутами и зелёной зоной.",
+        "address": "г. Курск, парк Боева дача",
+        "coordinates": "51.7421, 36.2114",
+        "tip": "Удобно совместить короткую тренировку с прогулкой вдоль воды.",
+        "externalUrl": "https://kursk.ru"
+      }
+    }
+  },
+  {
+    "type": "Feature",
+    "id": "gym-yard-turnik",
+    "geometry": { "type": "Point", "coordinates": [36.1859, 51.7248] },
+    "properties": {
+      "id": "gym-yard-turnik",
+      "categories": ["sport"],
+      "collections": ["tourist"],
+      "balloonContent": {
+        "thumbnail": "/pwa/icon-192.png",
+        "name": "Двор с гимнастическим турником",
+        "description": "Небольшая дворовая точка для короткой разминки и упражнений с собственным весом.",
+        "address": "г. Курск, район центральных улиц",
+        "coordinates": "51.7248, 36.1859"
+      }
+    }
+  },
+  {
+    "type": "Feature",
+    "id": "central-bank-building",
+    "geometry": { "type": "Point", "coordinates": [36.194813, 51.745877] },
+    "properties": {
+      "id": "central-bank-building",
+      "categories": ["victory-day"],
+      "collections": ["tourist", "mansions", "historical-monuments"],
+      "badges": [{ "id": "dozapravka-recommended", "label": "Рекомендовано Дозаправкой", "tone": "recommended" }],
+      "balloonContent": {
+        "image": "/pwa/icon-512.png",
+        "thumbnail": "/pwa/icon-192.png",
+        "name": "Здание отделения Банка России",
+        "description": "Историческое здание на улице Ленина, заметная точка для прогулочного маршрута по центру.",
+        "address": "г. Курск, ул. Ленина, 83",
+        "coordinates": "51.745877, 36.194813",
+        "tip": "Обратите внимание на фасад и соседние особняки."
+      }
+    }
+  },
+  {
+    "type": "Feature",
+    "id": "dozapravka-cafe",
+    "geometry": { "type": "Point", "coordinates": [36.1873, 51.7362] },
+    "properties": {
+      "id": "dozapravka-cafe",
+      "categories": ["restaurants"],
+      "collections": ["nastoyki", "standup-clubs"],
+      "links": [{ "id": "telegram", "label": "Telegram", "url": "https://t.me/example", "kind": "telegram" }],
+      "balloonContent": {
+        "image": "/pwa/icon-512.png",
+        "name": "Дозаправка",
+        "description": "Городское место для встреч, разговоров и вечерних событий.",
+        "address": "г. Курск, центр",
+        "coordinates": "51.7362, 36.1873",
+        "externalUrl": "https://example.com"
+      }
+    }
+  },
+  {
+    "type": "Feature",
+    "id": "community-studio",
+    "geometry": { "type": "Point", "coordinates": [36.2012, 51.7318] },
+    "properties": {
+      "id": "community-studio",
+      "categories": ["restaurants"],
+      "collections": ["movie-places"],
+      "visibility": { "public": false, "linkOnly": true, "communitySlugs": ["dozapravka-friends"] },
+      "balloonContent": {
+        "thumbnail": "/pwa/icon-192.png",
+        "name": "Студия для карты сообщества",
+        "description": "Link-only место, доступное по заранее подготовленной ссылке карты сообщества.",
+        "address": "г. Курск, творческий квартал",
+        "coordinates": "51.7318, 36.2012"
+      }
+    }
+  }
+]

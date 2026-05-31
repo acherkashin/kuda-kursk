@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "dozapravka-friends",
+    "title": "Карта друзей Дозаправки",
+    "description": "Небольшой маршрут для тех, кто пришёл по ссылке сообщества.",
+    "placeIds": ["dozapravka-cafe", "boevka-sport"],
+    "linkOnlyPlaceIds": ["community-studio"],
+    "theme": { "accentColor": "#2f7d5b" }
+  }
+]
