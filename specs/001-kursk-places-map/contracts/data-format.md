@@ -15,9 +15,6 @@ type PlaceFeature = {
   properties: {
     id: string | number;
     balloonContent: BalloonContent;
-    categories?: string[];
-    collections?: string[];
-    badges?: Badge[];
     links?: ExternalLink[];
     visibility?: PlaceVisibility;
     [key: string]: unknown;
@@ -43,12 +40,6 @@ type Photo = {
   thumbnail?: string;
   caption?: string;
   order?: number;
-};
-
-type Badge = {
-  id: string;
-  label: string;
-  tone?: "verified" | "recommended" | "neutral" | string;
 };
 
 type ExternalLink = {
@@ -77,8 +68,6 @@ type PlaceVisibility = {
   },
   "properties": {
     "id": 4,
-    "categories": ["historical-monuments"],
-    "collections": ["tourist", "mansions"],
     "balloonContent": {
       "image": "/upload/resize_cache/iblock/c5c/16av2df104848p5mcomkxbgszonpibwn/640_380_0/180919centrobank77.jpg",
       "name": "Государственное управление Банка России по Курской области",

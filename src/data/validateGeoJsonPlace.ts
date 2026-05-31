@@ -50,18 +50,6 @@ function validateCoordinates(value: unknown): Coordinates {
   return [longitude, latitude];
 }
 
-function validateStringArray(value: unknown, fieldName: string): string[] | undefined {
-  if (value === undefined) {
-    return undefined;
-  }
-
-  if (!Array.isArray(value) || value.some((item) => typeof item !== "string")) {
-    throw new Error(`Place properties.${fieldName} must be an array of strings`);
-  }
-
-  return value;
-}
-
 function validateBalloonContent(value: unknown): BalloonContent {
   if (!isObject(value)) {
     throw new Error("Place properties.balloonContent is required");
@@ -101,8 +89,6 @@ export function validateGeoJsonPlace(value: unknown): PlaceFeature {
     throw new Error("Place properties.id must match id");
   }
 
-  const categories = validateStringArray(value.properties.categories, "categories");
-  const collections = validateStringArray(value.properties.collections, "collections");
   const place: PlaceFeature = {
     type: "Feature",
     id: value.id,
@@ -116,14 +102,6 @@ export function validateGeoJsonPlace(value: unknown): PlaceFeature {
       balloonContent: validateBalloonContent(value.properties.balloonContent)
     }
   };
-
-  if (categories) {
-    place.properties.categories = categories;
-  }
-
-  if (collections) {
-    place.properties.collections = collections;
-  }
 
   return place;
 }

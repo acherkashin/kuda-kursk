@@ -2,21 +2,15 @@
 
 ## Решение: React/Vite/TypeScript как основа frontend-only PWA
 
-**Rationale**: Vite даёт быстрый dev/build цикл для SPA, TypeScript фиксирует контракты статических JSON-данных, а React подходит для сложной композиции карты, панелей, фильтров и consent UI без backend в первой версии.
+**Rationale**: Vite даёт быстрый dev/build цикл для SPA, TypeScript фиксирует контракты статических JSON-данных, а React подходит для сложной композиции карты, панелей и consent UI без backend в первой версии.
 
 **Alternatives considered**: Next.js отклонён из-за лишней серверной модели для v1; Vue/Svelte отклонены, потому что пользователь явно выбрал React/Vite.
 
 ## Решение: Tailwind CSS v4 для стилизации
 
-**Rationale**: интерфейс карты состоит из плотных overlay, панелей, toolbar, chips и responsive states. Tailwind v4 через `@tailwindcss/vite` даёт zero-runtime стили, быстрый Vite integration и достаточно гибкости для design tokens через CSS variables.
+**Rationale**: интерфейс карты состоит из плотных overlay, панелей, toolbar и responsive states. Tailwind v4 через `@tailwindcss/vite` даёт zero-runtime стили, быстрый Vite integration и достаточно гибкости для design tokens через CSS variables.
 
 **Alternatives considered**: CSS Modules проще, но хуже масштабируются для множества мелких responsive states; готовые UI kits вроде MUI/Ant Design слишком визуально тяжёлые для тихого картографического интерфейса.
-
-## Решение: Radix Primitives точечно
-
-**Rationale**: Dialog, Tooltip, Toggle Group, Tabs и похожие controls требуют корректного focus management, keyboard navigation и ARIA. Radix остаётся unstyled, поэтому не навязывает визуальную тему.
-
-**Alternatives considered**: Самописные primitives повышают риск accessibility ошибок; Radix Themes и shadcn/ui отклонены, потому что задают более выраженный визуальный слой.
 
 ## Решение: Motion для анимаций
 

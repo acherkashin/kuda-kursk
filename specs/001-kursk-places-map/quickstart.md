@@ -22,7 +22,7 @@ VITE_YANDEX_METRIKA_ID=00000000
 pnpm dev
 ```
 
-Ожидаемо: открывается SPA с полноэкранной картой Курска, маркерами, поиском и фильтрами. До согласия пользователя script Яндекс.Метрики не загружается.
+Ожидаемо: открывается SPA с полноэкранной картой Курска, маркерами и поиском. До согласия пользователя script Яндекс.Метрики не загружается.
 
 ## Проверки качества
 
@@ -33,7 +33,7 @@ pnpm test:e2e
 pnpm build
 ```
 
-Ожидаемо: TypeScript проходит без ошибок; unit-тесты покрывают фильтры, поиск, координаты и route links; Playwright проходит desktop/mobile/PWA/analytics сценарии; production build создаёт PWA manifest и service worker.
+Ожидаемо: TypeScript проходит без ошибок; unit-тесты покрывают поиск, координаты и route links; Playwright проходит desktop/mobile/PWA/analytics сценарии; production build создаёт PWA manifest и service worker.
 
 ## Проверка PWA
 

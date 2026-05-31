@@ -8,7 +8,7 @@
 
 ## Краткое описание
 
-Первая версия приложения будет фронтенд-only PWA на React/Vite/TypeScript: полноэкранная карта Курска с заметными маркерами мест, карточкой подробностей, поиском, категориями, подборками, прямыми ссылками карт сообществ и opt-in аналитикой Яндекс.Метрики. Карта строится на `maplibre-gl` и OpenFreeMap без API-ключей; данные мест и карт сообществ поставляются как статический GeoJSON-like JSON; бизнес-логика фильтрации, импорта, маршрутов и аналитики выносится из React-компонентов в отдельные модули.
+Первая версия приложения будет фронтенд-only PWA на React/Vite/TypeScript: полноэкранная карта Курска с заметными маркерами мест, карточкой подробностей, текстовым поиском, прямыми ссылками карт сообществ и opt-in аналитикой Яндекс.Метрики. Карта строится на `maplibre-gl` и OpenFreeMap без API-ключей; данные мест и карт сообществ поставляются как статический GeoJSON-like JSON; бизнес-логика импорта, поиска, маршрутов и аналитики выносится из React-компонентов в отдельные модули.
 
 ## Технический контекст
 
@@ -16,28 +16,28 @@
 
 **Package Manager**: `pnpm` 10.6.2; будущий `package.json` должен фиксировать `"packageManager": "pnpm@10.6.2"`, ожидаемый lock-файл - `pnpm-lock.yaml`
 
-**Primary Dependencies**: `react`, `react-dom`, `vite`, `@vitejs/plugin-react`, `typescript`, `maplibre-gl`, `tailwindcss`, `@tailwindcss/vite`, `motion`, точечные `@radix-ui/react-*`, `lucide-react`, `react-router`, `vite-plugin-pwa`, `workbox-window`
+**Primary Dependencies**: `react`, `react-dom`, `vite`, `@vitejs/plugin-react`, `typescript`, `maplibre-gl`, `tailwindcss`, `@tailwindcss/vite`, `motion`, `lucide-react`, `react-router`, `vite-plugin-pwa`, `workbox-window`
 
 **Storage**: статические JSON-файлы и локальные ассеты в первом релизе; backend, аккаунты и CMS не входят в v1
 
-**Testing**: Playwright для e2e/responsive/PWA/analytics сценариев; unit-тесты TypeScript для чистой логики поиска, фильтров, координат и route links
+**Testing**: Playwright для e2e/responsive/PWA/analytics сценариев; unit-тесты TypeScript для чистой логики поиска, координат и route links
 
 **Target Platform**: PWA для современных мобильных и десктопных браузеров; production deployment как статический SPA
 
 **Project Type**: frontend SPA/PWA без backend в первой версии
 
-**Performance Goals**: карта остаётся отзывчивой при 500 местах; поиск и фильтры воспринимаются мгновенными для опубликованного набора; анимации панели места выполняются без заметных просадок; не делать тяжёлую загрузку аналитики до согласия
+**Performance Goals**: карта остаётся отзывчивой при 500 местах; поиск воспринимается мгновенным для опубликованного набора; анимации панели места выполняются без заметных просадок; не делать тяжёлую загрузку аналитики до согласия
 
 **Constraints**: бесплатная карта без API-ключей; OpenFreeMap public instance допускается без SLA и должен быть заменяем через конфиг; канонический порядок координат `[longitude, latitude]`; no Zod; Яндекс.Метрика только после явного согласия; не отправлять сырые поисковые запросы
 
-**Scale/Scope**: v1 покрывает публичную карту, карты сообществ по ссылке, статический контент, поиск/фильтры/карточки/маршруты/PWA/аналитику; будущие backend, аккаунты, сохранённые места, отметки посещений, заявки пользователей и Telegram mini app не реализуются
+**Scale/Scope**: v1 покрывает публичную карту, карты сообществ по ссылке, статический контент, поиск, карточки, маршруты, PWA и аналитику; будущие backend, аккаунты, сохранённые места, отметки посещений, заявки пользователей и Telegram mini app не реализуются
 
 ## Проверка конституции
 
 *GATE: должно пройти до Phase 0 research. Повторно проверено после Phase 1 design.*
 
 - **Simplicity and abstractions**: PASS. Первый релиз остаётся одним frontend-приложением со статическими данными; новые модули нужны для отделения карты, данных, поиска, маршрутов, PWA и аналитики.
-- **Separation of concerns**: PASS. React-компоненты отвечают за композицию и состояние интерфейса; импорт/валидация данных, фильтрация, построение ссылок маршрутов и analytics adapter выносятся в focused modules.
+- **Separation of concerns**: PASS. React-компоненты отвечают за композицию и состояние интерфейса; импорт/валидация данных, поиск, построение ссылок маршрутов и analytics adapter выносятся в focused modules.
 - **Risk-based testing strategy**: PASS. Critical flows закрываются Playwright, чистая логика закрывается unit-тестами; visual/PWA/mobile проверки записаны в quickstart и будущие tasks.
 - **Consistent UX**: PASS. Полноэкранная карта остаётся главным экраном; optional content скрывается без пустых заглушек; mobile drawer и consent UI проектируются как доступные элементы.
 - **Performance**: PASS. Используется MapLibre GeoJSON source/clustering, локальная нормализация поискового индекса и opt-in lazy loading Метрики; Fuse/search engine не добавляется до подтверждённой необходимости.
@@ -57,7 +57,7 @@ specs/001-kursk-places-map/
 │   ├── data-format.md
 │   ├── pwa-behavior.md
 │   └── routes.md
-└── tasks.md             # будет создан через /speckit-tasks
+└── tasks.md
 ```
 
 ### Исходный код
@@ -104,7 +104,7 @@ tests/
 └── unit/
 ```
 
-**Решение по структуре**: один frontend-проект в корне репозитория. Данные и доменная логика отделяются от UI; карта, карточка места, фильтры, consent и PWA/analytics имеют собственные модули.
+**Решение по структуре**: один frontend-проект в корне репозитория. Данные и доменная логика отделяются от UI; карта, карточка места, поиск, consent и PWA/analytics имеют собственные модули.
 
 ## Отслеживание сложности
 
@@ -120,7 +120,7 @@ tests/
 
 ## Повторная проверка конституции после дизайна
 
-- **Simplicity and abstractions**: PASS. Выбранный стек не добавляет backend или CMS в v1; дополнительные библиотеки покрывают конкретные риски: карта, PWA, доступные primitives, анимации и иконки.
+- **Simplicity and abstractions**: PASS. Выбранный стек не добавляет backend или CMS в v1; дополнительные библиотеки покрывают конкретные риски: карта, PWA, анимации и иконки.
 - **Separation of concerns**: PASS. Контракты фиксируют границы данных, роутинга, PWA и аналитики; будущие задачи должны сохранять эти границы.
 - **Risk-based testing strategy**: PASS. Контракты и quickstart задают unit/e2e/PWA/analytics проверки для критичных требований.
 - **Consistent UX**: PASS. План учитывает mobile drawer, empty state, отсутствие optional блоков, управление consent и возврат с неизвестной community route.

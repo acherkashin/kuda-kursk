@@ -1,5 +1,4 @@
 import type { PlaceFeature } from "./places";
-import { categoryLabelById, collectionLabelById } from "./taxonomy";
 
 export function normalizeSearchText(value: string): string {
   return value
@@ -12,14 +11,12 @@ export function normalizeSearchText(value: string): string {
 
 function searchFields(place: PlaceFeature): string[] {
   const content = place.properties.balloonContent;
-  const categories = place.properties.categories?.map((id) => categoryLabelById.get(id) ?? id) ?? [];
-  const collections = place.properties.collections?.map((id) => collectionLabelById.get(id) ?? id) ?? [];
   const linkLabels = [
     ...(place.properties.links?.map((link) => link.label) ?? []),
     ...(content.socials?.map((link) => link.label) ?? [])
   ];
 
-  return [content.name, content.description, content.address, ...categories, ...collections, ...linkLabels];
+  return [content.name, content.description, content.address, ...linkLabels];
 }
 
 export function searchPlaces(places: PlaceFeature[], query: string): PlaceFeature[] {

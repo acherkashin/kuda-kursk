@@ -9,8 +9,6 @@ const places = [
     geometry: { type: "Point", coordinates: [36.1, 51.7] },
     properties: {
       id: "one",
-      categories: ["sport"],
-      collections: ["tourist"],
       links: [{ label: "Telegram афиша", url: "https://t.me/example", kind: "telegram" }],
       balloonContent: {
         name: "Площадка на Боевке",
@@ -26,8 +24,6 @@ const places = [
     geometry: { type: "Point", coordinates: [36.2, 51.8] },
     properties: {
       id: "two",
-      categories: ["restaurants"],
-      collections: ["nastoyki"],
       balloonContent: {
         name: "Дозаправка",
         description: "Городское место",
@@ -76,5 +72,23 @@ describe("searchPlaces", () => {
     });
 
     expect(searchPlaces(largeSet, "особая спортивная")).toHaveLength(1);
+  });
+
+  it("does not search unsupported editorial metadata left in imported properties", () => {
+    const base = places[0];
+
+    if (!base) {
+      throw new Error("Expected at least one fixture place");
+    }
+
+    const placeWithFutureMetadata = {
+      ...base,
+      properties: {
+        ...base.properties,
+        futureTag: "секретный редакционный тег"
+      }
+    } satisfies PlaceFeature;
+
+    expect(searchPlaces([placeWithFutureMetadata], "секретный")).toEqual([]);
   });
 });

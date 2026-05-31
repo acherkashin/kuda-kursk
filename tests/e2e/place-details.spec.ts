@@ -7,7 +7,6 @@ test("выбранное полное место открывает карточ
   const panel = page.getByTestId("place-details-panel");
   await expect(panel).toBeVisible();
   await expect(panel.getByRole("heading", { name: "Площадка на Боевке" })).toBeVisible();
-  await expect(panel.getByText("Проверено лично")).toBeVisible();
   await expect(panel.getByText(/Удобно совместить/i)).toBeVisible();
   await expect(panel.getByRole("link", { name: /Яндекс/i })).toHaveAttribute("href", /yandex\.ru/);
   await expect(panel.getByRole("link", { name: /2ГИС/i })).toHaveAttribute("href", /2gis\.ru/);

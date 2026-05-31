@@ -272,30 +272,10 @@ button {
   font-size: 14px;
 }
 
-.place-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.place-badge,
 .place-tip {
   border: 1px solid var(--color-line);
   border-radius: 8px;
   background: #eef5ed;
-}
-
-.place-badge {
-  padding: 5px 8px;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.place-badge[data-tone="recommended"] {
-  background: #f6efd9;
 }
 
 .place-tip {
@@ -377,38 +357,6 @@ button {
   border-radius: 8px;
   background: #eef5ed;
   color: var(--color-text);
-}
-
-.filter-controls {
-  display: grid;
-  gap: 8px;
-}
-
-.filter-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.filter-group--collections {
-  max-height: 80px;
-  overflow: auto;
-}
-
-.filter-chip {
-  min-height: 32px;
-  padding: 5px 9px;
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
-  background: #ffffff;
-  color: var(--color-text);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.filter-chip[data-state="on"] {
-  background: var(--color-accent);
-  color: #ffffff;
 }
 
 .results-summary {
@@ -550,10 +498,6 @@ button {
     width: auto;
     max-height: 28dvh;
     overflow: auto;
-  }
-
-  .filter-group--collections {
-    display: none;
   }
 
   .place-details-panel {

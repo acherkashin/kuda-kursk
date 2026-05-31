@@ -1,7 +1,7 @@
 type ResultsSummaryProps = {
   count: number;
   total: number;
-  hasActiveFilters: boolean;
+  hasActiveSearch: boolean;
   onReset: () => void;
 };
 
@@ -20,13 +20,13 @@ function pluralizePlaces(count: number): string {
   return `${count} мест`;
 }
 
-export function ResultsSummary({ count, total, hasActiveFilters, onReset }: ResultsSummaryProps) {
+export function ResultsSummary({ count, total, hasActiveSearch, onReset }: ResultsSummaryProps) {
   return (
     <div className="results-summary" data-testid="results-summary">
       <span>
         {pluralizePlaces(count)} из {total}
       </span>
-      {hasActiveFilters ? (
+      {hasActiveSearch ? (
         <button className="text-button" type="button" onClick={onReset}>
           Сбросить
         </button>

@@ -7,7 +7,6 @@ export type PlaceDetailsViewModel = {
   address: string;
   coordinates: string;
   photos: Photo[];
-  badges: NonNullable<PlaceFeature["properties"]["badges"]>;
   tip?: string;
   links: ExternalLink[];
 };
@@ -47,7 +46,6 @@ export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
     address: content.address,
     coordinates: content.coordinates,
     photos,
-    badges: place.properties.badges ?? [],
     links
   };
 

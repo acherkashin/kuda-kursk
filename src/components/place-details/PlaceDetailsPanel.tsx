@@ -5,7 +5,6 @@ import type { PlaceFeature } from "../../domain/places";
 import { buildRouteLinks, type RouteLink } from "../../domain/routeLinks";
 import { ExternalLinks } from "./ExternalLinks";
 import { PhotoCarousel } from "./PhotoCarousel";
-import { PlaceBadges } from "./PlaceBadges";
 import { PlaceTip } from "./PlaceTip";
 import { RouteActions } from "./RouteActions";
 
@@ -51,7 +50,6 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       </button>
       <PhotoCarousel photos={viewModel.photos} title={viewModel.name} />
       <div className="place-details-content">
-        <PlaceBadges badges={viewModel.badges} />
         <h1>{viewModel.name}</h1>
         <p className="place-description">{viewModel.description}</p>
         <dl className="place-meta">

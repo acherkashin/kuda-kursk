@@ -4,7 +4,6 @@ import {
   readStoredAnalyticsConsent,
   storeAnalyticsConsent
 } from "../components/analytics-consent/AnalyticsConsent";
-import { FilterControls } from "../components/filters/FilterControls";
 import { ResultsSummary } from "../components/filters/ResultsSummary";
 import { SearchBox } from "../components/filters/SearchBox";
 import { CommunityMapFallback } from "../components/map/CommunityMapFallback";
@@ -16,12 +15,10 @@ import { loadPlaces } from "../data/loadPlaces";
 import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
 import type { CommunityMap } from "../domain/communityMaps";
 import { resolveCommunityMap } from "../domain/communityMaps";
-import { filterPlaces } from "../domain/filterPlaces";
 import type { PlaceFeature } from "../domain/places";
 import { isPublicPlace } from "../domain/places";
 import type { RouteProvider } from "../domain/routeLinks";
 import { searchPlaces } from "../domain/search";
-import { categories, collections } from "../domain/taxonomy";
 import { createAnalyticsAdapter } from "../services/analytics/analyticsAdapter";
 import { loadYandexMetrika } from "../services/analytics/yandexMetrika";
 import { useLocation, useParams } from "react-router";
@@ -32,8 +29,6 @@ export function App() {
   const [loadState, setLoadState] = useState<"loading" | "ready" | "error">("loading");
   const [activePlace, setActivePlace] = useState<PlaceFeature | null>(null);
   const [query, setQuery] = useState("");
-  const [selectedCategoryIds, setSelectedCategoryIds] = useState<string[]>([]);
-  const [selectedCollectionIds, setSelectedCollectionIds] = useState<string[]>([]);
   const [analyticsConsent, setAnalyticsConsent] = useState<AnalyticsConsentRecord | null>(() => readStoredAnalyticsConsent());
   const analyticsAccepted = analyticsConsent?.status === "accepted";
   const analytics = useMemo(
@@ -53,17 +48,11 @@ export function App() {
 
     return places.filter(isPublicPlace);
   }, [places, resolvedCommunity]);
-  const filteredPlaces = useMemo(
-    () => filterPlaces(basePlaces, { categoryIds: selectedCategoryIds, collectionIds: selectedCollectionIds }),
-    [basePlaces, selectedCategoryIds, selectedCollectionIds]
-  );
-  const visiblePlaces = useMemo(() => searchPlaces(filteredPlaces, query), [filteredPlaces, query]);
-  const hasActiveFilters = query.trim().length > 0 || selectedCategoryIds.length > 0 || selectedCollectionIds.length > 0;
+  const visiblePlaces = useMemo(() => searchPlaces(basePlaces, query), [basePlaces, query]);
+  const hasActiveSearch = query.trim().length > 0;
 
-  const resetSearchAndFilters = useCallback(() => {
+  const resetSearch = useCallback(() => {
     setQuery("");
-    setSelectedCategoryIds([]);
-    setSelectedCollectionIds([]);
   }, []);
 
   useEffect(() => {
@@ -97,8 +86,8 @@ export function App() {
 
   useEffect(() => {
     setActivePlace(null);
-    resetSearchAndFilters();
-  }, [location.pathname, resetSearchAndFilters]);
+    resetSearch();
+  }, [location.pathname, resetSearch]);
 
   useEffect(() => {
     if (resolvedCommunity?.status === "found") {
@@ -139,37 +128,13 @@ export function App() {
   const handleQueryChange = useCallback(
     (value: string) => {
       setQuery(value);
-      const resultCount = searchPlaces(filteredPlaces, value).length;
+      const resultCount = searchPlaces(basePlaces, value).length;
       analytics.track({
         name: "search_used",
         params: { queryLength: value.trim().length, hasResults: resultCount > 0, resultCount }
       });
     },
-    [analytics, filteredPlaces]
-  );
-
-  const handleCategoryChange = useCallback(
-    (ids: string[]) => {
-      setSelectedCategoryIds(ids);
-      const resultCount = searchPlaces(filterPlaces(basePlaces, { categoryIds: ids, collectionIds: selectedCollectionIds }), query).length;
-      analytics.track({
-        name: "filters_changed",
-        params: { categoryIds: ids, collectionIds: selectedCollectionIds, resultCount }
-      });
-    },
-    [analytics, basePlaces, query, selectedCollectionIds]
-  );
-
-  const handleCollectionChange = useCallback(
-    (ids: string[]) => {
-      setSelectedCollectionIds(ids);
-      const resultCount = searchPlaces(filterPlaces(basePlaces, { categoryIds: selectedCategoryIds, collectionIds: ids }), query).length;
-      analytics.track({
-        name: "filters_changed",
-        params: { categoryIds: selectedCategoryIds, collectionIds: ids, resultCount }
-      });
-    },
-    [analytics, basePlaces, query, selectedCategoryIds]
+    [analytics, basePlaces]
   );
 
   return (
@@ -189,21 +154,13 @@ export function App() {
       ) : null}
       {resolvedCommunity?.status === "not-found" ? <CommunityMapFallback slug={resolvedCommunity.slug} /> : null}
       {resolvedCommunity?.status !== "not-found" ? (
-        <section className="filter-toolbar" aria-label="Поиск и фильтры">
+        <section className="filter-toolbar" aria-label="Поиск">
           <SearchBox value={query} onChange={handleQueryChange} onReset={() => handleQueryChange("")} />
-          <FilterControls
-            categories={categories}
-            collections={collections}
-            selectedCategoryIds={selectedCategoryIds}
-            selectedCollectionIds={selectedCollectionIds}
-            onCategoryChange={handleCategoryChange}
-            onCollectionChange={handleCollectionChange}
-          />
           <ResultsSummary
             count={visiblePlaces.length}
             total={basePlaces.length}
-            hasActiveFilters={hasActiveFilters}
-            onReset={resetSearchAndFilters}
+            hasActiveSearch={hasActiveSearch}
+            onReset={resetSearch}
           />
         </section>
       ) : null}

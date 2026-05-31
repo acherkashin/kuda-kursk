@@ -11,9 +11,6 @@ GeoJSON-like объект места.
 - `geometry.coordinates`: tuple `[longitude, latitude]`.
 - `properties.id`: должен совпадать с `id` после нормализации типа.
 - `properties.balloonContent`: основные поля карточки места.
-- `properties.categories`: optional массив идентификаторов категорий.
-- `properties.collections`: optional массив идентификаторов подборок.
-- `properties.badges`: optional массив бейджей.
 - `properties.links`: optional массив внешних ссылок.
 - `properties.visibility`: optional правило видимости для основной карты и карт сообществ.
 - `properties.extra`: optional дополнительные редакционные поля, включая соцсети.
@@ -46,37 +43,6 @@ GeoJSON-like объект места.
 - `thumbnail`: optional путь к миниатюре.
 - `caption`: optional подпись.
 - `order`: optional порядок отображения.
-
-## Badge
-
-**Поля**
-- `id`: стабильный идентификатор.
-- `label`: текст бейджа.
-- `tone`: optional визуальный тип, например `verified`, `recommended`, `neutral`.
-
-**Начальные значения**
-- `verified-personally`: "Проверено лично".
-- `dozapravka-recommended`: "Рекомендовано Дозаправкой".
-
-## Category
-
-**Поля**
-- `id`: стабильный slug.
-- `label`: отображаемое название.
-- `description`: optional пояснение.
-
-**Начальные категории**
-- `restaurants`, `by-car`, `victory-day`, `sport`.
-
-## Collection
-
-**Поля**
-- `id`: стабильный slug.
-- `label`: отображаемое название.
-- `description`: optional редакционный контекст.
-
-**Начальные подборки**
-- `tourist`, `excursions`, `may-9`, `easter`, `new-year`, `nastoyki`, `historical-monuments`, `standup-clubs`, `lost-kursk`, `wwii-memorials`, `movie-places`, `mansions`, `summer-beaches`.
 
 ## CommunityMap
 
@@ -114,7 +80,6 @@ GeoJSON-like объект места.
 **События**
 - `app_open`
 - `search_used`
-- `filters_changed`
 - `marker_selected`
 - `route_opened`
 - `external_link_clicked`
@@ -123,4 +88,4 @@ GeoJSON-like объект места.
 
 **Правила**
 - Сырые поисковые запросы не отправляются.
-- Идентификаторы мест, категорий и подборок можно отправлять как редакционные public ids.
+- Идентификаторы мест можно отправлять как редакционные public ids.

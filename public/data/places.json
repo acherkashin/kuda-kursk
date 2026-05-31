@@ -5,9 +5,6 @@
     "geometry": { "type": "Point", "coordinates": [36.2114, 51.7421] },
     "properties": {
       "id": "boevka-sport",
-      "categories": ["sport", "by-car"],
-      "collections": ["tourist", "summer-beaches"],
-      "badges": [{ "id": "verified-personally", "label": "Проверено лично", "tone": "verified" }],
       "links": [{ "id": "boevka-info", "label": "Парк Боева дача", "url": "https://kursk.ru", "kind": "site" }],
       "balloonContent": {
         "image": "/pwa/icon-512.png",
@@ -30,8 +27,6 @@
     "geometry": { "type": "Point", "coordinates": [36.1859, 51.7248] },
     "properties": {
       "id": "gym-yard-turnik",
-      "categories": ["sport"],
-      "collections": ["tourist"],
       "balloonContent": {
         "thumbnail": "/pwa/icon-192.png",
         "name": "Двор с гимнастическим турником",
@@ -47,9 +42,6 @@
     "geometry": { "type": "Point", "coordinates": [36.194813, 51.745877] },
     "properties": {
       "id": "central-bank-building",
-      "categories": ["victory-day"],
-      "collections": ["tourist", "mansions", "historical-monuments"],
-      "badges": [{ "id": "dozapravka-recommended", "label": "Рекомендовано Дозаправкой", "tone": "recommended" }],
       "balloonContent": {
         "image": "/pwa/icon-512.png",
         "thumbnail": "/pwa/icon-192.png",
@@ -67,8 +59,6 @@
     "geometry": { "type": "Point", "coordinates": [36.1873, 51.7362] },
     "properties": {
       "id": "dozapravka-cafe",
-      "categories": ["restaurants"],
-      "collections": ["nastoyki", "standup-clubs"],
       "links": [{ "id": "telegram", "label": "Telegram", "url": "https://t.me/example", "kind": "telegram" }],
       "balloonContent": {
         "image": "/pwa/icon-512.png",
@@ -86,8 +76,6 @@
     "geometry": { "type": "Point", "coordinates": [36.2012, 51.7318] },
     "properties": {
       "id": "community-studio",
-      "categories": ["restaurants"],
-      "collections": ["movie-places"],
       "visibility": { "public": false, "linkOnly": true, "communitySlugs": ["dozapravka-friends"] },
       "balloonContent": {
         "thumbnail": "/pwa/icon-192.png",

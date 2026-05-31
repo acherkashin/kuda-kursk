@@ -14,12 +14,6 @@ export type ExternalLink = {
   kind?: "site" | "vk" | "telegram" | "instagram" | "phone" | "other" | string;
 };
 
-export type Badge = {
-  id: string;
-  label: string;
-  tone?: "verified" | "recommended" | "neutral" | string;
-};
-
 export type BalloonContent = {
   image?: string;
   thumbnail?: string;
@@ -50,25 +44,10 @@ export type PlaceFeature = {
   properties: {
     id: string | number;
     balloonContent: BalloonContent;
-    categories?: string[];
-    collections?: string[];
-    badges?: Badge[];
     links?: ExternalLink[];
     visibility?: PlaceVisibility;
     [key: string]: unknown;
   };
-};
-
-export type Category = {
-  id: string;
-  label: string;
-  description?: string;
-};
-
-export type Collection = {
-  id: string;
-  label: string;
-  description?: string;
 };
 
 export function getPlaceId(place: PlaceFeature): string {
