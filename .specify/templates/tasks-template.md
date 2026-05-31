@@ -9,7 +9,7 @@ description: "Task list template for feature implementation"
 
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: The examples below include test tasks. Tests are required when the spec/plan or implementation risk calls for them: critical user journeys, business logic, edge cases, data contracts, and regressions. Low-risk UI/content changes may use documented manual verification.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -94,7 +94,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T014 [US1] Implement [Service] in src/services/[service].py (depends on T012, T013)
 - [ ] T015 [US1] Implement [endpoint/feature] in src/[location]/[file].py
 - [ ] T016 [US1] Add validation and error handling
-- [ ] T017 [US1] Add logging for user story 1 operations
+- [ ] T017 [US1] Move non-trivial business logic out of UI components where applicable
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
@@ -153,7 +153,8 @@ Examples of foundational tasks (adjust based on your project):
 
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
-- [ ] TXXX Performance optimization across all stories
+- [ ] TXXX Verify UI consistency, responsive behavior, and absence of overlapping controls
+- [ ] TXXX Performance verification or optimization for critical flows and stated scale
 - [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
 - [ ] TXXX Security hardening
 - [ ] TXXX Run quickstart.md validation
@@ -179,7 +180,8 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Within Each User Story
 
-- Tests (if included) MUST be written and FAIL before implementation
+- Risk-required tests MUST be written before implementation when practical and
+  MUST fail first for bug fixes or new behavior with clear expected outcomes
 - Models before services
 - Services before endpoints
 - Core implementation before integration
@@ -199,7 +201,7 @@ Examples of foundational tasks (adjust based on your project):
 ## Parallel Example: User Story 1
 
 ```bash
-# Launch all tests for User Story 1 together (if tests requested):
+# Launch all risk-required tests for User Story 1 together:
 Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
 Task: "Integration test for [user journey] in tests/integration/test_[name].py"
 

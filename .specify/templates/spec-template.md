@@ -72,7 +72,9 @@
 
 <!--
   ACTION REQUIRED: The content in this section represents placeholders.
-  Fill them out with the right edge cases.
+  Fill them out with the right edge cases. Include incomplete data, empty states,
+  external service failures, mobile/responsive behavior, and scale-related
+  boundaries when the feature touches UI, maps, search, imports, or user flows.
 -->
 
 - What happens when [boundary condition]?
@@ -116,6 +118,7 @@
 - **SC-002**: [Measurable metric, e.g., "System handles 1000 concurrent users without degradation"]
 - **SC-003**: [User satisfaction metric, e.g., "90% of users successfully complete primary task on first attempt"]
 - **SC-004**: [Business metric, e.g., "Reduce support tickets related to [X] by 50%"]
+- **SC-005**: [If UI or scale is involved, include a measurable UX/performance outcome, e.g., "Search feedback appears quickly enough for the published dataset"]
 
 ## Assumptions
 
