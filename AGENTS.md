@@ -3,3 +3,7 @@
 - Markdown-файлы, кроме папки .specify/ и служебной папки .agents/skills/, должны быть на русском
 - Markdown-файлы в папке .specify/ должны быть на английском
 - Markdown-файлы в папке .agents/skills/ являются служебными инструкциями локальных навыков и не подпадают под языковое правило проекта
+
+<!-- SPECKIT START -->
+Текущий план функции: specs/001-kursk-places-map/plan.md
+<!-- SPECKIT END -->
