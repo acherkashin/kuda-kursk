@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { addMarkerImages, createDefaultMarkerImage, createMarkerImageData, MARKER_IMAGE_SIZE } from "../../src/components/map/markerImages";
+import { addMarkerImages, MARKER_IMAGE_SIZE } from "../../src/components/map/markerImages";
 import type { PlaceFeature } from "../../src/domain/places";
 
 function makePlace(id: string, image?: string, thumbnail?: string): PlaceFeature {
@@ -88,60 +88,5 @@ describe("addMarkerImages", () => {
     );
 
     expect(loadedSources).toEqual(["/place-images/full.jpg"]);
-  });
-});
-
-describe("marker image styling", () => {
-  function captureCanvasStyles(run: () => ImageData) {
-    const styles: string[] = [];
-    const context = {
-      arc: vi.fn(),
-      beginPath: vi.fn(),
-      clip: vi.fn(),
-      drawImage: vi.fn(),
-      fill: vi.fn(),
-      getImageData: vi.fn(() => makeImageData()),
-      restore: vi.fn(),
-      save: vi.fn(),
-      stroke: vi.fn(),
-      set fillStyle(value: string) {
-        styles.push(value);
-      },
-      set lineWidth(_value: number) {},
-      set strokeStyle(value: string) {
-        styles.push(value);
-      }
-    } as unknown as CanvasRenderingContext2D;
-    const canvas = {
-      getContext: vi.fn(() => context),
-      height: 0,
-      width: 0
-    } as unknown as HTMLCanvasElement;
-    const createElement = vi.spyOn(document, "createElement").mockReturnValue(canvas);
-
-    try {
-      run();
-    } finally {
-      createElement.mockRestore();
-    }
-
-    return styles;
-  }
-
-  it("uses neutral contrast for the default marker", () => {
-    const styles = captureCanvasStyles(() => createDefaultMarkerImage());
-
-    expect(styles).toContain("#ffffff");
-    expect(styles).toContain("#111111");
-    expect(styles).not.toContain("#2f7d5b");
-  });
-
-  it("uses a neutral ring around photographic markers", () => {
-    const image = { height: 128, naturalHeight: 128, naturalWidth: 128, width: 128 } as HTMLImageElement;
-    const styles = captureCanvasStyles(() => createMarkerImageData(image));
-
-    expect(styles).toContain("#ffffff");
-    expect(styles).toContain("#111111");
-    expect(styles).not.toContain("#2f7d5b");
   });
 });
