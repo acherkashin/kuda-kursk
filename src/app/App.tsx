@@ -99,6 +99,15 @@ export function App() {
     analytics.track({ name: "app_open", params: { route: location.pathname, mapSlug: slug ?? "" } });
   }, [analytics, location.pathname, slug]);
 
+  useEffect(() => {
+    if (loadState === "ready" && currentMap && currentMap.slug !== "main") {
+      analytics.track({
+        name: "community_map_opened",
+        params: { slug: currentMap.slug, placeCount: places.length, linkOnlyCount: 0 }
+      });
+    }
+  }, [analytics, currentMap, loadState, places.length]);
+
   const handleConsentChange = useCallback(
     (consent: AnalyticsConsentRecord) => {
       storeAnalyticsConsent(consent);
@@ -172,7 +181,7 @@ export function App() {
       <AnalyticsConsent consent={analyticsConsent} onChange={handleConsentChange} />
       {pwaUpdatePrompt?.needRefresh ? (
         <section
-          className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-2 max-[700px]:bottom-2 max-[700px]:left-2 max-[700px]:w-auto"
+          className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-2 max-[700px]:bottom-[104px] max-[700px]:left-2 max-[700px]:w-auto"
           data-testid="pwa-update"
           aria-label="Доступно обновление приложения"
         >

@@ -16,6 +16,10 @@
 
 - `.specify/memory/constitution.md`
 
+Перед планированием или реализацией интерфейса явно прочитайте:
+
+- `DESIGN_SYSTEM.md`
+
 # Технологии
 - Frontend-only PWA на React, Vite и TypeScript.
 - Tailwind CSS v4 для стилизации интерфейса.

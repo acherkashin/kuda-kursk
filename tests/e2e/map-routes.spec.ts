@@ -23,6 +23,13 @@ test.describe("публичные карты", () => {
     }
   });
 
+  test("старый community path больше не является публичным маршрутом", async ({ page }) => {
+    await page.goto("/community/dozapravka");
+
+    await expect(page).toHaveURL("/maps/main");
+    await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "39");
+  });
+
   test("карточка места показывает image, а не marker thumbnail", async ({ page }) => {
     await page.goto("/maps/zapishu-zarisuyu");
     await page.getByRole("button", { name: "КГУ" }).focus();

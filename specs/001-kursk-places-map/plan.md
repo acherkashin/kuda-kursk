@@ -10,6 +10,8 @@
 
 Первая версия приложения будет фронтенд-only PWA на React/Vite/TypeScript: полноэкранная карта Курска с заметными маркерами мест, карточкой подробностей, текстовым поиском, прямыми ссылками карт сообществ и opt-in аналитикой Яндекс.Метрики. Карта строится на `maplibre-gl` и OpenFreeMap без API-ключей; данные мест и карт сообществ поставляются как статический GeoJSON-like JSON; бизнес-логика импорта, поиска, маршрутов и аналитики выносится из React-компонентов в отдельные модули.
 
+Визуальный слой первой версии обязан следовать `DESIGN_SYSTEM.md`: карта остаётся главным холстом, UI размещается поверх неё как небольшие плавающие карточки, палитра монохромная, цветовую выразительность несут фотографии мест, а анимации используются только для объяснения смены состояния.
+
 ## Технический контекст
 
 **Language/Version**: TypeScript 5.x, React 19.x, Vite 8.x, modern ECMAScript modules
@@ -17,6 +19,8 @@
 **Package Manager**: `pnpm` 10.6.2; будущий `package.json` должен фиксировать `"packageManager": "pnpm@10.6.2"`, ожидаемый lock-файл - `pnpm-lock.yaml`
 
 **Primary Dependencies**: `react`, `react-dom`, `vite`, `@vitejs/plugin-react`, `typescript`, `maplibre-gl`, `tailwindcss`, `@tailwindcss/vite`, `motion`, `lucide-react`, `react-router`, `vite-plugin-pwa`, `workbox-window`
+
+**Design System**: `DESIGN_SYSTEM.md` - обязательный источник визуальных решений для Tailwind tokens, монохромной палитры, типографики Inter, глубины, floating-card layout, functional Motion-анимаций и тона контента
 
 **Storage**: статические JSON-файлы и локальные ассеты в первом релизе; backend, аккаунты и CMS не входят в v1
 
@@ -123,5 +127,5 @@ tests/
 - **Simplicity and abstractions**: PASS. Выбранный стек не добавляет backend или CMS в v1; дополнительные библиотеки покрывают конкретные риски: карта, PWA, анимации и иконки.
 - **Separation of concerns**: PASS. Контракты фиксируют границы данных, роутинга, PWA и аналитики; будущие задачи должны сохранять эти границы.
 - **Risk-based testing strategy**: PASS. Контракты и quickstart задают unit/e2e/PWA/analytics проверки для критичных требований.
-- **Consistent UX**: PASS. План учитывает mobile drawer, empty state, отсутствие optional блоков, управление consent и возврат с неизвестной community route.
+- **Consistent UX**: PASS. План учитывает `DESIGN_SYSTEM.md`: карта остаётся главным холстом, UI плавает поверх карты, фотографии несут идентичность мест, активные состояния выражаются контрастом, а visual QA закрывает desktop/mobile состояния без наложений.
 - **Performance**: PASS. Требования к 500 местам закрываются локальной нормализацией данных, MapLibre source/clustering и отказом от преждевременного fuzzy engine.

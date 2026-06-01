@@ -32,7 +32,7 @@
 
 ## Решение: React Router Declarative Mode
 
-**Rationale**: нужны `/`, `/community/:slug` и fallback неизвестной карты. Declarative Mode достаточно для SPA без backend loaders и не тянет framework-mode архитектуру.
+**Rationale**: нужны `/`, `/maps/:slug` и fallback неизвестной карты. Declarative Mode достаточно для SPA без backend loaders и не тянет framework-mode архитектуру.
 
 **Alternatives considered**: Собственный router через `window.location` хуже для тестов и будущих entry points; framework mode React Router избыточен для v1.
 
