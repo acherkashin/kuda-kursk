@@ -18,11 +18,12 @@ import { addMarkerImagePlaceholders, addMarkerImages, createDefaultMarkerImage }
 
 type KurskMapProps = {
   activePlace: PlaceFeature | null;
+  mapTitle: string;
   places: PlaceFeature[];
   onPlaceSelect?: (place: PlaceFeature, source: "map") => void;
 };
 
-export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) {
+export function KurskMap({ activePlace, mapTitle, places, onPlaceSelect }: KurskMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const placeByIdRef = useRef<Map<string, PlaceFeature>>(new Map());
@@ -236,7 +237,7 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
         ))}
       </div>
       {mapState !== "ready" ? <MapFallback state={mapState === "error" ? "error" : "loading"} /> : null}
-      <MapLogo />
+      <MapLogo title={mapTitle} />
       <MarkerTooltip name={tooltipName} />
     </section>
   );

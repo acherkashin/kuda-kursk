@@ -3,7 +3,6 @@ import { expect, test } from "@playwright/test";
 const floatingSelectors = [
   ["logo", 'a[aria-label="Куда в Курске"]'],
   ["search", 'section[aria-label="Поиск"]'],
-  ["mapHeader", 'section[aria-label="Открытая карта"]'],
   ["details", '[data-testid="place-details-panel"]'],
   ["analytics", '[data-testid="analytics-consent"]'],
   ["analyticsToggle", 'button[aria-label="Настройки аналитики"]'],
@@ -75,6 +74,13 @@ test.describe("первый экран карты", () => {
     await expect(page.getByTestId("place-marker")).toHaveCount(0);
     await expect(page.getByTestId("map-place-control")).toHaveCount(39);
     await expect(page.getByRole("button", { name: /Парк-отель «Песчаный»/i })).toBeAttached();
+  });
+
+  test("первый экран не показывает нижнюю секцию открытой карты", async ({ page }) => {
+    await page.goto("/maps/main");
+    await expect(page.getByTestId("map-shell")).toBeVisible();
+
+    await expect(page.locator('section[aria-label="Открытая карта"]')).toHaveCount(0);
   });
 
   test("floating UI regions do not overlap on desktop and mobile", async ({ page }) => {

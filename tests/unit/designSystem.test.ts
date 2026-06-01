@@ -35,7 +35,6 @@ describe("design system tokens", () => {
       "src/components/map/MapLogo.tsx",
       "src/components/map/MarkerTooltip.tsx",
       "src/components/map/PublicMapFallback.tsx",
-      "src/components/map/PublicMapHeader.tsx",
       "src/components/map/markerImages.ts",
       "src/components/map/placeLayers.ts",
       "src/components/place-details/PhotoCarousel.tsx",

@@ -8,7 +8,6 @@ import { ResultsSummary } from "../components/filters/ResultsSummary";
 import { SearchBox } from "../components/filters/SearchBox";
 import { KurskMap } from "../components/map/KurskMap";
 import { PublicMapFallback } from "../components/map/PublicMapFallback";
-import { PublicMapHeader } from "../components/map/PublicMapHeader";
 import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel";
 import { loadPlaces } from "../data/loadPlaces";
 import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
@@ -154,8 +153,14 @@ export function App() {
           Не удалось загрузить места
         </div>
       ) : null}
-      {currentMap ? <KurskMap activePlace={activePlace} places={visiblePlaces} onPlaceSelect={handlePlaceSelect} /> : null}
-      {currentMap && !hasActivePlace ? <PublicMapHeader map={currentMap} placeCount={loadState === "ready" ? places.length : 0} /> : null}
+      {currentMap ? (
+        <KurskMap
+          activePlace={activePlace}
+          mapTitle={currentMap.title}
+          places={visiblePlaces}
+          onPlaceSelect={handlePlaceSelect}
+        />
+      ) : null}
       {currentMap ? (
         <section
           className="fixed top-[72px] left-[max(16px,env(safe-area-inset-left))] z-3 grid w-[min(420px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2.5 shadow-[var(--shadow-panel)] max-[700px]:top-16 max-[700px]:right-2 max-[700px]:left-2 max-[700px]:max-h-[28dvh] max-[700px]:w-auto max-[700px]:overflow-auto"

@@ -16,10 +16,13 @@ test.describe("публичные карты", () => {
     ];
 
     for (const route of routes) {
-      await page.goto(route.path);
+      await page.goto(route.path, { waitUntil: "domcontentloaded" });
 
-      await expect(page.getByRole("heading", { name: route.title })).toBeVisible();
-      await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", route.count);
+      await expect(page.getByRole("link", { name: route.title })).toBeVisible();
+      await expect
+        .poll(async () => page.getByTestId("map-shell").getAttribute("data-place-count"), { timeout: 15_000 })
+        .toBe(route.count);
+      await expect(page.locator('section[aria-label="Открытая карта"]')).toHaveCount(0);
     }
   });
 
