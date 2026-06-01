@@ -14,6 +14,7 @@ import {
   PLACE_SYMBOL_LAYER_ID
 } from "./placeLayers";
 import { createPlaceFeatureCollection } from "./placeSource";
+import { addMarkerImagePlaceholders, addMarkerImages, createDefaultMarkerImage } from "./markerImages";
 
 type KurskMapProps = {
   places: PlaceFeature[];
@@ -194,77 +195,4 @@ export function KurskMap({ places, onPlaceSelect }: KurskMapProps) {
       <MarkerTooltip name={tooltipName} />
     </section>
   );
-}
-
-function createDefaultMarkerImage(): ImageData {
-  const size = 96;
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-  const context = canvas.getContext("2d");
-
-  if (!context) {
-    return new ImageData(size, size);
-  }
-
-  context.fillStyle = "#ffffff";
-  context.beginPath();
-  context.arc(size / 2, size / 2, 40, 0, Math.PI * 2);
-  context.fill();
-  context.lineWidth = 10;
-  context.strokeStyle = "#2f7d5b";
-  context.stroke();
-  context.fillStyle = "#2f7d5b";
-  context.beginPath();
-  context.arc(size / 2, size / 2, 18, 0, Math.PI * 2);
-  context.fill();
-
-  return context.getImageData(0, 0, size, size);
-}
-
-async function addMarkerImages(map: maplibregl.Map, places: PlaceFeature[]) {
-  const collection = createPlaceFeatureCollection(places);
-  const images = new Map<string, string>();
-
-  collection.features.forEach((feature) => {
-    const { markerImage, markerImageId } = feature.properties;
-
-    if (markerImage && markerImageId && !map.hasImage(markerImageId)) {
-      images.set(markerImageId, markerImage);
-    }
-  });
-
-  await Promise.all(
-    [...images].map(async ([imageId, imageUrl]) => {
-      const image = await loadImage(imageUrl);
-
-      if (map.hasImage(imageId)) {
-        map.updateImage(imageId, image);
-      } else {
-        map.addImage(imageId, image, { pixelRatio: 2 });
-      }
-    })
-  );
-}
-
-function addMarkerImagePlaceholders(map: maplibregl.Map, places: PlaceFeature[]) {
-  const collection = createPlaceFeatureCollection(places);
-
-  collection.features.forEach((feature) => {
-    const { markerImageId } = feature.properties;
-
-    if (markerImageId && !map.hasImage(markerImageId)) {
-      map.addImage(markerImageId, createDefaultMarkerImage(), { pixelRatio: 2 });
-    }
-  });
-}
-
-function loadImage(src: string): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.crossOrigin = "anonymous";
-    image.onload = () => resolve(image);
-    image.onerror = reject;
-    image.src = src;
-  });
 }

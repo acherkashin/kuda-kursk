@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test("поиск, пустое состояние и сброс обновляют видимые места", async ({ page }) => {
   await page.goto("/");
 
-  await page.getByRole("searchbox", { name: /Поиск/i }).fill("Боевке");
+  await page.getByRole("searchbox", { name: /Поиск/i }).fill("Песчаный");
   await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "1");
   await expect(page.getByTestId("results-summary")).toContainText("1 место");
 
@@ -11,5 +11,5 @@ test("поиск, пустое состояние и сброс обновляю
   await expect(page.getByTestId("empty-results")).toBeVisible();
 
   await page.getByTestId("results-summary").getByRole("button", { name: "Сбросить" }).click();
-  await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "4");
+  await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "39");
 });

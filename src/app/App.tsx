@@ -6,17 +6,14 @@ import {
 } from "../components/analytics-consent/AnalyticsConsent";
 import { ResultsSummary } from "../components/filters/ResultsSummary";
 import { SearchBox } from "../components/filters/SearchBox";
-import { CommunityMapFallback } from "../components/map/CommunityMapFallback";
-import { CommunityMapHeader } from "../components/map/CommunityMapHeader";
 import { KurskMap } from "../components/map/KurskMap";
+import { PublicMapFallback } from "../components/map/PublicMapFallback";
+import { PublicMapHeader } from "../components/map/PublicMapHeader";
 import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel";
-import { loadCommunityMaps } from "../data/loadCommunityMaps";
 import { loadPlaces } from "../data/loadPlaces";
 import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
-import type { CommunityMap } from "../domain/communityMaps";
-import { resolveCommunityMap } from "../domain/communityMaps";
+import { findMapBySlug } from "../domain/mapCatalog";
 import type { PlaceFeature } from "../domain/places";
-import { isPublicPlace } from "../domain/places";
 import type { RouteProvider } from "../domain/routeLinks";
 import { searchPlaces } from "../domain/search";
 import { createAnalyticsAdapter } from "../services/analytics/analyticsAdapter";
@@ -26,7 +23,6 @@ import { useLocation, useParams } from "react-router";
 
 export function App() {
   const [places, setPlaces] = useState<PlaceFeature[]>([]);
-  const [communityMaps, setCommunityMaps] = useState<CommunityMap[]>([]);
   const [loadState, setLoadState] = useState<"loading" | "ready" | "error">("loading");
   const [activePlace, setActivePlace] = useState<PlaceFeature | null>(null);
   const [query, setQuery] = useState("");
@@ -39,17 +35,8 @@ export function App() {
   );
   const { slug } = useParams();
   const location = useLocation();
-  const resolvedCommunity = useMemo(
-    () => (slug ? resolveCommunityMap(slug, communityMaps, places) : null),
-    [communityMaps, places, slug]
-  );
-  const basePlaces = useMemo(() => {
-    if (resolvedCommunity?.status === "found") {
-      return resolvedCommunity.places;
-    }
-
-    return places.filter(isPublicPlace);
-  }, [places, resolvedCommunity]);
+  const currentMap = useMemo(() => findMapBySlug(slug), [slug]);
+  const basePlaces = places;
   const visiblePlaces = useMemo(() => searchPlaces(basePlaces, query), [basePlaces, query]);
   const hasActiveSearch = query.trim().length > 0;
 
@@ -60,11 +47,22 @@ export function App() {
   useEffect(() => {
     let cancelled = false;
 
-    void Promise.all([loadPlaces(), loadCommunityMaps()])
-      .then(([loadedPlaces, loadedCommunityMaps]) => {
+    if (!currentMap) {
+      setPlaces([]);
+      setActivePlace(null);
+      setLoadState("ready");
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    setLoadState("loading");
+    setPlaces([]);
+    setActivePlace(null);
+    void loadPlaces(currentMap.dataPath)
+      .then((loadedPlaces) => {
         if (!cancelled) {
           setPlaces(loadedPlaces);
-          setCommunityMaps(loadedCommunityMaps);
           setLoadState("ready");
         }
       })
@@ -77,7 +75,7 @@ export function App() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [currentMap]);
 
   useEffect(() => {
     setActivePlace(null);
@@ -98,24 +96,8 @@ export function App() {
 
   useEffect(() => {
     analytics.hit(location.pathname);
-    analytics.track({
-      name: "app_open",
-      params: slug ? { route: location.pathname, communitySlug: slug } : { route: location.pathname }
-    });
+    analytics.track({ name: "app_open", params: { route: location.pathname, mapSlug: slug ?? "" } });
   }, [analytics, location.pathname, slug]);
-
-  useEffect(() => {
-    if (resolvedCommunity?.status === "found") {
-      analytics.track({
-        name: "community_map_opened",
-        params: {
-          slug: resolvedCommunity.map.slug,
-          placeCount: resolvedCommunity.places.length,
-          linkOnlyCount: resolvedCommunity.linkOnlyCount
-        }
-      });
-    }
-  }, [analytics, resolvedCommunity]);
 
   const handleConsentChange = useCallback(
     (consent: AnalyticsConsentRecord) => {
@@ -148,6 +130,7 @@ export function App() {
 
   return (
     <main className="relative min-h-dvh w-full overflow-hidden bg-[var(--color-page)]">
+      {!currentMap ? <PublicMapFallback slug={slug ?? ""} /> : null}
       {loadState === "error" ? (
         <div
           className="absolute right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-2 max-w-[min(320px,calc(100vw-32px))] rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5 text-sm text-[var(--color-muted)] shadow-[var(--shadow-panel)]"
@@ -156,16 +139,9 @@ export function App() {
           Не удалось загрузить места
         </div>
       ) : null}
-      <KurskMap places={visiblePlaces} onPlaceSelect={handlePlaceSelect} />
-      {resolvedCommunity?.status === "found" ? (
-        <CommunityMapHeader
-          map={resolvedCommunity.map}
-          placeCount={resolvedCommunity.places.length}
-          linkOnlyCount={resolvedCommunity.linkOnlyCount}
-        />
-      ) : null}
-      {resolvedCommunity?.status === "not-found" ? <CommunityMapFallback slug={resolvedCommunity.slug} /> : null}
-      {resolvedCommunity?.status !== "not-found" ? (
+      {currentMap ? <KurskMap places={visiblePlaces} onPlaceSelect={handlePlaceSelect} /> : null}
+      {currentMap ? <PublicMapHeader map={currentMap} placeCount={loadState === "ready" ? places.length : 0} /> : null}
+      {currentMap ? (
         <section
           className="fixed top-[72px] left-[max(16px,env(safe-area-inset-left))] z-3 grid w-[min(420px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2.5 shadow-[var(--shadow-panel)] max-[700px]:top-16 max-[700px]:right-2 max-[700px]:left-2 max-[700px]:max-h-[28dvh] max-[700px]:w-auto max-[700px]:overflow-auto"
           aria-label="Поиск"

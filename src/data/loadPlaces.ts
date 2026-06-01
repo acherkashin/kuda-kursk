@@ -1,7 +1,7 @@
 import type { PlaceFeature } from "../domain/places";
 import { validateGeoJsonPlace } from "./validateGeoJsonPlace";
 
-export async function loadPlaces(path = "/data/places.json"): Promise<PlaceFeature[]> {
+export async function loadPlaces(path = "/data/main-map.json"): Promise<PlaceFeature[]> {
   const response = await fetch(path);
 
   if (!response.ok) {
@@ -10,9 +10,15 @@ export async function loadPlaces(path = "/data/places.json"): Promise<PlaceFeatu
 
   const raw = (await response.json()) as unknown;
 
-  if (!Array.isArray(raw)) {
-    throw new Error("places.json must contain an array");
+  if (
+    typeof raw !== "object" ||
+    raw === null ||
+    Array.isArray(raw) ||
+    (raw as { type?: unknown }).type !== "FeatureCollection" ||
+    !Array.isArray((raw as { features?: unknown }).features)
+  ) {
+    throw new Error("Map data must contain a GeoJSON FeatureCollection");
   }
 
-  return raw.map(validateGeoJsonPlace);
+  return (raw as { features: unknown[] }).features.map(validateGeoJsonPlace);
 }

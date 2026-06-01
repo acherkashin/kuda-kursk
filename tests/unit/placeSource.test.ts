@@ -38,6 +38,13 @@ describe("createPlaceFeatureCollection", () => {
     });
   });
 
+  it("does not expose the full image as the marker when thumbnail exists", () => {
+    const collection = createPlaceFeatureCollection([makePlace("separate", "/place-images/full.jpg", "/place-thumbnails/thumb.jpg")]);
+
+    expect(collection.features[0]?.properties.markerImage).toBe("/place-thumbnails/thumb.jpg");
+    expect(collection.features[0]?.properties.markerImage).not.toBe("/place-images/full.jpg");
+  });
+
   it("keeps a 500-place publication set in a single GeoJSON source", () => {
     const places = Array.from({ length: 500 }, (_, index) => makePlace(`place-${index}`, "/pwa/icon-512.png"));
 

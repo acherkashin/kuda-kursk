@@ -3,11 +3,11 @@ import { expect, test } from "@playwright/test";
 test("маркер показывает название при hover, а панорамирование и zoom не ломают интерфейс", async ({ page }) => {
   await page.goto("/");
 
-  const marker = page.getByRole("button", { name: /Площадка на Боевке/i });
+  const marker = page.getByRole("button", { name: /Парк-отель «Песчаный»/i });
   await expect(marker).toBeAttached();
   await marker.focus();
 
-  await expect(page.getByTestId("marker-tooltip")).toContainText("Площадка на Боевке");
+  await expect(page.getByTestId("marker-tooltip")).toContainText("Парк-отель «Песчаный»");
 
   const map = page.getByTestId("map-shell");
   const box = await map.boundingBox();
