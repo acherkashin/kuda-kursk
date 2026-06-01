@@ -22,17 +22,21 @@ function pluralizePlaces(count: number): string {
 
 export function ResultsSummary({ count, total, hasActiveSearch, onReset }: ResultsSummaryProps) {
   return (
-    <div className="results-summary" data-testid="results-summary">
+    <div className="flex items-center justify-between gap-2 text-[13px] text-[var(--color-muted)]" data-testid="results-summary">
       <span>
         {pluralizePlaces(count)} из {total}
       </span>
       {hasActiveSearch ? (
-        <button className="text-button" type="button" onClick={onReset}>
+        <button
+          className="min-h-[30px] rounded-lg border border-[var(--color-line)] bg-white px-2 py-1 text-[13px] font-bold text-[var(--color-text)]"
+          type="button"
+          onClick={onReset}
+        >
           Сбросить
         </button>
       ) : null}
       {count === 0 ? (
-        <div className="empty-results" data-testid="empty-results">
+        <div className="basis-full font-bold text-[#8a3d2c]" data-testid="empty-results">
           Ничего не нашлось
         </div>
       ) : null}

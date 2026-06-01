@@ -12,10 +12,10 @@ export function ExternalLinks({ links, onOpen }: ExternalLinksProps) {
   }
 
   return (
-    <div className="external-links" data-testid="external-links" aria-label="Внешние ссылки">
+    <div className="grid gap-2" data-testid="external-links" aria-label="Внешние ссылки">
       {links.map((link) => (
         <a
-          className="external-link"
+          className="inline-flex min-h-[42px] items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-white px-2.5 py-2 text-sm font-bold text-[var(--color-text)] no-underline"
           href={link.url}
           key={`${link.kind ?? "other"}-${link.label}-${link.id ?? link.url}`}
           target={link.kind === "phone" ? undefined : "_blank"}

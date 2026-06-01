@@ -2,7 +2,8 @@ import { expect, test } from "@playwright/test";
 
 test("карточка неполного места скрывает optional блоки без заглушек", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: /Двор с гимнастическим турником/i }).click();
+  await page.getByRole("button", { name: /Двор с гимнастическим турником/i }).focus();
+  await page.keyboard.press("Enter");
 
   const panel = page.getByTestId("place-details-panel");
   await expect(panel).toBeVisible();

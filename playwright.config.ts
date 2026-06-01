@@ -10,8 +10,12 @@ export default defineConfig({
   },
   webServer: {
     command: "pnpm dev --host 127.0.0.1 --port 5173",
+    env: {
+      ...process.env,
+      VITE_YANDEX_METRIKA_ID: process.env.VITE_YANDEX_METRIKA_ID ?? "123456"
+    },
     url: "http://127.0.0.1:5173",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 120_000
   },
   projects: [

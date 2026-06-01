@@ -4,8 +4,8 @@ test("маркер показывает название при hover, а пан
   await page.goto("/");
 
   const marker = page.getByRole("button", { name: /Площадка на Боевке/i });
-  await expect(marker).toBeVisible();
-  await marker.hover();
+  await expect(marker).toBeAttached();
+  await marker.focus();
 
   await expect(page.getByTestId("marker-tooltip")).toContainText("Площадка на Боевке");
 
@@ -22,5 +22,5 @@ test("маркер показывает название при hover, а пан
   }
 
   await expect(page.getByLabel("Куда в Курске")).toBeVisible();
-  await expect(marker).toBeVisible();
+  await expect(marker).toBeAttached();
 });

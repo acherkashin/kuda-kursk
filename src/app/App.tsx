@@ -21,6 +21,7 @@ import type { RouteProvider } from "../domain/routeLinks";
 import { searchPlaces } from "../domain/search";
 import { createAnalyticsAdapter } from "../services/analytics/analyticsAdapter";
 import { loadYandexMetrika } from "../services/analytics/yandexMetrika";
+import { registerServiceWorker, type ServiceWorkerUpdatePrompt } from "../services/pwa/registerServiceWorker";
 import { useLocation, useParams } from "react-router";
 
 export function App() {
@@ -30,6 +31,7 @@ export function App() {
   const [activePlace, setActivePlace] = useState<PlaceFeature | null>(null);
   const [query, setQuery] = useState("");
   const [analyticsConsent, setAnalyticsConsent] = useState<AnalyticsConsentRecord | null>(() => readStoredAnalyticsConsent());
+  const [pwaUpdatePrompt, setPwaUpdatePrompt] = useState<ServiceWorkerUpdatePrompt | null>(null);
   const analyticsAccepted = analyticsConsent?.status === "accepted";
   const analytics = useMemo(
     () => createAnalyticsAdapter(import.meta.env.VITE_YANDEX_METRIKA_ID, analyticsAccepted),
@@ -78,16 +80,29 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    setActivePlace(null);
+    resetSearch();
+  }, [location.pathname, resetSearch]);
+
+  useEffect(() => {
+    registerServiceWorker({
+      onNeedRefresh: setPwaUpdatePrompt
+    });
+  }, []);
+
+  useEffect(() => {
+    if (analyticsAccepted) {
+      loadYandexMetrika(import.meta.env.VITE_YANDEX_METRIKA_ID);
+    }
+  }, [analyticsAccepted]);
+
+  useEffect(() => {
+    analytics.hit(location.pathname);
     analytics.track({
       name: "app_open",
       params: slug ? { route: location.pathname, communitySlug: slug } : { route: location.pathname }
     });
   }, [analytics, location.pathname, slug]);
-
-  useEffect(() => {
-    setActivePlace(null);
-    resetSearch();
-  }, [location.pathname, resetSearch]);
 
   useEffect(() => {
     if (resolvedCommunity?.status === "found") {
@@ -101,12 +116,6 @@ export function App() {
       });
     }
   }, [analytics, resolvedCommunity]);
-
-  useEffect(() => {
-    if (analyticsAccepted) {
-      loadYandexMetrika(import.meta.env.VITE_YANDEX_METRIKA_ID);
-    }
-  }, [analyticsAccepted]);
 
   const handleConsentChange = useCallback(
     (consent: AnalyticsConsentRecord) => {
@@ -138,13 +147,16 @@ export function App() {
   );
 
   return (
-    <main className="app-shell">
+    <main className="relative min-h-dvh w-full overflow-hidden bg-[var(--color-page)]">
       {loadState === "error" ? (
-        <div className="app-error" role="alert">
+        <div
+          className="absolute right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-2 max-w-[min(320px,calc(100vw-32px))] rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2.5 text-sm text-[var(--color-muted)] shadow-[var(--shadow-panel)]"
+          role="alert"
+        >
           Не удалось загрузить места
         </div>
       ) : null}
-      <KurskMap places={visiblePlaces} activePlaceId={activePlace?.id ?? null} onPlaceSelect={handlePlaceSelect} />
+      <KurskMap places={visiblePlaces} onPlaceSelect={handlePlaceSelect} />
       {resolvedCommunity?.status === "found" ? (
         <CommunityMapHeader
           map={resolvedCommunity.map}
@@ -154,7 +166,10 @@ export function App() {
       ) : null}
       {resolvedCommunity?.status === "not-found" ? <CommunityMapFallback slug={resolvedCommunity.slug} /> : null}
       {resolvedCommunity?.status !== "not-found" ? (
-        <section className="filter-toolbar" aria-label="Поиск">
+        <section
+          className="fixed top-[72px] left-[max(16px,env(safe-area-inset-left))] z-3 grid w-[min(420px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2.5 shadow-[var(--shadow-panel)] max-[700px]:top-16 max-[700px]:right-2 max-[700px]:left-2 max-[700px]:max-h-[28dvh] max-[700px]:w-auto max-[700px]:overflow-auto"
+          aria-label="Поиск"
+        >
           <SearchBox value={query} onChange={handleQueryChange} onReset={() => handleQueryChange("")} />
           <ResultsSummary
             count={visiblePlaces.length}
@@ -179,6 +194,22 @@ export function App() {
         }}
       />
       <AnalyticsConsent consent={analyticsConsent} onChange={handleConsentChange} />
+      {pwaUpdatePrompt?.needRefresh ? (
+        <section
+          className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-2 max-[700px]:bottom-2 max-[700px]:left-2 max-[700px]:w-auto"
+          data-testid="pwa-update"
+          aria-label="Доступно обновление приложения"
+        >
+          <p className="m-0 text-[13px] leading-snug text-[var(--color-muted)]">Доступна новая версия карты.</p>
+          <button
+            className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-accent)] px-2.5 py-1.5 text-[13px] font-bold text-white"
+            type="button"
+            onClick={() => void pwaUpdatePrompt.updateServiceWorker()}
+          >
+            Обновить
+          </button>
+        </section>
+      ) : null}
     </main>
   );
 }

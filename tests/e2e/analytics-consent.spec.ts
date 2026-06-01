@@ -1,6 +1,9 @@
 import { expect, test } from "@playwright/test";
 
 test("аналитика не создаёт ym до consent и не отправляет сырой поисковый запрос", async ({ page }) => {
+  await page.route("https://mc.yandex.ru/metrika/tag.js", async (route) => {
+    await route.fulfill({ contentType: "application/javascript", body: "window.__metrikaScriptLoaded = true;" });
+  });
   await page.goto("/");
 
   await expect(page.getByTestId("analytics-consent")).toBeVisible();
@@ -12,6 +15,23 @@ test("аналитика не создаёт ym до consent и не отпра�
 
   await expect(page.getByTestId("analytics-consent")).toHaveCount(0);
   await expect(page.evaluate(() => localStorage.getItem("kursk-map:analytics-consent:v1"))).resolves.toContain("accepted");
+  await expect(page.locator('script[src*="mc.yandex.ru/metrika"]')).toHaveCount(1);
+  await expect
+    .poll(async () =>
+      page.evaluate(() => {
+        const queue = (window as typeof window & { ymQueue?: unknown[][] }).ymQueue ?? [];
+        return queue.map((entry) => entry.slice(0, 4));
+      })
+    )
+    .toContainEqual([123456, "hit", "/"]);
+  await expect
+    .poll(async () =>
+      page.evaluate(() => {
+        const queue = (window as typeof window & { ymQueue?: unknown[][] }).ymQueue ?? [];
+        return queue.some((entry) => entry[1] === "reachGoal" && entry[2] === "app_open");
+      })
+    )
+    .toBe(true);
   await expect(page.evaluate(() => document.documentElement.textContent?.includes("секретный запрос") ?? false)).resolves.toBe(
     false
   );

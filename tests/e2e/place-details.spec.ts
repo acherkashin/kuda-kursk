@@ -2,7 +2,8 @@ import { expect, test } from "@playwright/test";
 
 test("выбранное полное место открывает карточку и route actions", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: /Площадка на Боевке/i }).click();
+  await page.getByRole("button", { name: /Площадка на Боевке/i }).focus();
+  await page.keyboard.press("Enter");
 
   const panel = page.getByTestId("place-details-panel");
   await expect(panel).toBeVisible();

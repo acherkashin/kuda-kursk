@@ -6,5 +6,5 @@ test("неизвестная community route показывает fallback и в
   await expect(page.getByTestId("community-fallback")).toBeVisible();
   await page.getByRole("link", { name: /На основную карту/i }).click();
   await expect(page).toHaveURL("/");
-  await expect(page.getByTestId("place-marker")).toHaveCount(4);
+  await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "4");
 });

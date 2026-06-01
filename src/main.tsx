@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./styles/index.css";
 import { AppRouter } from "./app/router";
-import { registerServiceWorker } from "./services/pwa/registerServiceWorker";
 
 const rootElement = document.getElementById("root");
 
@@ -16,5 +15,3 @@ createRoot(rootElement).render(
     <AppRouter />
   </React.StrictMode>
 );
-
-registerServiceWorker();

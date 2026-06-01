@@ -4,6 +4,8 @@ export type PlaceProperties = {
   id: string | number;
   name: string;
   thumbnail?: string;
+  markerImage?: string;
+  markerImageId?: string;
 };
 
 export type PlaceFeatureCollection = {
@@ -24,9 +26,15 @@ export function createPlaceFeatureCollection(places: PlaceFeature[]): PlaceFeatu
         id: place.id,
         name: place.properties.balloonContent.name
       };
+      const markerImage = place.properties.balloonContent.thumbnail ?? place.properties.balloonContent.image;
 
       if (place.properties.balloonContent.thumbnail) {
         properties.thumbnail = place.properties.balloonContent.thumbnail;
+      }
+
+      if (markerImage) {
+        properties.markerImage = markerImage;
+        properties.markerImageId = `place-marker-${String(place.id).replace(/[^a-zA-Z0-9_-]+/g, "-")}`;
       }
 
       return {

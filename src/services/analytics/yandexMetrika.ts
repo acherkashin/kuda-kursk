@@ -27,7 +27,7 @@ export function loadYandexMetrika(counterId: string | undefined): boolean {
   script.src = "https://mc.yandex.ru/metrika/tag.js";
   script.dataset.kurskMetrika = "true";
   document.head.append(script);
-  window.ym(numericCounterId, "init", numericCounterId, {
+  window.ym(numericCounterId, "init", {
     clickmap: true,
     trackLinks: true,
     accurateTrackBounce: true

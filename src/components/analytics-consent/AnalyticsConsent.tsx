@@ -42,7 +42,7 @@ export function AnalyticsConsent({ consent, onChange }: AnalyticsConsentProps) {
   if (consent) {
     return (
       <button
-        className="analytics-settings"
+        className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 inline-flex h-10 min-h-9 w-10 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-0 text-[13px] font-bold text-[var(--color-text)] shadow-[var(--shadow-panel)]"
         type="button"
         aria-label="Настройки аналитики"
         onClick={() => onChange(createConsent(consent.status === "accepted" ? "rejected" : "accepted"))}
@@ -59,14 +59,28 @@ export function AnalyticsConsent({ consent, onChange }: AnalyticsConsentProps) {
   };
 
   return (
-    <section className="analytics-consent" data-testid="analytics-consent" aria-label="Согласие на аналитику">
-      <p>Аналитика включается только по согласию и помогает понять, какие места и фильтры полезны.</p>
-      <div className="analytics-consent__actions">
-        <button type="button" onClick={() => updateConsent("accepted")}>
+    <section
+      className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-2 max-[700px]:bottom-2 max-[700px]:left-2 max-[700px]:w-auto"
+      data-testid="analytics-consent"
+      aria-label="Согласие на аналитику"
+    >
+      <p className="m-0 text-[13px] leading-snug text-[var(--color-muted)]">
+        Аналитика включается только по согласию и помогает понять, какие места и фильтры полезны.
+      </p>
+      <div className="flex flex-wrap gap-2">
+        <button
+          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-accent)] px-2.5 py-1.5 text-[13px] font-bold text-white"
+          type="button"
+          onClick={() => updateConsent("accepted")}
+        >
           <CheckIcon aria-hidden="true" size={16} />
           <span>Принять аналитику</span>
         </button>
-        <button type="button" onClick={() => updateConsent("rejected")}>
+        <button
+          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-white px-2.5 py-1.5 text-[13px] font-bold text-[var(--color-text)]"
+          type="button"
+          onClick={() => updateConsent("rejected")}
+        >
           <XIcon aria-hidden="true" size={16} />
           <span>Отклонить</span>
         </button>

@@ -11,11 +11,14 @@ export function PhotoCarousel({ photos, title }: PhotoCarouselProps) {
   }
 
   return (
-    <div className="photo-carousel" aria-label={`Фотографии: ${title}`}>
+    <div
+      className="grid auto-cols-full grid-flow-col overflow-x-auto bg-[#e3ebe0] [scroll-snap-type:x_mandatory]"
+      aria-label={`Фотографии: ${title}`}
+    >
       {photos.map((photo) => (
-        <figure className="photo-carousel__item" key={`${photo.src}-${photo.caption ?? ""}`}>
-          <img src={photo.src} alt={photo.caption ?? title} loading="lazy" />
-          {photo.caption ? <figcaption>{photo.caption}</figcaption> : null}
+        <figure className="m-0 min-h-[210px] [scroll-snap-align:start]" key={`${photo.src}-${photo.caption ?? ""}`}>
+          <img className="block h-[230px] w-full object-cover max-[700px]:h-[190px]" src={photo.src} alt={photo.caption ?? title} loading="lazy" />
+          {photo.caption ? <figcaption className="px-3.5 py-2 text-[13px] text-[var(--color-muted)]">{photo.caption}</figcaption> : null}
         </figure>
       ))}
     </div>

@@ -14,13 +14,15 @@ const icons = {
 
 export function RouteActions({ links, onOpen }: RouteActionsProps) {
   return (
-    <div className="route-actions" aria-label="Маршруты">
-      {links.map((link) => {
+    <div className="grid gap-2" aria-label="Маршруты">
+      {links.map((link, index) => {
         const Icon = icons[link.provider];
 
         return (
           <a
-            className="route-action"
+            className={`inline-flex min-h-[42px] items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] px-2.5 py-2 text-sm font-bold no-underline ${
+              index === 0 ? "bg-[var(--color-accent)] text-white" : "bg-white text-[var(--color-text)]"
+            }`}
             href={link.url}
             key={link.provider}
             target="_blank"
