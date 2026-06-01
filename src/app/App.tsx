@@ -39,6 +39,8 @@ export function App() {
   const basePlaces = places;
   const visiblePlaces = useMemo(() => searchPlaces(basePlaces, query), [basePlaces, query]);
   const hasActiveSearch = query.trim().length > 0;
+  const hasActivePlace = activePlace !== null;
+  const hasFloatingNotice = !hasActivePlace && (!analyticsConsent || pwaUpdatePrompt?.needRefresh);
 
   const resetSearch = useCallback(() => {
     setQuery("");
@@ -138,7 +140,11 @@ export function App() {
   );
 
   return (
-    <main className="relative min-h-dvh w-full overflow-hidden bg-[var(--color-page)]">
+    <main
+      className="relative min-h-dvh w-full overflow-hidden bg-[var(--color-page)]"
+      data-details-open={hasActivePlace ? "true" : "false"}
+      data-notice-open={hasFloatingNotice ? "true" : "false"}
+    >
       {!currentMap ? <PublicMapFallback slug={slug ?? ""} /> : null}
       {loadState === "error" ? (
         <div
@@ -148,8 +154,8 @@ export function App() {
           Не удалось загрузить места
         </div>
       ) : null}
-      {currentMap ? <KurskMap places={visiblePlaces} onPlaceSelect={handlePlaceSelect} /> : null}
-      {currentMap ? <PublicMapHeader map={currentMap} placeCount={loadState === "ready" ? places.length : 0} /> : null}
+      {currentMap ? <KurskMap activePlace={activePlace} places={visiblePlaces} onPlaceSelect={handlePlaceSelect} /> : null}
+      {currentMap && !hasActivePlace ? <PublicMapHeader map={currentMap} placeCount={loadState === "ready" ? places.length : 0} /> : null}
       {currentMap ? (
         <section
           className="fixed top-[72px] left-[max(16px,env(safe-area-inset-left))] z-3 grid w-[min(420px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2.5 shadow-[var(--shadow-panel)] max-[700px]:top-16 max-[700px]:right-2 max-[700px]:left-2 max-[700px]:max-h-[28dvh] max-[700px]:w-auto max-[700px]:overflow-auto"
@@ -178,10 +184,10 @@ export function App() {
           }
         }}
       />
-      <AnalyticsConsent consent={analyticsConsent} onChange={handleConsentChange} />
-      {pwaUpdatePrompt?.needRefresh ? (
+      <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace} onChange={handleConsentChange} />
+      {pwaUpdatePrompt?.needRefresh && !hasActivePlace ? (
         <section
-          className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-2 max-[700px]:bottom-[104px] max-[700px]:left-2 max-[700px]:w-auto"
+          className="fixed top-[max(16px,env(safe-area-inset-top))] right-[max(16px,env(safe-area-inset-right))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:top-[184px] max-[700px]:right-2 max-[700px]:left-2 max-[700px]:w-auto"
           data-testid="pwa-update"
           aria-label="Доступно обновление приложения"
         >

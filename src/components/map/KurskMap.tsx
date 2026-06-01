@@ -17,14 +17,16 @@ import { createPlaceFeatureCollection } from "./placeSource";
 import { addMarkerImagePlaceholders, addMarkerImages, createDefaultMarkerImage } from "./markerImages";
 
 type KurskMapProps = {
+  activePlace: PlaceFeature | null;
   places: PlaceFeature[];
   onPlaceSelect?: (place: PlaceFeature, source: "map") => void;
 };
 
-export function KurskMap({ places, onPlaceSelect }: KurskMapProps) {
+export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const placeByIdRef = useRef<Map<string, PlaceFeature>>(new Map());
+  const previousActivePlaceIdRef = useRef<string | number | null>(null);
   const [tooltipName, setTooltipName] = useState<string | null>(null);
   const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
 
@@ -65,8 +67,14 @@ export function KurskMap({ places, onPlaceSelect }: KurskMapProps) {
     map.on("error", () => setMapState((state) => (state === "loading" ? "error" : state)));
 
     mapRef.current = map;
+    if (import.meta.env.DEV) {
+      (window as typeof window & { __kurskMap?: maplibregl.Map }).__kurskMap = map;
+    }
 
     return () => {
+      if (import.meta.env.DEV) {
+        delete (window as typeof window & { __kurskMap?: maplibregl.Map }).__kurskMap;
+      }
       map.remove();
       mapRef.current = null;
     };
@@ -92,6 +100,43 @@ export function KurskMap({ places, onPlaceSelect }: KurskMapProps) {
       map.once("load", updateSource);
     }
   }, [places]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+
+    if (!map || mapState !== "ready" || !map.getSource(PLACE_SOURCE_ID)) {
+      return;
+    }
+
+    const previousActivePlaceId = previousActivePlaceIdRef.current;
+
+    if (previousActivePlaceId !== null && previousActivePlaceId !== activePlace?.id) {
+      map.setFeatureState({ id: previousActivePlaceId, source: PLACE_SOURCE_ID }, { active: false });
+    }
+
+    if (activePlace) {
+      map.setFeatureState({ id: activePlace.id, source: PLACE_SOURCE_ID }, { active: true });
+    }
+
+    previousActivePlaceIdRef.current = activePlace?.id ?? null;
+  }, [activePlace, mapState]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+
+    if (!map || mapState !== "ready" || !activePlace) {
+      return;
+    }
+
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+    const [longitude, latitude] = activePlace.geometry.coordinates;
+
+    map.easeTo({
+      center: [longitude, latitude],
+      duration: 420,
+      offset: isMobile ? [0, -220] : [-210, 0]
+    });
+  }, [activePlace, mapState]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -169,7 +214,7 @@ export function KurskMap({ places, onPlaceSelect }: KurskMapProps) {
 
   return (
     <section
-      className="fixed inset-0 bg-[#dfe8dd]"
+      className="fixed inset-0 bg-[var(--color-page)]"
       data-testid="map-shell"
       data-place-count={places.length}
       aria-label="Карта мест Курска"

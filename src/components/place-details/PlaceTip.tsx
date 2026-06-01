@@ -9,7 +9,7 @@ export function PlaceTip({ tip }: PlaceTipProps) {
 
   return (
     <aside
-      className="rounded-lg border border-[var(--color-line)] bg-[#eef5ed] p-3 text-sm leading-snug text-[#243b2f]"
+      className="rounded-lg border border-[var(--color-line)] bg-[var(--color-accent-soft)] p-3 text-sm leading-snug text-[var(--color-text-secondary)]"
       data-testid="place-tip"
     >
       {tip}

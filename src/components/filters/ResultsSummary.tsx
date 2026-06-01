@@ -22,7 +22,7 @@ function pluralizePlaces(count: number): string {
 
 export function ResultsSummary({ count, total, hasActiveSearch, onReset }: ResultsSummaryProps) {
   return (
-    <div className="flex items-center justify-between gap-2 text-[13px] text-[var(--color-muted)]" data-testid="results-summary">
+    <div className="flex items-center justify-between gap-2 text-[13px] text-[var(--color-muted)] tabular-nums" data-testid="results-summary">
       <span>
         {pluralizePlaces(count)} из {total}
       </span>
@@ -36,7 +36,7 @@ export function ResultsSummary({ count, total, hasActiveSearch, onReset }: Resul
         </button>
       ) : null}
       {count === 0 ? (
-        <div className="basis-full font-bold text-[#8a3d2c]" data-testid="empty-results">
+        <div className="basis-full font-bold text-[var(--color-text)]" data-testid="empty-results">
           Ничего не нашлось
         </div>
       ) : null}

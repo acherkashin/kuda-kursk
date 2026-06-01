@@ -12,7 +12,7 @@ export function PhotoCarousel({ photos, title }: PhotoCarouselProps) {
 
   return (
     <div
-      className="grid auto-cols-full grid-flow-col overflow-x-auto bg-[#e3ebe0] [scroll-snap-type:x_mandatory]"
+      className="grid auto-cols-full grid-flow-col overflow-x-auto bg-[var(--color-surface-lower)] [scroll-snap-type:x_mandatory]"
       aria-label={`Фотографии: ${title}`}
     >
       {photos.map((photo) => (

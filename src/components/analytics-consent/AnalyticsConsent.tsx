@@ -4,6 +4,7 @@ import { ANALYTICS_CONSENT_STORAGE_KEY, ANALYTICS_POLICY_VERSION } from "../../d
 
 type AnalyticsConsentProps = {
   consent: AnalyticsConsentRecord | null;
+  isSuppressed?: boolean;
   onChange: (consent: AnalyticsConsentRecord) => void;
 };
 
@@ -38,11 +39,15 @@ export function storeAnalyticsConsent(consent: AnalyticsConsentRecord) {
   window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, JSON.stringify(consent));
 }
 
-export function AnalyticsConsent({ consent, onChange }: AnalyticsConsentProps) {
+export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: AnalyticsConsentProps) {
+  if (isSuppressed) {
+    return null;
+  }
+
   if (consent) {
     return (
       <button
-        className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 inline-flex h-10 min-h-9 w-10 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-0 text-[13px] font-bold text-[var(--color-text)] shadow-[var(--shadow-panel)] max-[700px]:bottom-[104px]"
+        className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 inline-flex h-10 min-h-9 w-10 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-0 text-[13px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] max-[700px]:right-3 max-[700px]:bottom-[104px]"
         type="button"
         aria-label="Настройки аналитики"
         onClick={() => onChange(createConsent(consent.status === "accepted" ? "rejected" : "accepted"))}
@@ -60,7 +65,7 @@ export function AnalyticsConsent({ consent, onChange }: AnalyticsConsentProps) {
 
   return (
     <section
-      className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-2 max-[700px]:bottom-[104px] max-[700px]:left-2 max-[700px]:w-auto"
+      className="fixed top-[max(16px,env(safe-area-inset-top))] right-[max(16px,env(safe-area-inset-right))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:top-[184px] max-[700px]:right-2 max-[700px]:left-2 max-[700px]:w-auto"
       data-testid="analytics-consent"
       aria-label="Согласие на аналитику"
     >

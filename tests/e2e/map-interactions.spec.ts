@@ -24,3 +24,28 @@ test("маркер показывает название при hover, а пан
   await expect(page.getByLabel("Куда в Курске")).toBeVisible();
   await expect(marker).toBeAttached();
 });
+
+test("клик по кластеру раскрывает кликабельные маркеры", async ({ page }) => {
+  await page.setViewportSize({ height: 720, width: 1280 });
+  await page.goto("/");
+
+  await expect(page.getByTestId("map-shell")).toBeVisible();
+  await page.mouse.click(615, 209);
+
+  await expect
+    .poll(async () =>
+      page.evaluate(() => {
+        const map = (window as typeof window & {
+          __kurskMap?: {
+            queryRenderedFeatures: (
+              geometry?: unknown,
+              options?: { layers?: string[] }
+            ) => unknown[];
+          };
+        }).__kurskMap;
+
+        return map?.queryRenderedFeatures(undefined, { layers: ["place-marker-images"] }).length ?? 0;
+      })
+    )
+    .toBeGreaterThan(0);
+});

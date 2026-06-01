@@ -9,20 +9,20 @@
   },
   "glyphs": "https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",
   "layers": [
-    { "id": "background", "type": "background", "paint": { "background-color": "#edf3ea" } },
+    { "id": "background", "type": "background", "paint": { "background-color": "#f2f2f2" } },
     {
       "id": "landuse",
       "type": "fill",
       "source": "openfreemap",
       "source-layer": "landuse",
-      "paint": { "fill-color": "#dfe8dd", "fill-opacity": 0.5 }
+      "paint": { "fill-color": "#e9e9e9", "fill-opacity": 0.5 }
     },
     {
       "id": "water",
       "type": "fill",
       "source": "openfreemap",
       "source-layer": "water",
-      "paint": { "fill-color": "#b9d4d9" }
+      "paint": { "fill-color": "#d8d8d8" }
     },
     {
       "id": "roads",
@@ -38,7 +38,7 @@
       "source-layer": "transportation_name",
       "minzoom": 13,
       "layout": { "text-field": ["coalesce", ["get", "name:ru"], ["get", "name"]], "text-font": ["Noto Sans Regular"], "text-size": 11 },
-      "paint": { "text-color": "#6d7a70", "text-halo-color": "#edf3ea", "text-halo-width": 1 }
+      "paint": { "text-color": "#888888", "text-halo-color": "#f2f2f2", "text-halo-width": 1 }
     },
     {
       "id": "place-labels",
@@ -46,7 +46,7 @@
       "source": "openfreemap",
       "source-layer": "place",
       "layout": { "text-field": ["coalesce", ["get", "name:ru"], ["get", "name"]], "text-font": ["Noto Sans Regular"], "text-size": 13 },
-      "paint": { "text-color": "#46564d", "text-halo-color": "#edf3ea", "text-halo-width": 1.2 }
+      "paint": { "text-color": "#444444", "text-halo-color": "#f2f2f2", "text-halo-width": 1.2 }
     }
   ]
 }

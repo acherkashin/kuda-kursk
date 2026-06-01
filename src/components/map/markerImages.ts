@@ -30,9 +30,9 @@ export function createDefaultMarkerImage(): ImageData {
   context.arc(size / 2, size / 2, 40, 0, Math.PI * 2);
   context.fill();
   context.lineWidth = 10;
-  context.strokeStyle = "#2f7d5b";
+  context.strokeStyle = "#111111";
   context.stroke();
-  context.fillStyle = "#2f7d5b";
+  context.fillStyle = "#111111";
   context.beginPath();
   context.arc(size / 2, size / 2, 18, 0, Math.PI * 2);
   context.fill();
@@ -68,7 +68,7 @@ export function createMarkerImageData(image: HTMLImageElement): ImageData {
   context.drawImage(image, sourceX, sourceY, sourceSize, sourceSize, 16, 16, 64, 64);
   context.restore();
   context.lineWidth = 8;
-  context.strokeStyle = "#2f7d5b";
+  context.strokeStyle = "#111111";
   context.beginPath();
   context.arc(size / 2, size / 2, 36, 0, Math.PI * 2);
   context.stroke();

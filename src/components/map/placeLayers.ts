@@ -17,7 +17,7 @@ export function addPlaceLayers(map: Map) {
       filter: ["has", "point_count"],
       paint: {
         "circle-radius": ["step", ["get", "point_count"], 18, 10, 23, 50, 28],
-        "circle-color": "#2f7d5b",
+        "circle-color": "#111111",
         "circle-stroke-width": 3,
         "circle-stroke-color": "#ffffff"
       }
@@ -48,10 +48,15 @@ export function addPlaceLayers(map: Map) {
       source: PLACE_SOURCE_ID,
       filter: ["!", ["has", "point_count"]],
       paint: {
-        "circle-radius": ["interpolate", ["linear"], ["zoom"], 10, 16, 15, 21],
+        "circle-radius": [
+          "case",
+          ["boolean", ["feature-state", "active"], false],
+          ["interpolate", ["linear"], ["zoom"], 10, 19, 15, 25],
+          ["interpolate", ["linear"], ["zoom"], 10, 16, 15, 21]
+        ],
         "circle-color": "#ffffff",
-        "circle-stroke-width": 3,
-        "circle-stroke-color": "#2f7d5b",
+        "circle-stroke-width": ["case", ["boolean", ["feature-state", "active"], false], 5, 3],
+        "circle-stroke-color": "#111111",
         "circle-opacity": 0.98
       }
     });
@@ -87,7 +92,7 @@ export function addPlaceLayers(map: Map) {
         "text-anchor": "top"
       },
       paint: {
-        "text-color": "#17211b",
+        "text-color": "#0a0a0a",
         "text-halo-color": "#ffffff",
         "text-halo-width": 1.4
       }

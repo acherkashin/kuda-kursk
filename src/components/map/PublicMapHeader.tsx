@@ -12,7 +12,7 @@ export function PublicMapHeader({ map, placeCount }: PublicMapHeaderProps) {
       aria-label="Открытая карта"
     >
       <h1 className="m-0 mb-1.5 text-xl tracking-normal">{map.title}</h1>
-      <span className="block text-sm leading-snug font-bold text-[#33483c]">{placeCount} мест</span>
+      <span className="block text-sm leading-snug font-bold text-[var(--color-text-secondary)] tabular-nums">{placeCount} мест</span>
     </section>
   );
 }
