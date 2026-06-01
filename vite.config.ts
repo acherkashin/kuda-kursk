@@ -9,7 +9,15 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "prompt",
-      includeAssets: ["data/*.json", "map-styles/*.json", "pwa/icon-192.png", "pwa/icon-512.png"],
+      includeAssets: [
+        "data/*.json",
+        "map-styles/*.json",
+        "brand/kuda-v-kurske-logo-128.webp",
+        "pwa/icon-192.png",
+        "pwa/icon-512.png",
+        "pwa/apple-touch-icon.png",
+        "pwa/favicon-32.png"
+      ],
       manifest: {
         name: "Куда в Курске",
         short_name: "Курск",
