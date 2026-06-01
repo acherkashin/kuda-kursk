@@ -33,7 +33,9 @@ pnpm test:e2e
 pnpm build
 ```
 
-Ожидаемо: TypeScript проходит без ошибок; unit-тесты покрывают поиск, координаты и route links; Playwright проходит desktop/mobile/PWA/analytics сценарии; production build создаёт PWA manifest и service worker.
+Ожидаемо: TypeScript проходит без ошибок; существующие unit-проверки проверяют поиск, координаты и route links; существующие Playwright-сценарии проходят desktop/mobile/PWA/analytics проверки; production build создаёт PWA manifest и service worker.
+
+Новые или изменённые тесты не добавляются в рамках проверки качества без отдельного явного запроса или разрешения пользователя; существующие команды выше можно запускать как регрессионную проверку.
 
 ## Проверка PWA
 

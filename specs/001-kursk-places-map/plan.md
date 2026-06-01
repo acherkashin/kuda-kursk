@@ -24,7 +24,7 @@
 
 **Storage**: статические JSON-файлы и локальные ассеты в первом релизе; backend, аккаунты и CMS не входят в v1
 
-**Testing**: Playwright для e2e/responsive/PWA/analytics сценариев; unit-тесты TypeScript для чистой логики поиска, координат и route links
+**Testing**: существующие Playwright и unit-проверки можно запускать для регрессии; новое или изменённое тестовое покрытие добавляется только после отдельного явного запроса или разрешения пользователя
 
 **Target Platform**: PWA для современных мобильных и десктопных браузеров; production deployment как статический SPA
 
@@ -42,7 +42,7 @@
 
 - **Simplicity and abstractions**: PASS. Первый релиз остаётся одним frontend-приложением со статическими данными; новые модули нужны для отделения карты, данных, поиска, маршрутов, PWA и аналитики.
 - **Separation of concerns**: PASS. React-компоненты отвечают за композицию и состояние интерфейса; импорт/валидация данных, поиск, построение ссылок маршрутов и analytics adapter выносятся в focused modules.
-- **Risk-based testing strategy**: PASS. Critical flows закрываются Playwright, чистая логика закрывается unit-тестами; visual/PWA/mobile проверки записаны в quickstart и будущие tasks.
+- **User-approved testing**: PASS. В текущей фиче уже есть созданные unit/e2e проверки, которые можно запускать как регрессионные; новое покрытие не добавляется без отдельного разрешения, visual/PWA/mobile проверки могут фиксироваться вручную.
 - **Consistent UX**: PASS. Полноэкранная карта остаётся главным экраном; optional content скрывается без пустых заглушек; mobile drawer и consent UI проектируются как доступные элементы.
 - **Performance**: PASS. Используется MapLibre GeoJSON source/clustering, локальная нормализация поискового индекса и opt-in lazy loading Метрики; Fuse/search engine не добавляется до подтверждённой необходимости.
 
@@ -126,6 +126,6 @@ tests/
 
 - **Simplicity and abstractions**: PASS. Выбранный стек не добавляет backend или CMS в v1; дополнительные библиотеки покрывают конкретные риски: карта, PWA, анимации и иконки.
 - **Separation of concerns**: PASS. Контракты фиксируют границы данных, роутинга, PWA и аналитики; будущие задачи должны сохранять эти границы.
-- **Risk-based testing strategy**: PASS. Контракты и quickstart задают unit/e2e/PWA/analytics проверки для критичных требований.
+- **User-approved testing**: PASS. Контракты и quickstart описывают существующие проверки качества; новые или изменённые тесты требуют отдельного разрешения пользователя.
 - **Consistent UX**: PASS. План учитывает `DESIGN_SYSTEM.md`: карта остаётся главным холстом, UI плавает поверх карты, фотографии несут идентичность мест, активные состояния выражаются контрастом, а visual QA закрывает desktop/mobile состояния без наложений.
 - **Performance**: PASS. Требования к 500 местам закрываются локальной нормализацией данных, MapLibre source/clustering и отказом от преждевременного fuzzy engine.

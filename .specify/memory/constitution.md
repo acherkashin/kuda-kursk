@@ -1,15 +1,10 @@
 <!--
 Sync Impact Report
-Version change: template/unratified -> 1.0.0
+Version change: 1.0.0 -> 2.0.0
 Modified principles:
-- Template principle 1 -> I. Simplicity, readability, and maintainability
-- Template principle 2 -> II. Separation of concerns
-- Template principle 3 -> III. Risk-based testing
-- Template principle 4 -> IV. Consistent user experience
-- Template principle 5 -> V. Performance without premature optimization
+- Previous principle III -> III. User-approved testing
 Added sections:
-- Technical Constraints
-- Development and Verification Process
+- None
 Removed sections:
 - None
 Templates requiring updates:
@@ -18,7 +13,7 @@ Templates requiring updates:
 - ✅ .specify/templates/tasks-template.md
 - N/A .specify/templates/commands/*.md (directory absent)
 Runtime guidance:
-- ✅ AGENTS.md reviewed; no update required
+- ✅ AGENTS.md updated with explicit test-approval rule
 Follow-up TODOs:
 - None
 -->
@@ -52,19 +47,18 @@ test, reuse, or understand.
 Rationale: the map, search, collections, place cards, and future scenarios must
 remain testable and changeable without rewriting the interface layer.
 
-### III. Risk-Based Testing
+### III. User-Approved Testing
 
-Tests are REQUIRED for critical user scenarios, business logic, edge cases, data
-contracts, regressions, and behavior that is difficult to verify manually. Simple
-UI or content changes MAY rely on manual verification when the risk is clearly
-low and that choice is recorded in the plan or tasks. Defect fixes MUST add a
-regression test when the defect can be reproduced automatically at reasonable
-cost. The testing strategy MUST match the risk: unit tests for pure logic,
-integration/e2e tests or manual scenarios for user flows where those checks
-provide more confidence.
+New or changed automated tests MUST NOT be added unless the user explicitly
+requests or approves them. When an executor believes new test coverage would be
+useful, they MUST explain the relevant risk briefly and ask for permission before
+creating or expanding unit, integration, e2e, contract, or regression tests.
+Existing tests MAY be run as regression checks when appropriate, but running
+existing checks does not authorize new test coverage. Plans and tasks MUST record
+the chosen verification method without automatically adding test tasks.
 
-Rationale: tests should protect important product behavior without turning every
-small change into a disproportionately heavy process.
+Rationale: verification should remain intentional and useful without creating
+test coverage the user did not ask to maintain.
 
 ### IV. Consistent User Experience
 
@@ -106,12 +100,12 @@ complicate the first version without a direct requirement.
 
 Each implementation plan MUST pass the Constitution Check before research and
 again after design. Review MUST check solution simplicity, responsibility
-boundaries, testing strategy, explicit handling of edge cases, UX consistency,
-and sufficient performance for the stated scale. Tasks MUST record risk-based
-checks: automated tests, manual scenarios, visual verification, responsive
-behavior checks, or performance checks where risk requires them. Deviations from
-the principles MUST be described in Complexity Tracking with the reason and the
-simpler alternative that was rejected.
+boundaries, verification strategy, explicit handling of edge cases, UX
+consistency, and sufficient performance for the stated scale. Tasks MUST record
+approved checks: existing automated tests, manual scenarios, visual
+verification, responsive behavior checks, performance checks, or newly approved
+test coverage. Deviations from the principles MUST be described in Complexity
+Tracking with the reason and the simpler alternative that was rejected.
 
 ## Governance
 
@@ -128,4 +122,4 @@ verify that the current work complies with this constitution. If a principle is
 intentionally violated, the violation MUST be explicitly documented with the
 reason, risk, and simpler alternative that was rejected.
 
-**Version**: 1.0.0 | **Ratified**: 2026-05-28 | **Last Amended**: 2026-05-28
+**Version**: 2.0.0 | **Ratified**: 2026-05-28 | **Last Amended**: 2026-06-01

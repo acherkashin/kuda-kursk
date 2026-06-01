@@ -24,7 +24,7 @@
 
 **Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
 
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]
+**Testing**: [state whether new/changed tests were explicitly requested or approved; otherwise describe existing/manual verification]
 
 **Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
 
@@ -46,9 +46,9 @@
 - **Separation of concerns**: UI components handle rendering and composition;
   non-trivial business logic is moved into hooks, helpers, services, or focused
   modules.
-- **Risk-based testing strategy**: critical scenarios, business logic, edge
-  cases, data contracts, and regressions have automated tests or explicitly
-  justified verification; low-risk UI/content changes may use manual checks.
+- **User-approved testing**: the plan states whether new/changed tests were
+  explicitly requested or approved; if not, verification uses existing checks,
+  manual scenarios, visual QA, or other non-coverage validation.
 - **Consistent UX**: the interface follows existing patterns and does not create
   overlaps, inaccessible controls, or inconsistent states on desktop and mobile
   screens.
