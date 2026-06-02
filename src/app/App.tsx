@@ -7,6 +7,7 @@ import {
 import { ResultsSummary } from "../components/filters/ResultsSummary";
 import { SearchBox } from "../components/filters/SearchBox";
 import { KurskMap } from "../components/map/KurskMap";
+import { MapLogo } from "../components/map/MapLogo";
 import { PublicMapFallback } from "../components/map/PublicMapFallback";
 import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel";
 import { loadPlaces } from "../data/loadPlaces";
@@ -156,23 +157,26 @@ export function App() {
       {currentMap ? (
         <KurskMap
           activePlace={activePlace}
-          mapTitle={currentMap.title}
           places={visiblePlaces}
           onPlaceSelect={handlePlaceSelect}
         />
       ) : null}
       {currentMap ? (
-        <section
-          className="fixed top-[72px] left-[max(16px,env(safe-area-inset-left))] z-3 grid w-[min(420px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-2.5 shadow-[var(--shadow-panel)] max-[700px]:top-16 max-[700px]:right-2 max-[700px]:left-2 max-[700px]:max-h-[28dvh] max-[700px]:w-auto max-[700px]:overflow-auto"
-          aria-label="Поиск"
-        >
-          <SearchBox value={query} onChange={handleQueryChange} onReset={() => handleQueryChange("")} />
-          <ResultsSummary
-            count={visiblePlaces.length}
-            total={basePlaces.length}
-            hasActiveSearch={hasActiveSearch}
-          />
-        </section>
+        <>
+          <div className="map-top-ui fixed top-[max(16px,env(safe-area-inset-top))] left-[max(16px,env(safe-area-inset-left))] z-3 flex w-[min(820px,calc(100vw-476px))] min-w-[min(720px,calc(100vw-32px))] items-start gap-3 max-[900px]:w-[calc(100vw-32px)] max-[900px]:min-w-0 max-[700px]:top-[max(12px,env(safe-area-inset-top))] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto max-[520px]:gap-2">
+            <MapLogo title={currentMap.title} subtitle="Путеводитель для местных" />
+            <section className="min-w-0 flex-1" aria-label="Поиск">
+              <SearchBox value={query} onChange={handleQueryChange} onReset={() => handleQueryChange("")} />
+            </section>
+          </div>
+          <div className="map-results-ui fixed bottom-[max(16px,env(safe-area-inset-bottom))] left-[max(16px,env(safe-area-inset-left))] z-3 max-w-[min(420px,calc(100vw-32px))] max-[700px]:bottom-[max(12px,env(safe-area-inset-bottom))] max-[700px]:left-[max(12px,env(safe-area-inset-left))]">
+            <ResultsSummary
+              count={visiblePlaces.length}
+              total={basePlaces.length}
+              hasActiveSearch={hasActiveSearch}
+            />
+          </div>
+        </>
       ) : null}
       <PlaceDetailsPanel
         place={activePlace}
@@ -191,13 +195,13 @@ export function App() {
       <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace} onChange={handleConsentChange} />
       {pwaUpdatePrompt?.needRefresh && !hasActivePlace ? (
         <section
-          className="fixed top-[max(16px,env(safe-area-inset-top))] right-[max(16px,env(safe-area-inset-right))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:top-[184px] max-[700px]:right-2 max-[700px]:left-2 max-[700px]:w-auto"
+          className="fixed right-[calc(max(16px,env(safe-area-inset-right))+56px)] bottom-[calc(max(16px,env(safe-area-inset-bottom))+112px)] z-5 grid w-[min(360px,calc(100vw-96px))] gap-2.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:bottom-[calc(max(12px,env(safe-area-inset-bottom))+116px)] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto"
           data-testid="pwa-update"
           aria-label="Доступно обновление приложения"
         >
           <p className="m-0 text-[13px] leading-snug text-[var(--color-muted)]">Доступна новая версия карты.</p>
           <button
-            className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-accent)] px-2.5 py-1.5 text-[13px] font-bold text-white"
+            className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-text)] bg-[var(--color-text)] px-3 py-1.5 text-[13px] font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
             type="button"
             onClick={() => void pwaUpdatePrompt.updateServiceWorker()}
           >

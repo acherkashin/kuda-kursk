@@ -37,7 +37,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
 
   return (
     <motion.aside
-      className="fixed top-4 right-4 bottom-4 z-4 w-[min(390px,calc(100vw-32px))] overflow-x-hidden overflow-y-auto rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-panel)] max-[700px]:top-auto max-[700px]:right-2 max-[700px]:bottom-2 max-[700px]:left-2 max-[700px]:max-h-[calc(100dvh-188px)] max-[700px]:w-auto"
+      className="fixed top-4 right-4 bottom-4 z-4 w-[min(410px,calc(100vw-32px))] overflow-x-hidden overflow-y-auto rounded-2xl border border-[var(--color-line)] bg-[var(--color-surface)] shadow-[var(--shadow-panel)] max-[700px]:inset-0 max-[700px]:h-dvh max-[700px]:w-full max-[700px]:rounded-none max-[700px]:border-0"
       data-testid="place-details-panel"
       data-layout={layout}
       aria-label={`Подробности: ${viewModel.name}`}
@@ -46,7 +46,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
       <button
-        className="sticky top-2.5 left-[calc(100%-50px)] z-2 ml-auto grid h-9 w-9 place-items-center rounded-lg border border-[var(--color-line)] bg-white/90 text-[var(--color-text)]"
+        className="sticky top-3 left-[calc(100%-52px)] z-2 ml-auto grid h-10 w-10 place-items-center rounded-xl border border-[var(--color-line)] bg-white/95 text-[var(--color-text)] shadow-[var(--shadow-rest)] backdrop-blur transition-colors duration-150 hover:border-[var(--color-line-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:top-[max(12px,env(safe-area-inset-top))]"
         type="button"
         aria-label="Закрыть карточку"
         onClick={onClose}
@@ -54,17 +54,17 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
         <XIcon aria-hidden="true" size={20} />
       </button>
       <PhotoCarousel photos={viewModel.photos} title={viewModel.name} />
-      <div className="grid gap-3.5 p-4.5">
-        <h1 className="m-0 text-2xl leading-tight tracking-normal max-[700px]:text-[22px]">{viewModel.name}</h1>
-        <p className="m-0 text-sm leading-[1.55] text-[var(--color-text-secondary)]">{viewModel.description}</p>
-        <dl className="m-0 grid gap-2.5">
-          <div className="grid gap-1">
-            <dt className="text-[11px] font-bold text-[var(--color-muted)] uppercase tracking-normal">Адрес</dt>
-            <dd className="m-0 text-sm">{viewModel.address}</dd>
+      <div className="grid gap-4 p-5 max-[700px]:px-5 max-[700px]:pb-[calc(24px+env(safe-area-inset-bottom))]">
+        <h1 className="m-0 text-[30px] leading-[1.05] font-extrabold tracking-normal max-[700px]:text-[28px]">{viewModel.name}</h1>
+        <p className="m-0 text-[15px] leading-[1.58] text-[var(--color-text-secondary)]">{viewModel.description}</p>
+        <dl className="m-0 grid gap-0 border-y border-[var(--color-line)]">
+          <div className="grid gap-1 py-3">
+            <dt className="text-[11px] font-bold text-[var(--color-muted)] uppercase tracking-[0.08em]">Адрес</dt>
+            <dd className="m-0 text-[15px]">{viewModel.address}</dd>
           </div>
-          <div className="grid gap-1">
-            <dt className="text-[11px] font-bold text-[var(--color-muted)] uppercase tracking-normal">Координаты</dt>
-            <dd className="m-0 text-sm tabular-nums">{viewModel.coordinates}</dd>
+          <div className="grid gap-1 border-t border-[var(--color-line)] py-3">
+            <dt className="text-[11px] font-bold text-[var(--color-muted)] uppercase tracking-[0.08em]">Координаты</dt>
+            <dd className="m-0 text-[15px] tabular-nums">{viewModel.coordinates}</dd>
           </div>
         </dl>
         {viewModel.tip ? <PlaceTip tip={viewModel.tip} /> : null}

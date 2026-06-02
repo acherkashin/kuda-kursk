@@ -16,8 +16,8 @@ export function PhotoCarousel({ photos, title }: PhotoCarouselProps) {
       aria-label={`Фотографии: ${title}`}
     >
       {photos.map((photo) => (
-        <figure className="m-0 min-h-[210px] [scroll-snap-align:start]" key={`${photo.src}-${photo.caption ?? ""}`}>
-          <img className="block h-[230px] w-full object-cover max-[700px]:h-[190px]" src={photo.src} alt={photo.caption ?? title} loading="lazy" />
+        <figure className="m-0 min-h-[230px] [scroll-snap-align:start] max-[700px]:min-h-[42dvh]" key={`${photo.src}-${photo.caption ?? ""}`}>
+          <img className="block h-[250px] w-full object-cover max-[700px]:h-[42dvh]" src={photo.src} alt={photo.caption ?? title} loading="lazy" />
           {photo.caption ? <figcaption className="px-3.5 py-2 text-[13px] text-[var(--color-muted)]">{photo.caption}</figcaption> : null}
         </figure>
       ))}

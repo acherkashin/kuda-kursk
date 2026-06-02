@@ -21,12 +21,16 @@ function pluralizePlaces(count: number): string {
 
 export function ResultsSummary({ count, total, hasActiveSearch }: ResultsSummaryProps) {
   return (
-    <div className="flex items-center justify-between gap-2 text-[13px] text-[var(--color-muted)] tabular-nums" data-testid="results-summary">
-      <span>
-        {pluralizePlaces(count)} из {total}
+    <div
+      className="flex flex-wrap items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-semibold text-[var(--color-text-secondary)] shadow-[var(--shadow-rest)] tabular-nums"
+      data-testid="results-summary"
+    >
+      <span className="h-2 w-2 rounded-full bg-[var(--color-text)]" aria-hidden="true" />
+      <span className="whitespace-nowrap">
+        {hasActiveSearch ? `${pluralizePlaces(count)} из ${total}` : `${pluralizePlaces(count)} на карте`}
       </span>
       {count === 0 ? (
-        <div className="basis-full font-bold text-[var(--color-text)]" data-testid="empty-results">
+        <div className="basis-full px-4 font-bold text-[var(--color-text)]" data-testid="empty-results">
           Ничего не нашлось
         </div>
       ) : null}

@@ -4,7 +4,6 @@ import { mapConfig } from "../../domain/mapConfig";
 import type { PlaceFeature } from "../../domain/places";
 import { getPlaceName } from "../../domain/places";
 import { MapFallback } from "./MapFallback";
-import { MapLogo } from "./MapLogo";
 import { MarkerTooltip } from "./MarkerTooltip";
 import {
   addPlaceLayers,
@@ -14,24 +13,109 @@ import {
   PLACE_SYMBOL_LAYER_ID
 } from "./placeLayers";
 import { createPlaceFeatureCollection } from "./placeSource";
-import { addMarkerImagePlaceholders, addMarkerImages, createDefaultMarkerImage } from "./markerImages";
+import {
+  addMarkerImagePlaceholders,
+  addMarkerImages,
+  createDefaultMarkerImage,
+  MARKER_IMAGE_PIXEL_RATIO
+} from "./markerImages";
+
+const MARKER_HOVER_TRANSITION_MS = 310;
 
 type KurskMapProps = {
   activePlace: PlaceFeature | null;
-  mapTitle: string;
   places: PlaceFeature[];
   onPlaceSelect?: (place: PlaceFeature, source: "map") => void;
 };
 
-export function KurskMap({ activePlace, mapTitle, places, onPlaceSelect }: KurskMapProps) {
+type FeatureId = string | number;
+type HoverAnimation = {
+  frameId: number;
+  from: number;
+  startedAt: number;
+  to: number;
+};
+
+function easeMarkerHover(progress: number) {
+  return 1 - (1 - progress) ** 3;
+}
+
+export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
+  const hoverAnimationsRef = useRef<Map<FeatureId, HoverAnimation>>(new Map());
+  const hoverProgressByIdRef = useRef<Map<FeatureId, number>>(new Map());
   const placeByIdRef = useRef<Map<string, PlaceFeature>>(new Map());
   const previousActivePlaceIdRef = useRef<string | number | null>(null);
+  const hoveredPlaceIdRef = useRef<string | number | null>(null);
   const [tooltipName, setTooltipName] = useState<string | null>(null);
   const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
 
   placeByIdRef.current = new Map(places.map((place) => [String(place.id), place]));
+
+  const stopHoverAnimation = (id: FeatureId) => {
+    const animation = hoverAnimationsRef.current.get(id);
+
+    if (animation) {
+      window.cancelAnimationFrame(animation.frameId);
+      hoverAnimationsRef.current.delete(id);
+    }
+  };
+
+  const setMarkerHoverProgress = (map: maplibregl.Map, id: FeatureId, progress: number) => {
+    const nextProgress = Math.max(0, Math.min(1, progress));
+
+    if (nextProgress === 0) {
+      hoverProgressByIdRef.current.delete(id);
+    } else {
+      hoverProgressByIdRef.current.set(id, nextProgress);
+    }
+
+    map.setFeatureState({ id, source: PLACE_SOURCE_ID }, { hoverProgress: nextProgress });
+  };
+
+  const animateMarkerHoverProgress = (map: maplibregl.Map, id: FeatureId, to: number) => {
+    stopHoverAnimation(id);
+
+    const from = hoverProgressByIdRef.current.get(id) ?? 0;
+
+    if (from === to) {
+      setMarkerHoverProgress(map, id, to);
+      return;
+    }
+
+    const animation: HoverAnimation = {
+      frameId: 0,
+      from,
+      startedAt: window.performance.now(),
+      to
+    };
+
+    const tick = (now: number) => {
+      const elapsed = now - animation.startedAt;
+      const progress = Math.min(1, elapsed / MARKER_HOVER_TRANSITION_MS);
+      const easedProgress = easeMarkerHover(progress);
+      const nextProgress = animation.from + (animation.to - animation.from) * easedProgress;
+
+      setMarkerHoverProgress(map, id, nextProgress);
+
+      if (progress < 1) {
+        animation.frameId = window.requestAnimationFrame(tick);
+        hoverAnimationsRef.current.set(id, animation);
+      } else {
+        setMarkerHoverProgress(map, id, animation.to);
+        hoverAnimationsRef.current.delete(id);
+      }
+    };
+
+    animation.frameId = window.requestAnimationFrame(tick);
+    hoverAnimationsRef.current.set(id, animation);
+  };
+
+  const stopAllHoverAnimations = () => {
+    hoverAnimationsRef.current.forEach((animation) => window.cancelAnimationFrame(animation.frameId));
+    hoverAnimationsRef.current.clear();
+  };
 
   useEffect(() => {
     if (!containerRef.current || mapRef.current) {
@@ -51,7 +135,7 @@ export function KurskMap({ activePlace, mapTitle, places, onPlaceSelect }: Kursk
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
     map.on("load", () => {
       if (!map.hasImage(DEFAULT_PLACE_MARKER_IMAGE_ID)) {
-        map.addImage(DEFAULT_PLACE_MARKER_IMAGE_ID, createDefaultMarkerImage(), { pixelRatio: 2 });
+        map.addImage(DEFAULT_PLACE_MARKER_IMAGE_ID, createDefaultMarkerImage(), { pixelRatio: MARKER_IMAGE_PIXEL_RATIO });
       }
       const source = createPlaceFeatureCollection(places);
       map.addSource(PLACE_SOURCE_ID, {
@@ -73,6 +157,7 @@ export function KurskMap({ activePlace, mapTitle, places, onPlaceSelect }: Kursk
     }
 
     return () => {
+      stopAllHoverAnimations();
       if (import.meta.env.DEV) {
         delete (window as typeof window & { __kurskMap?: maplibregl.Map }).__kurskMap;
       }
@@ -90,6 +175,10 @@ export function KurskMap({ activePlace, mapTitle, places, onPlaceSelect }: Kursk
 
     const updateSource = () => {
       const source = map.getSource(PLACE_SOURCE_ID) as GeoJSONSource | undefined;
+      stopAllHoverAnimations();
+      hoverProgressByIdRef.current.clear();
+      hoveredPlaceIdRef.current = null;
+      setTooltipName(null);
       addMarkerImagePlaceholders(map, places);
       source?.setData(createPlaceFeatureCollection(places));
       void addMarkerImages(map, places).catch(() => undefined);
@@ -112,11 +201,11 @@ export function KurskMap({ activePlace, mapTitle, places, onPlaceSelect }: Kursk
     const previousActivePlaceId = previousActivePlaceIdRef.current;
 
     if (previousActivePlaceId !== null && previousActivePlaceId !== activePlace?.id) {
-      map.setFeatureState({ id: previousActivePlaceId, source: PLACE_SOURCE_ID }, { active: false });
+      map.setFeatureState({ id: previousActivePlaceId, source: PLACE_SOURCE_ID }, { selected: false });
     }
 
     if (activePlace) {
-      map.setFeatureState({ id: activePlace.id, source: PLACE_SOURCE_ID }, { active: true });
+      map.setFeatureState({ id: activePlace.id, source: PLACE_SOURCE_ID }, { selected: true });
     }
 
     previousActivePlaceIdRef.current = activePlace?.id ?? null;
@@ -169,11 +258,22 @@ export function KurskMap({ activePlace, mapTitle, places, onPlaceSelect }: Kursk
       const place = placeByIdRef.current.get(String(id));
 
       if (place) {
+        if (hoveredPlaceIdRef.current !== null && hoveredPlaceIdRef.current !== place.id) {
+          animateMarkerHoverProgress(map, hoveredPlaceIdRef.current, 0);
+        }
+
+        animateMarkerHoverProgress(map, place.id, 1);
+        hoveredPlaceIdRef.current = place.id;
         map.getCanvas().style.cursor = "pointer";
         setTooltipName(getPlaceName(place));
       }
     };
     const hideTooltip = () => {
+      if (hoveredPlaceIdRef.current !== null) {
+        animateMarkerHoverProgress(map, hoveredPlaceIdRef.current, 0);
+        hoveredPlaceIdRef.current = null;
+      }
+
       map.getCanvas().style.cursor = "";
       setTooltipName(null);
     };
@@ -237,7 +337,6 @@ export function KurskMap({ activePlace, mapTitle, places, onPlaceSelect }: Kursk
         ))}
       </div>
       {mapState !== "ready" ? <MapFallback state={mapState === "error" ? "error" : "loading"} /> : null}
-      <MapLogo title={mapTitle} />
       <MarkerTooltip name={tooltipName} />
     </section>
   );

@@ -5,8 +5,17 @@ export const PLACE_CLUSTER_LAYER_ID = "place-clusters";
 export const PLACE_CLUSTER_COUNT_LAYER_ID = "place-cluster-counts";
 export const PLACE_CIRCLE_LAYER_ID = "place-marker-halos";
 export const PLACE_LABEL_LAYER_ID = "place-labels";
+export const PLACE_ACTIVE_SYMBOL_LAYER_ID = "place-marker-active-images";
 export const PLACE_SYMBOL_LAYER_ID = "place-marker-images";
 export const DEFAULT_PLACE_MARKER_IMAGE_ID = "place-marker-default";
+
+type BooleanFeatureStateExpression = ["boolean", ["feature-state", string], boolean];
+type NumberFeatureStateExpression = ["number", ["feature-state", string], number];
+type MarkerInteractionProgressExpression = ["case", BooleanFeatureStateExpression, 1, NumberFeatureStateExpression];
+
+const ACTIVE_MARKER_STATE: BooleanFeatureStateExpression = ["boolean", ["feature-state", "selected"], false];
+const HOVER_PROGRESS_STATE: NumberFeatureStateExpression = ["number", ["feature-state", "hoverProgress"], 0];
+const MARKER_INTERACTION_PROGRESS: MarkerInteractionProgressExpression = ["case", ACTIVE_MARKER_STATE, 1, HOVER_PROGRESS_STATE];
 
 export function addPlaceLayers(map: Map) {
   if (!map.getLayer(PLACE_CLUSTER_LAYER_ID)) {
@@ -49,15 +58,18 @@ export function addPlaceLayers(map: Map) {
       filter: ["!", ["has", "point_count"]],
       paint: {
         "circle-radius": [
-          "case",
-          ["boolean", ["feature-state", "active"], false],
-          ["interpolate", ["linear"], ["zoom"], 10, 19, 15, 25],
-          ["interpolate", ["linear"], ["zoom"], 10, 16, 15, 21]
+          "interpolate",
+          ["linear"],
+          MARKER_INTERACTION_PROGRESS,
+          0,
+          ["interpolate", ["linear"], ["zoom"], 10, 22, 15, 30],
+          1,
+          ["interpolate", ["linear"], ["zoom"], 10, 28, 15, 36]
         ],
-        "circle-color": "#ffffff",
-        "circle-stroke-width": ["case", ["boolean", ["feature-state", "active"], false], 5, 3],
-        "circle-stroke-color": "#111111",
-        "circle-opacity": 0.98
+        "circle-color": "#e8eefc",
+        "circle-stroke-width": 0,
+        "circle-stroke-color": "#0B39A4",
+        "circle-opacity": ["*", 0.5, MARKER_INTERACTION_PROGRESS]
       }
     });
   }
@@ -70,9 +82,27 @@ export function addPlaceLayers(map: Map) {
       filter: ["!", ["has", "point_count"]],
       layout: {
         "icon-image": ["case", ["has", "markerImageId"], ["get", "markerImageId"], DEFAULT_PLACE_MARKER_IMAGE_ID],
-        "icon-size": ["interpolate", ["linear"], ["zoom"], 10, 0.28, 15, 0.36],
+        "icon-size": 1,
         "icon-allow-overlap": true,
         "icon-ignore-placement": true
+      }
+    });
+  }
+
+  if (!map.getLayer(PLACE_ACTIVE_SYMBOL_LAYER_ID)) {
+    map.addLayer({
+      id: PLACE_ACTIVE_SYMBOL_LAYER_ID,
+      type: "symbol",
+      source: PLACE_SOURCE_ID,
+      filter: ["!", ["has", "point_count"]],
+      layout: {
+        "icon-image": ["case", ["has", "activeMarkerImageId"], ["get", "activeMarkerImageId"], DEFAULT_PLACE_MARKER_IMAGE_ID],
+        "icon-size": 1,
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true
+      },
+      paint: {
+        "icon-opacity": MARKER_INTERACTION_PROGRESS
       }
     });
   }
@@ -83,18 +113,22 @@ export function addPlaceLayers(map: Map) {
       type: "symbol",
       source: PLACE_SOURCE_ID,
       filter: ["!", ["has", "point_count"]],
-      minzoom: 13,
       layout: {
         "text-field": ["get", "name"],
         "text-font": ["Noto Sans Regular"],
-        "text-size": 12,
-        "text-offset": [0, 1.35],
-        "text-anchor": "top"
+        "text-size": 13,
+        "text-offset": [0, 2.65],
+        "text-anchor": "top",
+        "text-allow-overlap": true,
+        "text-ignore-placement": true,
+        "text-padding": 8
       },
       paint: {
         "text-color": "#0a0a0a",
         "text-halo-color": "#ffffff",
-        "text-halo-width": 1.4
+        "text-halo-width": 8,
+        "text-halo-blur": 0,
+        "text-opacity": MARKER_INTERACTION_PROGRESS
       }
     });
   }

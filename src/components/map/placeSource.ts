@@ -6,6 +6,7 @@ export type PlaceProperties = {
   thumbnail?: string;
   markerImage?: string;
   markerImageId?: string;
+  activeMarkerImageId?: string;
 };
 
 export type PlaceFeatureCollection = {
@@ -33,8 +34,10 @@ export function createPlaceFeatureCollection(places: PlaceFeature[]): PlaceFeatu
       }
 
       if (markerImage) {
+        const safeId = String(place.id).replace(/[^a-zA-Z0-9_-]+/g, "-");
         properties.markerImage = markerImage;
-        properties.markerImageId = `place-marker-${String(place.id).replace(/[^a-zA-Z0-9_-]+/g, "-")}`;
+        properties.markerImageId = `place-marker-${safeId}`;
+        properties.activeMarkerImageId = `place-marker-active-${safeId}`;
       }
 
       return {
