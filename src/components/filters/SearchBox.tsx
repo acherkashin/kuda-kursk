@@ -1,22 +1,46 @@
+import { type KeyboardEvent, type ReactNode, useEffect, useRef } from "react";
 import { SearchIcon, XIcon } from "lucide-react";
 
 type SearchBoxProps = {
+  autoFocus?: boolean;
+  className?: string;
+  onEscape?: () => void;
   value: string;
   onChange: (value: string) => void;
   onReset: () => void;
+  trailingAction?: ReactNode;
 };
 
-export function SearchBox({ value, onChange, onReset }: SearchBoxProps) {
+export function SearchBox({ autoFocus = false, className = "", onEscape, value, onChange, onReset, trailingAction }: SearchBoxProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (autoFocus) {
+      inputRef.current?.focus();
+    }
+  }, [autoFocus]);
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      onEscape?.();
+    }
+  };
+
   return (
-    <div className="grid min-h-12 grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-[15px] text-[var(--color-muted)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 focus-within:border-[var(--color-accent)] focus-within:shadow-[var(--shadow-focus)] max-[700px]:min-h-11 max-[520px]:gap-2 max-[520px]:px-2.5">
+    <div
+      className={`grid min-h-12 grid-cols-[auto_1fr_auto_auto] items-center gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-[15px] text-[var(--color-muted)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 focus-within:border-[var(--color-accent)] focus-within:shadow-[var(--shadow-focus)] max-[700px]:min-h-11 max-[520px]:gap-2 max-[520px]:px-2.5 ${className}`}
+    >
       <SearchIcon aria-hidden="true" size={18} />
       <input
+        ref={inputRef}
         className="min-w-0 border-0 bg-transparent text-[var(--color-text)] outline-0 placeholder:text-[var(--color-muted)]"
         aria-label="Поиск мест"
-        type="text"
+        type="search"
         value={value}
         placeholder="Найти место, улицу или район..."
         onChange={(event) => onChange(event.target.value)}
+        onKeyDown={handleKeyDown}
       />
       {value ? (
         <button
@@ -28,6 +52,7 @@ export function SearchBox({ value, onChange, onReset }: SearchBoxProps) {
           <XIcon aria-hidden="true" size={16} />
         </button>
       ) : null}
+      {trailingAction}
     </div>
   );
 }

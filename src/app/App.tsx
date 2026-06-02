@@ -5,9 +5,8 @@ import {
   storeAnalyticsConsent
 } from "../components/analytics-consent/AnalyticsConsent";
 import { ResultsSummary } from "../components/filters/ResultsSummary";
-import { SearchBox } from "../components/filters/SearchBox";
 import { KurskMap } from "../components/map/KurskMap";
-import { MapLogo } from "../components/map/MapLogo";
+import { MapTopControls } from "../components/map/MapTopControls";
 import { PublicMapFallback } from "../components/map/PublicMapFallback";
 import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel";
 import { loadPlaces } from "../data/loadPlaces";
@@ -163,12 +162,13 @@ export function App() {
       ) : null}
       {currentMap ? (
         <>
-          <div className="map-top-ui fixed top-[max(16px,env(safe-area-inset-top))] left-[max(16px,env(safe-area-inset-left))] z-3 flex w-[min(820px,calc(100vw-476px))] min-w-[min(720px,calc(100vw-32px))] items-start gap-3 max-[900px]:w-[calc(100vw-32px)] max-[900px]:min-w-0 max-[700px]:top-[max(12px,env(safe-area-inset-top))] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto max-[520px]:gap-2">
-            <MapLogo title={currentMap.title} subtitle="Путеводитель для местных" />
-            <section className="min-w-0 flex-1" aria-label="Поиск">
-              <SearchBox value={query} onChange={handleQueryChange} onReset={() => handleQueryChange("")} />
-            </section>
-          </div>
+          <MapTopControls
+            title={currentMap.title}
+            subtitle="Путеводитель для местных"
+            query={query}
+            onQueryChange={handleQueryChange}
+            onQueryReset={() => handleQueryChange("")}
+          />
           <div className="map-results-ui fixed bottom-[max(16px,env(safe-area-inset-bottom))] left-[max(16px,env(safe-area-inset-left))] z-3 max-w-[min(420px,calc(100vw-32px))] max-[700px]:bottom-[max(12px,env(safe-area-inset-bottom))] max-[700px]:left-[max(12px,env(safe-area-inset-left))]">
             <ResultsSummary
               count={visiblePlaces.length}
