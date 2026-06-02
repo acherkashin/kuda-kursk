@@ -47,7 +47,7 @@ export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: An
   if (consent) {
     return (
       <button
-        className="fixed right-[max(16px,env(safe-area-inset-right))] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 inline-flex h-10 min-h-9 w-10 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-0 text-[13px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] max-[700px]:right-3 max-[700px]:bottom-[104px]"
+        className="fixed right-[calc(max(16px,env(safe-area-inset-right))+56px)] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 inline-flex h-10 min-h-9 w-10 items-center justify-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-0 text-[13px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:bottom-[76px]"
         type="button"
         aria-label="Настройки аналитики"
         onClick={() => onChange(createConsent(consent.status === "accepted" ? "rejected" : "accepted"))}
@@ -65,16 +65,16 @@ export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: An
 
   return (
     <section
-      className="fixed top-[max(16px,env(safe-area-inset-top))] right-[max(16px,env(safe-area-inset-right))] z-5 grid w-[min(360px,calc(100vw-32px))] gap-2.5 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:top-[184px] max-[700px]:right-2 max-[700px]:left-2 max-[700px]:w-auto"
+      className="fixed right-[calc(max(16px,env(safe-area-inset-right))+56px)] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 grid w-[min(380px,calc(100vw-96px))] gap-2.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:bottom-[max(12px,env(safe-area-inset-bottom))] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto max-[700px]:gap-2 max-[700px]:rounded-2xl max-[700px]:p-3"
       data-testid="analytics-consent"
       aria-label="Согласие на аналитику"
     >
-      <p className="m-0 text-[13px] leading-snug text-[var(--color-muted)]">
-        Аналитика включается только по согласию и помогает понять, какие места и фильтры полезны.
+      <p className="m-0 text-[13px] leading-snug text-[var(--color-text-secondary)]">
+        Мы используем cookies и обезличенную аналитику, чтобы улучшать приложение.
       </p>
       <div className="flex flex-wrap gap-2">
         <button
-          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-accent)] px-2.5 py-1.5 text-[13px] font-bold text-white"
+          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-accent)] bg-[var(--color-accent)] px-3 py-1.5 text-[13px] font-bold text-white transition-[box-shadow] duration-150 hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
           type="button"
           onClick={() => updateConsent("accepted")}
         >
@@ -82,7 +82,7 @@ export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: An
           <span>Принять аналитику</span>
         </button>
         <button
-          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-white px-2.5 py-1.5 text-[13px] font-bold text-[var(--color-text)]"
+          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-line)] bg-white px-3 py-1.5 text-[13px] font-bold text-[var(--color-text)] transition-colors duration-150 hover:border-[var(--color-line-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
           type="button"
           onClick={() => updateConsent("rejected")}
         >
