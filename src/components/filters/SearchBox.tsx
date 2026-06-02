@@ -13,7 +13,7 @@ export function SearchBox({ value, onChange, onReset }: SearchBoxProps) {
       <input
         className="min-w-0 border-0 bg-transparent text-[var(--color-text)] outline-0"
         aria-label="Поиск мест"
-        type="search"
+        type="text"
         value={value}
         placeholder="Найти место"
         onChange={(event) => onChange(event.target.value)}

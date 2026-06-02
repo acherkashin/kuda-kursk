@@ -171,7 +171,6 @@ export function App() {
             count={visiblePlaces.length}
             total={basePlaces.length}
             hasActiveSearch={hasActiveSearch}
-            onReset={resetSearch}
           />
         </section>
       ) : null}
