@@ -13,3 +13,29 @@ test("выбранное полное место открывает карточ
   await expect(panel.getByRole("link", { name: /2ГИС/i })).toHaveAttribute("href", /2gis\.ru/);
   await expect(panel.getByRole("link", { name: /Google/i })).toHaveAttribute("href", /google\.com/);
 });
+
+test("выбранное место фиксируется в URL и открывается по прямой ссылке", async ({ page }) => {
+  await page.goto("/maps/main?place=320");
+
+  const panel = page.getByTestId("place-details-panel");
+  await expect(panel).toBeVisible();
+  await expect(panel.getByRole("heading", { name: "Парк-отель «Песчаный»" })).toBeVisible();
+  await expect(page).toHaveURL("/maps/main?place=320");
+
+  await panel.getByRole("button", { name: "Закрыть карточку" }).click();
+  await expect(panel).toHaveCount(0);
+  await expect(page).toHaveURL("/maps/main");
+
+  await page.getByRole("button", { name: /Парк-отель «Песчаный»/i }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL("/maps/main?place=320");
+});
+
+test("прямая ссылка выбранного места работает внутри карты сообщества", async ({ page }) => {
+  await page.goto("/maps/dozapravka?place=1619");
+
+  const panel = page.getByTestId("place-details-panel");
+  await expect(panel).toBeVisible();
+  await expect(panel.getByRole("heading", { name: "Кухмистерская Atilan" })).toBeVisible();
+  await expect(page).toHaveURL("/maps/dozapravka?place=1619");
+});

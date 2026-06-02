@@ -12,13 +12,13 @@ import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel
 import { loadPlaces } from "../data/loadPlaces";
 import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
 import { findMapBySlug } from "../domain/mapCatalog";
-import type { PlaceFeature } from "../domain/places";
+import { getPlaceId, type PlaceFeature } from "../domain/places";
 import type { RouteProvider } from "../domain/routeLinks";
 import { searchPlaces } from "../domain/search";
 import { createAnalyticsAdapter } from "../services/analytics/analyticsAdapter";
 import { loadYandexMetrika } from "../services/analytics/yandexMetrika";
 import { registerServiceWorker, type ServiceWorkerUpdatePrompt } from "../services/pwa/registerServiceWorker";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useParams, useSearchParams } from "react-router";
 
 export function App() {
   const [places, setPlaces] = useState<PlaceFeature[]>([]);
@@ -34,8 +34,11 @@ export function App() {
   );
   const { slug } = useParams();
   const location = useLocation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const currentMap = useMemo(() => findMapBySlug(slug), [slug]);
   const basePlaces = places;
+  const placeById = useMemo(() => new Map(basePlaces.map((place) => [getPlaceId(place), place])), [basePlaces]);
+  const selectedPlaceId = searchParams.get("place")?.trim() ?? "";
   const visiblePlaces = useMemo(() => searchPlaces(basePlaces, query), [basePlaces, query]);
   const hasActiveSearch = query.trim().length > 0;
   const hasActivePlace = activePlace !== null;
@@ -81,7 +84,30 @@ export function App() {
   useEffect(() => {
     setActivePlace(null);
     resetSearch();
-  }, [location.pathname, resetSearch]);
+  }, [currentMap?.slug, resetSearch]);
+
+  useEffect(() => {
+    if (loadState !== "ready" || !currentMap) {
+      return;
+    }
+
+    if (!searchParams.has("place")) {
+      setActivePlace(null);
+      return;
+    }
+
+    const selectedPlace = placeById.get(selectedPlaceId);
+
+    if (selectedPlace) {
+      setActivePlace(selectedPlace);
+      return;
+    }
+
+    const nextSearchParams = new URLSearchParams(searchParams);
+    nextSearchParams.delete("place");
+    setActivePlace(null);
+    setSearchParams(nextSearchParams, { replace: true });
+  }, [currentMap, loadState, placeById, searchParams, selectedPlaceId, setSearchParams]);
 
   useEffect(() => {
     registerServiceWorker({
@@ -120,11 +146,21 @@ export function App() {
 
   const handlePlaceSelect = useCallback(
     (place: PlaceFeature, source: "map") => {
+      const nextSearchParams = new URLSearchParams(searchParams);
+      nextSearchParams.set("place", getPlaceId(place));
+      setSearchParams(nextSearchParams);
       setActivePlace(place);
       analytics.track({ name: "marker_selected", params: { placeId: place.id, source } });
     },
-    [analytics]
+    [analytics, searchParams, setSearchParams]
   );
+
+  const handlePlaceDetailsClose = useCallback(() => {
+    const nextSearchParams = new URLSearchParams(searchParams);
+    nextSearchParams.delete("place");
+    setSearchParams(nextSearchParams);
+    setActivePlace(null);
+  }, [searchParams, setSearchParams]);
 
   const handleQueryChange = useCallback(
     (value: string) => {
@@ -180,7 +216,7 @@ export function App() {
       ) : null}
       <PlaceDetailsPanel
         place={activePlace}
-        onClose={() => setActivePlace(null)}
+        onClose={handlePlaceDetailsClose}
         onRouteOpen={(provider: RouteProvider) => {
           if (activePlace) {
             analytics.track({ name: "route_opened", params: { placeId: activePlace.id, provider } });
