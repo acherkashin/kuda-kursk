@@ -4,7 +4,7 @@ export const PLACE_SOURCE_ID = "places";
 export const PLACE_CLUSTER_LAYER_ID = "place-clusters";
 export const PLACE_CLUSTER_COUNT_LAYER_ID = "place-cluster-counts";
 export const PLACE_CIRCLE_LAYER_ID = "place-marker-halos";
-export const PLACE_LABEL_LAYER_ID = "place-labels";
+export const PLACE_LABEL_LAYER_ID = "place-marker-labels";
 export const PLACE_ACTIVE_SYMBOL_LAYER_ID = "place-marker-active-images";
 export const PLACE_SYMBOL_LAYER_ID = "place-marker-images";
 export const DEFAULT_PLACE_MARKER_IMAGE_ID = "place-marker-default";
@@ -119,6 +119,9 @@ export function addPlaceLayers(map: Map) {
         "text-size": 13,
         "text-offset": [0, 2.65],
         "text-anchor": "top",
+        "text-justify": "center",
+        "text-line-height": 1.14,
+        "text-max-width": 10,
         "text-allow-overlap": true,
         "text-ignore-placement": true,
         "text-padding": 8

@@ -4,7 +4,6 @@ import { mapConfig } from "../../domain/mapConfig";
 import type { PlaceFeature } from "../../domain/places";
 import { getPlaceName } from "../../domain/places";
 import { MapFallback } from "./MapFallback";
-import { MarkerTooltip } from "./MarkerTooltip";
 import {
   addPlaceLayers,
   DEFAULT_PLACE_MARKER_IMAGE_ID,
@@ -48,7 +47,6 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
   const placeByIdRef = useRef<Map<string, PlaceFeature>>(new Map());
   const previousActivePlaceIdRef = useRef<string | number | null>(null);
   const hoveredPlaceIdRef = useRef<string | number | null>(null);
-  const [tooltipName, setTooltipName] = useState<string | null>(null);
   const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
 
   placeByIdRef.current = new Map(places.map((place) => [String(place.id), place]));
@@ -178,7 +176,6 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
       stopAllHoverAnimations();
       hoverProgressByIdRef.current.clear();
       hoveredPlaceIdRef.current = null;
-      setTooltipName(null);
       addMarkerImagePlaceholders(map, places);
       source?.setData(createPlaceFeatureCollection(places));
       void addMarkerImages(map, places).catch(() => undefined);
@@ -253,7 +250,7 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
         onPlaceSelect?.(place, "map");
       }
     };
-    const showTooltip = (event: MapLayerMouseEvent) => {
+    const showMarkerLabel = (event: MapLayerMouseEvent) => {
       const id = event.features?.[0]?.properties?.id;
       const place = placeByIdRef.current.get(String(id));
 
@@ -265,17 +262,15 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
         animateMarkerHoverProgress(map, place.id, 1);
         hoveredPlaceIdRef.current = place.id;
         map.getCanvas().style.cursor = "pointer";
-        setTooltipName(getPlaceName(place));
       }
     };
-    const hideTooltip = () => {
+    const hideMarkerLabel = () => {
       if (hoveredPlaceIdRef.current !== null) {
         animateMarkerHoverProgress(map, hoveredPlaceIdRef.current, 0);
         hoveredPlaceIdRef.current = null;
       }
 
       map.getCanvas().style.cursor = "";
-      setTooltipName(null);
     };
     const showClusterPointer = () => {
       map.getCanvas().style.cursor = "pointer";
@@ -297,19 +292,19 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
     };
 
     map.on("click", PLACE_SYMBOL_LAYER_ID, selectPlace);
-    map.on("mouseenter", PLACE_SYMBOL_LAYER_ID, showTooltip);
-    map.on("mouseleave", PLACE_SYMBOL_LAYER_ID, hideTooltip);
+    map.on("mouseenter", PLACE_SYMBOL_LAYER_ID, showMarkerLabel);
+    map.on("mouseleave", PLACE_SYMBOL_LAYER_ID, hideMarkerLabel);
     map.on("click", PLACE_CLUSTER_LAYER_ID, expandCluster);
     map.on("mouseenter", PLACE_CLUSTER_LAYER_ID, showClusterPointer);
-    map.on("mouseleave", PLACE_CLUSTER_LAYER_ID, hideTooltip);
+    map.on("mouseleave", PLACE_CLUSTER_LAYER_ID, hideMarkerLabel);
 
     return () => {
       map.off("click", PLACE_SYMBOL_LAYER_ID, selectPlace);
-      map.off("mouseenter", PLACE_SYMBOL_LAYER_ID, showTooltip);
-      map.off("mouseleave", PLACE_SYMBOL_LAYER_ID, hideTooltip);
+      map.off("mouseenter", PLACE_SYMBOL_LAYER_ID, showMarkerLabel);
+      map.off("mouseleave", PLACE_SYMBOL_LAYER_ID, hideMarkerLabel);
       map.off("click", PLACE_CLUSTER_LAYER_ID, expandCluster);
       map.off("mouseenter", PLACE_CLUSTER_LAYER_ID, showClusterPointer);
-      map.off("mouseleave", PLACE_CLUSTER_LAYER_ID, hideTooltip);
+      map.off("mouseleave", PLACE_CLUSTER_LAYER_ID, hideMarkerLabel);
     };
   }, [mapState, onPlaceSelect]);
 
@@ -328,16 +323,13 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
             data-testid="map-place-control"
             key={place.id}
             type="button"
-            onBlur={() => setTooltipName(null)}
             onClick={() => onPlaceSelect?.(place, "map")}
-            onFocus={() => setTooltipName(getPlaceName(place))}
           >
             {getPlaceName(place)}
           </button>
         ))}
       </div>
       {mapState !== "ready" ? <MapFallback state={mapState === "error" ? "error" : "loading"} /> : null}
-      <MarkerTooltip name={tooltipName} />
     </section>
   );
 }
