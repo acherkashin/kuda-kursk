@@ -55,16 +55,16 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       </button>
       <PhotoCarousel photos={viewModel.photos} title={viewModel.name} />
       <div className="grid gap-4 p-5 max-[700px]:px-5 max-[700px]:pb-[calc(24px+env(safe-area-inset-bottom))]">
-        <h1 className="m-0 text-[30px] leading-[1.05] font-extrabold tracking-normal max-[700px]:text-[28px]">{viewModel.name}</h1>
-        <p className="m-0 text-[15px] leading-[1.58] text-[var(--color-text-secondary)]">{viewModel.description}</p>
+        <h1 className="m-0 text-[28px] leading-[1.05] font-bold tracking-[-0.02em] [text-wrap:balance]">{viewModel.name}</h1>
+        <p className="m-0 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">{viewModel.description}</p>
         <dl className="m-0 grid gap-0 border-y border-[var(--color-line)]">
           <div className="grid gap-1 py-3">
-            <dt className="text-[11px] font-bold text-[var(--color-muted)] uppercase tracking-[0.08em]">Адрес</dt>
-            <dd className="m-0 text-[15px]">{viewModel.address}</dd>
+            <dt className="text-[10.5px] font-semibold text-[var(--color-muted)] uppercase tracking-[0.08em]">Адрес</dt>
+            <dd className="m-0 text-[14px]">{viewModel.address}</dd>
           </div>
           <div className="grid gap-1 border-t border-[var(--color-line)] py-3">
-            <dt className="text-[11px] font-bold text-[var(--color-muted)] uppercase tracking-[0.08em]">Координаты</dt>
-            <dd className="m-0 text-[15px] tabular-nums">{viewModel.coordinates}</dd>
+            <dt className="text-[10.5px] font-semibold text-[var(--color-muted)] uppercase tracking-[0.08em]">Координаты</dt>
+            <dd className="m-0 text-[14px] tabular-nums">{viewModel.coordinates}</dd>
           </div>
         </dl>
         {viewModel.tip ? <PlaceTip tip={viewModel.tip} /> : null}

@@ -14,7 +14,7 @@ export function PublicMapFallback({ slug }: PublicMapFallbackProps) {
       <h1 className="m-0 mb-1.5 text-xl tracking-normal">Карта не найдена</h1>
       <p className="m-0 mb-3 text-sm leading-snug text-[var(--color-muted)]">Ссылка `/maps/{slug}` не совпала с подготовленными картами.</p>
       <Link
-        className="inline-flex min-h-[30px] items-center rounded-lg border border-[var(--color-line)] bg-white px-2 py-1 text-[13px] font-bold text-[var(--color-text)] no-underline"
+        className="inline-flex min-h-[30px] items-center rounded-lg border border-[var(--color-line)] bg-white px-2 py-1 text-[13px] font-semibold tracking-[-0.01em] text-[var(--color-text)] no-underline"
         to="/maps/main"
       >
         На основную карту

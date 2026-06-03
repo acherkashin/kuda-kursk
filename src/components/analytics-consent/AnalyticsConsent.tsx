@@ -74,7 +74,7 @@ export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: An
       </p>
       <div className="flex flex-wrap gap-2">
         <button
-          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-accent)] bg-[var(--color-accent)] px-3 py-1.5 text-[13px] font-bold text-white transition-[box-shadow] duration-150 hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-accent)] bg-[var(--color-accent)] px-3 py-1.5 text-[13px] font-semibold tracking-[-0.01em] text-white transition-[box-shadow] duration-150 hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
           type="button"
           onClick={() => updateConsent("accepted")}
         >
@@ -82,7 +82,7 @@ export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: An
           <span>Принять аналитику</span>
         </button>
         <button
-          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-line)] bg-white px-3 py-1.5 text-[13px] font-bold text-[var(--color-text)] transition-colors duration-150 hover:border-[var(--color-line-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-line)] bg-white px-3 py-1.5 text-[13px] font-semibold tracking-[-0.01em] text-[var(--color-text)] transition-colors duration-150 hover:border-[var(--color-line-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
           type="button"
           onClick={() => updateConsent("rejected")}
         >

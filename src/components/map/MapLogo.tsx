@@ -17,7 +17,7 @@ export function MapLogo({ actionSlot, subtitle, title }: MapLogoProps) {
         height="32"
       />
       <span className="grid min-w-0 gap-0.5">
-        <span className="truncate leading-none">{title}</span>
+        <span className="truncate leading-none tracking-[-0.02em]">{title}</span>
         {subtitle ? (
           <span className="truncate text-[12px] leading-none font-medium text-[var(--color-muted)] max-[520px]:text-[11px]">
             {subtitle}

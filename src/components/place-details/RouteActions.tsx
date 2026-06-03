@@ -20,7 +20,7 @@ export function RouteActions({ links, onOpen }: RouteActionsProps) {
 
         return (
           <a
-            className={`inline-flex min-h-[42px] items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] px-2.5 py-2 text-sm font-bold no-underline ${
+            className={`inline-flex min-h-[42px] items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] px-2.5 py-2 text-sm font-semibold tracking-[-0.01em] no-underline ${
               index === 0 ? "bg-[var(--color-text)] text-white" : "bg-white text-[var(--color-text)]"
             } transition-[border-color,box-shadow] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]`}
             href={link.url}

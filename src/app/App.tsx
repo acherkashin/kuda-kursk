@@ -237,7 +237,7 @@ export function App() {
         >
           <p className="m-0 text-[13px] leading-snug text-[var(--color-muted)]">Доступна новая версия карты.</p>
           <button
-            className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-text)] bg-[var(--color-text)] px-3 py-1.5 text-[13px] font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+            className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-text)] bg-[var(--color-text)] px-3 py-1.5 text-[13px] font-semibold tracking-[-0.01em] text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
             type="button"
             onClick={() => void pwaUpdatePrompt.updateServiceWorker()}
           >

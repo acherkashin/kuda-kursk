@@ -115,8 +115,8 @@ export function addPlaceLayers(map: Map) {
       filter: ["!", ["has", "point_count"]],
       layout: {
         "text-field": ["get", "name"],
-        "text-font": ["Noto Sans Regular"],
-        "text-size": 13,
+        "text-font": ["Noto Sans Bold"],
+        "text-size": 12,
         "text-offset": [0, 2.65],
         "text-anchor": "top",
         "text-justify": "center",
@@ -129,8 +129,8 @@ export function addPlaceLayers(map: Map) {
       paint: {
         "text-color": "#0a0a0a",
         "text-halo-color": "#ffffff",
-        "text-halo-width": 8,
-        "text-halo-blur": 0,
+        "text-halo-width": 3,
+        "text-halo-blur": 1,
         "text-opacity": MARKER_INTERACTION_PROGRESS
       }
     });

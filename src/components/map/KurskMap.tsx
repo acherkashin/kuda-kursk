@@ -319,7 +319,7 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
       <div aria-label="Места на карте">
         {places.map((place) => (
           <button
-            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-20 focus:rounded-lg focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-bold"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-20 focus:rounded-lg focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-semibold focus:tracking-[-0.01em]"
             data-testid="map-place-control"
             key={place.id}
             type="button"
