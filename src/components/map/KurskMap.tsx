@@ -250,11 +250,16 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
         onPlaceSelect?.(place, "map");
       }
     };
-    const showMarkerLabel = (event: MapLayerMouseEvent) => {
+    const syncMarkerHover = (event: MapLayerMouseEvent) => {
       const id = event.features?.[0]?.properties?.id;
       const place = placeByIdRef.current.get(String(id));
 
       if (place) {
+        if (hoveredPlaceIdRef.current === place.id) {
+          map.getCanvas().style.cursor = "pointer";
+          return;
+        }
+
         if (hoveredPlaceIdRef.current !== null && hoveredPlaceIdRef.current !== place.id) {
           animateMarkerHoverProgress(map, hoveredPlaceIdRef.current, 0);
         }
@@ -292,7 +297,7 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
     };
 
     map.on("click", PLACE_SYMBOL_LAYER_ID, selectPlace);
-    map.on("mouseenter", PLACE_SYMBOL_LAYER_ID, showMarkerLabel);
+    map.on("mousemove", PLACE_SYMBOL_LAYER_ID, syncMarkerHover);
     map.on("mouseleave", PLACE_SYMBOL_LAYER_ID, hideMarkerLabel);
     map.on("click", PLACE_CLUSTER_LAYER_ID, expandCluster);
     map.on("mouseenter", PLACE_CLUSTER_LAYER_ID, showClusterPointer);
@@ -300,7 +305,7 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
 
     return () => {
       map.off("click", PLACE_SYMBOL_LAYER_ID, selectPlace);
-      map.off("mouseenter", PLACE_SYMBOL_LAYER_ID, showMarkerLabel);
+      map.off("mousemove", PLACE_SYMBOL_LAYER_ID, syncMarkerHover);
       map.off("mouseleave", PLACE_SYMBOL_LAYER_ID, hideMarkerLabel);
       map.off("click", PLACE_CLUSTER_LAYER_ID, expandCluster);
       map.off("mouseenter", PLACE_CLUSTER_LAYER_ID, showClusterPointer);
