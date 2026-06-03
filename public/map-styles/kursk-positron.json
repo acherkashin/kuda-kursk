@@ -37,7 +37,16 @@
       "source": "openfreemap",
       "source-layer": "transportation_name",
       "minzoom": 13,
-      "layout": { "text-field": ["coalesce", ["get", "name:ru"], ["get", "name"]], "text-font": ["Noto Sans Regular"], "text-size": 11 },
+      "layout": {
+        "symbol-placement": "line",
+        "text-field": ["coalesce", ["get", "name:ru"], ["get", "name"]],
+        "text-font": ["Noto Sans Regular"],
+        "text-size": 11,
+        "text-rotation-alignment": "map",
+        "text-pitch-alignment": "viewport",
+        "symbol-spacing": 260,
+        "text-max-angle": 35
+      },
       "paint": { "text-color": "#888888", "text-halo-color": "#f2f2f2", "text-halo-width": 1 }
     },
     {
