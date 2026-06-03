@@ -34,6 +34,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   const viewModel = buildPlaceDetails(place);
   const [longitude, latitude] = place.geometry.coordinates;
   const routeLinks = buildRouteLinks({ longitude, latitude });
+  const hasPhotos = viewModel.photos.length > 0;
 
   return (
     <motion.aside
@@ -45,15 +46,19 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
-      <button
-        className="sticky top-3 left-[calc(100%-52px)] z-2 ml-auto grid h-10 w-10 place-items-center rounded-xl border border-[var(--color-line)] bg-white/95 text-[var(--color-text)] shadow-[var(--shadow-rest)] backdrop-blur transition-colors duration-150 hover:border-[var(--color-line-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:top-[max(12px,env(safe-area-inset-top))]"
-        type="button"
-        aria-label="Закрыть карточку"
-        onClick={onClose}
+      <div
+        className={`relative p-3 pb-0 max-[700px]:px-4 max-[700px]:pt-[max(16px,env(safe-area-inset-top))] ${hasPhotos ? "" : "min-h-16"}`}
       >
-        <XIcon aria-hidden="true" size={20} />
-      </button>
-      <PhotoCarousel photos={viewModel.photos} title={viewModel.name} />
+        <button
+          className="absolute top-5 right-5 z-2 grid h-10 w-10 place-items-center rounded-full border border-[var(--color-line)] bg-white/95 text-[var(--color-text)] shadow-[var(--shadow-rest)] backdrop-blur transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:top-[calc(max(16px,env(safe-area-inset-top))+8px)] max-[700px]:right-6"
+          type="button"
+          aria-label="Закрыть карточку"
+          onClick={onClose}
+        >
+          <XIcon aria-hidden="true" size={20} strokeWidth={2.2} />
+        </button>
+        <PhotoCarousel photos={viewModel.photos} title={viewModel.name} />
+      </div>
       <div className="grid gap-4 p-5 max-[700px]:px-5 max-[700px]:pb-[calc(24px+env(safe-area-inset-bottom))]">
         <h1 className="m-0 text-[28px] leading-[1.05] font-bold tracking-[-0.02em] [text-wrap:balance]">{viewModel.name}</h1>
         <p className="m-0 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">{viewModel.description}</p>
