@@ -6,7 +6,7 @@ export const KURSK_CENTER = {
 export const mapConfig = {
   center: [KURSK_CENTER.longitude, KURSK_CENTER.latitude] as [number, number],
   zoom: 12.2,
-  minZoom: 10,
+  minZoom: 6.5,
   maxZoom: 18,
   styleUrl: "/map-styles/kursk-positron.json"
 } as const;
