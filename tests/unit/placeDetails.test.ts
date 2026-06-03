@@ -25,6 +25,7 @@ describe("buildPlaceDetails", () => {
       src: "/place-images/320-image-photo.jpg",
       thumbnail: "/place-thumbnails/320-f29160ce22.webp"
     });
+    expect(buildPlaceDetails(place).photos[0]?.caption).toBeUndefined();
   });
 
   it("falls back to thumbnail when image is absent", () => {
@@ -48,5 +49,52 @@ describe("buildPlaceDetails", () => {
       src: "/place-thumbnails/sketches/1.jpg",
       thumbnail: "/place-thumbnails/sketches/1.jpg"
     });
+  });
+
+  it("builds a details link from relative balloon content url", () => {
+    const place = {
+      type: "Feature",
+      id: "hotel",
+      geometry: { type: "Point", coordinates: [35.392868, 52.231969] },
+      properties: {
+        id: "hotel",
+        balloonContent: {
+          name: "Парк-отель",
+          description: "Описание",
+          address: "Адрес",
+          coordinates: "52.231969, 35.392868",
+          url: "/objects/park-otel-peschanyy/"
+        }
+      }
+    } satisfies PlaceFeature;
+
+    expect(buildPlaceDetails(place).detailsLink).toEqual({
+      id: "details",
+      label: "Узнать подробнее",
+      url: "https://gokursk.ru/objects/park-otel-peschanyy/",
+      kind: "site"
+    });
+    expect(buildPlaceDetails(place).links).toEqual([]);
+  });
+
+  it("prefers externalUrl over balloon content url for details link", () => {
+    const place = {
+      type: "Feature",
+      id: "hotel",
+      geometry: { type: "Point", coordinates: [35.392868, 52.231969] },
+      properties: {
+        id: "hotel",
+        balloonContent: {
+          name: "Парк-отель",
+          description: "Описание",
+          address: "Адрес",
+          coordinates: "52.231969, 35.392868",
+          url: "/objects/park-otel-peschanyy/",
+          externalUrl: "https://example.com/place"
+        }
+      }
+    } satisfies PlaceFeature;
+
+    expect(buildPlaceDetails(place).detailsLink?.url).toBe("https://example.com/place");
   });
 });

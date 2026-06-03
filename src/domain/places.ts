@@ -25,6 +25,8 @@ export type BalloonContent = {
   tip?: string;
   socials?: ExternalLink[];
   externalUrl?: string;
+  url?: string;
+  button?: string;
   [key: string]: unknown;
 };
 
