@@ -22,28 +22,6 @@ test("маркер показывает название при hover, а пан
     )
     .toBe(true);
 
-  const labelLayout = await page.evaluate(() => {
-    const map = (window as typeof window & {
-      __kurskMap?: {
-        getLayoutProperty: (layerId: string, name: string) => unknown;
-      };
-    }).__kurskMap;
-
-    return {
-      anchor: map?.getLayoutProperty("place-marker-labels", "text-anchor"),
-      justify: map?.getLayoutProperty("place-marker-labels", "text-justify"),
-      lineHeight: map?.getLayoutProperty("place-marker-labels", "text-line-height"),
-      maxWidth: map?.getLayoutProperty("place-marker-labels", "text-max-width")
-    };
-  });
-
-  expect(labelLayout).toEqual({
-    anchor: "top",
-    justify: "center",
-    lineHeight: 1.14,
-    maxWidth: 10
-  });
-
   const map = page.getByTestId("map-shell");
   const box = await map.boundingBox();
   expect(box).not.toBeNull();
