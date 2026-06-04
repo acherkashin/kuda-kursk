@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { SearchIcon, XIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 import { SearchBox } from "../filters/SearchBox";
 import { MapLogo } from "./MapLogo";
 
@@ -52,19 +52,6 @@ function SearchButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function CloseSearchButton({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      className="grid h-8 w-8 flex-none place-items-center rounded-lg border border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] transition-colors duration-150 hover:border-[var(--color-line-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
-      type="button"
-      aria-label="Закрыть поиск"
-      onClick={onClick}
-    >
-      <XIcon aria-hidden="true" size={16} />
-    </button>
-  );
-}
-
 function BrandBar({ onSearchOpen, subtitle, title }: Pick<MapTopControlsProps, "subtitle" | "title"> & { onSearchOpen: () => void }) {
   return <MapLogo actionSlot={<SearchButton onClick={onSearchOpen} />} subtitle={subtitle} title={title} />;
 }
@@ -86,9 +73,9 @@ function SearchPanel({
         className="w-full"
         value={query}
         onChange={onQueryChange}
+        onEmptyAction={onClose}
         onEscape={onEscape}
         onReset={onQueryReset}
-        trailingAction={<CloseSearchButton onClick={onClose} />}
       />
     </section>
   );
