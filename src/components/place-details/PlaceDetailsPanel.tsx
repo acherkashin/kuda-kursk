@@ -4,7 +4,6 @@ import { buildPlaceDetails } from "../../domain/placeDetails";
 import type { PlaceFeature } from "../../domain/places";
 import { buildRouteLinks, type RouteLink } from "../../domain/routeLinks";
 import { ExternalLinks } from "./ExternalLinks";
-import { PhotoCarousel } from "./PhotoCarousel";
 import { PlaceTip } from "./PlaceTip";
 import { RouteActions } from "./RouteActions";
 
@@ -35,6 +34,8 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   const [longitude, latitude] = place.geometry.coordinates;
   const routeLinks = buildRouteLinks({ longitude, latitude });
   const hasPhotos = viewModel.photos.length > 0;
+  const heroPhoto = hasPhotos ? viewModel.photos[0] : null;
+  const extraPhotos = viewModel.photos.slice(1);
 
   return (
     <motion.aside
@@ -46,21 +47,50 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div
-        className={`relative p-3 pb-0 max-[700px]:px-4 max-[700px]:pt-[max(16px,env(safe-area-inset-top))] ${hasPhotos ? "" : "min-h-16"}`}
-      >
-        <button
-          className="absolute top-5 right-5 z-2 grid h-10 w-10 place-items-center rounded-full border border-[var(--color-line)] bg-white/95 text-[var(--color-text)] shadow-[var(--shadow-rest)] backdrop-blur transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:top-[calc(max(16px,env(safe-area-inset-top))+8px)] max-[700px]:right-6"
-          type="button"
-          aria-label="Закрыть карточку"
-          onClick={onClose}
-        >
-          <XIcon aria-hidden="true" size={20} strokeWidth={2.2} />
-        </button>
-        <PhotoCarousel photos={viewModel.photos} title={viewModel.name} />
-      </div>
+      {heroPhoto ? (
+        <div className="relative">
+          <img
+            className="block h-[300px] w-full object-cover max-[700px]:h-[40dvh]"
+            src={heroPhoto.src}
+            alt={heroPhoto.caption ?? viewModel.name}
+            fetchPriority="high"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,14,8,0.84)_0%,rgba(20,14,8,0.28)_46%,transparent_72%)]" />
+          <button
+            className="absolute top-4 right-4 z-2 grid h-10 w-10 place-items-center rounded-full border border-white/25 bg-black/35 text-white backdrop-blur-sm transition-[background-color,border-color,transform] duration-150 hover:bg-black/55 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white max-[700px]:top-[max(16px,env(safe-area-inset-top))] max-[700px]:right-4"
+            type="button"
+            aria-label="Закрыть карточку"
+            onClick={onClose}
+          >
+            <XIcon aria-hidden="true" size={20} strokeWidth={2.2} />
+          </button>
+          <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-14">
+            <h1
+              className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-white [font-family:var(--font-editorial)] [text-wrap:balance]"
+            >
+              {viewModel.name}
+            </h1>
+          </div>
+        </div>
+      ) : (
+        <div className="relative min-h-16 px-5 pb-4 pt-5 max-[700px]:pt-[max(20px,env(safe-area-inset-top))]">
+          <button
+            className="absolute top-4 right-4 z-2 grid h-10 w-10 place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface)]/95 text-[var(--color-text)] shadow-[var(--shadow-rest)] backdrop-blur transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:top-[max(16px,env(safe-area-inset-top))]"
+            type="button"
+            aria-label="Закрыть карточку"
+            onClick={onClose}
+          >
+            <XIcon aria-hidden="true" size={20} strokeWidth={2.2} />
+          </button>
+          <h1
+            className="m-0 pr-12 text-[28px] font-bold leading-[1.05] tracking-[-0.02em] [font-family:var(--font-editorial)] [text-wrap:balance]"
+          >
+            {viewModel.name}
+          </h1>
+        </div>
+      )}
+
       <div className="grid gap-4 p-5 max-[700px]:px-5 max-[700px]:pb-[calc(24px+env(safe-area-inset-bottom))]">
-        <h1 className="m-0 text-[28px] leading-[1.05] font-bold tracking-[-0.02em] [text-wrap:balance]">{viewModel.name}</h1>
         <p className="m-0 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">{viewModel.description}</p>
         <dl className="m-0 grid gap-0 border-y border-[var(--color-line)]">
           <div className="grid gap-1 py-3">
@@ -76,7 +106,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
         <RouteActions links={routeLinks} onOpen={onRouteOpen} />
         {viewModel.detailsLink ? (
           <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-white px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[var(--color-text)] no-underline transition-[border-color,box-shadow] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[var(--color-text)] no-underline transition-[border-color,box-shadow] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
             href={viewModel.detailsLink.url}
             target="_blank"
             rel="noreferrer"
@@ -87,6 +117,22 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
           </a>
         ) : null}
         <ExternalLinks links={viewModel.links} onOpen={onExternalLinkOpen} />
+        {extraPhotos.length > 0 && (
+          <div
+            className="-mx-5 grid auto-cols-[160px] grid-flow-col gap-2 overflow-x-auto px-5 [scroll-snap-type:x_mandatory]"
+            aria-label="Ещё фотографии"
+          >
+            {extraPhotos.map((photo) => (
+              <img
+                key={`${photo.src}-${photo.caption ?? ""}`}
+                className="h-[110px] w-full rounded-lg object-cover [scroll-snap-align:start]"
+                src={photo.thumbnail ?? photo.src}
+                alt={photo.caption ?? viewModel.name}
+                loading="lazy"
+              />
+            ))}
+          </div>
+        )}
       </div>
     </motion.aside>
   );

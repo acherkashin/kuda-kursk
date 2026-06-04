@@ -21,7 +21,7 @@ export function createDefaultMarkerImage(): ImageData {
 }
 
 export function createActiveDefaultMarkerImage(): ImageData {
-  return createDefaultMarkerImageWithFrame("#0B39A4", "rgba(11, 57, 164, 0.24)");
+  return createDefaultMarkerImageWithFrame("#C4571A", "rgba(196, 87, 26, 0.28)");
 }
 
 function createDefaultMarkerImageWithFrame(strokeColor: string, glowColor?: string): ImageData {
@@ -48,7 +48,7 @@ export function createMarkerImageData(image: HTMLImageElement): ImageData {
 }
 
 export function createActiveMarkerImageData(image: HTMLImageElement): ImageData {
-  return createMarkerImageDataWithFrame(image, { glowColor: "rgba(11, 57, 164, 0.24)", strokeColor: "#0B39A4" });
+  return createMarkerImageDataWithFrame(image, { glowColor: "rgba(196, 87, 26, 0.28)", strokeColor: "#C4571A" });
 }
 
 function createMarkerImageDataWithFrame(

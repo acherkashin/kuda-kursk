@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -7,20 +8,21 @@
   font-feature-settings:
     "cv11" 1,
     "ss01" 1;
-  --color-page: #f3f3f3;
-  --color-surface: #ffffff;
-  --color-surface-lower: #f7f7f7;
-  --color-text: #0a0a0a;
-  --color-text-secondary: #444444;
-  --color-muted: #8a8a8a;
-  --color-line: #e4e4e4;
-  --color-line-strong: #cfcfcf;
-  --color-accent: #0b39a4;
-  --color-accent-soft: #e8eefc;
-  --shadow-rest: 0 8px 24px rgba(0, 0, 0, 0.07);
-  --shadow-raised: 0 12px 30px rgba(0, 0, 0, 0.1);
-  --shadow-panel: 0 22px 60px rgba(0, 0, 0, 0.14);
-  --shadow-focus: 0 10px 30px rgba(11, 57, 164, 0.12);
+  --font-editorial: 'Playfair Display', Georgia, serif;
+  --color-page: #F2EDE6;
+  --color-surface: #FDFAF6;
+  --color-surface-lower: #F5F0E8;
+  --color-text: #1A1410;
+  --color-text-secondary: #4A3F35;
+  --color-muted: #9A8E82;
+  --color-line: #E0D8CE;
+  --color-line-strong: #C8BEAF;
+  --color-accent: #C4571A;
+  --color-accent-soft: #FBF0E8;
+  --shadow-rest: 0 8px 24px rgba(50, 28, 8, 0.07);
+  --shadow-raised: 0 12px 30px rgba(50, 28, 8, 0.10);
+  --shadow-panel: 0 22px 60px rgba(50, 28, 8, 0.13);
+  --shadow-focus: 0 10px 30px rgba(196, 87, 26, 0.15);
 }
 
 * {
