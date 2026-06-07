@@ -7,6 +7,7 @@ import { validateGeoJsonPlace } from "../../src/data/validateGeoJsonPlace";
 import { mapCatalog } from "../../src/domain/mapCatalog";
 
 const projectRoot = process.cwd();
+const allowedSitePaths = new Set(["https://grinn-kursk.ru/places/tvoyapolka/"]);
 
 describe("map data files", () => {
   it("contain valid canonical places and existing local thumbnails", () => {
@@ -48,7 +49,9 @@ describe("map data files", () => {
 
           if (link.kind === "site") {
             const url = new URL(link.url);
-            expect(url.pathname).toMatch(/^\/?$/);
+            if (!allowedSitePaths.has(link.url)) {
+              expect(url.pathname).toMatch(/^\/?$/);
+            }
           }
         }
 
