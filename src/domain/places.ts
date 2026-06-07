@@ -36,6 +36,10 @@ export type PlaceVisibility = {
   linkOnly?: boolean;
 };
 
+export type PlaceMapLink = {
+  slug: string;
+};
+
 export type PlaceFeature = {
   type: "Feature";
   id: string | number;
@@ -48,6 +52,10 @@ export type PlaceFeature = {
     balloonContent: BalloonContent;
     links?: ExternalLink[];
     visibility?: PlaceVisibility;
+    /** Место является входом в под-карту с указанным slug. */
+    mapLink?: PlaceMapLink;
+    /** Можно ли строить маршрут до места. По умолчанию true; false для представительных точек-порталов. */
+    routable?: boolean;
     [key: string]: unknown;
   };
 };

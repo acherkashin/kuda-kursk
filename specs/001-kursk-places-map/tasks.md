@@ -201,6 +201,20 @@
 
 ---
 
+## Phase 9: User Story 5 - Переход с основной карты на под-карты (Priority: P3)
+
+**Цель**: связать основную карту с под-картами через места-входы, добавить отметку-портал и возврат на главную. Проверка — typecheck, build, существующие unit-тесты и ручная проверка через preview без нового тестового покрытия (FR-031, FR-032, FR-033, US5).
+
+- [X] T091 [US5] Добавить в модель места поля `mapLink: { slug }` и `routable` в `src/domain/places.ts`; surface их во view-model (резолв названия через `findMapBySlug`) в `src/domain/placeDetails.ts`; добавить событие `submap_opened` в `src/domain/analyticsEvents.ts`
+- [X] T092 [US5] В `src/components/place-details/PlaceDetailsPanel.tsx` добавить primary-действие «Открыть карту «<название>»» (проп `onOpenMap`) и скрытие route actions при `routable: false`
+- [X] T093 [US5] Места-входы в под-карты используют обычные фотомаркеры (по решению пользователя отдельный «портальный» маркер не используется; ранее добавленный код портального маркера удалён из `placeLayers.ts`, `markerImages.ts`, `placeSource.ts`, `KurskMap.tsx`)
+- [X] T094 [US5] Подключить навигацию в `src/app/App.tsx` (`useNavigate`, `submap_opened`) и действие «На главную карту» при `slug !== "main"` в `src/components/map/MapTopControls.tsx`
+- [X] T095 [US5] Добавить в `public/data/main-map.json` отметку-портал «Дозаправка» (`routable: false`, соцсети VK/Instagram) и места «Кафе «Комета»», «Твоя полка» (МегаГРИНН, `mapLink: zapishu-zarisuyu`) с цепляющими описаниями и реальными локальными фото в `public/place-images/` и `public/place-thumbnails/`
+- [X] T096 [US5] Добавить Storybook stories новых состояний карточки (`SubmapPortal`, `PlaceWithSubmapLink`) в `src/components/place-details/PlaceDetailsPanel.stories.tsx`; обновить счётчик `main` в `tests/unit/mapDataIntegrity.test.ts` (39→42)
+- [X] T097 [US5] Выполнить `npm run typecheck`, `npm run build`, существующие `npm run test:unit` (без регрессий, кроме пре-существующих jsdom-падений `markerImages`) и ручную проверку сценариев через preview
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз

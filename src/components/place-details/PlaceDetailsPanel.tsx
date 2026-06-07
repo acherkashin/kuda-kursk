@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, XIcon } from "lucide-react";
+import { ExternalLinkIcon, MapIcon, XIcon } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { buildPlaceDetails } from "../../domain/placeDetails";
 import type { PlaceFeature } from "../../domain/places";
@@ -12,6 +12,7 @@ type PlaceDetailsPanelProps = {
   onClose: () => void;
   onRouteOpen: (provider: RouteLink["provider"]) => void;
   onExternalLinkOpen: (kind: string) => void;
+  onOpenMap: (slug: string) => void;
 };
 
 function usePanelLayout() {
@@ -22,7 +23,7 @@ function usePanelLayout() {
   return window.matchMedia("(max-width: 700px)").matches ? "drawer" : "side-panel";
 }
 
-export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkOpen }: PlaceDetailsPanelProps) {
+export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkOpen, onOpenMap }: PlaceDetailsPanelProps) {
   const reduceMotion = useReducedMotion();
   const layout = usePanelLayout();
 
@@ -105,7 +106,18 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
           </div>
         </dl>
         {viewModel.tip ? <PlaceTip tip={viewModel.tip} /> : null}
-        <RouteActions links={routeLinks} onOpen={onRouteOpen} />
+        {viewModel.routable ? <RouteActions links={routeLinks} onOpen={onRouteOpen} /> : null}
+        {viewModel.mapLink ? (
+          <button
+            className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border border-[var(--color-accent)] bg-[var(--color-accent-soft)] px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[var(--color-accent)] transition-[border-color,box-shadow,transform] duration-150 hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.98]"
+            type="button"
+            data-testid="open-submap"
+            onClick={() => onOpenMap(viewModel.mapLink!.slug)}
+          >
+            <MapIcon aria-hidden="true" size={18} />
+            <span>{`Открыть карту «${viewModel.mapLink.title}»`}</span>
+          </button>
+        ) : null}
         {viewModel.detailsLink ? (
           <a
             className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[var(--color-text)] no-underline transition-[border-color,box-shadow] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"

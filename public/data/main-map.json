@@ -997,6 +997,119 @@
           "thumbnail": "/place-thumbnails/1601-c0bbfeb56c.webp"
         }
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9001,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.1874,
+          51.7308
+        ]
+      },
+      "properties": {
+        "id": 9001,
+        "mapLink": {
+          "slug": "dozapravka"
+        },
+        "routable": false,
+        "balloonContent": {
+          "name": "Дозаправка",
+          "description": "Городское сообщество о местах, где можно выдохнуть и перезагрузиться: кофе навынос, тихие столики и точки, куда забегают свои. Мы собрали их на отдельной карте — откройте её и найдите место поблизости.",
+          "address": "Курск",
+          "coordinates": "51.730800, 36.187400",
+          "image": "/place-images/9001-dozapravka.jpg",
+          "thumbnail": "/place-thumbnails/9001-dozapravka.jpg",
+          "socials": [
+            {
+              "label": "ВКонтакте",
+              "url": "https://vk.ru/dozapravka4712",
+              "kind": "vk"
+            },
+            {
+              "label": "Instagram",
+              "url": "https://www.instagram.com/dozapravka_4712/",
+              "kind": "instagram"
+            }
+          ]
+        },
+        "visibility": {
+          "public": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9002,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.191675,
+          51.736146
+        ]
+      },
+      "properties": {
+        "id": 9002,
+        "mapLink": {
+          "slug": "zapishu-zarisuyu"
+        },
+        "balloonContent": {
+          "name": "Кафе «Комета»",
+          "description": "Маленькая кофейня с панорамными окнами рядом с КГУ: спешелти из российских обжарок, сибирский чай и десерты. Сюда можно с собакой, а летом кофе и лимонады выносят на террасу.",
+          "address": "Курск, ул. Ленина, 24/1",
+          "coordinates": "51.736146, 36.191675",
+          "image": "/place-images/9002-kometa.jpg",
+          "thumbnail": "/place-thumbnails/9002-kometa.jpg",
+          "tip": "Здесь продают авторские открытки сообщества «Запишу, зарисую» — заберите парочку на память.",
+          "socials": [
+            {
+              "label": "Instagram",
+              "url": "https://www.instagram.com/kometa_coffee/",
+              "kind": "instagram"
+            }
+          ]
+        },
+        "visibility": {
+          "public": true
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9003,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.184553,
+          51.762129
+        ]
+      },
+      "properties": {
+        "id": 9003,
+        "mapLink": {
+          "slug": "zapishu-zarisuyu"
+        },
+        "balloonContent": {
+          "name": "Твоя полка",
+          "description": "Магазин-барахолка на третьем этаже «МегаГРИНН»: авторские открытки, гравюры, украшения, игрушки и подарки ручной работы. Сюда заходят за находкой, которой больше нигде не встретишь.",
+          "address": "Курск, ул. Карла Маркса, 68, ТРЦ «МегаГРИНН», 3 этаж",
+          "coordinates": "51.762129, 36.184553",
+          "image": "/place-images/9003-tvoya-polka.jpg",
+          "thumbnail": "/place-thumbnails/9003-tvoya-polka.jpg",
+          "tip": "Открытки сообщества «Запишу, зарисую» ищите здесь — это одна из точек, где их можно купить."
+        },
+        "links": [
+          {
+            "label": "Сайт магазина",
+            "url": "https://grinn-kursk.ru/places/tvoyapolka/",
+            "kind": "site"
+          }
+        ],
+        "visibility": {
+          "public": true
+        }
+      }
     }
   ]
 }

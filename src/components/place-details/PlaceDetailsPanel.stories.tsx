@@ -129,6 +129,49 @@ const placeWithoutPhotos: PlaceFeature = {
   }
 };
 
+const portalPlace: PlaceFeature = {
+  type: "Feature",
+  id: "story-portal-dozapravka",
+  geometry: {
+    type: "Point",
+    coordinates: [36.1874, 51.7308]
+  },
+  properties: {
+    id: "story-portal-dozapravka",
+    mapLink: { slug: "dozapravka" },
+    routable: false,
+    balloonContent: {
+      name: "Дозаправка",
+      description:
+        "Сообщество о курских кофейнях и местах, где можно выдохнуть и перезагрузиться. Откройте отдельную карту — мы собрали проверенные точки города.",
+      address: "Курск",
+      coordinates: "51.730800, 36.187400",
+      socials: [
+        { label: "Telegram", url: "https://t.me/example", kind: "telegram" },
+        { label: "ВКонтакте", url: "https://vk.com/example", kind: "vk" }
+      ]
+    },
+    visibility: {
+      public: true
+    }
+  }
+};
+
+const placeWithMapLink: PlaceFeature = {
+  ...placeWithLandscapePhoto,
+  id: "story-shop-maplink",
+  properties: {
+    ...placeWithLandscapePhoto.properties,
+    id: "story-shop-maplink",
+    mapLink: { slug: "zapishu-zarisuyu" },
+    balloonContent: {
+      ...placeWithLandscapePhoto.properties.balloonContent,
+      name: "Кафе Комета",
+      tip: "Здесь продают авторские открытки сообщества «Запишу, зарисую» — загляните за сувениром."
+    }
+  }
+};
+
 const meta = {
   title: "Place/PlaceDetailsPanel",
   component: PlaceDetailsPanel,
@@ -145,7 +188,8 @@ const meta = {
   args: {
     onClose: () => undefined,
     onRouteOpen: () => undefined,
-    onExternalLinkOpen: () => undefined
+    onExternalLinkOpen: () => undefined,
+    onOpenMap: () => undefined
   }
 } satisfies Meta<typeof PlaceDetailsPanel>;
 
@@ -173,5 +217,17 @@ export const TallPhotoLimit: Story = {
 export const WithoutPhoto: Story = {
   args: {
     place: placeWithoutPhotos
+  }
+};
+
+export const SubmapPortal: Story = {
+  args: {
+    place: portalPlace
+  }
+};
+
+export const PlaceWithSubmapLink: Story = {
+  args: {
+    place: placeWithMapLink
   }
 };

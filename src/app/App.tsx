@@ -18,7 +18,7 @@ import { searchPlaces } from "../domain/search";
 import { createAnalyticsAdapter } from "../services/analytics/analyticsAdapter";
 import { loadYandexMetrika } from "../services/analytics/yandexMetrika";
 import { registerServiceWorker, type ServiceWorkerUpdatePrompt } from "../services/pwa/registerServiceWorker";
-import { useLocation, useParams, useSearchParams } from "react-router";
+import { useLocation, useNavigate, useParams, useSearchParams } from "react-router";
 
 export function App() {
   const [places, setPlaces] = useState<PlaceFeature[]>([]);
@@ -34,6 +34,7 @@ export function App() {
   );
   const { slug } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const currentMap = useMemo(() => findMapBySlug(slug), [slug]);
   const basePlaces = places;
@@ -162,6 +163,20 @@ export function App() {
     setActivePlace(null);
   }, [searchParams, setSearchParams]);
 
+  const handleOpenMap = useCallback(
+    (targetSlug: string) => {
+      if (activePlace) {
+        analytics.track({ name: "submap_opened", params: { fromPlaceId: activePlace.id, toSlug: targetSlug } });
+      }
+      navigate(`/maps/${targetSlug}`);
+    },
+    [activePlace, analytics, navigate]
+  );
+
+  const handleBackToMain = useCallback(() => {
+    navigate("/maps/main");
+  }, [navigate]);
+
   const handleQueryChange = useCallback(
     (value: string) => {
       setQuery(value);
@@ -204,6 +219,7 @@ export function App() {
             query={query}
             onQueryChange={handleQueryChange}
             onQueryReset={() => handleQueryChange("")}
+            onBackToMain={currentMap.slug !== "main" ? handleBackToMain : undefined}
           />
           <div className="map-results-ui fixed bottom-[max(16px,env(safe-area-inset-bottom))] left-[max(16px,env(safe-area-inset-left))] z-3 max-w-[min(420px,calc(100vw-32px))] max-[700px]:bottom-[max(12px,env(safe-area-inset-bottom))] max-[700px]:left-[max(12px,env(safe-area-inset-left))]">
             <ResultsSummary
@@ -227,6 +243,7 @@ export function App() {
             analytics.track({ name: "external_link_clicked", params: { placeId: activePlace.id, kind } });
           }
         }}
+        onOpenMap={handleOpenMap}
       />
       <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace} onChange={handleConsentChange} />
       {pwaUpdatePrompt?.needRefresh && !hasActivePlace ? (

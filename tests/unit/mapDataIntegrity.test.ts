@@ -42,7 +42,7 @@ describe("map data files", () => {
     }
 
     expect(Object.fromEntries(counts)).toEqual({
-      main: 39,
+      main: 42,
       dozapravka: 19,
       "zapishu-zarisuyu": 21
     });

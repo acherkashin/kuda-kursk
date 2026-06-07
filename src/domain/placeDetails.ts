@@ -1,4 +1,10 @@
+import { findMapBySlug } from "./mapCatalog";
 import type { ExternalLink, Photo, PlaceFeature } from "./places";
+
+export type PlaceMapLinkView = {
+  slug: string;
+  title: string;
+};
 
 export type PlaceDetailsViewModel = {
   id: string | number;
@@ -10,6 +16,10 @@ export type PlaceDetailsViewModel = {
   tip?: string;
   detailsLink?: ExternalLink;
   links: ExternalLink[];
+  /** Если задано — место ведёт на под-карту, и в карточке показывается переход. */
+  mapLink?: PlaceMapLinkView;
+  /** Можно ли строить маршрут до места. По умолчанию true. */
+  routable: boolean;
 };
 
 const DETAILS_LINK_BASE_URL = "https://gokursk.ru";
@@ -55,8 +65,16 @@ export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
     address: content.address,
     coordinates: content.coordinates,
     photos,
-    links
+    links,
+    routable: place.properties.routable !== false
   };
+
+  const mapLinkSlug = place.properties.mapLink?.slug;
+  const linkedMap = mapLinkSlug ? findMapBySlug(mapLinkSlug) : undefined;
+
+  if (linkedMap) {
+    viewModel.mapLink = { slug: linkedMap.slug, title: linkedMap.title };
+  }
 
   if (detailsUrl) {
     viewModel.detailsLink = { id: "details", label: "Узнать подробнее", url: detailsUrl, kind: "site" };
