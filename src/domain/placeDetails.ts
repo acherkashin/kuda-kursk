@@ -8,21 +8,8 @@ export type PlaceDetailsViewModel = {
   coordinates: string;
   photos: Photo[];
   tip?: string;
-  detailsLink?: ExternalLink;
   links: ExternalLink[];
 };
-
-const DETAILS_LINK_BASE_URL = "https://gokursk.ru";
-
-function normalizeDetailsUrl(value?: string): string | undefined {
-  const url = value?.trim();
-
-  if (!url) {
-    return undefined;
-  }
-
-  return new URL(url, DETAILS_LINK_BASE_URL).toString();
-}
 
 export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
   const content = place.properties.balloonContent;
@@ -42,7 +29,6 @@ export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
   }
 
   const links = [...(place.properties.links ?? [])];
-  const detailsUrl = normalizeDetailsUrl(content.externalUrl) ?? normalizeDetailsUrl(content.url);
 
   if (content.socials) {
     links.push(...content.socials);
@@ -57,10 +43,6 @@ export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
     photos,
     links
   };
-
-  if (detailsUrl) {
-    viewModel.detailsLink = { id: "details", label: "Узнать подробнее", url: detailsUrl, kind: "site" };
-  }
 
   if (content.tip) {
     viewModel.tip = content.tip;

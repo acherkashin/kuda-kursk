@@ -1,4 +1,4 @@
-import { ExternalLinkIcon, XIcon } from "lucide-react";
+import { XIcon } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { buildPlaceDetails } from "../../domain/placeDetails";
 import type { PlaceFeature } from "../../domain/places";
@@ -104,18 +104,6 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
         </dl>
         {viewModel.tip ? <PlaceTip tip={viewModel.tip} /> : null}
         <RouteActions links={routeLinks} onOpen={onRouteOpen} />
-        {viewModel.detailsLink ? (
-          <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[var(--color-text)] no-underline transition-[border-color,box-shadow] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
-            href={viewModel.detailsLink.url}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => onExternalLinkOpen(viewModel.detailsLink?.kind ?? "site")}
-          >
-            <ExternalLinkIcon aria-hidden="true" size={16} />
-            <span>{viewModel.detailsLink.label}</span>
-          </a>
-        ) : null}
         <ExternalLinks links={viewModel.links} onOpen={onExternalLinkOpen} />
         {extraPhotos.length > 0 && (
           <div

@@ -18,7 +18,6 @@ const placeWithPhotos: PlaceFeature = {
       address: "Курск, Красная площадь, 2",
       coordinates: "51.730000, 36.193000",
       tip: "Лучше приходить до полудня: в это время здесь светлее всего и проще занять стол у окна.",
-      externalUrl: "/places/story-cafe",
       images: [
         {
           src: "/place-images/1-image-local-dba58e76a6.jpg",
@@ -33,19 +32,27 @@ const placeWithPhotos: PlaceFeature = {
           order: 2
         }
       ],
-      socials: [
-        {
-          label: "Telegram",
-          url: "https://t.me/example",
-          kind: "telegram"
-        }
-      ]
     },
     links: [
       {
-        label: "Сайт места",
-        url: "https://example.com",
+        label: "Узнать подробнее",
+        url: "https://example.com/story-cafe",
         kind: "site"
+      },
+      {
+        label: "ВКонтакте",
+        url: "https://vk.com/example",
+        kind: "vk"
+      },
+      {
+        label: "Telegram",
+        url: "https://t.me/example",
+        kind: "telegram"
+      },
+      {
+        label: "Instagram",
+        url: "https://www.instagram.com/example",
+        kind: "instagram"
       }
     ],
     visibility: {

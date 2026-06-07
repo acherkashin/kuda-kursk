@@ -15,7 +15,6 @@
         "type": "1009",
         "id": 320,
         "balloonContent": {
-          "url": "/objects/park-otel-peschanyy/",
           "image": "/place-images/320-image-1b82889cd9.jpg",
           "name": "Парк-отель «Песчаный»",
           "description": "«Песчаный» расположен у кромки водохранилища и окружен сосновым лесом. В озере можно купаться, плавать на лодке и рыбачить. ",
@@ -23,7 +22,14 @@
           "coordinates": "52.231969, 35.392868",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/320-f29160ce22.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/peschany_park_hotel",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -41,7 +47,6 @@
         "type": "164",
         "id": 29,
         "balloonContent": {
-          "url": "/objects/vodyanaya-melnitsa/",
           "image": "/place-images/29-image-49ab16509f.jpg",
           "name": "Водяная мельница",
           "description": "Старейшая работающая деревянная водяная мельница в Черноземье, изначально построенная без единого гвоздя. ",
@@ -67,7 +72,6 @@
         "type": "269",
         "id": 86,
         "balloonContent": {
-          "url": "/objects/teplovskie-vysoty/",
           "image": "/place-images/86-image-49784d2804.jpg",
           "name": "«Тепловские высоты»",
           "description": "Масштабный монумент в форме ордена «Отечественной войны» расположен в месте ожесточённых сражений на Курской дуге. Смотровая площадка стоит на высоте 274,5.",
@@ -93,7 +97,6 @@
         "type": "180",
         "id": 76,
         "balloonContent": {
-          "url": "/objects/memorialnyy-kompleks-poklonnaya-vysota-269/",
           "image": "/place-images/76-image-92e1cf273d.jpg",
           "name": "Мемориальный комплекс «Поклонная высота 269»",
           "description": "Мемориальный комплекс «Поклонная высота 269» находится у села Молотычи Фатежского района. Он увековечивает подвиг советских воинов, не допустивших прорыва немецко-фашистских захватчиков к Курску в июле 1943 года.\r\n",
@@ -119,7 +122,6 @@
         "type": "304",
         "id": 96,
         "balloonContent": {
-          "url": "/objects/zheleznogorskiy-dendrologicheskiy-park/",
           "image": "/place-images/96-image-e9a72603a1.jpg",
           "name": "Железногорский дендрологический парк",
           "description": "Экологический парк на особо охраняемой природной территории. Был создан в 1996 году к 40-летию города Железногорска.",
@@ -145,7 +147,6 @@
         "type": "1009",
         "id": 1587,
         "balloonContent": {
-          "url": "/objects/baza-otdykha-donvillage/",
           "image": "/place-images/1587-image-a54a636bda.jpg",
           "name": "База отдыха «DonVillage»",
           "description": "Современная база отдыха рядом с м. Свобода на водоеме в 30 км от Курска",
@@ -153,7 +154,14 @@
           "coordinates": "52.063583, 36.346307",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1587-9473c21229.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://donvillage.ru/",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -170,7 +178,6 @@
         "type": "спорт и отдых",
         "id": 2001,
         "balloonContent": {
-          "url": "https://2gis.ru/kursk/geo/10274532434640991",
           "image": "/place-images/2001-image-80a4ffdba7.jpg",
           "name": "Картинг",
           "description": "Картинг-площадка в Курске для активного отдыха и тренировочных заездов.",
@@ -195,7 +202,6 @@
         "type": "спорт и отдых",
         "id": 2002,
         "balloonContent": {
-          "url": "https://vk.com/sskvystrel",
           "image": "/place-images/2002-image-dce49b8a45.jpg",
           "name": "ССК «Выстрел»",
           "description": "Спортивно-стрелковый клуб с тиром в черте города и площадками для практической и стендовой стрельбы.",
@@ -203,7 +209,14 @@
           "coordinates": "51.695438, 36.156211",
           "button": "Открыть сообщество",
           "thumbnail": "/place-thumbnails/2002-thumbnail-dce49b8a45.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/sskvystrel",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -220,7 +233,6 @@
         "type": "агротуризм",
         "id": 2003,
         "balloonContent": {
-          "url": "https://gokursk.ru/objects/ulitochnaya-ferma-ulitkampaniya/",
           "image": "/place-images/2003-image-9b207c3d39.jpg",
           "name": "Улиточная ферма «Улиткампания»",
           "description": "Ферма в Фатежском районе, где проводят экскурсии, рассказывают о разведении улиток и предлагают дегустации.",
@@ -245,7 +257,6 @@
         "type": "304",
         "id": 1410,
         "balloonContent": {
-          "url": "/objects/lavandovyy-bereg/",
           "image": "/place-images/1410-image-912fbcf989.jpg",
           "name": "Лавандовый берег",
           "description": "Цветочная ферма",
@@ -270,7 +281,6 @@
         "type": "3170",
         "id": 1244,
         "balloonContent": {
-          "url": "/objects/derevnya-syrovarov/",
           "image": "/place-images/1244-image-ae56e64940.jpg",
           "name": "Деревня сыроваров",
           "description": "Проект «Ферма групп» и курского фермера Александра Волкова",
@@ -278,7 +288,14 @@
           "coordinates": "51.371854,37.127979",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1244-2acb33fc5c.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/volkovalal",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -295,7 +312,6 @@
         "type": "еда",
         "id": 2004,
         "balloonContent": {
-          "url": "https://dikiy-kaban-kursk.clients.site/",
           "image": "/place-images/2004-image-2b5644de2f.jpg",
           "name": "Дикий Кабан",
           "description": "Ресторан в центре Курска с мясной кухней и атмосферой городского гастробара.",
@@ -303,7 +319,14 @@
           "coordinates": "51.744344, 36.186764",
           "button": "Открыть сайт",
           "thumbnail": "/place-thumbnails/2004-thumbnail-2b5644de2f.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://dikiy-kaban-kursk.clients.site/",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -320,7 +343,6 @@
         "type": "еда",
         "id": 2005,
         "balloonContent": {
-          "url": "https://2gis.ru/kursk/firm/70000001040027900",
           "image": "/place-images/2005-image-eeda802902.jpg",
           "name": "Iguana Lounge",
           "description": "Лаундж-бар на Радищева с вечерним графиком работы, напитками и настольными играми.",
@@ -345,7 +367,6 @@
         "type": "204",
         "id": 91,
         "balloonContent": {
-          "url": "/objects/usadba-a-a-feta/",
           "image": "/place-images/91-image-ca03d6323e.jpg",
           "name": "Усадьба Афанасия Фета",
           "description": "Усадебный дом поэта и публициста Афанасия Фета, где он провёл заключительный период жизни. Здесь можно больше узнать о творчестве и помещичьем быте.",
@@ -370,7 +391,6 @@
         "type": "3170",
         "id": 1430,
         "balloonContent": {
-          "url": "/objects/bakhcha-kurskarbuz/",
           "image": "/place-images/1430-image-d507f6921a.jpg",
           "name": "Бахча «КурскАрбуз»",
           "description": "Курская бахча, где выращивают экзотические сорта арбузов",
@@ -378,7 +398,14 @@
           "coordinates": "51.687089, 36.381339",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1430-b2341d1604.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kursk_arbuz",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -395,7 +422,6 @@
         "type": "конный клуб",
         "id": 2006,
         "balloonContent": {
-          "url": "https://vk.com/club154342705",
           "image": "/place-images/2006-image-18eddf5e7d.jpg",
           "name": "Раздолье Русское",
           "description": "Конный клуб в черте города: прогулки верхом, занятия, фотосессии и отдых на природе.",
@@ -403,7 +429,14 @@
           "coordinates": "51.709411, 36.203488",
           "button": "Открыть сообщество",
           "thumbnail": "/place-thumbnails/2006-thumbnail-18eddf5e7d.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/club154342705",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -420,7 +453,6 @@
         "type": "велнес",
         "id": 2007,
         "balloonContent": {
-          "url": "https://rivierawell.ru/banya",
           "image": "/place-images/2007-image-c7712082e7.jpg",
           "name": "Банный комплекс Riviera Wellness Resort",
           "description": "Банный комплекс на территории Riviera Wellness Resort с парениями, купелью и отдыхом у Лазурного озера.",
@@ -428,7 +460,14 @@
           "coordinates": "50.604900, 36.651200",
           "button": "Открыть сайт",
           "thumbnail": "/place-thumbnails/2007-thumbnail-c7712082e7.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://rivierawell.ru/",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -445,7 +484,6 @@
         "type": "163",
         "id": 1619,
         "balloonContent": {
-          "url": "/objects/kukhmisterskaya-atilan/",
           "image": "/place-images/1619-image-e144610c12.jpg",
           "name": "Кухмистерская Atilan",
           "description": "Кафе в стиле СССР",
@@ -470,7 +508,6 @@
         "type": "активный отдых",
         "id": 2008,
         "balloonContent": {
-          "url": "https://kursk.warpoint.ru",
           "image": "/place-images/2008-image-ce6615bef6.jpg",
           "name": "War Point",
           "description": "VR-арена для командных игр рядом с ТЦ «Европа» и Московской площадью.",
@@ -478,7 +515,14 @@
           "coordinates": "51.750595, 36.191409",
           "button": "Открыть сайт",
           "thumbnail": "/place-thumbnails/2008-thumbnail-ce6615bef6.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://kursk.warpoint.ru",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -495,7 +539,6 @@
         "type": "театр",
         "id": 1172,
         "balloonContent": {
-          "url": "https://theatre3dkursk.ru",
           "image": "/place-images/1172-image-local-fa5d80b55b.webp",
           "name": "Молодёжный театр «3Д»",
           "description": "Театр Дома Знаний с камерными постановками и современной сценической программой.",
@@ -503,7 +546,14 @@
           "coordinates": "51.736860, 36.190633",
           "button": "Открыть сайт",
           "thumbnail": "/place-thumbnails/1172-theatre-3d.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://theatre3dkursk.ru",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -521,7 +571,6 @@
         "type": "304",
         "id": 81,
         "balloonContent": {
-          "url": "/objects/gostevoy-sad-landizayn/",
           "image": "/place-images/81-image-783cbf5798.jpg",
           "name": "Гостевой сад «Ландизайн»",
           "description": "Гостевой сад «Ландизайн» — настоящий райский уголок площадью около 1 гектара, в который постоянно съезжаются гости, чтобы сделать красивые фотографии и просто подышать свежим воздухом. К слову, в этом уютном месте богата не только флора, но и фауна. Здесь живет красавец-павлин, фазаны и восемь черепах.",
@@ -529,7 +578,14 @@
           "coordinates": "51.84131, 36.06554",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/81-7fc929b615.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/landesign_kursk",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -547,7 +603,6 @@
         "type": "180",
         "id": 1132,
         "balloonContent": {
-          "url": "/objects/memorial-kurskaya-bitva/",
           "image": "/place-images/1132-image-19feae71a1.jpg",
           "name": "Мемориальный комплекс «Курская битва»",
           "description": "Открыт 23 августа 2023 года в честь 80-летия Победы в Курской битве.",
@@ -572,7 +627,6 @@
         "type": "спорт и отдых",
         "id": 2009,
         "balloonContent": {
-          "url": "https://5verst.ru/boevadacha/",
           "image": "/place-images/2009-image-fallback-865f59a30b.jpg",
           "name": "5 вёрст Боева Дача",
           "description": "Бесплатные дружеские старты на 5 км каждую субботу в 9:00 в парке Боева Дача. Дистанцию можно пробежать или пройти пешком в любом комфортном темпе; мероприятие проводят волонтёры, а для участия нужна предварительная регистрация и QR-код. Парк Боева Дача с 2021 года имеет статус природного парка регионального значения и расположен в пойме реки Тускарь.",
@@ -580,7 +634,14 @@
           "coordinates": "51.742172, 36.209818",
           "button": "Открыть страницу",
           "thumbnail": "/place-thumbnails/2009-thumbnail-50802e064b.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://5verst.ru/",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -598,7 +659,6 @@
         "type": "907",
         "id": 1465,
         "balloonContent": {
-          "url": "/objects/kofeynya-pyshki-i-ne-tolko/",
           "image": "/place-images/1465-image-9eda5c82a9.jpg",
           "name": "Кофейня «Пышки и не только»",
           "description": "Кофейня с пышками собственного приготовления",
@@ -606,7 +666,14 @@
           "coordinates": "51.716408, 36.133998",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1465-91d2bc7ddf.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://pyshki-i-ne-tolko.clients.site/",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -623,7 +690,6 @@
         "type": "театр",
         "id": 2010,
         "balloonContent": {
-          "url": "https://www.circus-kursk.ru/",
           "image": "/place-images/2010-image-9f57c7e5d1.jpg",
           "name": "Курский государственный цирк",
           "description": "Культурно-развлекательный центр в центре Курска на улице Александра Невского. На арене проходят цирковые программы для детей и взрослых, а перед зданием установлен памятник Юрию Никулину и Михаилу Шуйдину.",
@@ -631,7 +697,14 @@
           "coordinates": "51.725692, 36.189296",
           "button": "Открыть сайт",
           "thumbnail": "/place-thumbnails/2010-thumbnail-9f57c7e5d1.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://www.circus-kursk.ru/",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -649,7 +722,6 @@
         "type": "3304",
         "id": 1247,
         "balloonContent": {
-          "url": "/objects/gornolyzhnyy-sklon/",
           "image": "/place-images/1247-image-aed0670f0e.jpg",
           "name": "Горнолыжный склон",
           "description": "Склон с рельефом и бугельным подъёмником. Для лыжников и сноубордистов. ",
@@ -675,7 +747,6 @@
         "type": "296",
         "id": 112,
         "balloonContent": {
-          "url": "/objects/kostel/",
           "image": "/place-images/112-image-ffe21281b1.jpg",
           "name": "Римско-католический костел",
           "description": "Увидеть в Курске католическое здание — большая редкость, а если оно еще и привлекает взгляды прохожих своей красотой и габаритами заметными издалека, его по праву можно считать настоящей достопримечательностью. \r\n\r\nХрам Успения Богородицы появился в конце XIX века и расположился на крутом западном склоне холма, на котором родился и сам Курск. Вокруг костел окружен плотной городской застройкой и уже на протяжении сотни лет порождает немало легенд, окутанных мистическими тайнами.",
@@ -701,7 +772,6 @@
         "type": "3104",
         "id": 322,
         "balloonContent": {
-          "url": "/objects/baza-otdykha-serebryano/",
           "image": "/place-images/322-image-e2c731b7cb.jpg",
           "name": "База отдыха «Серебряно»",
           "description": "База отдыха для тех, кто хочет в полной мере насладиться природой с семьей, друзьями, коллегами.",
@@ -727,7 +797,6 @@
         "type": "3104",
         "id": 336,
         "balloonContent": {
-          "url": "/objects/zagorodnyy-klub-shale-u-lesa/",
           "image": "/place-images/336-image-7458aaf3b9.jpg",
           "name": "Загородный клуб «Шале у леса»",
           "description": "Дома для уединенного отдыха в Курске.",
@@ -735,7 +804,14 @@
           "coordinates": "51.743669, 36.347310",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/336-e99253ab9d.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://shaleylesa.ru/",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -753,7 +829,6 @@
         "type": "3104",
         "id": 1516,
         "balloonContent": {
-          "url": "/objects/yakhonty-krasnikovo-eko-otel/",
           "image": "/place-images/1516-image-16b813be28.jpg",
           "name": "«Яхонты Красниково» эко-отель",
           "description": "Эко-отель на территории этнографического кластера «Парк Мельниц»",
@@ -761,7 +836,14 @@
           "coordinates": "51.246253, 36.414958",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1516-ece15bafe8.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://krasnikovo-yahonty.ru/",
+            "kind": "site"
+          }
+        ]
       }
     },
     {
@@ -779,7 +861,6 @@
         "type": "3104",
         "id": 1588,
         "balloonContent": {
-          "url": "/objects/glemping-novoshemyakino/",
           "image": "/place-images/1588-image-5af27a6635.jpg",
           "name": "Глэмпинг НовоШемякино",
           "description": "Сферические домики на берегу водоёма",
@@ -805,7 +886,6 @@
         "type": "3104",
         "id": 1591,
         "balloonContent": {
-          "url": "/objects/glemping-berloga-barn/",
           "image": "/place-images/1591-image-92148fda66.jpg",
           "name": "Глэмпинг Berloga Barn",
           "description": "Атмосферные дома недалеко от Курска",
@@ -831,7 +911,6 @@
         "type": "3104",
         "id": 1592,
         "balloonContent": {
-          "url": "/objects/forest-house/",
           "image": "/place-images/1592-image-b73ad598a4.jpg",
           "name": "Forest House",
           "description": "Домики в сосновом лесу недалеко от Курска",
@@ -857,7 +936,6 @@
         "type": "3104",
         "id": 1593,
         "balloonContent": {
-          "url": "/objects/tishina/",
           "image": "/place-images/1593-image-9bbb27b03d.jpg",
           "name": "Тишина",
           "description": "Домик в сосновом лесу",
@@ -883,7 +961,6 @@
         "type": "3104",
         "id": 1597,
         "balloonContent": {
-          "url": "/objects/riverland/",
           "image": "/place-images/1597-image-69f566943c.jpg",
           "name": "Riverland",
           "description": "Пять современных шале на природе",
@@ -891,7 +968,24 @@
           "coordinates": "51.916470, 36.278758",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1597-2cee2794c2.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://myriverland.ru/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/myriverland",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/my.riverland",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -909,7 +1003,6 @@
         "type": "3104",
         "id": 1598,
         "balloonContent": {
-          "url": "/objects/shale-u-reki/",
           "image": "/place-images/1598-image-209b28cda1.jpg",
           "name": "Шале у реки",
           "description": "Домик на берегу реки Тускарь",
@@ -935,7 +1028,6 @@
         "type": "3104",
         "id": 1599,
         "balloonContent": {
-          "url": "/objects/yelki-igolki/",
           "image": "/place-images/1599-image-bce38e4ba4.jpg",
           "name": "Ёлки-иголки",
           "description": "Шале в 10 минутах от города",
@@ -961,7 +1053,6 @@
         "type": "3104",
         "id": 1600,
         "balloonContent": {
-          "url": "/objects/shik-shale/",
           "image": "/place-images/1600-image-3ee55fa028.jpg",
           "name": "Шик&Шале",
           "description": "Домик с бассейном с подогревом",
@@ -987,7 +1078,6 @@
         "type": "3104",
         "id": 1601,
         "balloonContent": {
-          "url": "/objects/shale-river-house/",
           "image": "/place-images/1601-image-930853e6cc.jpg",
           "name": "Шале «River House»",
           "description": "Шале в 35 км от Курска",

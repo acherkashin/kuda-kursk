@@ -26,9 +26,31 @@ describe("map data files", () => {
       for (const place of places) {
         const thumbnail = place.properties.balloonContent.thumbnail;
         const image = place.properties.balloonContent.image;
+        const legacyUrl = place.properties.balloonContent.url;
+        const legacyExternalUrl = place.properties.balloonContent.externalUrl;
+        const links = [
+          ...(place.properties.links ?? []),
+          ...(place.properties.balloonContent.socials ?? [])
+        ];
 
         expect(image).toMatch(/^\/place-images\//);
         expect(thumbnail).toMatch(/^\/place-thumbnails\//);
+        if (typeof legacyUrl === "string") {
+          expect(legacyUrl).not.toMatch(/gokursk\.ru/i);
+        }
+
+        if (typeof legacyExternalUrl === "string") {
+          expect(legacyExternalUrl).not.toMatch(/gokursk\.ru/i);
+        }
+
+        for (const link of links) {
+          expect(link.url).not.toMatch(/gokursk\.ru/i);
+
+          if (link.kind === "site") {
+            const url = new URL(link.url);
+            expect(url.pathname).toMatch(/^\/?$/);
+          }
+        }
 
         for (const src of [thumbnail, image]) {
           expect(src).not.toMatch(/^https?:\/\//);

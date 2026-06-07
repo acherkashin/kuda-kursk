@@ -11,7 +11,7 @@ export type ExternalLink = {
   id?: string;
   label: string;
   url: string;
-  kind?: "site" | "vk" | "telegram" | "instagram" | "phone" | "other" | string;
+  kind?: "site" | "details" | "vk" | "telegram" | "instagram" | "phone" | "other" | string;
 };
 
 export type BalloonContent = {

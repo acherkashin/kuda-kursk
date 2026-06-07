@@ -15,7 +15,6 @@
         "type": "sketch",
         "id": 1,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/1-image-local-dba58e76a6.jpg",
           "thumbnail": "/place-thumbnails/sketches/1.jpg",
           "name": "КГУ",
@@ -40,7 +39,6 @@
         "type": "sketch",
         "id": 2,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/2-image-local-437bc9a2fd.jpg",
           "thumbnail": "/place-thumbnails/sketches/2.jpg",
           "name": "КГМУ",
@@ -65,7 +63,6 @@
         "type": "sketch",
         "id": 3,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/3-image-local-81d422fb2f.jpg",
           "thumbnail": "/place-thumbnails/sketches/3.jpg",
           "name": "Ул. Радищева, 12",
@@ -90,7 +87,6 @@
         "type": "sketch",
         "id": 4,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/4-image-local-d82b1e887c.jpg",
           "thumbnail": "/place-thumbnails/sketches/4.jpg",
           "name": "Ул. Золотая, 12",
@@ -115,7 +111,6 @@
         "type": "sketch",
         "id": 5,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/5-image-local-599568873d.jpg",
           "thumbnail": "/place-thumbnails/sketches/5.jpg",
           "name": "Костёл",
@@ -140,7 +135,6 @@
         "type": "sketch",
         "id": 6,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/6-image-local-2458390af4.jpg",
           "thumbnail": "/place-thumbnails/sketches/6.jpg",
           "name": "Драмтеатр",
@@ -165,7 +159,6 @@
         "type": "sketch",
         "id": 7,
         "balloonContent": {
-          "url": "https://t.me/zapishu_zarisuyu/761",
           "image": "/place-images/7-image-local-e645790c49.jpg",
           "thumbnail": "/place-thumbnails/sketches/7.jpg",
           "name": "ЖД Вокзал",
@@ -173,7 +166,14 @@
           "address": "Привокзальная площадь, 1",
           "coordinates": "51.749788, 36.227698",
           "button": "Читать пост"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://t.me/zapishu_zarisuyu/761",
+            "kind": "details"
+          }
+        ]
       }
     },
     {
@@ -190,7 +190,6 @@
         "type": "sketch",
         "id": 8,
         "balloonContent": {
-          "url": "https://t.me/zapishu_zarisuyu/578",
           "image": "/place-images/8-image-local-634a4850b7.jpg",
           "thumbnail": "/place-thumbnails/sketches/8.jpg",
           "name": "Дом Семенова и Уфимцева",
@@ -198,7 +197,14 @@
           "address": "ул. Семеновская, 14",
           "coordinates": "51.733920, 36.184948",
           "button": "Читать пост"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://t.me/zapishu_zarisuyu/578",
+            "kind": "details"
+          }
+        ]
       }
     },
     {
@@ -215,7 +221,6 @@
         "type": "sketch",
         "id": 9,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/9-image-local-84d3fa8cc2.jpg",
           "thumbnail": "/place-thumbnails/sketches/9.jpg",
           "name": "Свиридовский",
@@ -240,7 +245,6 @@
         "type": "sketch",
         "id": 10,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/10-image-local-538a94f3e4.jpg",
           "thumbnail": "/place-thumbnails/sketches/10.jpg",
           "name": "Филармония",
@@ -265,7 +269,6 @@
         "type": "sketch",
         "id": 11,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/11-image-local-8f92164bca.jpg",
           "thumbnail": "/place-thumbnails/sketches/11.jpg",
           "name": "Ул. Щепкина, 27",
@@ -290,7 +293,6 @@
         "type": "sketch",
         "id": 12,
         "balloonContent": {
-          "url": "https://t.me/zapishu_zarisuyu/487",
           "image": "/place-images/12-image-local-7bd67a280a.jpg",
           "thumbnail": "/place-thumbnails/sketches/12.jpg",
           "name": "Ул. Щепкина, 25",
@@ -298,7 +300,14 @@
           "address": "ул. Щепкина, 25",
           "coordinates": "51.727790, 36.174725",
           "button": "Читать пост"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://t.me/zapishu_zarisuyu/487",
+            "kind": "details"
+          }
+        ]
       }
     },
     {
@@ -315,7 +324,6 @@
         "type": "sketch",
         "id": 13,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/13-image-local-d61f833ba8.jpg",
           "thumbnail": "/place-thumbnails/sketches/13.jpg",
           "name": "Ул. Ломоносова, 7",
@@ -340,7 +348,6 @@
         "type": "sketch",
         "id": 14,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/14-image-local-4ad58eb11b.jpg",
           "thumbnail": "/place-thumbnails/sketches/14.jpg",
           "name": "Кинотеатр Щепкина",
@@ -365,7 +372,6 @@
         "type": "sketch",
         "id": 15,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/15-image-local-38d23cdb3f.jpg",
           "thumbnail": "/place-thumbnails/sketches/15.jpg",
           "name": "Дом книги",
@@ -390,7 +396,6 @@
         "type": "sketch",
         "id": 16,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/16-image-local-eb3f9d6530.jpg",
           "thumbnail": "/place-thumbnails/sketches/16.jpg",
           "name": "Ул. Ендовищенская, 27",
@@ -415,7 +420,6 @@
         "type": "sketch",
         "id": 17,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/17-image-local-fad330fd0a.jpg",
           "thumbnail": "/place-thumbnails/sketches/17.jpg",
           "name": "Мужская гимназия",
@@ -440,7 +444,6 @@
         "type": "sketch",
         "id": 18,
         "balloonContent": {
-          "url": "https://t.me/zapishu_zarisuyu/344",
           "image": "/place-images/18-image-local-089d338675.jpg",
           "thumbnail": "/place-thumbnails/sketches/18.jpg",
           "name": "Дом моды Веры Геппы",
@@ -448,7 +451,14 @@
           "address": "ул. Дзержинского, 17",
           "coordinates": "51.728431, 36.188128",
           "button": "Читать пост"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://t.me/zapishu_zarisuyu/344",
+            "kind": "details"
+          }
+        ]
       }
     },
     {
@@ -465,7 +475,6 @@
         "type": "sketch",
         "id": 19,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/19-image-local-603c831334.jpg",
           "thumbnail": "/place-thumbnails/sketches/19.jpg",
           "name": "Церковь Серафима Саровского",
@@ -490,7 +499,6 @@
         "type": "sketch",
         "id": 20,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/20-image-local-7b9e03a2f1.jpg",
           "thumbnail": "/place-thumbnails/sketches/20.jpg",
           "name": "Памятник жертвам Чернобыля",
@@ -515,7 +523,6 @@
         "type": "sketch",
         "id": 21,
         "balloonContent": {
-          "url": "",
           "image": "/place-images/21-image-local-8da830fbab.jpg",
           "thumbnail": "/place-thumbnails/sketches/21.jpg",
           "name": "Мирный атом",

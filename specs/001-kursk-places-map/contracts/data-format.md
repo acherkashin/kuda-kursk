@@ -30,8 +30,6 @@ type BalloonContent = {
   address: string;
   coordinates: string;
   tip?: string;
-  socials?: ExternalLink[];
-  externalUrl?: string;
   [key: string]: unknown;
 };
 
@@ -46,7 +44,7 @@ type ExternalLink = {
   id?: string;
   label: string;
   url: string;
-  kind?: "site" | "vk" | "telegram" | "instagram" | "phone" | "other" | string;
+  kind?: "site" | "details" | "vk" | "telegram" | "instagram" | "phone" | "other" | string;
 };
 
 type PlaceVisibility = {
@@ -86,6 +84,11 @@ type PlaceVisibility = {
 - Если координаты для Курска выглядят как `[latitude, longitude]`, импорт должен завершиться ошибкой валидации.
 - Дополнительные поля в `properties` разрешены и должны сохраняться для будущего backend/CMS, но UI показывает только поддержанные поля.
 - Отсутствующие optional поля не создают пустые блоки интерфейса.
+- Отображаемые внешние ссылки хранятся в `properties.links`, а не в `balloonContent.url`, `balloonContent.externalUrl` или `balloonContent.socials`.
+- `kind: "site"` и `kind: "details"` показываются как текстовая кнопка «Узнать подробнее».
+- `kind: "vk"`, `kind: "telegram"` и `kind: "instagram"` показываются как кнопки соцсетей с логотипом, только если ссылка ведёт на официальный канал самого места.
+- Редакционные Telegram-посты карты `zapishu-zarisuyu` хранятся как `kind: "details"`, чтобы не выглядеть официальной соцсетью места.
+- Ссылки на `gokursk.ru` не используются в данных и интерфейсе.
 
 ## Файл карт сообществ
 
