@@ -51,7 +51,7 @@ describe("buildPlaceDetails", () => {
     });
   });
 
-  it("builds a details link from relative balloon content url", () => {
+  it("ignores legacy balloon content urls instead of building GoKursk details links", () => {
     const place = {
       type: "Feature",
       id: "hotel",
@@ -68,16 +68,11 @@ describe("buildPlaceDetails", () => {
       }
     } satisfies PlaceFeature;
 
-    expect(buildPlaceDetails(place).detailsLink).toEqual({
-      id: "details",
-      label: "Узнать подробнее",
-      url: "https://gokursk.ru/objects/park-otel-peschanyy/",
-      kind: "site"
-    });
+    expect(buildPlaceDetails(place)).not.toHaveProperty("detailsLink");
     expect(buildPlaceDetails(place).links).toEqual([]);
   });
 
-  it("prefers externalUrl over balloon content url for details link", () => {
+  it("keeps explicit details, site and social links from place data", () => {
     const place = {
       type: "Feature",
       id: "hotel",
@@ -91,10 +86,20 @@ describe("buildPlaceDetails", () => {
           coordinates: "52.231969, 35.392868",
           url: "/objects/park-otel-peschanyy/",
           externalUrl: "https://example.com/place"
-        }
+        },
+        links: [
+          { label: "Узнать подробнее", url: "https://t.me/zapishu_zarisuyu/761", kind: "details" },
+          { label: "Сайт", url: "https://example.com/place", kind: "site" },
+          { label: "ВКонтакте", url: "https://vk.com/example", kind: "vk" }
+        ]
       }
     } satisfies PlaceFeature;
 
-    expect(buildPlaceDetails(place).detailsLink?.url).toBe("https://example.com/place");
+    expect(buildPlaceDetails(place)).not.toHaveProperty("detailsLink");
+    expect(buildPlaceDetails(place).links).toEqual([
+      { label: "Узнать подробнее", url: "https://t.me/zapishu_zarisuyu/761", kind: "details" },
+      { label: "Сайт", url: "https://example.com/place", kind: "site" },
+      { label: "ВКонтакте", url: "https://vk.com/example", kind: "vk" }
+    ]);
   });
 });

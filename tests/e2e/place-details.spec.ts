@@ -10,7 +10,8 @@ test("выбранное полное место открывает карточ
   await expect(panel.getByRole("heading", { name: "Парк-отель «Песчаный»" })).toBeVisible();
   await expect(panel.getByRole("img", { name: "Парк-отель «Песчаный»" })).toHaveAttribute("src", /\/place-images\/320-image-1b82889cd9\.jpg$/);
   await expect(panel.getByText("Парк-отель «Песчаный»")).toHaveCount(1);
-  await expect(panel.getByRole("link", { name: /Узнать подробнее/i })).toHaveAttribute("href", "https://gokursk.ru/objects/park-otel-peschanyy/");
+  await expect(panel.getByRole("link", { name: "ВКонтакте" })).toHaveAttribute("href", "https://vk.com/peschany_park_hotel");
+  await expect(panel.getByRole("link", { name: /Узнать подробнее/i })).toHaveCount(0);
   await expect(panel.getByRole("link", { name: /Яндекс/i })).toHaveCount(0);
   await expect(panel.getByRole("link", { name: /2ГИС/i })).toHaveCount(0);
   await expect(panel.getByRole("link", { name: /Google/i })).toHaveCount(0);
@@ -163,4 +164,14 @@ test("прямая ссылка выбранного места работает
   await expect(panel).toBeVisible();
   await expect(panel.getByRole("heading", { name: "Кухмистерская Atilan" })).toBeVisible();
   await expect(page).toHaveURL("/maps/dozapravka?place=1619");
+});
+
+test("редакционная Telegram-ссылка в карте зарисовок открывается как подробности", async ({ page }) => {
+  await page.goto("/maps/zapishu-zarisuyu?place=7");
+
+  const panel = page.getByTestId("place-details-panel");
+  await expect(panel).toBeVisible();
+  await expect(panel.getByRole("heading", { name: "ЖД Вокзал" })).toBeVisible();
+  await expect(panel.getByRole("link", { name: "Узнать подробнее" })).toHaveAttribute("href", "https://t.me/zapishu_zarisuyu/761");
+  await expect(panel.getByRole("link", { name: "Telegram" })).toHaveCount(0);
 });
