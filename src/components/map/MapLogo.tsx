@@ -52,9 +52,11 @@ export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLog
 
     return (
       <div className={`flex min-h-11 min-w-0 items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 ${widthClass}`}>
-        {onBack ? <BackButton onClick={onBack} /> : null}
         {onBack ? (
-          <span className="flex min-w-0 flex-1 items-center gap-2">{content}</span>
+          <>
+            <BackButton onClick={onBack} />
+            <span className="flex min-w-0 flex-1 items-center gap-2">{content}</span>
+          </>
         ) : (
           <a
             className="flex min-w-0 flex-1 items-center gap-2 text-[var(--color-text)] no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
