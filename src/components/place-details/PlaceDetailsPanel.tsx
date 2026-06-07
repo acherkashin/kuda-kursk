@@ -56,7 +56,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
               alt={heroPhoto.caption ?? viewModel.name}
               fetchPriority="high"
             />
-            <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,14,8,0.84)_0%,rgba(20,14,8,0.28)_46%,transparent_72%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,14,8,0.80)_0%,rgba(20,14,8,0.40)_28%,rgba(20,14,8,0.06)_52%,transparent_65%)]" />
             <button
               className="absolute top-4 right-4 z-2 grid h-10 w-10 place-items-center rounded-full border border-white/25 bg-black/35 text-white backdrop-blur-sm transition-[background-color,border-color,transform] duration-150 hover:bg-black/55 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white max-[700px]:top-[max(16px,env(safe-area-inset-top))] max-[700px]:right-4"
               type="button"
@@ -67,7 +67,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
             </button>
             <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-14">
               <h1
-                className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-white [font-family:var(--font-editorial)] [text-wrap:balance]"
+                className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-white [font-family:var(--font-editorial)] [text-wrap:balance] [text-shadow:0_1px_10px_rgba(20,14,8,0.55)]"
               >
                 {viewModel.name}
               </h1>
