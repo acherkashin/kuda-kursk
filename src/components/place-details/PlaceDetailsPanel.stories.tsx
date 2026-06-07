@@ -2,6 +2,17 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import type { PlaceFeature } from "../../domain/places";
 import { PlaceDetailsPanel } from "./PlaceDetailsPanel";
 
+const tallPhotoFixtureSvg = `
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 1100">
+    <rect width="600" height="1100" fill="#d8c6b4" />
+    <rect x="46" y="48" width="508" height="260" fill="#7b8f87" />
+    <rect x="46" y="342" width="508" height="332" fill="#f2dfc6" />
+    <rect x="46" y="710" width="508" height="342" fill="#9b5f3d" />
+    <circle cx="438" cy="188" r="64" fill="#f7efe4" />
+  </svg>
+`;
+const tallPhotoFixture = `data:image/svg+xml,${encodeURIComponent(tallPhotoFixtureSvg)}`;
+
 const placeWithPhotos: PlaceFeature = {
   type: "Feature",
   id: "story-cafe",
@@ -54,6 +65,47 @@ const placeWithPhotos: PlaceFeature = {
   }
 };
 
+const placeWithLandscapePhoto: PlaceFeature = {
+  ...placeWithPhotos,
+  id: "story-park-hotel",
+  properties: {
+    ...placeWithPhotos.properties,
+    id: "story-park-hotel",
+    balloonContent: {
+      ...placeWithPhotos.properties.balloonContent,
+      name: "Парк-отель «Песчаный»",
+      images: [
+        {
+          src: "/place-images/320-image-1b82889cd9.jpg",
+          thumbnail: "/place-thumbnails/320-f29160ce22.webp",
+          caption: "Парк-отель",
+          order: 1
+        }
+      ]
+    }
+  }
+};
+
+const placeWithTallPhoto: PlaceFeature = {
+  ...placeWithLandscapePhoto,
+  id: "story-tall-photo",
+  properties: {
+    ...placeWithLandscapePhoto.properties,
+    id: "story-tall-photo",
+    balloonContent: {
+      ...placeWithLandscapePhoto.properties.balloonContent,
+      name: "Высокий кадр",
+      images: [
+        {
+          src: tallPhotoFixture,
+          caption: "Кадр выше лимита",
+          order: 1
+        }
+      ]
+    }
+  }
+};
+
 const placeWithoutPhotos: PlaceFeature = {
   type: "Feature",
   id: "story-square",
@@ -102,7 +154,19 @@ type Story = StoryObj<typeof meta>;
 
 export const WithPhoto: Story = {
   args: {
+    place: placeWithLandscapePhoto
+  }
+};
+
+export const PortraitPhoto: Story = {
+  args: {
     place: placeWithPhotos
+  }
+};
+
+export const TallPhotoLimit: Story = {
+  args: {
+    place: placeWithTallPhoto
   }
 };
 

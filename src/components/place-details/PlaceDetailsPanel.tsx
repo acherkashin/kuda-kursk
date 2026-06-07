@@ -48,28 +48,30 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
       {heroPhoto ? (
-        <div className="relative">
-          <img
-            className="block h-[300px] w-full object-cover max-[700px]:h-[40dvh]"
-            src={heroPhoto.src}
-            alt={heroPhoto.caption ?? viewModel.name}
-            fetchPriority="high"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,14,8,0.84)_0%,rgba(20,14,8,0.28)_46%,transparent_72%)]" />
-          <button
-            className="absolute top-4 right-4 z-2 grid h-10 w-10 place-items-center rounded-full border border-white/25 bg-black/35 text-white backdrop-blur-sm transition-[background-color,border-color,transform] duration-150 hover:bg-black/55 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white max-[700px]:top-[max(16px,env(safe-area-inset-top))] max-[700px]:right-4"
-            type="button"
-            aria-label="Закрыть карточку"
-            onClick={onClose}
-          >
-            <XIcon aria-hidden="true" size={20} strokeWidth={2.2} />
-          </button>
-          <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-14">
-            <h1
-              className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-white [font-family:var(--font-editorial)] [text-wrap:balance]"
+        <div className="relative [container-type:inline-size]">
+          <div className="relative grid max-h-[150cqw] place-items-center overflow-hidden bg-[var(--color-surface-lower)]">
+            <img
+              className="block h-auto w-full"
+              src={heroPhoto.src}
+              alt={heroPhoto.caption ?? viewModel.name}
+              fetchPriority="high"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,14,8,0.84)_0%,rgba(20,14,8,0.28)_46%,transparent_72%)]" />
+            <button
+              className="absolute top-4 right-4 z-2 grid h-10 w-10 place-items-center rounded-full border border-white/25 bg-black/35 text-white backdrop-blur-sm transition-[background-color,border-color,transform] duration-150 hover:bg-black/55 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white max-[700px]:top-[max(16px,env(safe-area-inset-top))] max-[700px]:right-4"
+              type="button"
+              aria-label="Закрыть карточку"
+              onClick={onClose}
             >
-              {viewModel.name}
-            </h1>
+              <XIcon aria-hidden="true" size={20} strokeWidth={2.2} />
+            </button>
+            <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-14">
+              <h1
+                className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-white [font-family:var(--font-editorial)] [text-wrap:balance]"
+              >
+                {viewModel.name}
+              </h1>
+            </div>
           </div>
         </div>
       ) : (
