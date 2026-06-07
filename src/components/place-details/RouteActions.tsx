@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 import { ChevronDownIcon, ExternalLinkIcon, MapIcon, NavigationIcon } from "lucide-react";
-import type { RouteLink } from "../../domain/routeLinks";
+import { buildRouteUrl, type RouteLink } from "../../domain/routeLinks";
 
 type RouteActionsProps = {
   links: RouteLink[];
@@ -12,6 +12,35 @@ const icons = {
   "2gis": MapIcon,
   google: ExternalLinkIcon
 } satisfies Record<RouteLink["provider"], typeof MapIcon>;
+
+function openRouteUrl(url: string) {
+  const routeWindow = window.open(url, "_blank", "noopener,noreferrer");
+
+  if (routeWindow) {
+    routeWindow.opener = null;
+  }
+}
+
+function openRouteAfterGeolocation(link: RouteLink) {
+  if (!("geolocation" in navigator)) {
+    openRouteUrl(link.url);
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    ({ coords }) => {
+      const url = buildRouteUrl({
+        provider: link.provider,
+        origin: { longitude: coords.longitude, latitude: coords.latitude },
+        destination: link.destination
+      });
+
+      openRouteUrl(url);
+    },
+    () => openRouteUrl(link.url),
+    { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+  );
+}
 
 export function RouteActions({ links, onOpen }: RouteActionsProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +75,11 @@ export function RouteActions({ links, onOpen }: RouteActionsProps) {
                 key={link.provider}
                 target="_blank"
                 rel="noreferrer"
-                onClick={() => onOpen(link.provider)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  onOpen(link.provider);
+                  openRouteAfterGeolocation(link);
+                }}
               >
                 <Icon aria-hidden="true" size={18} />
                 <span>{link.label}</span>

@@ -22,6 +22,123 @@ test("выбранное полное место открывает карточ
   await expect(panel.getByRole("link", { name: /Google/i })).toHaveAttribute("href", /google\.com/);
 });
 
+test("маршрут ждёт геолокацию перед открытием внешней карты", async ({ page }) => {
+  await page.addInitScript(() => {
+    let pendingSuccess: PositionCallback | null = null;
+
+    Object.defineProperty(navigator, "geolocation", {
+      configurable: true,
+      value: {
+        getCurrentPosition: (success: PositionCallback) => {
+          pendingSuccess = success;
+        }
+      }
+    });
+
+    Object.defineProperty(window, "__openedRouteUrls", {
+      configurable: true,
+      value: [] as string[]
+    });
+
+    Object.defineProperty(window, "__resolveGeolocation", {
+      configurable: true,
+      value: () => {
+        pendingSuccess?.({
+          coords: {
+            latitude: 51.73,
+            longitude: 36.193,
+            accuracy: 10,
+            altitude: null,
+            altitudeAccuracy: null,
+            heading: null,
+            speed: null
+          },
+          timestamp: Date.now()
+        });
+      }
+    });
+
+    window.open = (url?: string | URL) => {
+      (window as unknown as { __openedRouteUrls: string[] }).__openedRouteUrls.push(String(url ?? ""));
+
+      return { opener: null } as Window;
+    };
+  });
+
+  await page.goto("/");
+  await page.getByRole("button", { name: /Парк-отель «Песчаный»/i }).focus();
+  await page.keyboard.press("Enter");
+
+  const panel = page.getByTestId("place-details-panel");
+  await panel.getByRole("button", { name: /Построить маршрут/i }).click();
+
+  const twoGisLink = panel.getByRole("link", { name: /2ГИС/i });
+  await expect(twoGisLink).toHaveAttribute("href", /\/directions\/points\/\|/);
+  await twoGisLink.click();
+
+  await expect(page.evaluate(() => (window as unknown as { __openedRouteUrls: string[] }).__openedRouteUrls)).resolves.toHaveLength(0);
+  await page.evaluate(() => (window as unknown as { __resolveGeolocation: () => void }).__resolveGeolocation());
+
+  await expect
+    .poll(() => page.evaluate(() => (window as unknown as { __openedRouteUrls: string[] }).__openedRouteUrls[0] ?? ""))
+    .toContain("/directions/points/36.193,51.73|");
+});
+
+test("маршрут открывается без начальной точки, если геолокацию получить не удалось", async ({ page }) => {
+  await page.addInitScript(() => {
+    let pendingError: PositionErrorCallback | null = null;
+
+    Object.defineProperty(navigator, "geolocation", {
+      configurable: true,
+      value: {
+        getCurrentPosition: (_success: PositionCallback, error?: PositionErrorCallback | null) => {
+          pendingError = error ?? null;
+        }
+      }
+    });
+
+    Object.defineProperty(window, "__openedRouteUrls", {
+      configurable: true,
+      value: [] as string[]
+    });
+
+    Object.defineProperty(window, "__rejectGeolocation", {
+      configurable: true,
+      value: () => {
+        pendingError?.({
+          code: 1,
+          message: "Permission denied",
+          PERMISSION_DENIED: 1,
+          POSITION_UNAVAILABLE: 2,
+          TIMEOUT: 3
+        } as GeolocationPositionError);
+      }
+    });
+
+    window.open = (url?: string | URL) => {
+      (window as unknown as { __openedRouteUrls: string[] }).__openedRouteUrls.push(String(url ?? ""));
+
+      return { opener: null } as Window;
+    };
+  });
+
+  await page.goto("/");
+  await page.getByRole("button", { name: /Парк-отель «Песчаный»/i }).focus();
+  await page.keyboard.press("Enter");
+
+  const panel = page.getByTestId("place-details-panel");
+  await panel.getByRole("button", { name: /Построить маршрут/i }).click();
+
+  await panel.getByRole("link", { name: /2ГИС/i }).click();
+
+  await expect(page.evaluate(() => (window as unknown as { __openedRouteUrls: string[] }).__openedRouteUrls)).resolves.toHaveLength(0);
+  await page.evaluate(() => (window as unknown as { __rejectGeolocation: () => void }).__rejectGeolocation());
+
+  await expect
+    .poll(() => page.evaluate(() => (window as unknown as { __openedRouteUrls: string[] }).__openedRouteUrls[0] ?? ""))
+    .toContain("/directions/points/|");
+});
+
 test("выбранное место фиксируется в URL и открывается по прямой ссылке", async ({ page }) => {
   await page.goto("/maps/main?place=320");
 
