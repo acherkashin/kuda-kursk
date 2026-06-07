@@ -1,18 +1,34 @@
 import type { ReactNode } from "react";
+import { ArrowLeftIcon } from "lucide-react";
 
 type MapLogoProps = {
   actionSlot?: ReactNode;
+  logoSrc: string;
+  onBack?: (() => void) | undefined;
   subtitle?: string;
   title: string;
 };
 
-export function MapLogo({ actionSlot, subtitle, title }: MapLogoProps) {
+function BackButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      className="grid h-9 w-9 flex-none cursor-pointer place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.95]"
+      type="button"
+      aria-label="На главную карту"
+      onClick={onClick}
+    >
+      <ArrowLeftIcon aria-hidden="true" size={18} />
+    </button>
+  );
+}
+
+export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLogoProps) {
   const content = (
     <>
       <img
-        className="h-8 w-8 flex-none rounded-lg object-contain max-[520px]:h-7 max-[520px]:w-7"
-        src="/brand/kuda-v-kurske-logo-128.webp"
-        alt="Логотип Куда в Курске"
+        className="h-8 w-8 flex-none rounded-lg object-cover max-[520px]:h-7 max-[520px]:w-7"
+        src={logoSrc}
+        alt={`Логотип «${title}»`}
         width="32"
         height="32"
       />
@@ -27,16 +43,27 @@ export function MapLogo({ actionSlot, subtitle, title }: MapLogoProps) {
     </>
   );
 
-  if (actionSlot) {
+  // Внутри под-карты бренд-блок несёт ведущую кнопку «назад» и не ведёт на главную ссылкой —
+  // навигацию домой берёт на себя стрелка.
+  if (onBack || actionSlot) {
+    // На мобильном бренд-блок тянется на всю ширину строки (actionSlot = поиск справа);
+    // на desktop под-карты он остаётся компактным рядом с полем поиска.
+    const widthClass = actionSlot ? "w-full" : "max-w-[300px] flex-none";
+
     return (
-      <div className="flex min-h-11 w-full min-w-0 items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150">
-        <a
-          className="flex min-w-0 flex-1 items-center gap-2 text-[var(--color-text)] no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
-          href="/"
-          aria-label={title}
-        >
-          {content}
-        </a>
+      <div className={`flex min-h-11 min-w-0 items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 ${widthClass}`}>
+        {onBack ? <BackButton onClick={onBack} /> : null}
+        {onBack ? (
+          <span className="flex min-w-0 flex-1 items-center gap-2">{content}</span>
+        ) : (
+          <a
+            className="flex min-w-0 flex-1 items-center gap-2 text-[var(--color-text)] no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+            href="/"
+            aria-label={title}
+          >
+            {content}
+          </a>
+        )}
         {actionSlot}
       </div>
     );

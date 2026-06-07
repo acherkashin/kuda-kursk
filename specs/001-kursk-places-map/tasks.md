@@ -212,6 +212,7 @@
 - [X] T095 [US5] Добавить в `public/data/main-map.json` отметку-портал «Дозаправка» (`routable: false`, соцсети VK/Instagram) и места «Кафе «Комета»», «Твоя полка» (МегаГРИНН, `mapLink: zapishu-zarisuyu`) с цепляющими описаниями и реальными локальными фото в `public/place-images/` и `public/place-thumbnails/`
 - [X] T096 [US5] Добавить Storybook stories новых состояний карточки (`SubmapPortal`, `PlaceWithSubmapLink`) в `src/components/place-details/PlaceDetailsPanel.stories.tsx`; обновить счётчик `main` в `tests/unit/mapDataIntegrity.test.ts` (39→42)
 - [X] T097 [US5] Выполнить `npm run typecheck`, `npm run build`, существующие `npm run test:unit` (без регрессий, кроме пре-существующих jsdom-падений `markerImages`) и ручную проверку сценариев через preview
+- [X] T098 [US5] Дать каждой карте собственную идентичность: добавить поля `logo` и `description` в `mapCatalog` (`src/domain/mapCatalog.ts`), прокинуть их через `MapTopControls`/`App.tsx`; в `MapLogo` сделать логотип props-driven и встроить компактную иконку-стрелку «На главную карту» как ведущий элемент бренд-блока (вместо отдельной плавающей кнопки). Логотип «Дозаправка» — фото места-входа, «Запишу, зарисую» — `public/brand/zapishu-zarisuyu-logo.webp`. Проверка: typecheck + ручная проверка через preview (desktop/mobile, все карты, возврат)
 
 ---
 

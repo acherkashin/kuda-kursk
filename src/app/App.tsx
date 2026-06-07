@@ -215,7 +215,8 @@ export function App() {
         <>
           <MapTopControls
             title={currentMap.title}
-            subtitle="Путеводитель для местных"
+            subtitle={currentMap.description}
+            logo={currentMap.logo}
             query={query}
             onQueryChange={handleQueryChange}
             onQueryReset={() => handleQueryChange("")}
