@@ -272,7 +272,19 @@
           "coordinates": "51.960323, 35.649199",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/2003-thumbnail-9b207c3d39.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://xn--46-6kc5ajbfx2bh1i.xn--p1ai/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/ulitferma_kursk",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -296,7 +308,19 @@
           "coordinates": "51.973685, 36.487192",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1410-f562c0f437.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/public214631808",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/lavender__coast/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -423,7 +447,19 @@
           "coordinates": "51.989105, 36.477422",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/91-2afd583ae0.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://fet.kursk-museum.ru/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/public191675177",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -1149,7 +1185,19 @@
           "coordinates": "51.694212, 35.951586",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1593-0063d14a91.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/tishina_46",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/tishina.46/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -1216,7 +1264,24 @@
           "coordinates": "51.920910, 36.273244",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1598-a8829af524.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://www.xn--80akamjd0bx5b.xn--p1ai/index.html",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/shale_y_reki",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/shale_y_reki/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -1241,7 +1306,14 @@
           "coordinates": "51.725309, 36.342965",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1599-e60ac8cc62.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/treeneedleschalet",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -1303,7 +1375,19 @@
           "coordinates": "51.881775, 36.248039",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1601-c0bbfeb56c.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/riverhouse46",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/terepsha_river_house",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -1374,7 +1458,18 @@
         "visibility": {
           "public": true
         },
-        "links": []
+        "links": [
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/kometa_coffee/",
+            "kind": "instagram"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/kometa_coffe",
+            "kind": "telegram"
+          }
+        ]
       }
     },
     {

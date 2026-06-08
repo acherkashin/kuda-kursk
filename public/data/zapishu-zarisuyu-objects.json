@@ -142,7 +142,14 @@
           "address": "ул. Марата, 31",
           "coordinates": "51.732269, 36.187850",
           "button": ""
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kontsertykostel",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -399,7 +406,14 @@
           "address": "ул. Дзержинского, 51",
           "coordinates": "51.724872, 36.177492",
           "button": ""
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/stars46",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {

@@ -233,7 +233,24 @@
           "coordinates": "51.742837, 36.151863",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2015-thumbnail-7c37e33fe5.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://xn--e1aftfgbfc.xn--p1ai/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/ris_testo_46",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/ris.testo46/reels/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -473,7 +490,19 @@
           "coordinates": "51.745887, 36.193717",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2021-thumbnail-ede3387e72.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/wakandalounge",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/wakanda.kursk/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -533,7 +562,24 @@
           "coordinates": "51.742821, 36.186788",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1489-bb3e248f12.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/odnyshka.rumochnaya",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/rumochnaya_odnyshka",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/odnyshka.rumochnaya",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -582,7 +628,14 @@
           "coordinates": "51.743742, 36.186278",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/2024-thumbnail-227e81d94e.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/zavtraktebe/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
