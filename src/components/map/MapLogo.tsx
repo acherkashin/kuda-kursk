@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ArrowLeftIcon } from "lucide-react";
+import { resolvePublicPath } from "../../services/publicPath";
 
 type MapLogoProps = {
   actionSlot?: ReactNode;
@@ -27,7 +28,7 @@ export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLog
     <>
       <img
         className="h-8 w-8 flex-none rounded-lg object-cover max-[520px]:h-7 max-[520px]:w-7"
-        src={logoSrc}
+        src={resolvePublicPath(logoSrc)}
         alt={`Логотип «${title}»`}
         width="32"
         height="32"
@@ -60,7 +61,7 @@ export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLog
         ) : (
           <a
             className="flex min-w-0 flex-1 items-center gap-2 text-[var(--color-text)] no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
-            href="/"
+            href={import.meta.env.BASE_URL}
             aria-label={title}
           >
             {content}
@@ -74,7 +75,7 @@ export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLog
   return (
     <a
       className="inline-flex min-h-12 max-w-[280px] flex-none items-center gap-2.5 whitespace-nowrap rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-[15px] font-bold text-[var(--color-text)] no-underline shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:max-w-[210px] max-[700px]:min-h-11 max-[520px]:max-w-[170px] max-[520px]:gap-2 max-[520px]:px-2.5"
-      href="/"
+      href={import.meta.env.BASE_URL}
       aria-label={title}
     >
       {content}

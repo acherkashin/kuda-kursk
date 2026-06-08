@@ -1,3 +1,5 @@
+import { resolvePublicPath } from "../publicPath";
+
 export type ServiceWorkerUpdatePrompt = {
   needRefresh: boolean;
   updateServiceWorker: () => Promise<void>;
@@ -33,7 +35,7 @@ export function registerServiceWorker(options: RegisterServiceWorkerOptions = {}
     options.createWorkbox ??
     (async () => {
       const { Workbox } = await import("workbox-window");
-      return new Workbox("/sw.js") as WorkboxLike;
+      return new Workbox(resolvePublicPath("/sw.js")) as WorkboxLike;
     });
   const reload = options.reload ?? (() => window.location.reload());
 

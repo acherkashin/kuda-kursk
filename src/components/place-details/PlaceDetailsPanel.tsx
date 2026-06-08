@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { buildPlaceDetails } from "../../domain/placeDetails";
 import type { PlaceFeature } from "../../domain/places";
 import { buildRouteLinks, type RouteLink } from "../../domain/routeLinks";
+import { resolvePublicPath } from "../../services/publicPath";
 import { ExternalLinks } from "./ExternalLinks";
 import { PlaceTip } from "./PlaceTip";
 import { RouteActions } from "./RouteActions";
@@ -53,7 +54,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
           <div className="relative grid max-h-[150cqw] place-items-center overflow-hidden bg-[var(--color-surface-lower)]">
             <img
               className="block h-auto w-full"
-              src={heroPhoto.src}
+              src={resolvePublicPath(heroPhoto.src)}
               alt={heroPhoto.caption ?? viewModel.name}
               fetchPriority="high"
             />
@@ -128,7 +129,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
               <img
                 key={`${photo.src}-${photo.caption ?? ""}`}
                 className="h-[110px] w-full rounded-lg object-cover [scroll-snap-align:start]"
-                src={photo.thumbnail ?? photo.src}
+                src={resolvePublicPath(photo.thumbnail ?? photo.src)}
                 alt={photo.caption ?? viewModel.name}
                 loading="lazy"
               />

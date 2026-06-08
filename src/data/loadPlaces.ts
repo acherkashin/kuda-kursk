@@ -1,8 +1,9 @@
 import type { PlaceFeature } from "../domain/places";
+import { resolvePublicPath } from "../services/publicPath";
 import { validateGeoJsonPlace } from "./validateGeoJsonPlace";
 
 export async function loadPlaces(path = "/data/main-map.json"): Promise<PlaceFeature[]> {
-  const response = await fetch(path);
+  const response = await fetch(resolvePublicPath(path));
 
   if (!response.ok) {
     throw new Error(`Failed to load places: ${response.status}`);

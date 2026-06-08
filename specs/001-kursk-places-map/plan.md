@@ -26,7 +26,7 @@
 
 **Testing**: существующие Playwright и unit-проверки можно запускать для регрессии; новое или изменённое тестовое покрытие добавляется только после отдельного явного запроса или разрешения пользователя
 
-**Target Platform**: PWA для современных мобильных и десктопных браузеров; production deployment как статический SPA
+**Target Platform**: PWA для современных мобильных и десктопных браузеров; production deployment как статический SPA на GitHub Pages project pages (`https://acherkashin.github.io/kuda-kursk/`)
 
 **Project Type**: frontend SPA/PWA без backend в первой версии
 
@@ -35,6 +35,8 @@
 **Constraints**: бесплатная карта без API-ключей; OpenFreeMap public instance допускается без SLA и должен быть заменяем через конфиг; канонический порядок координат `[longitude, latitude]`; no Zod; Яндекс.Метрика только после явного согласия; не отправлять сырые поисковые запросы
 
 **Scale/Scope**: v1 покрывает публичную карту, карты сообществ по ссылке, статический контент, поиск, карточки, маршруты, PWA и аналитику; будущие backend, аккаунты, сохранённые места, отметки посещений, заявки пользователей и Telegram mini app не реализуются
+
+**Deployment**: проект публикуется через GitHub Actions workflow в GitHub Pages. Vite `base` равен `/kuda-kursk/`; локальные public assets, JSON-данные, MapLibre style, PWA manifest и service worker должны строить URL с учётом `import.meta.env.BASE_URL`, чтобы SPA работала на project pages без custom domain.
 
 ## Проверка конституции
 

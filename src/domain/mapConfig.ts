@@ -1,3 +1,5 @@
+import { resolvePublicPath } from "../services/publicPath";
+
 export const KURSK_CENTER = {
   longitude: 36.1926,
   latitude: 51.7304
@@ -8,5 +10,5 @@ export const mapConfig = {
   zoom: 12.2,
   minZoom: 6.5,
   maxZoom: 18,
-  styleUrl: "/map-styles/kursk-positron.json"
+  styleUrl: resolvePublicPath("/map-styles/kursk-positron.json")
 } as const;

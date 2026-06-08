@@ -1,4 +1,5 @@
 import type { PlaceFeature } from "../../domain/places";
+import { resolvePublicPath } from "../../services/publicPath";
 import { createPlaceFeatureCollection } from "./placeSource";
 
 export const MARKER_IMAGE_SIZE = 120;
@@ -152,7 +153,7 @@ export async function addMarkerImages(map: MarkerImageMap, places: PlaceFeature[
 
   await Promise.all(
     [...images].map(async ([imageUrl, imageIds]) => {
-      const image = await imageLoader(imageUrl);
+      const image = await imageLoader(resolvePublicPath(imageUrl));
 
       const markerImage = imageDataFactory(image);
       const activeMarkerImage = activeImageDataFactory(image);
