@@ -26,8 +26,18 @@
         "links": [
           {
             "label": "ВКонтакте",
-            "url": "https://vk.com/peschany_park_hotel",
+            "url": "https://vk.com/peschaniy_park_hotel",
             "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/park_hotel_peschaniy",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/peschaniy_park_hotel/",
+            "kind": "instagram"
           }
         ]
       }
@@ -54,7 +64,19 @@
           "coordinates": "51.255752, 36.417460",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/29-5efc031818.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/melnica",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/parkmelnic",
+            "kind": "telegram"
+          }
+        ]
       }
     },
     {
@@ -160,6 +182,16 @@
             "label": "Узнать подробнее",
             "url": "https://donvillage.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/donvillage",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/don_village/",
+            "kind": "instagram"
           }
         ]
       }
@@ -322,9 +354,19 @@
         },
         "links": [
           {
-            "label": "Узнать подробнее",
-            "url": "https://dikiy-kaban-kursk.clients.site/",
-            "kind": "site"
+            "label": "ВКонтакте",
+            "url": "https://vk.ru/club235487508",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/dikiykabanru",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/dikiy.kaban.ru/",
+            "kind": "instagram"
           }
         ]
       }
@@ -350,7 +392,14 @@
           "coordinates": "51.744660, 36.190846",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2005-thumbnail-eeda802902.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/iguana_lounge/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -404,6 +453,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/kursk_arbuz",
             "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/kursk_arbuz/",
+            "kind": "instagram"
           }
         ]
       }
@@ -435,6 +489,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/club154342705",
             "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/razdolierusskoe/",
+            "kind": "instagram"
           }
         ]
       }
@@ -466,6 +525,21 @@
             "label": "Узнать подробнее",
             "url": "https://rivierawell.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/wearerwr",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/rivierawell",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/we.are.rwr/",
+            "kind": "instagram"
           }
         ]
       }
@@ -491,7 +565,14 @@
           "coordinates": "51.720962, 36.161583",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1619-2a4268de2a.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/kuxmisterskaya_atilan/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -521,6 +602,21 @@
             "label": "Узнать подробнее",
             "url": "https://kursk.warpoint.ru",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/warpoint_kursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/Warpoint_KURSK",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/warpoint_kursk/",
+            "kind": "instagram"
           }
         ]
       }
@@ -552,6 +648,21 @@
             "label": "Узнать подробнее",
             "url": "https://theatre3dkursk.ru",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/theatre_3d",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/theatre_3d",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/the_theatre_3d/",
+            "kind": "instagram"
           }
         ]
       }
@@ -584,6 +695,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/landesign_kursk",
             "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/landesign_kursk/",
+            "kind": "instagram"
           }
         ]
       }
@@ -640,6 +756,11 @@
             "label": "Узнать подробнее",
             "url": "https://5verst.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/event195330149",
+            "kind": "vk"
           }
         ]
       }
@@ -672,6 +793,16 @@
             "label": "Узнать подробнее",
             "url": "https://pyshki-i-ne-tolko.clients.site/",
             "kind": "site"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/kursk_cafebakery/",
+            "kind": "instagram"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kursk_cafebakery",
+            "kind": "vk"
           }
         ]
       }
@@ -703,6 +834,16 @@
             "label": "Узнать подробнее",
             "url": "https://www.circus-kursk.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/club130025365",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/kurski_circus",
+            "kind": "telegram"
           }
         ]
       }
@@ -729,7 +870,14 @@
           "coordinates": "51.724051, 36.113527",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1247-f4212bb5d6.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/sklonkursk",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -779,7 +927,19 @@
           "coordinates": "51.747377, 35.061308",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/322-3909b1f978.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/baza_serebryano",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/baza_serebryano/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -810,6 +970,16 @@
             "label": "Узнать подробнее",
             "url": "https://shaleylesa.ru/",
             "kind": "site"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/shale_y_lesa/",
+            "kind": "instagram"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/shale_y_lesa",
+            "kind": "vk"
           }
         ]
       }
@@ -842,6 +1012,16 @@
             "label": "Узнать подробнее",
             "url": "https://krasnikovo-yahonty.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/yahontykrasnikovo",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/yahonty.krasnikovo/",
+            "kind": "instagram"
           }
         ]
       }
@@ -868,7 +1048,14 @@
           "coordinates": "51.913733, 36.043247",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1588-764e9535a9.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/club228365135",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -893,7 +1080,14 @@
           "coordinates": "51.693699, 35.954324",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1591-e70c89886e.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/berloga_barn/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -918,7 +1112,19 @@
           "coordinates": "51.694625, 35.959445",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1592-489185a498.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/foresthousekursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/forest_house_kursk/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -982,7 +1188,7 @@
           },
           {
             "label": "Instagram",
-            "url": "https://www.instagram.com/my.riverland",
+            "url": "https://www.instagram.com/my.riverland/",
             "kind": "instagram"
           }
         ]
@@ -1060,7 +1266,19 @@
           "coordinates": "51.820379, 36.193542",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1600-9258d440a4.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/shik_shale/",
+            "kind": "instagram"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/shikshale",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -1110,23 +1328,23 @@
           "address": "Курск",
           "coordinates": "51.730800, 36.187400",
           "image": "/place-images/9001-dozapravka.jpg",
-          "thumbnail": "/place-thumbnails/9001-dozapravka.jpg",
-          "socials": [
-            {
-              "label": "ВКонтакте",
-              "url": "https://vk.ru/dozapravka4712",
-              "kind": "vk"
-            },
-            {
-              "label": "Instagram",
-              "url": "https://www.instagram.com/dozapravka_4712/",
-              "kind": "instagram"
-            }
-          ]
+          "thumbnail": "/place-thumbnails/9001-dozapravka.jpg"
         },
         "visibility": {
           "public": true
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.ru/dozapravka4712",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/dozapravka_4712/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -1151,18 +1369,12 @@
           "coordinates": "51.736146, 36.191675",
           "image": "/place-images/9002-kometa.jpg",
           "thumbnail": "/place-thumbnails/9002-kometa.jpg",
-          "tip": "Здесь продают авторские открытки сообщества «Запишу, зарисую» — заберите парочку на память.",
-          "socials": [
-            {
-              "label": "Instagram",
-              "url": "https://www.instagram.com/kometa_coffee/",
-              "kind": "instagram"
-            }
-          ]
+          "tip": "Здесь продают авторские открытки сообщества «Запишу, зарисую» — заберите парочку на память."
         },
         "visibility": {
           "public": true
-        }
+        },
+        "links": []
       }
     },
     {
@@ -1194,6 +1406,11 @@
             "label": "Сайт магазина",
             "url": "https://grinn-kursk.ru/places/tvoyapolka/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/tvoyapolka_kursk",
+            "kind": "vk"
           }
         ],
         "visibility": {

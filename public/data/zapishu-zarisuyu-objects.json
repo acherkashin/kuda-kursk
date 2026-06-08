@@ -22,7 +22,19 @@
           "address": "ул. Радищева, 33",
           "coordinates": "51.735498, 36.191748",
           "button": ""
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kursksu",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/Kursksu",
+            "kind": "telegram"
+          }
+        ]
       }
     },
     {
@@ -46,7 +58,19 @@
           "address": "ул. Карла Маркса, 3",
           "coordinates": "51.749056, 36.194902",
           "button": ""
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kurskmedcom",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/KSMU_Kursk",
+            "kind": "telegram"
+          }
+        ]
       }
     },
     {
@@ -142,7 +166,14 @@
           "address": "ул. Ленина, 26",
           "coordinates": "51.738995, 36.191852",
           "button": ""
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kurskdramaru",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -228,7 +259,8 @@
           "address": "ул. Сонина, 4",
           "coordinates": "51.725961, 36.192052",
           "button": ""
-        }
+        },
+        "links": []
       }
     },
     {
@@ -252,7 +284,19 @@
           "address": "ул. Перекальского, 1",
           "coordinates": "51.748637, 36.196642",
           "button": ""
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/club44648581",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/kogfru",
+            "kind": "telegram"
+          }
+        ]
       }
     },
     {

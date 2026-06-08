@@ -23,7 +23,19 @@
           "coordinates": "51.720962, 36.161583",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1619-2a4268de2a.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/club223133229",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/kuxmisterskaya_atilan/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -47,7 +59,8 @@
           "coordinates": "51.731890, 36.192332",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2010-thumbnail-11e842fddd.jpg"
-        }
+        },
+        "links": []
       }
     },
     {
@@ -75,8 +88,18 @@
         "links": [
           {
             "label": "Узнать подробнее",
-            "url": "https://www.tomato-pizza.ru/",
+            "url": "https://www.tomato-pizza.ru/menu/kursk/newitemstomato",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/tomato.pizza",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/tomatorest",
+            "kind": "telegram"
           }
         ]
       }
@@ -108,6 +131,16 @@
             "label": "Узнать подробнее",
             "url": "https://fornomio.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/fornomio.kursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/fornomio",
+            "kind": "telegram"
           }
         ]
       }
@@ -133,7 +166,14 @@
           "coordinates": "51.710076, 36.148499",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2013-thumbnail-59afaa4849.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/chicken_house_kursk",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -157,7 +197,19 @@
           "coordinates": "51.743208, 36.193680",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2014-thumbnail-56e9b4af0e.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/soufllebar_kursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/forest_house_kursk/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -205,7 +257,19 @@
           "coordinates": "51.743125, 36.186251",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/1415-3906d52ff6.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/anonymous46pub",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/anonymouspub46/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -235,6 +299,16 @@
             "label": "Узнать подробнее",
             "url": "https://makalihinkali.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/makalihinkali",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/makali_hinkali/",
+            "kind": "instagram"
           }
         ]
       }
@@ -260,7 +334,14 @@
           "coordinates": "51.738703, 36.193657",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2018-thumbnail-ead1553e96.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/pasteria.visota/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -290,6 +371,11 @@
             "label": "Узнать подробнее",
             "url": "https://gogia46.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/gogiarest",
+            "kind": "vk"
           }
         ]
       }
@@ -321,6 +407,16 @@
             "label": "Узнать подробнее",
             "url": "https://nbcake.ru/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/nbcake",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/nbcake.studio/",
+            "kind": "instagram"
           }
         ]
       }
@@ -346,7 +442,14 @@
           "coordinates": "51.795791, 36.161646",
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/199-d4bc7fbed9.webp"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/restaurant_kursk",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -400,6 +503,11 @@
             "label": "Узнать подробнее",
             "url": "https://чайхана-курск.рф/",
             "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/chaihana_46",
+            "kind": "vk"
           }
         ]
       }
@@ -450,13 +558,7 @@
           "button": "Узнать подробнее",
           "thumbnail": "/place-thumbnails/2023-thumbnail-182278b06e.png"
         },
-        "links": [
-          {
-            "label": "Узнать подробнее",
-            "url": "https://шефалекс.рф/",
-            "kind": "site"
-          }
-        ]
+        "links": []
       }
     },
     {
@@ -504,7 +606,14 @@
           "coordinates": "51.724961, 36.188665",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2025-thumbnail-4772809e98.jpg"
-        }
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/club187510849",
+            "kind": "vk"
+          }
+        ]
       }
     }
   ]
