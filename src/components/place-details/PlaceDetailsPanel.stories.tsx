@@ -173,7 +173,7 @@ const placeWithMapLink: PlaceFeature = {
     mapLink: { slug: "zapishu-zarisuyu" },
     balloonContent: {
       ...placeWithLandscapePhoto.properties.balloonContent,
-      name: "Кафе Комета",
+      name: "Комета",
       tip: "Здесь продают авторские открытки сообщества «Запишу, зарисую» — загляните за сувениром."
     }
   }

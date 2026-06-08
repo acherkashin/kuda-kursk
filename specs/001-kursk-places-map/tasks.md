@@ -209,7 +209,7 @@
 - [X] T092 [US5] В `src/components/place-details/PlaceDetailsPanel.tsx` добавить primary-действие «Открыть карту «<название>»» (проп `onOpenMap`) и скрытие route actions при `routable: false`
 - [X] T093 [US5] Места-входы в под-карты используют обычные фотомаркеры (по решению пользователя отдельный «портальный» маркер не используется; ранее добавленный код портального маркера удалён из `placeLayers.ts`, `markerImages.ts`, `placeSource.ts`, `KurskMap.tsx`)
 - [X] T094 [US5] Подключить навигацию в `src/app/App.tsx` (`useNavigate`, `submap_opened`) и действие «На главную карту» при `slug !== "main"` в `src/components/map/MapTopControls.tsx`
-- [X] T095 [US5] Добавить в `public/data/main-map.json` отметку-портал «Дозаправка» (`routable: false`, соцсети VK/Instagram) и места «Кафе «Комета»», «Твоя полка» (МегаГРИНН, `mapLink: zapishu-zarisuyu`) с цепляющими описаниями и реальными локальными фото в `public/place-images/` и `public/place-thumbnails/`
+- [X] T095 [US5] Добавить в `public/data/main-map.json` отметку-портал «Дозаправка» (`routable: false`, соцсети VK/Instagram) и места «Комета», «Твоя полка» (МегаГРИНН, `mapLink: zapishu-zarisuyu`) с цепляющими описаниями и реальными локальными фото в `public/place-images/` и `public/place-thumbnails/`
 - [X] T096 [US5] Добавить Storybook stories новых состояний карточки (`SubmapPortal`, `PlaceWithSubmapLink`) в `src/components/place-details/PlaceDetailsPanel.stories.tsx`; обновить счётчик `main` в `tests/unit/mapDataIntegrity.test.ts` (39→42)
 - [X] T097 [US5] Выполнить `npm run typecheck`, `npm run build`, существующие `npm run test:unit` (без регрессий, кроме пре-существующих jsdom-падений `markerImages`) и ручную проверку сценариев через preview
 - [X] T098 [US5] Дать каждой карте собственную идентичность: добавить поля `logo` и `description` в `mapCatalog` (`src/domain/mapCatalog.ts`), прокинуть их через `MapTopControls`/`App.tsx`; в `MapLogo` сделать логотип props-driven и встроить компактную иконку-стрелку «На главную карту» как ведущий элемент бренд-блока (вместо отдельной плавающей кнопки). Логотип «Дозаправка» — фото места-входа, «Запишу, зарисую» — `public/brand/zapishu-zarisuyu-logo.webp`. Проверка: typecheck + ручная проверка через preview (desktop/mobile, все карты, возврат)
@@ -221,9 +221,15 @@
 **Цель**: найти официальные VK, Telegram и Instagram для мест на всех картах каталога и хранить отображаемые внешние ссылки в `properties.links`.
 
 - [X] T099 Выполнить интернет-аудит соцсетей для 82 записей из `public/data/main-map.json`, `public/data/dozapravka-objects.json` и `public/data/zapishu-zarisuyu-objects.json`; добавить только подтверждённые официальные VK/Telegram/Instagram, перенести прежние `balloonContent.socials` в `properties.links`, сохранить существующие `site` и `details` ссылки. Итог: обработано 82 записи, добавлено/сохранено 41 VK, 12 Telegram и 26 Instagram ссылок; устаревших `balloonContent.socials` осталось 0.
-  - Не добавлены без уверенного подтверждения: соцсети архитектурных и исторических объектов карты «Запишу, зарисую» без самостоятельных официальных аккаунтов; редакционные Telegram-посты оставлены как `kind: "details"`; похожие или неподтверждённые аккаунты для «ССК Выстрел», «Кафе «Комета»», «Chef Alex Pizza» и ряда мест без явного совпадения названия/адреса/бренда не добавлялись.
+  - Не добавлены без уверенного подтверждения: соцсети архитектурных и исторических объектов карты «Запишу, зарисую» без самостоятельных официальных аккаунтов; редакционные Telegram-посты оставлены как `kind: "details"`; похожие или неподтверждённые аккаунты для «ССК Выстрел», «Комета», «Chef Alex Pizza» и ряда мест без явного совпадения названия/адреса/бренда не добавлялись.
   - По ручной проверке пользователя не используются адреса `https://vk.com/kuxmesterck_atilan`, `https://t.me/verst5`, `https://vk.ru/yahonty`, `https://t.me/yahontysales`, `https://www.instagram.com/yahonty.hotels/`; для «Мясное место» удалены ранее добавленные VK/Telegram.
   - По ручным правкам пользователя добавлены или уточнены соцсети для «Яхонты Красниково», «DonVillage», «КурскАрбуз», «Безымянный паб», «Ландизайн», «Дикий Кабан», «Шале у леса», «Пышки и не только», «Кухмистерская Atilan», «Молодёжный театр 3Д», «Песчаный», «Раздолье Русское», «Шик&Шале», `Forest House`, `Souffle BAR`, «Водяная мельница», «Глэмпинг НовоШемякино», «Горнолыжный склон»; Instagram «Серебряно» уже совпадал с указанным адресом.
+
+## Phase 11: Точность данных мест
+
+**Цель**: поддерживать координаты мест в актуальном состоянии по ручным уточнениям пользователя без изменения схемы данных.
+
+- [X] T100 Уточнить координаты в `public/data/dozapravka-objects.json` для «Завтрак тебе», `NB cake`, «Безымянный паб» и «Рюмочная «Однушка»`; сохранить канонический порядок GeoJSON `[longitude, latitude]` и строку карточки `latitude, longitude`. Проверка: JSON parse + `npm run typecheck`.
 
 ---
 
