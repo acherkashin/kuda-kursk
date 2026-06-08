@@ -131,7 +131,7 @@ export async function addMarkerImages(map: MarkerImageMap, places: PlaceFeature[
   const images = new Map<string, { activeImageIds: string[]; imageIds: string[] }>();
   const imageLoader = options.loadImage ?? loadImage;
   const imageDataFactory = options.createMarkerImageData ?? createMarkerImageData;
-  const activeImageDataFactory = options.createActiveMarkerImageData ?? createActiveMarkerImageData;
+  const activeImageDataFactory = options.createActiveMarkerImageData ?? options.createMarkerImageData ?? createActiveMarkerImageData;
 
   collection.features.forEach((feature) => {
     const { activeMarkerImageId, markerImage, markerImageId } = feature.properties;
