@@ -3,7 +3,7 @@ name: Deploy static content to GitHub Pages
 on:
   push:
     branches:
-      - 001-kursk-places-map
+      - main
   workflow_dispatch:
 
 permissions:

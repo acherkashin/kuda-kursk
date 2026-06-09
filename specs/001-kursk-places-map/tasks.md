@@ -242,7 +242,7 @@
 **Цель**: настроить production deployment статического Vite/PWA приложения на GitHub Pages project pages `https://acherkashin.github.io/kuda-kursk/` без custom domain.
 
 - [X] T102 Настроить `base: "/kuda-kursk/"` в `vite.config.ts`, сделать manifest, service worker fallback и runtime cache данных совместимыми с project pages; добавить helper `src/services/publicPath.ts` и применить его к локальным public-путям данных, карты, изображений, логотипов и `/sw.js`.
-- [X] T103 Добавить workflow `.github/workflows/deploy-pages.yml` для деплоя `dist` через GitHub Actions (`pnpm install --frozen-lockfile`, `pnpm build`, `actions/configure-pages`, `actions/upload-pages-artifact`, `actions/deploy-pages`) на ветке `001-kursk-places-map`.
+- [X] T103 Добавить workflow `.github/workflows/deploy-pages.yml` для деплоя `dist` через GitHub Actions (`pnpm install --frozen-lockfile`, `pnpm build`, `actions/configure-pages`, `actions/upload-pages-artifact`, `actions/deploy-pages`) при push в ветку `main`.
 - [X] T104 Обновить контракт PWA и план фичи под base-aware GitHub Pages deployment. Проверка: `pnpm typecheck`, `pnpm build`, локальная проверка production preview путей `/kuda-kursk/`, `/kuda-kursk/maps/main`, `/kuda-kursk/maps/dozapravka` и неизвестного slug; новое тестовое покрытие не добавлялось.
 
 ---

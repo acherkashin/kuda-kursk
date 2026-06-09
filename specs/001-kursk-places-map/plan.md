@@ -36,7 +36,7 @@
 
 **Scale/Scope**: v1 покрывает публичную карту, карты сообществ по ссылке, статический контент, поиск, карточки, маршруты, PWA и аналитику; будущие backend, аккаунты, сохранённые места, отметки посещений, заявки пользователей и Telegram mini app не реализуются
 
-**Deployment**: проект публикуется через GitHub Actions workflow в GitHub Pages. Vite `base` равен `/kuda-kursk/`; локальные public assets, JSON-данные, MapLibre style, PWA manifest и service worker должны строить URL с учётом `import.meta.env.BASE_URL`, чтобы SPA работала на project pages без custom domain.
+**Deployment**: проект публикуется через GitHub Actions workflow в GitHub Pages от push в ветку `main`. Vite `base` равен `/kuda-kursk/`; локальные public assets, JSON-данные, MapLibre style, PWA manifest и service worker должны строить URL с учётом `import.meta.env.BASE_URL`, чтобы SPA работала на project pages без custom domain.
 
 ## Проверка конституции
 
