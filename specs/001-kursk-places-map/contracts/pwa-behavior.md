@@ -46,4 +46,4 @@
 
 - Если app shell уже установлен, приложение открывает базовый интерфейс offline.
 - Если tiles недоступны, UI показывает резервное состояние карты и сохраняет доступ к уже загруженному текстовому контенту, когда он есть в кеше.
-- SPA fallback для GitHub Pages использует `/kuda-kursk/index.html`, чтобы прямые URL вида `/kuda-kursk/maps/main` открывались после установки app shell.
+- SPA fallback для GitHub Pages использует `/kuda-kursk/index.html` в service worker и опубликованный `404.html`, совпадающий с `index.html`, чтобы прямые URL вида `/kuda-kursk/maps/main` открывались до и после установки app shell.
