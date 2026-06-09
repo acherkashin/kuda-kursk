@@ -264,6 +264,12 @@
 - [X] T110 По ручному уточнению обновить координаты места-портала «Дозаправка» (`id: 9001`) в `public/data/main-map.json` на `51.741522, 36.202537`, сохранив порядок GeoJSON `[longitude, latitude]`. Проверка: JSON parse, `pnpm typecheck`; новое тестовое покрытие не добавлялось.
 - [X] T111 Исправить production service worker: убрать ссылку на замкнутую переменную `githubPagesBase` из Workbox `runtimeCaching.urlPattern`, чтобы `sw.js` не падал с `ReferenceError` на GitHub Pages. Проверка: `pnpm build`, инспекция `dist/sw.js`; новое тестовое покрытие не добавлялось.
 
+## Phase 15: Стабильная загрузка фотографий карточки
+
+**Цель**: убрать заметный layout shift в панели подробностей места на медленном интернете без изменения данных мест.
+
+- [X] T113 Зафиксировать высоту hero-фото карточки места в `src/components/place-details/PlaceDetailsPanel.tsx`: `300px` на desktop и `40dvh` на mobile, оставить `fetchPriority="high"` и отображать изображение через `h-full w-full object-cover`. JSON мест, тип `Photo`, генерация размеров изображений и новое тестовое покрытие не добавлялись. Проверка: `pnpm typecheck`, `pnpm build`, ручная visual QA desktop/mobile при throttling сети для места с фото, места без фото и места с высоким/портретным фото.
+
 ---
 
 ## Зависимости и порядок выполнения
