@@ -171,21 +171,36 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
       return;
     }
 
-    const updateSource = () => {
-      const source = map.getSource(PLACE_SOURCE_ID) as GeoJSONSource | undefined;
+    const resetMarkerInteractionState = (targetMap: maplibregl.Map) => {
       stopAllHoverAnimations();
+      targetMap.removeFeatureState({ source: PLACE_SOURCE_ID });
       hoverProgressByIdRef.current.clear();
       hoveredPlaceIdRef.current = null;
+      previousActivePlaceIdRef.current = null;
+    };
+
+    const updateSource = () => {
+      const source = map.getSource(PLACE_SOURCE_ID) as GeoJSONSource | undefined;
+
+      if (!source) {
+        return;
+      }
+
+      resetMarkerInteractionState(map);
       addMarkerImagePlaceholders(map, places);
-      source?.setData(createPlaceFeatureCollection(places));
+      source.setData(createPlaceFeatureCollection(places));
       void addMarkerImages(map, places).catch(() => undefined);
     };
 
-    if (map.isStyleLoaded() && map.getSource(PLACE_SOURCE_ID)) {
+    if (map.getSource(PLACE_SOURCE_ID)) {
       updateSource();
     } else {
       map.once("load", updateSource);
     }
+
+    return () => {
+      map.off("load", updateSource);
+    };
   }, [places]);
 
   useEffect(() => {
