@@ -70,28 +70,11 @@ export async function waitForRenderedMarkerImages(page: Page) {
 }
 
 export async function getFirstRenderedMarkerPoint(page: Page): Promise<RenderedMarkerPoint | null> {
-  return page.evaluate(() => {
-    const map = (window as typeof window & {
-      __kurskMap?: {
-        queryRenderedFeatures: (geometry?: unknown, options?: { layers?: string[] }) => Array<{
-          geometry: { coordinates: [number, number] };
-          id?: string | number;
-          properties?: { id?: string | number; name?: string };
-        }>;
-        project: (lngLat: [number, number]) => { x: number; y: number };
-      };
-    }).__kurskMap;
-    const feature = map?.queryRenderedFeatures(undefined, { layers: ["place-marker-images"] })[0];
+  return getFirstRenderedFeaturePoint(page, "place-marker-images");
+}
 
-    if (!map || !feature) {
-      return null;
-    }
-
-    const id = feature.id ?? feature.properties?.id;
-    const point = map.project(feature.geometry.coordinates);
-
-    return id === undefined ? null : { id, x: point.x, y: point.y };
-  });
+export async function getFirstRenderedClusterPoint(page: Page): Promise<RenderedMarkerPoint | null> {
+  return getFirstRenderedFeaturePoint(page, "place-clusters");
 }
 
 export async function getPlaceHoverProgress(page: Page, id: PlaceFeatureId) {
@@ -104,6 +87,31 @@ export async function getPlaceHoverProgress(page: Page, id: PlaceFeatureId) {
 
     return map?.getFeatureState({ id: featureId, source: "places" }).hoverProgress ?? 0;
   }, id);
+}
+
+async function getFirstRenderedFeaturePoint(page: Page, layerId: "place-clusters" | "place-marker-images") {
+  return page.evaluate((targetLayerId) => {
+    const map = (window as typeof window & {
+      __kurskMap?: {
+        queryRenderedFeatures: (geometry?: unknown, options?: { layers?: string[] }) => Array<{
+          geometry: { coordinates: [number, number] };
+          id?: string | number;
+          properties?: { id?: string | number; name?: string };
+        }>;
+        project: (lngLat: [number, number]) => { x: number; y: number };
+      };
+    }).__kurskMap;
+    const feature = map?.queryRenderedFeatures(undefined, { layers: [targetLayerId] })[0];
+
+    if (!map || !feature) {
+      return null;
+    }
+
+    const id = feature.id ?? feature.properties?.id;
+    const point = map.project(feature.geometry.coordinates);
+
+    return id === undefined ? null : { id, x: point.x, y: point.y };
+  }, layerId);
 }
 
 async function countRenderedMapFeatures(page: Page, layers: string[]) {

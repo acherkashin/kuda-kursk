@@ -1,13 +1,17 @@
 import { expect, test } from "@playwright/test";
 import { appPath } from "./support/appPath";
 import {
+  getFirstRenderedClusterPoint,
   getFirstRenderedMarkerPoint,
   getPlaceHoverProgress,
   waitForMarkerImagesWithLayer,
-  waitForRenderedMarkerImages
+  waitForRenderedMarkerImages,
+  waitForVisibleMapMarkers
 } from "./support/mapLibre";
 
-test("маркер показывает название при hover, а панорамирование и zoom не ломают интерфейс", async ({ page }) => {
+test("маркер показывает название при hover, а панорамирование и zoom не ломают интерфейс", async ({ page, isMobile }) => {
+  test.skip(isMobile, "hover marker state is available only on hover-capable viewports");
+
   await page.goto(appPath("/"));
 
   const marker = page.getByRole("button", { name: /Парк-отель «Песчаный»/i });
@@ -47,7 +51,14 @@ test("клик по кластеру раскрывает кликабельны
   await page.goto(appPath("/"));
 
   await expect(page.getByTestId("map-shell")).toBeVisible();
-  await page.mouse.click(615, 209);
+  await waitForVisibleMapMarkers(page);
+
+  const clusterPoint = await getFirstRenderedClusterPoint(page);
+  expect(clusterPoint).not.toBeNull();
+
+  if (clusterPoint) {
+    await page.mouse.click(clusterPoint.x, clusterPoint.y);
+  }
 
   await waitForRenderedMarkerImages(page);
 });

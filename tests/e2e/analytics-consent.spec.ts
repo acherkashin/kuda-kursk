@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { appPath } from "./support/appPath";
+import { fillSearchBox } from "./support/searchControls";
 
 test("аналитика не создаёт ym до consent и не отправляет сырой поисковый запрос", async ({ page }) => {
   await page.route("https://mc.yandex.ru/metrika/tag.js", async (route) => {
@@ -11,7 +12,7 @@ test("аналитика не создаёт ym до consent и не отпра�
   await expect(page.locator('script[src*="mc.yandex.ru/metrika"]')).toHaveCount(0);
   await expect(page.evaluate(() => "ym" in window)).resolves.toBe(false);
 
-  await page.getByRole("searchbox", { name: /Поиск/i }).fill("секретный запрос");
+  await fillSearchBox(page, "секретный запрос");
   await page.getByRole("button", { name: "Принять аналитику" }).click();
 
   await expect(page.getByTestId("analytics-consent")).toHaveCount(0);
