@@ -36,7 +36,7 @@ export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLog
       <span className="grid min-w-0 gap-0.5">
         <span className="truncate leading-none tracking-[-0.02em]">{title}</span>
         {subtitle ? (
-          <span className="truncate text-[12px] leading-none font-medium text-[var(--color-muted)] max-[520px]:text-[11px]">
+          <span className="whitespace-normal break-words text-[12px] leading-snug font-medium text-[var(--color-muted)] max-[520px]:text-[11px]">
             {subtitle}
           </span>
         ) : null}
@@ -49,10 +49,10 @@ export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLog
   if (onBack || actionSlot) {
     // На мобильном бренд-блок тянется на всю ширину строки (actionSlot = поиск справа);
     // на desktop под-карты он остаётся компактным рядом с полем поиска.
-    const widthClass = actionSlot ? "w-full" : "max-w-[300px] flex-none";
+    const widthClass = actionSlot ? "w-full" : "w-[430px] max-w-[min(430px,calc(100vw-32px))] flex-none";
 
     return (
-      <div className={`flex min-h-11 min-w-0 items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-1.5 text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 ${widthClass}`}>
+      <div className={`flex min-h-11 min-w-0 items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-[5px] text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 ${widthClass}`}>
         {onBack ? (
           <>
             <BackButton onClick={onBack} />

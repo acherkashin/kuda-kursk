@@ -89,7 +89,7 @@ export function ExternalLinks({ links, onOpen }: ExternalLinksProps) {
             onClick={() => onOpen(link.kind ?? "details")}
           >
             <Icon aria-hidden="true" size={16} />
-            <span>Узнать подробнее</span>
+            <span>{link.label}</span>
           </a>
         );
       })}

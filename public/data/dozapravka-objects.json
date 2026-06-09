@@ -18,7 +18,7 @@
         "balloonContent": {
           "image": "/place-images/1619-image-e144610c12.jpg",
           "name": "Кухмистерская Atilan",
-          "description": "Кафе в стиле СССР",
+          "description": "Atilan — это когда берёшь жареную картошечку, жульенчик, драники в сметанке, жареные пельмени собственного приготовления и уже не задаёшь лишних вопросов. Тут всё по делу: сочно, плотно, по-домашнему и с тем самым вайбом «ну просто посмотри».",
           "address": "Курск, ул. Асеева 1к1",
           "coordinates": "51.720962, 36.161583",
           "button": "Узнать подробнее",
@@ -34,6 +34,16 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/kuxmisterskaya_atilan/",
             "kind": "instagram"
+          },
+          {
+            "label": "Посмотреть, как это выглядит",
+            "url": "https://www.instagram.com/reel/DRyrwNajZbm/",
+            "kind": "site"
+          },
+          {
+            "label": "Ещё один вкусный заход",
+            "url": "https://www.instagram.com/reel/DYFuicyNqwY/",
+            "kind": "site"
           }
         ]
       }
