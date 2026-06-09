@@ -40,7 +40,7 @@ export default defineConfig({
         navigateFallback: `${githubPagesBase}index.html`,
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.startsWith(`${githubPagesBase}data/`),
+            urlPattern: ({ url }) => url.pathname.startsWith("/kuda-kursk/data/"),
             handler: "StaleWhileRevalidate",
             options: { cacheName: "kursk-map-data" }
           }
