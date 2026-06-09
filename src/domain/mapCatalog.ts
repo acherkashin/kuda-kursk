@@ -17,7 +17,7 @@ export const mapCatalog = [
   {
     slug: "dozapravka",
     title: "Дозаправка",
-    description: "Где выдохнуть и перезагрузиться",
+    description: "Не шефы и не гурманы. Наш вкус, наше мнение.",
     logo: "/place-thumbnails/9001-dozapravka.jpg",
     dataPath: "/data/dozapravka-objects.json"
   },
