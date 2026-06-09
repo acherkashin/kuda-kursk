@@ -261,6 +261,7 @@
 - [X] T107 Обновить описание места-портала «Дозаправка» (`id: 9001`) в `public/data/main-map.json` на полный пользовательский текст, описание карты `dozapravka` в `src/domain/mapCatalog.ts` — на сокращённую версию, а в `src/components/map/MapLogo.tsx` разрешить перенос подзаголовка без однострочного обрезания. Проверка: JSON parse, `pnpm typecheck`, `pnpm build`, ручная visual QA `/maps/dozapravka` на desktop/mobile и карточки места-портала на основной карте; новое тестовое покрытие не добавлялось.
 - [X] T108 По ручному visual QA расширить desktop-бренд-блок под-карты и выровнять его высоту с поиском в `src/components/map/MapLogo.tsx`. Проверка: `pnpm typecheck`, ручная visual QA `/maps/dozapravka` на desktop.
 - [X] T109 По ручному решению убрать из unit-теста `mapCatalog` проверки конкретных названий и описаний карт; оставить проверку поведения поиска по нормализованному `slug`, чтобы редакционный текст не блокировал релиз. Проверка: `pnpm test:unit`, `pnpm build`.
+- [X] T110 По ручному уточнению обновить координаты места-портала «Дозаправка» (`id: 9001`) в `public/data/main-map.json` на `51.741522, 36.202537`, сохранив порядок GeoJSON `[longitude, latitude]`. Проверка: JSON parse, `pnpm typecheck`; новое тестовое покрытие не добавлялось.
 
 ---
 

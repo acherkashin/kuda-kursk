@@ -1396,8 +1396,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          36.1874,
-          51.7308
+          36.202537,
+          51.741522
         ]
       },
       "properties": {
@@ -1410,7 +1410,7 @@
           "name": "Дозаправка",
           "description": "Мы не шефы и не гурманы, но любим вкусно поесть. Наша насмотренность, наш вкус, наше мнение.",
           "address": "Курск",
-          "coordinates": "51.730800, 36.187400",
+          "coordinates": "51.741522, 36.202537",
           "image": "/place-images/9001-dozapravka.jpg",
           "thumbnail": "/place-thumbnails/9001-dozapravka.jpg"
         },
