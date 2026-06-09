@@ -263,12 +263,19 @@
 - [X] T109 По ручному решению убрать из unit-теста `mapCatalog` проверки конкретных названий и описаний карт; оставить проверку поведения поиска по нормализованному `slug`, чтобы редакционный текст не блокировал релиз. Проверка: `pnpm test:unit`, `pnpm build`.
 - [X] T110 По ручному уточнению обновить координаты места-портала «Дозаправка» (`id: 9001`) в `public/data/main-map.json` на `51.741522, 36.202537`, сохранив порядок GeoJSON `[longitude, latitude]`. Проверка: JSON parse, `pnpm typecheck`; новое тестовое покрытие не добавлялось.
 - [X] T111 Исправить production service worker: убрать ссылку на замкнутую переменную `githubPagesBase` из Workbox `runtimeCaching.urlPattern`, чтобы `sw.js` не падал с `ReferenceError` на GitHub Pages. Проверка: `pnpm build`, инспекция `dist/sw.js`; новое тестовое покрытие не добавлялось.
+- [X] T112 Исправить race MapLibre source при повторных SPA-переходах между основной картой и под-картами: обновлять существующий `places` source сразу, снимать устаревшие `load` handlers, очищать MapLibre feature-state и сбрасывать marker interaction state при замене набора мест. По явному разрешению пользователя добавлена сокращённая e2e-регрессия повторных переходов `main ↔ dozapravka`; также актуализированы e2e-ожидания количества мест основной карты до 42, base-aware route URL через общий helper в route/place-details проверках и текущие reset/логотип/link-контракты в изменённых e2e. Проверка: RED `pnpm exec playwright test tests/e2e/map-routes.spec.ts --project=desktop --grep "повторные переходы"` падал с `Expected: 19, Received: 0`; после исправления прошли `pnpm typecheck`, `pnpm exec playwright test tests/e2e/map-routes.spec.ts tests/e2e/map-first-screen.spec.ts tests/e2e/search.spec.ts --project=desktop` и `pnpm build`.
 
 ## Phase 15: Стабильная загрузка фотографий карточки
 
 **Цель**: убрать заметный layout shift в панели подробностей места на медленном интернете без изменения данных мест.
 
 - [X] T113 Зафиксировать высоту hero-фото карточки места в `src/components/place-details/PlaceDetailsPanel.tsx`: `300px` на desktop и `40dvh` на mobile, оставить `fetchPriority="high"` и отображать изображение через `h-full w-full object-cover`. JSON мест, тип `Photo`, генерация размеров изображений и новое тестовое покрытие не добавлялись. Проверка: `pnpm typecheck`, `pnpm build`, ручная visual QA desktop/mobile при throttling сети для места с фото, места без фото и места с высоким/портретным фото.
+
+## Phase 16: Поддерживаемость e2e-проверок
+
+**Цель**: убрать дубли test helpers из e2e specs и зафиксировать единый base-aware стиль навигации.
+
+- [X] T114 Вынести e2e helpers для base-aware путей, MapLibre browser internals и mock geolocation/window.open в `tests/e2e/support/`; заменить прямые `page.goto("/")`, manifest request без base path и локальные `page.evaluate` helpers в route/map/place-details specs на support helpers. Unit-тесты и новое тестовое покрытие не добавлялись. Проверка: `pnpm typecheck`, focused Playwright smoke по затронутым e2e specs.
 
 ---
 

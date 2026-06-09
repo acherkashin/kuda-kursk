@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
+import { appPath } from "./support/appPath";
 
 test("поиск, пустое состояние и сброс обновляют видимые места", async ({ page }) => {
-  await page.goto("/");
+  await page.goto(appPath("/"));
 
   await page.getByRole("searchbox", { name: /Поиск/i }).fill("Песчаный");
   await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "1");
@@ -10,6 +11,6 @@ test("поиск, пустое состояние и сброс обновляю
   await page.getByRole("searchbox", { name: /Поиск/i }).fill("несуществующее");
   await expect(page.getByTestId("empty-results")).toBeVisible();
 
-  await page.getByTestId("results-summary").getByRole("button", { name: "Сбросить" }).click();
-  await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "39");
+  await page.getByRole("button", { name: "Сбросить поиск" }).click();
+  await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "42");
 });

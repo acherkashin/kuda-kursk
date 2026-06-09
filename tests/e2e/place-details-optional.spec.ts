@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
+import { appPath } from "./support/appPath";
 
 test("карточка неполного места скрывает optional блоки без заглушек", async ({ page }) => {
-  await page.goto("/");
+  await page.goto(appPath("/"));
   await page.getByRole("button", { name: /Водяная мельница/i }).focus();
   await page.keyboard.press("Enter");
 

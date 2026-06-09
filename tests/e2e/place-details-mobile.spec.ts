@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
+import { appPath } from "./support/appPath";
 
 test("на mobile карточка открывается как touch-friendly drawer", async ({ page, isMobile }) => {
-  await page.goto("/");
+  await page.goto(appPath("/"));
   await page.getByRole("button", { name: /Парк-отель «Песчаный»/i }).focus();
   await page.keyboard.press("Enter");
 

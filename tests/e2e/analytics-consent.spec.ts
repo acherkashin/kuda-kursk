@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
+import { appPath } from "./support/appPath";
 
 test("аналитика не создаёт ym до consent и не отправляет сырой поисковый запрос", async ({ page }) => {
   await page.route("https://mc.yandex.ru/metrika/tag.js", async (route) => {
     await route.fulfill({ contentType: "application/javascript", body: "window.__metrikaScriptLoaded = true;" });
   });
-  await page.goto("/");
+  await page.goto(appPath("/"));
 
   await expect(page.getByTestId("analytics-consent")).toBeVisible();
   await expect(page.locator('script[src*="mc.yandex.ru/metrika"]')).toHaveCount(0);
