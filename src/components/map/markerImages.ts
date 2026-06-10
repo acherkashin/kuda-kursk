@@ -9,6 +9,7 @@ type MarkerImageMap = {
   addImage: (id: string, image: ImageData, options?: { pixelRatio?: number }) => unknown;
   hasImage: (id: string) => boolean;
   updateImage: (id: string, image: ImageData) => unknown;
+  triggerRepaint?: () => void;
 };
 
 type MarkerImageOptions = {
@@ -162,6 +163,8 @@ export async function addMarkerImages(map: MarkerImageMap, places: PlaceFeature[
       imageIds.activeImageIds.forEach((imageId) => upsertMarkerImage(map, imageId, activeMarkerImage));
     })
   );
+
+  map.triggerRepaint?.();
 }
 
 function upsertMarkerImage(map: MarkerImageMap, imageId: string, markerImage: ImageData) {
