@@ -1,4 +1,4 @@
-import { BarChart3Icon, CheckIcon, XIcon } from "lucide-react";
+import { CheckIcon, XIcon } from "lucide-react";
 import type { AnalyticsConsent as AnalyticsConsentRecord, AnalyticsConsentStatus } from "../../domain/analyticsEvents";
 import { ANALYTICS_CONSENT_STORAGE_KEY, ANALYTICS_POLICY_VERSION } from "../../domain/analyticsEvents";
 
@@ -45,16 +45,7 @@ export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: An
   }
 
   if (consent) {
-    return (
-      <button
-        className="fixed right-[calc(max(16px,env(safe-area-inset-right))+56px)] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 inline-flex h-10 min-h-9 w-10 items-center justify-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-0 text-[13px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:bottom-[76px]"
-        type="button"
-        aria-label="Настройки аналитики"
-        onClick={() => onChange(createConsent(consent.status === "accepted" ? "rejected" : "accepted"))}
-      >
-        <BarChart3Icon aria-hidden="true" size={18} />
-      </button>
-    );
+    return null;
   }
 
   const updateConsent = (status: AnalyticsConsentStatus) => {

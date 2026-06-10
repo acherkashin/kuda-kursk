@@ -20,6 +20,8 @@ type AnalyticsConsent = {
 
 Ключ хранения: `kursk-map:analytics-consent:v1`.
 
+Повторное управление согласием доступно через диалог «О проекте». После выбора `accepted` или `rejected` приложение не показывает отдельную плавающую кнопку настроек аналитики.
+
 ## Adapter
 
 ```ts
@@ -30,6 +32,7 @@ type AnalyticsEvent =
   | { name: "route_opened"; params: { placeId: string | number; provider: "yandex" | "2gis" | "google" } }
   | { name: "external_link_clicked"; params: { placeId: string | number; kind: string } }
   | { name: "community_map_opened"; params: { slug: string; placeCount: number; linkOnlyCount: number } }
+  | { name: "submap_opened"; params: { fromPlaceId: string | number; toSlug: string } }
   | { name: "analytics_consent_changed"; params: { status: "accepted" | "rejected" } };
 ```
 

@@ -4,6 +4,7 @@ import { resolvePublicPath } from "../../services/publicPath";
 
 type MapLogoProps = {
   actionSlot?: ReactNode;
+  className?: string;
   logoSrc: string;
   onBack?: (() => void) | undefined;
   subtitle?: string;
@@ -23,7 +24,7 @@ function BackButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLogoProps) {
+export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, title }: MapLogoProps) {
   const content = (
     <>
       <img
@@ -49,7 +50,7 @@ export function MapLogo({ actionSlot, logoSrc, onBack, subtitle, title }: MapLog
   if (onBack || actionSlot) {
     // На мобильном бренд-блок тянется на всю ширину строки (actionSlot = поиск справа);
     // на desktop под-карты он остаётся компактным рядом с полем поиска.
-    const widthClass = actionSlot ? "w-full" : "w-[430px] max-w-[min(430px,calc(100vw-32px))] flex-none";
+    const widthClass = className ?? (actionSlot ? "w-full" : "w-[430px] max-w-[min(430px,calc(100vw-32px))] flex-none");
 
     return (
       <div className={`flex min-h-11 min-w-0 items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-[5px] text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 ${widthClass}`}>

@@ -4,6 +4,7 @@ import {
   readStoredAnalyticsConsent,
   storeAnalyticsConsent
 } from "../components/analytics-consent/AnalyticsConsent";
+import { AboutProjectDialog } from "../components/about-project/AboutProjectDialog";
 import { ResultsSummary } from "../components/filters/ResultsSummary";
 import { KurskMap } from "../components/map/KurskMap";
 import { MapTopControls } from "../components/map/MapTopControls";
@@ -24,6 +25,7 @@ export function App() {
   const [places, setPlaces] = useState<PlaceFeature[]>([]);
   const [loadState, setLoadState] = useState<"loading" | "ready" | "error">("loading");
   const [activePlace, setActivePlace] = useState<PlaceFeature | null>(null);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [analyticsConsent, setAnalyticsConsent] = useState<AnalyticsConsentRecord | null>(() => readStoredAnalyticsConsent());
   const [pwaUpdatePrompt, setPwaUpdatePrompt] = useState<ServiceWorkerUpdatePrompt | null>(null);
@@ -43,7 +45,7 @@ export function App() {
   const visiblePlaces = useMemo(() => searchPlaces(basePlaces, query), [basePlaces, query]);
   const hasActiveSearch = query.trim().length > 0;
   const hasActivePlace = activePlace !== null;
-  const hasFloatingNotice = !hasActivePlace && (!analyticsConsent || pwaUpdatePrompt?.needRefresh);
+  const hasFloatingNotice = !hasActivePlace && !isAboutOpen && (!analyticsConsent || pwaUpdatePrompt?.needRefresh);
 
   const resetSearch = useCallback(() => {
     setQuery("");
@@ -217,7 +219,9 @@ export function App() {
             title={currentMap.title}
             subtitle={currentMap.description}
             logo={currentMap.logo}
+            isAboutOpen={isAboutOpen}
             query={query}
+            onAboutOpen={() => setIsAboutOpen(true)}
             onQueryChange={handleQueryChange}
             onQueryReset={() => handleQueryChange("")}
             onBackToMain={currentMap.slug !== "main" ? handleBackToMain : undefined}
@@ -246,7 +250,13 @@ export function App() {
         }}
         onOpenMap={handleOpenMap}
       />
-      <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace} onChange={handleConsentChange} />
+      <AboutProjectDialog
+        analyticsConsent={analyticsConsent}
+        isOpen={isAboutOpen}
+        onAnalyticsConsentChange={handleConsentChange}
+        onClose={() => setIsAboutOpen(false)}
+      />
+      <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace || isAboutOpen} onChange={handleConsentChange} />
       {pwaUpdatePrompt?.needRefresh && !hasActivePlace ? (
         <section
           className="fixed right-[calc(max(16px,env(safe-area-inset-right))+56px)] bottom-[calc(max(16px,env(safe-area-inset-bottom))+112px)] z-5 grid w-[min(360px,calc(100vw-96px))] gap-2.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:bottom-[calc(max(12px,env(safe-area-inset-bottom))+116px)] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto"

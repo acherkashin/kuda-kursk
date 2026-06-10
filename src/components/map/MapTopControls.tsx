@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { SearchIcon } from "lucide-react";
+import { InfoIcon, SearchIcon } from "lucide-react";
 import { SearchBox } from "../filters/SearchBox";
 import { MapLogo } from "./MapLogo";
 
@@ -13,6 +13,8 @@ type MapTopControlsProps = {
   onQueryChange: (value: string) => void;
   onQueryReset: () => void;
   onBackToMain?: (() => void) | undefined;
+  onAboutOpen: () => void;
+  isAboutOpen?: boolean;
 };
 
 function getIsMobileViewport() {
@@ -54,16 +56,46 @@ function SearchButton({ onClick }: { onClick: () => void }) {
   );
 }
 
+function AboutButton({ isActive, onClick }: { isActive: boolean; onClick: () => void }) {
+  return (
+    <button
+      className="grid h-9 w-9 flex-none cursor-pointer place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.95] data-[active=true]:border-[var(--color-accent)] data-[active=true]:shadow-[0_0_0_3px_var(--color-accent-soft)]"
+      type="button"
+      aria-label="О проекте"
+      aria-pressed={isActive}
+      data-active={isActive ? "true" : "false"}
+      onClick={onClick}
+    >
+      <InfoIcon aria-hidden="true" size={18} />
+    </button>
+  );
+}
+
+function BrandActions({ isAboutOpen, onAboutOpen, onSearchOpen }: { isAboutOpen: boolean; onAboutOpen: () => void; onSearchOpen?: () => void }) {
+  return (
+    <span className="flex flex-none items-center gap-2">
+      <AboutButton isActive={isAboutOpen} onClick={onAboutOpen} />
+      {onSearchOpen ? <SearchButton onClick={onSearchOpen} /> : null}
+    </span>
+  );
+}
+
 function BrandBar({
+  isAboutOpen,
   logo,
+  onAboutOpen,
   onBack,
   onSearchOpen,
   subtitle,
   title
-}: Pick<MapTopControlsProps, "logo" | "subtitle" | "title"> & { onBack?: (() => void) | undefined; onSearchOpen: () => void }) {
+}: Pick<MapTopControlsProps, "logo" | "onAboutOpen" | "subtitle" | "title"> & {
+  isAboutOpen: boolean;
+  onBack?: (() => void) | undefined;
+  onSearchOpen: () => void;
+}) {
   return (
     <MapLogo
-      actionSlot={<SearchButton onClick={onSearchOpen} />}
+      actionSlot={<BrandActions isAboutOpen={isAboutOpen} onAboutOpen={onAboutOpen} onSearchOpen={onSearchOpen} />}
       logoSrc={logo}
       onBack={onBack}
       subtitle={subtitle}
@@ -97,7 +129,17 @@ function SearchPanel({
   );
 }
 
-export function MapTopControls({ logo, onBackToMain, onQueryChange, onQueryReset, query, subtitle, title }: MapTopControlsProps) {
+export function MapTopControls({
+  isAboutOpen = false,
+  logo,
+  onAboutOpen,
+  onBackToMain,
+  onQueryChange,
+  onQueryReset,
+  query,
+  subtitle,
+  title
+}: MapTopControlsProps) {
   const [mobileMode, setMobileMode] = useState<SearchMode>("brand");
   const isMobile = useIsMobileViewport();
 
@@ -122,7 +164,15 @@ export function MapTopControls({ logo, onBackToMain, onQueryChange, onQueryReset
     <div className="map-top-ui fixed top-[max(16px,env(safe-area-inset-top))] left-[max(16px,env(safe-area-inset-left))] z-3 w-[min(820px,calc(100vw-476px))] min-w-[min(720px,calc(100vw-32px))] max-[900px]:w-[calc(100vw-32px)] max-[900px]:min-w-0 max-[700px]:top-[max(12px,env(safe-area-inset-top))] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto">
       {isMobile ? (
         mobileMode === "brand" ? (
-          <BrandBar logo={logo} title={title} subtitle={subtitle} onBack={onBackToMain} onSearchOpen={openSearch} />
+          <BrandBar
+            isAboutOpen={isAboutOpen}
+            logo={logo}
+            title={title}
+            subtitle={subtitle}
+            onAboutOpen={onAboutOpen}
+            onBack={onBackToMain}
+            onSearchOpen={openSearch}
+          />
         ) : (
           <SearchPanel
             query={query}
@@ -134,7 +184,14 @@ export function MapTopControls({ logo, onBackToMain, onQueryChange, onQueryReset
         )
       ) : (
         <div className="flex items-start gap-3">
-          <MapLogo logoSrc={logo} title={title} subtitle={subtitle} onBack={onBackToMain} />
+          <MapLogo
+            actionSlot={<BrandActions isAboutOpen={isAboutOpen} onAboutOpen={onAboutOpen} />}
+            className="w-[340px] max-w-[min(340px,calc(100vw-32px))] flex-none"
+            logoSrc={logo}
+            title={title}
+            subtitle={subtitle}
+            onBack={onBackToMain}
+          />
           <section className="min-w-0 flex-1" aria-label="Поиск">
             <SearchBox value={query} onChange={onQueryChange} onReset={onQueryReset} />
           </section>
