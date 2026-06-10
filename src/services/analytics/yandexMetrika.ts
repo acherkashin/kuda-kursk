@@ -1,9 +1,3 @@
-declare global {
-  interface Window {
-    ymQueue?: unknown[][];
-  }
-}
-
 export function loadYandexMetrika(counterId: string | undefined): boolean {
   if (!counterId || typeof window === "undefined") {
     return false;
@@ -18,19 +12,21 @@ export function loadYandexMetrika(counterId: string | undefined): boolean {
   window.ym =
     window.ym ??
     function ym(...args: unknown[]) {
-      window.ymQueue = window.ymQueue ?? [];
-      window.ymQueue.push(args);
+      ((window.ym as { a?: unknown[][] }).a ??= []).push(args);
     };
 
   const script = document.createElement("script");
   script.async = true;
-  script.src = "https://mc.yandex.ru/metrika/tag.js";
+  script.src = `https://mc.yandex.ru/metrika/tag.js?id=${numericCounterId}`;
   script.dataset.kurskMetrika = "true";
   document.head.append(script);
   window.ym(numericCounterId, "init", {
     clickmap: true,
     trackLinks: true,
-    accurateTrackBounce: true
+    accurateTrackBounce: true,
+    webvisor: true,
+    referrer: document.referrer,
+    url: location.href
   });
 
   return true;
