@@ -1,6 +1,7 @@
 import type { SVGProps } from "react";
 import { ExternalLinkIcon, GlobeIcon } from "lucide-react";
 import type { ExternalLink } from "../../domain/places";
+import { ButtonLink } from "../ui/ButtonLink";
 
 type ExternalLinksProps = {
   links: ExternalLink[];
@@ -80,8 +81,7 @@ export function ExternalLinks({ links, onOpen }: ExternalLinksProps) {
         const Icon = link.kind === "site" ? GlobeIcon : ExternalLinkIcon;
 
         return (
-          <a
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[var(--color-text)] no-underline transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+          <ButtonLink
             href={link.url}
             key={`${link.kind}-${link.id ?? link.url}`}
             target="_blank"
@@ -90,7 +90,7 @@ export function ExternalLinks({ links, onOpen }: ExternalLinksProps) {
           >
             <Icon aria-hidden="true" size={16} />
             <span>{link.label}</span>
-          </a>
+          </ButtonLink>
         );
       })}
       {socialLinks.length > 0 ? (

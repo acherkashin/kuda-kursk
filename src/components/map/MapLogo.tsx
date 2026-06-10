@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { ArrowLeftIcon } from "lucide-react";
 import { resolvePublicPath } from "../../services/publicPath";
+import { IconButton } from "../ui/IconButton";
 
 type MapLogoProps = {
   actionSlot?: ReactNode;
@@ -10,19 +11,6 @@ type MapLogoProps = {
   subtitle?: string;
   title: string;
 };
-
-function BackButton({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      className="grid h-9 w-9 flex-none cursor-pointer place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.95]"
-      type="button"
-      aria-label="На главную карту"
-      onClick={onClick}
-    >
-      <ArrowLeftIcon aria-hidden="true" size={18} />
-    </button>
-  );
-}
 
 export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, title }: MapLogoProps) {
   const content = (
@@ -56,7 +44,9 @@ export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, titl
       <div className={`flex min-h-11 min-w-0 items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-[5px] text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 ${widthClass}`}>
         {onBack ? (
           <>
-            <BackButton onClick={onBack} />
+            <IconButton size="sm" type="button" aria-label="На главную карту" onClick={onBack}>
+              <ArrowLeftIcon aria-hidden="true" size={18} />
+            </IconButton>
             <span className="flex min-w-0 flex-1 items-center gap-2">{content}</span>
           </>
         ) : (

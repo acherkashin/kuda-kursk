@@ -4,6 +4,8 @@ import type { AnalyticsConsent as AnalyticsConsentRecord, AnalyticsConsentStatus
 import { ANALYTICS_POLICY_VERSION } from "../../domain/analyticsEvents";
 import { projectInfo } from "../../domain/projectInfo";
 import { resolvePublicPath } from "../../services/publicPath";
+import { Button } from "../ui/Button";
+import { IconButton } from "../ui/IconButton";
 
 type AboutProjectDialogProps = {
   analyticsConsent: AnalyticsConsentRecord | null;
@@ -18,6 +20,29 @@ function createAnalyticsConsent(status: AnalyticsConsentStatus): AnalyticsConsen
     policyVersion: ANALYTICS_POLICY_VERSION,
     updatedAt: new Date().toISOString()
   };
+}
+
+type ProjectLinkProps = {
+  href: string;
+  icon: React.ElementType;
+  children: React.ReactNode;
+};
+
+function ProjectLink({ href, icon: Icon, children }: ProjectLinkProps) {
+  return (
+    <a
+      className="inline-flex min-h-11 items-center justify-between gap-3 rounded-xl border border-[var(--color-line)] bg-white px-3.5 py-2.5 text-[14px] font-semibold text-[var(--color-text)] no-underline transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.99]"
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+    >
+      <span className="inline-flex min-w-0 items-center gap-2">
+        <Icon aria-hidden="true" size={17} />
+        {children}
+      </span>
+      <ExternalLinkIcon aria-hidden="true" size={16} />
+    </a>
+  );
 }
 
 function getAnalyticsLabel(consent: AnalyticsConsentRecord | null) {
@@ -92,43 +117,16 @@ export function AboutProjectDialog({ analyticsConsent, isOpen, onAnalyticsConsen
               {projectInfo.title}
             </h2>
           </div>
-          <button
-            className="grid h-10 w-10 flex-none cursor-pointer place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.96]"
-            type="button"
-            aria-label="Закрыть диалог"
-            onClick={onClose}
-          >
+          <IconButton type="button" aria-label="Закрыть диалог" onClick={onClose}>
             <XIcon aria-hidden="true" size={18} />
-          </button>
+          </IconButton>
         </div>
 
         <p className="mt-5 mb-0 text-[14px] leading-[1.65] text-[var(--color-text-secondary)]">{projectInfo.description}</p>
 
         <div className="mt-5 grid gap-2">
-          <a
-            className="inline-flex min-h-11 items-center justify-between gap-3 rounded-xl border border-[var(--color-line)] bg-white px-3.5 py-2.5 text-[14px] font-semibold text-[var(--color-text)] no-underline transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.99]"
-            href={projectInfo.telegramUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span className="inline-flex min-w-0 items-center gap-2">
-              <SendIcon aria-hidden="true" size={17} />
-              Telegram
-            </span>
-            <ExternalLinkIcon aria-hidden="true" size={16} />
-          </a>
-          <a
-            className="inline-flex min-h-11 items-center justify-between gap-3 rounded-xl border border-[var(--color-line)] bg-white px-3.5 py-2.5 text-[14px] font-semibold text-[var(--color-text)] no-underline transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.99]"
-            href={projectInfo.feedbackUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <span className="inline-flex min-w-0 items-center gap-2">
-              <MessageCircleIcon aria-hidden="true" size={17} />
-              Обратная связь
-            </span>
-            <ExternalLinkIcon aria-hidden="true" size={16} />
-          </a>
+          <ProjectLink href={projectInfo.telegramUrl} icon={SendIcon}>Telegram</ProjectLink>
+          <ProjectLink href={projectInfo.feedbackUrl} icon={MessageCircleIcon}>Обратная связь</ProjectLink>
         </div>
 
         <section className="mt-5 border-t border-[var(--color-line)] pt-4" aria-label="Настройки аналитики">
@@ -143,15 +141,17 @@ export function AboutProjectDialog({ analyticsConsent, isOpen, onAnalyticsConsen
               </p>
             </div>
           </div>
-          <button
-            className="mt-3 inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full border border-[var(--color-text)] bg-[var(--color-text)] px-4 py-2 text-[14px] font-semibold text-white transition-[box-shadow,transform] duration-150 hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.99] data-[variant=secondary]:border-[var(--color-line)] data-[variant=secondary]:bg-white data-[variant=secondary]:text-[var(--color-text)]"
+          <Button
+            className="mt-3"
             type="button"
-            data-variant={isAnalyticsAccepted ? "secondary" : "primary"}
+            variant={isAnalyticsAccepted ? "secondary" : "primary"}
+            shape="pill"
+            fullWidth
             onClick={() => onAnalyticsConsentChange(createAnalyticsConsent(nextAnalyticsStatus))}
           >
             {isAnalyticsAccepted ? <XIcon aria-hidden="true" size={16} /> : <CheckIcon aria-hidden="true" size={16} />}
             {isAnalyticsAccepted ? "Отключить аналитику" : "Включить аналитику"}
-          </button>
+          </Button>
         </section>
       </section>
     </div>

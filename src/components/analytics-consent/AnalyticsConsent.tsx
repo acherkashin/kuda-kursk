@@ -1,6 +1,7 @@
 import { CheckIcon, XIcon } from "lucide-react";
 import type { AnalyticsConsent as AnalyticsConsentRecord, AnalyticsConsentStatus } from "../../domain/analyticsEvents";
 import { ANALYTICS_CONSENT_STORAGE_KEY, ANALYTICS_POLICY_VERSION } from "../../domain/analyticsEvents";
+import { Button } from "../ui/Button";
 
 type AnalyticsConsentProps = {
   consent: AnalyticsConsentRecord | null;
@@ -64,22 +65,14 @@ export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: An
         Мы используем cookies и обезличенную аналитику, чтобы улучшать приложение.
       </p>
       <div className="flex flex-wrap gap-2">
-        <button
-          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-accent)] bg-[var(--color-accent)] px-3 py-1.5 text-[13px] font-semibold tracking-[-0.01em] text-white transition-[box-shadow] duration-150 hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
-          type="button"
-          onClick={() => updateConsent("accepted")}
-        >
+        <Button variant="accent" size="sm" shape="pill" type="button" onClick={() => updateConsent("accepted")}>
           <CheckIcon aria-hidden="true" size={16} />
           <span>Принять аналитику</span>
-        </button>
-        <button
-          className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-line)] bg-white px-3 py-1.5 text-[13px] font-semibold tracking-[-0.01em] text-[var(--color-text)] transition-colors duration-150 hover:border-[var(--color-line-strong)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
-          type="button"
-          onClick={() => updateConsent("rejected")}
-        >
+        </Button>
+        <Button variant="secondary" size="sm" shape="pill" type="button" onClick={() => updateConsent("rejected")}>
           <XIcon aria-hidden="true" size={16} />
           <span>Отклонить</span>
-        </button>
+        </Button>
       </div>
     </section>
   );

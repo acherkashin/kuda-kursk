@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { InfoIcon, SearchIcon } from "lucide-react";
+import { IconButton } from "../ui/IconButton";
 import { SearchBox } from "../filters/SearchBox";
 import { MapLogo } from "./MapLogo";
 
@@ -43,39 +44,17 @@ function useIsMobileViewport() {
   return isMobile;
 }
 
-function SearchButton({ onClick }: { onClick: () => void }) {
-  return (
-    <button
-      className="grid h-9 w-9 flex-none cursor-pointer place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.95]"
-      type="button"
-      aria-label="Открыть поиск"
-      onClick={onClick}
-    >
-      <SearchIcon aria-hidden="true" size={18} />
-    </button>
-  );
-}
-
-function AboutButton({ isActive, onClick }: { isActive: boolean; onClick: () => void }) {
-  return (
-    <button
-      className="grid h-9 w-9 flex-none cursor-pointer place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.95] data-[active=true]:border-[var(--color-accent)] data-[active=true]:shadow-[0_0_0_3px_var(--color-accent-soft)]"
-      type="button"
-      aria-label="О проекте"
-      aria-pressed={isActive}
-      data-active={isActive ? "true" : "false"}
-      onClick={onClick}
-    >
-      <InfoIcon aria-hidden="true" size={18} />
-    </button>
-  );
-}
-
 function BrandActions({ isAboutOpen, onAboutOpen, onSearchOpen }: { isAboutOpen: boolean; onAboutOpen: () => void; onSearchOpen?: () => void }) {
   return (
     <span className="flex flex-none items-center gap-2">
-      <AboutButton isActive={isAboutOpen} onClick={onAboutOpen} />
-      {onSearchOpen ? <SearchButton onClick={onSearchOpen} /> : null}
+      <IconButton size="sm" type="button" aria-label="О проекте" aria-pressed={isAboutOpen} isActive={isAboutOpen} onClick={onAboutOpen}>
+        <InfoIcon aria-hidden="true" size={18} />
+      </IconButton>
+      {onSearchOpen ? (
+        <IconButton size="sm" type="button" aria-label="Открыть поиск" onClick={onSearchOpen}>
+          <SearchIcon aria-hidden="true" size={18} />
+        </IconButton>
+      ) : null}
     </span>
   );
 }

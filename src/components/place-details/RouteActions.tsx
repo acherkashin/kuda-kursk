@@ -1,6 +1,8 @@
 import { useId, useState } from "react";
 import { ChevronDownIcon, ExternalLinkIcon, MapIcon, NavigationIcon } from "lucide-react";
 import { buildRouteUrl, type RouteLink } from "../../domain/routeLinks";
+import { Button } from "../ui/Button";
+import { ButtonLink } from "../ui/ButtonLink";
 
 type RouteActionsProps = {
   links: RouteLink[];
@@ -48,8 +50,8 @@ export function RouteActions({ links, onOpen }: RouteActionsProps) {
 
   return (
     <div className="grid gap-2" aria-label="Маршруты">
-      <button
-        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[var(--color-text)] bg-[var(--color-text)] px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-white transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.98]"
+      <Button
+        variant="primary"
         type="button"
         aria-controls={routesId}
         aria-expanded={isOpen}
@@ -62,15 +64,14 @@ export function RouteActions({ links, onOpen }: RouteActionsProps) {
           aria-hidden="true"
           size={16}
         />
-      </button>
+      </Button>
       {isOpen ? (
         <div id={routesId} className="grid gap-2">
           {links.map((link) => {
             const Icon = icons[link.provider];
 
             return (
-              <a
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[var(--color-line)] bg-white px-3 py-2 text-sm font-semibold tracking-[-0.01em] text-[var(--color-text)] no-underline transition-[border-color,box-shadow] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+              <ButtonLink
                 href={link.url}
                 key={link.provider}
                 target="_blank"
@@ -83,7 +84,7 @@ export function RouteActions({ links, onOpen }: RouteActionsProps) {
               >
                 <Icon aria-hidden="true" size={18} />
                 <span>{link.label}</span>
-              </a>
+              </ButtonLink>
             );
           })}
         </div>

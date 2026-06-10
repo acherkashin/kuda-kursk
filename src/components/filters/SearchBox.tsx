@@ -1,5 +1,6 @@
 import { type KeyboardEvent, useEffect, useRef } from "react";
 import { SearchIcon, XIcon } from "lucide-react";
+import { IconButton } from "../ui/IconButton";
 
 type SearchBoxProps = {
   autoFocus?: boolean;
@@ -58,14 +59,9 @@ export function SearchBox({
         onKeyDown={handleKeyDown}
       />
       {showAction ? (
-        <button
-          className="grid h-10 w-10 flex-none place-items-center rounded-full border border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[border-color,box-shadow,transform] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.98]"
-          type="button"
-          aria-label={actionLabel}
-          onClick={handleAction}
-        >
+        <IconButton type="button" aria-label={actionLabel} onClick={handleAction}>
           <XIcon aria-hidden="true" size={17} strokeWidth={2.2} />
-        </button>
+        </IconButton>
       ) : null}
     </div>
   );
