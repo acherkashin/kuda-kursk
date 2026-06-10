@@ -276,6 +276,7 @@
 - [X] T115 Добавить Storybook stories состояний диалога в `src/components/about-project/AboutProjectDialog.stories.tsx` без нового автотестового покрытия.
 - [X] T116 Выполнить `pnpm typecheck`, `pnpm build` и ручную visual QA desktop/mobile; новое автоматизированное тестовое покрытие не добавлять без отдельного разрешения пользователя.
   - Visual QA 2026-06-10: desktop 1440x900 и mobile 390x844 проверены через Playwright на Vite dev server с заблокированными service workers. Диалог открывается по кнопке «О проекте», показывает логотип, описание, Telegram, обратную связь и секцию аналитики; consent-плашка не перекрывает диалог; горизонтального overflow нет. Дополнительно выполнен `pnpm build-storybook`.
+
 - [X] T110 По ручному уточнению обновить координаты места-портала «Дозаправка» (`id: 9001`) в `public/data/main-map.json` на `51.741522, 36.202537`, сохранив порядок GeoJSON `[longitude, latitude]`. Проверка: JSON parse, `pnpm typecheck`; новое тестовое покрытие не добавлялось.
 - [X] T111 Исправить production service worker: убрать ссылку на замкнутую переменную `githubPagesBase` из Workbox `runtimeCaching.urlPattern`, чтобы `sw.js` не падал с `ReferenceError` на GitHub Pages. Проверка: `pnpm build`, инспекция `dist/sw.js`; новое тестовое покрытие не добавлялось.
 - [X] T112 Исправить race MapLibre source при повторных SPA-переходах между основной картой и под-картами: обновлять существующий `places` source сразу, снимать устаревшие `load` handlers, очищать MapLibre feature-state и сбрасывать marker interaction state при замене набора мест. По явному разрешению пользователя добавлена сокращённая e2e-регрессия повторных переходов `main ↔ dozapravka`; также актуализированы e2e-ожидания количества мест основной карты до 42, base-aware route URL через общий helper в route/place-details проверках и текущие reset/логотип/link-контракты в изменённых e2e. Проверка: RED `pnpm exec playwright test tests/e2e/map-routes.spec.ts --project=desktop --grep "повторные переходы"` падал с `Expected: 19, Received: 0`; после исправления прошли `pnpm typecheck`, `pnpm exec playwright test tests/e2e/map-routes.spec.ts tests/e2e/map-first-screen.spec.ts tests/e2e/search.spec.ts --project=desktop` и `pnpm build`.
@@ -291,6 +292,15 @@
 **Цель**: убрать дубли test helpers из e2e specs и зафиксировать единый base-aware стиль навигации.
 
 - [X] T114 Вынести e2e helpers для base-aware путей, MapLibre browser internals и mock geolocation/window.open в `tests/e2e/support/`; заменить прямые `page.goto("/")`, manifest request без base path и локальные `page.evaluate` helpers в route/map/place-details specs на support helpers. Unit-тесты и новое тестовое покрытие не добавлялись. Проверка: `pnpm typecheck`, focused Playwright smoke по затронутым e2e specs.
+
+## Phase 17: Обратная связь в карточке места
+
+**Цель**: дать пользователю тихий способ сообщить о проблеме с местом из карточки, используя общую форму обратной связи проекта.
+
+- [X] T117 Добавить в `src/components/place-details/PlaceDetailsPanel.tsx` нижнее muted-действие обратной связи с маленькой иконкой и ссылкой `projectInfo.feedbackUrl`.
+- [X] T118 Не добавлять новую ссылку в данные мест и не добавлять новое analytics event; использовать уже существующий источник `src/domain/projectInfo.ts`.
+- [X] T119 Выполнить `pnpm typecheck`, `pnpm build`, `pnpm build-storybook` и ручную visual QA desktop/mobile; новое автоматизированное тестовое покрытие не добавлять без отдельного разрешения пользователя.
+  - Visual QA 2026-06-10: desktop 1440x900 и mobile 390x844 проверены через Playwright на Vite dev server с заблокированными service workers. Карточка места прокручена к нижней части; действие «Нашли ошибку?» ведёт на `projectInfo.feedbackUrl`, не создаёт horizontal overflow и визуально не конкурирует с маршрутом, соцсетями и закрытием карточки.
 
 ---
 
