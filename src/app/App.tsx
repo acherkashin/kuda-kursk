@@ -25,7 +25,6 @@ export function App() {
   const [places, setPlaces] = useState<PlaceFeature[]>([]);
   const [loadState, setLoadState] = useState<"loading" | "ready" | "error">("loading");
   const [activePlace, setActivePlace] = useState<PlaceFeature | null>(null);
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [analyticsConsent, setAnalyticsConsent] = useState<AnalyticsConsentRecord | null>(() => readStoredAnalyticsConsent());
   const [pwaUpdatePrompt, setPwaUpdatePrompt] = useState<ServiceWorkerUpdatePrompt | null>(null);
@@ -38,6 +37,7 @@ export function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const isAboutOpen = searchParams.has("about");
   const currentMap = useMemo(() => findMapBySlug(slug), [slug]);
   const basePlaces = places;
   const placeById = useMemo(() => new Map(basePlaces.map((place) => [getPlaceId(place), place])), [basePlaces]);
@@ -165,6 +165,18 @@ export function App() {
     setActivePlace(null);
   }, [searchParams, setSearchParams]);
 
+  const handleAboutOpen = useCallback(() => {
+    const nextSearchParams = new URLSearchParams(searchParams);
+    nextSearchParams.set("about", "1");
+    setSearchParams(nextSearchParams);
+  }, [searchParams, setSearchParams]);
+
+  const handleAboutClose = useCallback(() => {
+    const nextSearchParams = new URLSearchParams(searchParams);
+    nextSearchParams.delete("about");
+    setSearchParams(nextSearchParams, { replace: true });
+  }, [searchParams, setSearchParams]);
+
   const handleOpenMap = useCallback(
     (targetSlug: string) => {
       if (activePlace) {
@@ -221,7 +233,7 @@ export function App() {
             logo={currentMap.logo}
             isAboutOpen={isAboutOpen}
             query={query}
-            onAboutOpen={() => setIsAboutOpen(true)}
+            onAboutOpen={handleAboutOpen}
             onQueryChange={handleQueryChange}
             onQueryReset={() => handleQueryChange("")}
             onBackToMain={currentMap.slug !== "main" ? handleBackToMain : undefined}
@@ -254,7 +266,7 @@ export function App() {
         analyticsConsent={analyticsConsent}
         isOpen={isAboutOpen}
         onAnalyticsConsentChange={handleConsentChange}
-        onClose={() => setIsAboutOpen(false)}
+        onClose={handleAboutClose}
       />
       <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace || isAboutOpen} onChange={handleConsentChange} />
       {pwaUpdatePrompt?.needRefresh && !hasActivePlace ? (
