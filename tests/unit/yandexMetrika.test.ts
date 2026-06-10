@@ -1,11 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { loadYandexMetrika } from "../../src/services/analytics/yandexMetrika";
 
-declare global {
-  interface Window {
-    ym?: ((...args: unknown[]) => void) & { a?: unknown[][] };
-  }
-}
+type YmWithQueue = ((...args: unknown[]) => void) & { a?: unknown[][] };
 
 describe("loadYandexMetrika", () => {
   afterEach(() => {
@@ -17,7 +13,7 @@ describe("loadYandexMetrika", () => {
     expect(loadYandexMetrika("123456")).toBe(true);
 
     expect(document.querySelector('script[data-kursk-metrika="true"]')).not.toBeNull();
-    expect(window.ym?.a?.[0]).toEqual([
+    expect((window.ym as YmWithQueue | undefined)?.a?.[0]).toEqual([
       123456,
       "init",
       {
