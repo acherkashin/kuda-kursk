@@ -49,7 +49,7 @@ export function SearchBox({
       <SearchIcon aria-hidden="true" size={18} />
       <input
         ref={inputRef}
-        className="min-w-0 border-0 bg-transparent text-[var(--color-text)] outline-0 placeholder:text-[var(--color-muted)]"
+        className="min-w-0 border-0 bg-transparent text-[16px] text-[var(--color-text)] outline-0 placeholder:text-[var(--color-muted)]"
         aria-label="Поиск мест"
         role="searchbox"
         type="text"
