@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { CheckIcon, XIcon } from "lucide-react";
 import type { AnalyticsConsent as AnalyticsConsentRecord, AnalyticsConsentStatus } from "../../domain/analyticsEvents";
 import { ANALYTICS_CONSENT_STORAGE_KEY, ANALYTICS_POLICY_VERSION } from "../../domain/analyticsEvents";
@@ -41,6 +42,8 @@ export function storeAnalyticsConsent(consent: AnalyticsConsentRecord) {
 }
 
 export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: AnalyticsConsentProps) {
+  const [isAppealVisible, setIsAppealVisible] = useState(false);
+
   if (isSuppressed) {
     return null;
   }
@@ -55,24 +58,54 @@ export function AnalyticsConsent({ consent, isSuppressed = false, onChange }: An
     onChange(nextConsent);
   };
 
+  const message = isAppealVisible
+    ? "Мы только запускаемся, и включённая аналитика очень мотивирует нас: она показывает, что сервис нужен, и помогает понять, какие сценарии развивать дальше."
+    : "Мы используем cookies и обезличенную аналитику, чтобы улучшать приложение.";
+  const handleDecline = () => {
+    if (isAppealVisible) {
+      updateConsent("rejected");
+      return;
+    }
+
+    setIsAppealVisible(true);
+  };
+  const declineButton = (
+    <Button
+      className="shrink-0 whitespace-nowrap"
+      variant="secondary"
+      size="sm"
+      shape="pill"
+      type="button"
+      onClick={handleDecline}
+    >
+      <XIcon aria-hidden="true" size={16} />
+      <span>Отклонить</span>
+    </Button>
+  );
+  const acceptButton = (
+    <Button
+      className="shrink-0 whitespace-nowrap"
+      variant="accent"
+      size="sm"
+      shape="pill"
+      type="button"
+      onClick={() => updateConsent("accepted")}
+    >
+      <CheckIcon aria-hidden="true" size={16} />
+      <span>Принять аналитику</span>
+    </Button>
+  );
+
   return (
     <section
       className="fixed right-[calc(max(16px,env(safe-area-inset-right))+56px)] bottom-[max(16px,env(safe-area-inset-bottom))] z-5 grid w-[min(380px,calc(100vw-96px))] gap-2.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:bottom-[max(12px,env(safe-area-inset-bottom))] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto max-[700px]:gap-2 max-[700px]:rounded-2xl max-[700px]:p-3"
       data-testid="analytics-consent"
       aria-label="Согласие на аналитику"
     >
-      <p className="m-0 text-[13px] leading-snug text-[var(--color-text-secondary)]">
-        Мы используем cookies и обезличенную аналитику, чтобы улучшать приложение.
-      </p>
-      <div className="flex flex-wrap gap-2">
-        <Button variant="accent" size="sm" shape="pill" type="button" onClick={() => updateConsent("accepted")}>
-          <CheckIcon aria-hidden="true" size={16} />
-          <span>Принять аналитику</span>
-        </Button>
-        <Button variant="secondary" size="sm" shape="pill" type="button" onClick={() => updateConsent("rejected")}>
-          <XIcon aria-hidden="true" size={16} />
-          <span>Отклонить</span>
-        </Button>
+      <p className="m-0 text-[13px] leading-snug text-[var(--color-text-secondary)]">{message}</p>
+      <div className="flex flex-nowrap items-center gap-2">
+        {isAppealVisible ? acceptButton : declineButton}
+        {isAppealVisible ? declineButton : acceptButton}
       </div>
     </section>
   );
