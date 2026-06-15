@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BarChart3Icon, CheckIcon, ExternalLinkIcon, MessageCircleIcon, SendIcon, XIcon } from "lucide-react";
 import type { AnalyticsConsent as AnalyticsConsentRecord, AnalyticsConsentStatus } from "../../domain/analyticsEvents";
 import { ANALYTICS_POLICY_VERSION } from "../../domain/analyticsEvents";
+import { buildFeedbackUrl } from "../../domain/feedbackLinks";
 import { projectInfo } from "../../domain/projectInfo";
 import { resolvePublicPath } from "../../services/publicPath";
 import { Button } from "../ui/Button";
@@ -126,7 +127,7 @@ export function AboutProjectDialog({ analyticsConsent, isOpen, onAnalyticsConsen
 
         <div className="mt-5 grid gap-2">
           <ProjectLink href={projectInfo.telegramUrl} icon={SendIcon}>Telegram</ProjectLink>
-          <ProjectLink href={projectInfo.feedbackUrl} icon={MessageCircleIcon}>Обратная связь</ProjectLink>
+          <ProjectLink href={buildFeedbackUrl({ source: "about" })} icon={MessageCircleIcon}>Обратная связь</ProjectLink>
         </div>
 
         <section className="mt-5 border-t border-[var(--color-line)] pt-4" aria-label="Настройки аналитики">

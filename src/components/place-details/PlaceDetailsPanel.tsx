@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { MapIcon, MessageCircleWarningIcon, XIcon } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import { buildFeedbackUrl } from "../../domain/feedbackLinks";
 import { buildPlaceDetails } from "../../domain/placeDetails";
 import type { PlaceFeature } from "../../domain/places";
-import { projectInfo } from "../../domain/projectInfo";
 import { buildRouteLinks, type RouteLink } from "../../domain/routeLinks";
 import { resolvePublicPath } from "../../services/publicPath";
 import { Button } from "../ui/Button";
@@ -28,12 +28,12 @@ function usePanelLayout() {
   return window.matchMedia("(max-width: 700px)").matches ? "drawer" : "side-panel";
 }
 
-function PlaceFeedbackLink({ placeName }: { placeName: string }) {
+function PlaceFeedbackLink({ placeId, placeName }: { placeId: string | number; placeName: string }) {
   return (
     <footer className="mt-1 flex justify-end border-t border-[var(--color-line)] pt-3">
       <a
         className="inline-flex min-h-9 items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-medium text-[var(--color-muted)] no-underline transition-[background-color,color,transform] duration-150 hover:bg-[var(--color-surface-lower)] hover:text-[var(--color-text-secondary)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] active:scale-[0.98]"
-        href={projectInfo.feedbackUrl}
+        href={buildFeedbackUrl({ source: "place_card", place: { id: placeId, name: placeName } })}
         target="_blank"
         rel="noreferrer"
         aria-label={`Сообщить о проблеме с местом «${placeName}»`}
@@ -167,7 +167,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
             ))}
           </div>
         )}
-        <PlaceFeedbackLink placeName={viewModel.name} />
+        <PlaceFeedbackLink placeId={viewModel.id} placeName={viewModel.name} />
       </div>
     </motion.aside>
   );
