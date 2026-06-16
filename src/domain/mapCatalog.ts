@@ -27,6 +27,13 @@ export const mapCatalog = [
     description: "Места для вдохновения",
     logo: "/brand/zapishu-zarisuyu-logo.webp",
     dataPath: "/data/zapishu-zarisuyu-objects.json"
+  },
+  {
+    slug: "elena-koltysheva",
+    title: "Елена Колтышева",
+    description: "Подборка мест для впечатлений в Курске и области",
+    logo: "/place-thumbnails/elena-koltysheva/white-square.webp",
+    dataPath: "/data/elena-koltysheva-objects.json"
   }
 ] as const satisfies readonly PublicMapConfig[];
 

@@ -9,8 +9,6 @@ import { mapCatalog } from "../../src/domain/mapCatalog";
 const projectRoot = process.cwd();
 describe("map data files", () => {
   it("contain valid canonical places and existing local thumbnails", () => {
-    const counts = new Map<string, number>();
-
     for (const map of mapCatalog) {
       const dataPath = join(projectRoot, "public", map.dataPath);
       const raw = JSON.parse(readFileSync(dataPath, "utf8")) as unknown;
@@ -20,7 +18,7 @@ describe("map data files", () => {
       expect(Array.isArray(features)).toBe(true);
 
       const places = (features as unknown[]).map(validateGeoJsonPlace);
-      counts.set(map.slug, places.length);
+      expect(places.length).toBeGreaterThan(0);
 
       for (const place of places) {
         const thumbnail = place.properties.balloonContent.thumbnail;
@@ -56,11 +54,5 @@ describe("map data files", () => {
         }
       }
     }
-
-    expect(Object.fromEntries(counts)).toEqual({
-      main: 42,
-      dozapravka: 19,
-      "zapishu-zarisuyu": 21
-    });
   });
 });

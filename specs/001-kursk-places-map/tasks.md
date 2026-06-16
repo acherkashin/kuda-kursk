@@ -316,6 +316,16 @@
 
 - [X] T125 Настроить GitHub Pages custom domain репозитория `acherkashin/kuda-kursk` на `kudakursk.ru` через GitHub API, заменить production `base`, PWA `start_url`/`scope`, service worker fallback и runtime cache данных на корневой `/`, а e2e base helper — на дефолтный `/`. DNS-зона Selectel авторитативно отдаёт четыре GitHub Pages A-записи для apex-домена и CNAME `www` на `acherkashin.github.io`, но публичные резолверы ещё ожидают распространения делегирования; HTTPS enforcement в GitHub Pages оставлен выключенным до готовности DNS и сертификата. Проверка: `pnpm typecheck`, `pnpm build`, focused Playwright smoke `tests/e2e/pwa.spec.ts` и `tests/e2e/map-routes.spec.ts` на desktop с временным dev server `http://127.0.0.1:5174`; новое тестовое покрытие не добавлялось.
 
+## Phase 19: Карта «Елена Колтышева»
+
+**Цель**: добавить отдельную под-карту с подборкой Елены Колтышевой, локальными фотографиями из `/Users/cherkalexander/Downloads/Карта` и проверенными координатами без новой ветки.
+
+- [X] T127 Создать `public/data/elena-koltysheva-objects.json` на 15 мест с GeoJSON-координатами `[longitude, latitude]`, короткими описаниями, локальными ссылками на фото/миниатюры и без ссылок на `gokursk.ru`. Для байдарок использовать место сбора у филармонии (`ул. Перекальского, 1`), для квадроциклов — координаты пользователя `51.694811, 35.960125`, для сапов — Боеву дачу.
+- [X] T128 Подготовить web-safe ассеты: сконвертировать исходные JPG/WEBP/HEIC из Downloads в `public/place-images/elena-koltysheva/` и `public/place-thumbnails/elena-koltysheva/`, сохранив по одному основному изображению и миниатюре на место.
+- [X] T129 Добавить карту в `src/domain/mapCatalog.ts` со slug `elena-koltysheva`, названием «Елена Колтышева», описанием подборки, логотипом из миниатюры «Белого квадрата» и `dataPath` новой карты.
+- [X] T130 По разрешению пользователя обновить существующий `tests/unit/mapDataIntegrity.test.ts`: убрать хрупкое ожидание точных счётчиков карт и оставить проверку валидности всех карт из `mapCatalog` и существования локальных ассетов; новое автоматизированное покрытие не добавлять.
+- [X] T131 Выполнить `pnpm typecheck`, `pnpm build`, `pnpm test:unit` и ручную проверку `/maps/elena-koltysheva` на desktop/mobile. Проверка пройдена: 15 мест и маркеров видны, поиск находит «Байдарки» и «Сапы», карточки открываются, фото грузятся, кнопки маршрутов доступны, console errors и failed requests не обнаружены.
+
 ---
 
 ## Зависимости и порядок выполнения
