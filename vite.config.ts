@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
-const githubPagesBase = "/kuda-kursk/";
+const githubPagesBase = "/";
 
 export default defineConfig({
   base: githubPagesBase,
@@ -40,7 +40,7 @@ export default defineConfig({
         navigateFallback: `${githubPagesBase}index.html`,
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => url.pathname.startsWith("/kuda-kursk/data/"),
+            urlPattern: ({ url }) => url.pathname.startsWith("/data/"),
             handler: "StaleWhileRevalidate",
             options: { cacheName: "kursk-map-data" }
           }

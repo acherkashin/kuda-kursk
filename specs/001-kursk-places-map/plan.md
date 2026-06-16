@@ -26,7 +26,7 @@
 
 **Testing**: существующие Playwright и unit-проверки можно запускать для регрессии; новое или изменённое тестовое покрытие добавляется только после отдельного явного запроса или разрешения пользователя
 
-**Target Platform**: PWA для современных мобильных и десктопных браузеров; production deployment как статический SPA на GitHub Pages project pages (`https://acherkashin.github.io/kuda-kursk/`)
+**Target Platform**: PWA для современных мобильных и десктопных браузеров; production deployment как статический SPA на GitHub Pages custom domain (`https://kudakursk.ru/`)
 
 **Project Type**: frontend SPA/PWA без backend в первой версии
 
@@ -36,7 +36,7 @@
 
 **Scale/Scope**: v1 покрывает публичную карту, карты сообществ по ссылке, статический контент, поиск, карточки, маршруты, PWA и аналитику; будущие backend, аккаунты, сохранённые места, отметки посещений, заявки пользователей и Telegram mini app не реализуются
 
-**Deployment**: проект публикуется через GitHub Actions workflow в GitHub Pages от push в ветку `main`. Vite `base` равен `/kuda-kursk/`; локальные public assets, JSON-данные, MapLibre style, PWA manifest и service worker должны строить URL с учётом `import.meta.env.BASE_URL`, чтобы SPA работала на project pages без custom domain.
+**Deployment**: проект публикуется через GitHub Actions workflow в GitHub Pages от push в ветку `main`. Custom domain репозитория — `kudakursk.ru`; DNS-зона обслуживается Selectel и должна указывать apex-домен на GitHub Pages A-записи, а `www` — CNAME на `acherkashin.github.io`. Vite `base` равен `/`; локальные public assets, JSON-данные, MapLibre style, PWA manifest и service worker должны строить URL с учётом `import.meta.env.BASE_URL`, чтобы SPA работала от корня домена.
 
 ## Проверка конституции
 

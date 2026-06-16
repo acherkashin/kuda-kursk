@@ -1,4 +1,4 @@
-export const appBase = normalizeBasePath(process.env.PLAYWRIGHT_APP_BASE ?? "/kuda-kursk");
+export const appBase = normalizeBasePath(process.env.PLAYWRIGHT_APP_BASE ?? "/");
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

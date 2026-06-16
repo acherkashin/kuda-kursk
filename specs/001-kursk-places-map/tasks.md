@@ -310,6 +310,12 @@
 - [X] T123 Заменить placeholder формы на Яндекс Форму `https://forms.yandex.ru/u/6a2f8b0ceb61469c8e25393e` и добавить `src/domain/feedbackLinks.ts` для предзаполненных ссылок: `source` и `page_url` для общего фидбека, `source`, `place_id`, `place_name` и `page_url` для карточки места; адрес и координаты не передаются, потому что этих скрытых полей нет в форме. Проверка: `pnpm typecheck`, `pnpm build`, ручная проверка структуры URL; новое тестовое покрытие не добавлялось.
 - [X] T124 Добавить предзаполнение темы «Ошибка в месте» для ссылки «Нашли ошибку?» через параметр `topic=9008980755561960`, где `topic` — идентификатор вопроса Яндекс Формы, а `9008980755561960` — идентификатор варианта ответа. Проверка: `pnpm typecheck`, `pnpm build`, ручная проверка структуры URL; новое тестовое покрытие не добавлялось.
 
+## Phase 18: Custom domain GitHub Pages
+
+**Цель**: перевести production deployment с project pages path на custom domain `https://kudakursk.ru/` без отдельной ветки.
+
+- [X] T125 Настроить GitHub Pages custom domain репозитория `acherkashin/kuda-kursk` на `kudakursk.ru` через GitHub API, заменить production `base`, PWA `start_url`/`scope`, service worker fallback и runtime cache данных на корневой `/`, а e2e base helper — на дефолтный `/`. DNS-зона Selectel авторитативно отдаёт четыре GitHub Pages A-записи для apex-домена и CNAME `www` на `acherkashin.github.io`, но публичные резолверы ещё ожидают распространения делегирования; HTTPS enforcement в GitHub Pages оставлен выключенным до готовности DNS и сертификата. Проверка: `pnpm typecheck`, `pnpm build`, focused Playwright smoke `tests/e2e/pwa.spec.ts` и `tests/e2e/map-routes.spec.ts` на desktop с временным dev server `http://127.0.0.1:5174`; новое тестовое покрытие не добавлялось.
+
 ---
 
 ## Зависимости и порядок выполнения
