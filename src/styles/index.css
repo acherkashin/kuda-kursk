@@ -96,6 +96,13 @@ body {
   bottom: 16px;
 }
 
+@media (min-width: 701px) {
+  [data-details-open="true"] .map-top-ui {
+    width: min(980px, calc(100vw - 476px));
+    min-width: 0;
+  }
+}
+
 [data-notice-open="true"] .map-results-ui {
   bottom: 16px;
 }

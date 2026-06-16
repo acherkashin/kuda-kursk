@@ -325,6 +325,15 @@
 - [X] T129 Добавить карту в `src/domain/mapCatalog.ts` со slug `elena-koltysheva`, названием «Елена Колтышева», описанием подборки, логотипом из миниатюры «Белого квадрата» и `dataPath` новой карты.
 - [X] T130 По разрешению пользователя обновить существующий `tests/unit/mapDataIntegrity.test.ts`: убрать хрупкое ожидание точных счётчиков карт и оставить проверку валидности всех карт из `mapCatalog` и существования локальных ассетов; новое автоматизированное покрытие не добавлять.
 - [X] T131 Выполнить `pnpm typecheck`, `pnpm build`, `pnpm test:unit` и ручную проверку `/maps/elena-koltysheva` на desktop/mobile. Проверка пройдена: 15 мест и маркеров видны, поиск находит «Байдарки» и «Сапы», карточки открываются, фото грузятся, кнопки маршрутов доступны, console errors и failed requests не обнаружены.
+- [X] T132 Добавить проверенные официальные `vk`, `instagram`, `telegram` и `site` ссылки для 15 мест карты Елены Колтышевой в `public/data/elena-koltysheva-objects.json`; удалить справочные `details`/`orgs.biz` ссылки и оставить «Сапы на Боевой даче» без ссылок, потому что официальный ресурс не подтверждён. Проверка: JSON parse, `pnpm typecheck`, `pnpm build`; новое тестовое покрытие не добавлялось.
+
+---
+
+## Phase 20: Размер верхних плашек
+
+**Цель**: закрепить одинаковую высоту бренд-плашки и поиска на desktop/mobile без отдельной ветки и без нового автоматизированного покрытия.
+
+- [X] T133 Исправить верхний overlay в `src/components/map/MapLogo.tsx`, `src/components/map/MapTopControls.tsx`, `src/components/filters/SearchBox.tsx` и `src/styles/index.css`: бренд-плашка и поиск сохраняют высоту desktop-поиска `48px`, подпись карты показывается в одну строку с обрезкой при нехватке ширины, desktop-бренд-блок расширен для длинных названий карт, а при открытой detail-панели overlay ограничен свободной областью карты. Проверка: `pnpm typecheck`, `pnpm build`, ручная visual QA через dev server `http://127.0.0.1:5174/` на desktop 1440x900 (`/maps/elena-koltysheva`, `/maps/dozapravka`, `/maps/main`, `/maps/main?place=9001`) и mobile 390x844 (`/maps/elena-koltysheva` brand/search); высота бренд-плашки и поиска — `48px`, horizontal overflow нет, top overlay не пересекается с detail-панелью.
 
 ---
 

@@ -140,7 +140,7 @@ export function MapTopControls({
   }, [closeSearch, onQueryReset, query]);
 
   return (
-    <div className="map-top-ui fixed top-[max(16px,env(safe-area-inset-top))] left-[max(16px,env(safe-area-inset-left))] z-3 w-[min(820px,calc(100vw-476px))] min-w-[min(720px,calc(100vw-32px))] max-[900px]:w-[calc(100vw-32px)] max-[900px]:min-w-0 max-[700px]:top-[max(12px,env(safe-area-inset-top))] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto">
+    <div className="map-top-ui fixed top-[max(16px,env(safe-area-inset-top))] left-[max(16px,env(safe-area-inset-left))] z-3 w-[min(980px,calc(100vw-476px))] min-w-[min(720px,calc(100vw-32px))] max-[1120px]:w-[calc(100vw-32px)] max-[1120px]:min-w-0 max-[700px]:top-[max(12px,env(safe-area-inset-top))] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto">
       {isMobile ? (
         mobileMode === "brand" ? (
           <BrandBar
@@ -165,7 +165,7 @@ export function MapTopControls({
         <div className="flex items-start gap-3">
           <MapLogo
             actionSlot={<BrandActions isAboutOpen={isAboutOpen} onAboutOpen={onAboutOpen} />}
-            className="w-[340px] max-w-[min(340px,calc(100vw-32px))] flex-none"
+            className="w-[470px] max-w-[min(470px,calc(100vw-32px))] flex-none max-[1120px]:w-[min(470px,48vw)]"
             logoSrc={logo}
             title={title}
             subtitle={subtitle}

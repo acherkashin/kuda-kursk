@@ -25,9 +25,14 @@
         },
         "links": [
           {
-            "label": "Узнать подробнее",
-            "url": "https://welcomekursk.ru/places/1248/art-studiya-belyi-kvadrat",
-            "kind": "details"
+            "label": "ВКонтакте",
+            "url": "https://vk.com/v_belom_kvadrate",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/v_belom_kvadrate/",
+            "kind": "instagram"
           }
         ]
       }
@@ -56,9 +61,14 @@
         },
         "links": [
           {
-            "label": "Узнать подробнее",
-            "url": "https://doors2quest.orgs.biz/",
-            "kind": "site"
+            "label": "ВКонтакте",
+            "url": "https://vk.com/doors2quest",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/doors_2_quest/",
+            "kind": "instagram"
           }
         ]
       }
@@ -85,7 +95,28 @@
           "coordinates": "51.800583, 36.164307",
           "button": "Открыть подробности"
         },
-        "links": []
+        "links": [
+          {
+            "label": "Сайт",
+            "url": "https://ace-padelclub.ru/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/club233146476",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/ace.padel.kursk/",
+            "kind": "instagram"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/acepadelclubchat",
+            "kind": "telegram"
+          }
+        ]
       }
     },
     {
@@ -115,6 +146,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/moto_drive_kursk",
             "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/moto_drive_kursk/",
+            "kind": "instagram"
           }
         ]
       }
@@ -141,7 +177,28 @@
           "coordinates": "51.742199, 36.194358",
           "button": "Открыть подробности"
         },
-        "links": []
+        "links": [
+          {
+            "label": "Сайт",
+            "url": "https://shevkunov.su/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/shevkunov_aa",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/shevkunov_aa/",
+            "kind": "instagram"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/SHEVKUNOV_l",
+            "kind": "telegram"
+          }
+        ]
       }
     },
     {
@@ -166,7 +223,28 @@
           "coordinates": "51.750945, 36.190918",
           "button": "Открыть подробности"
         },
-        "links": []
+        "links": [
+          {
+            "label": "Сайт",
+            "url": "https://kursk.warpoint.ru",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/warpoint_kursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/Warpoint_KURSK",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/warpoint_kursk/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -193,9 +271,14 @@
         },
         "links": [
           {
-            "label": "Узнать подробнее",
-            "url": "https://welcomekursk.ru/places/453/usadba-a-a-feta",
-            "kind": "details"
+            "label": "Сайт",
+            "url": "https://fet.kursk-museum.ru/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/public191675177",
+            "kind": "vk"
           }
         ]
       }
@@ -224,9 +307,14 @@
         },
         "links": [
           {
-            "label": "Узнать подробнее",
-            "url": "https://welcomekursk.ru/places/829/gostevoi-sad-landizain",
-            "kind": "details"
+            "label": "ВКонтакте",
+            "url": "https://vk.com/landesign_kursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/landesign_kursk/",
+            "kind": "instagram"
           }
         ]
       }
@@ -253,13 +341,7 @@
           "coordinates": "51.742732, 36.206436",
           "button": "Открыть подробности"
         },
-        "links": [
-          {
-            "label": "Ориентир",
-            "url": "https://5verst.ru/boevadacha/course/",
-            "kind": "details"
-          }
-        ]
+        "links": []
       }
     },
     {
@@ -286,9 +368,24 @@
         },
         "links": [
           {
-            "label": "Узнать подробнее",
-            "url": "https://mamado.su/kursk/molodeznyi-teatr-3d-teatr-id222102",
-            "kind": "details"
+            "label": "Сайт",
+            "url": "https://theatre3dkursk.ru",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/theatre_3d",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/theatre_3d",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/the_theatre_3d/",
+            "kind": "instagram"
           }
         ]
       }
@@ -317,9 +414,14 @@
         },
         "links": [
           {
-            "label": "Узнать подробнее",
-            "url": "https://welcomekursk.ru/places/497/kurskii-oblastnoi-planetarii",
-            "kind": "details"
+            "label": "Сайт",
+            "url": "https://kursk-museum.ru/affiliates/kurskiy-oblastnoy-planetariy",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kursk.planetarium",
+            "kind": "vk"
           }
         ]
       }
@@ -353,9 +455,9 @@
             "kind": "vk"
           },
           {
-            "label": "Узнать подробнее",
-            "url": "https://welcomekursk.ru/events/16845/splavy-ot-laboratorii-puteshestvii",
-            "kind": "details"
+            "label": "Instagram",
+            "url": "https://www.instagram.com/dfgtravelpro/",
+            "kind": "instagram"
           }
         ]
       }
@@ -382,7 +484,13 @@
           "coordinates": "51.761850, 36.184228",
           "button": "Открыть подробности"
         },
-        "links": []
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/alibikursk",
+            "kind": "vk"
+          }
+        ]
       }
     },
     {
@@ -407,7 +515,23 @@
           "coordinates": "51.748762, 36.256100",
           "button": "Открыть подробности"
         },
-        "links": []
+        "links": [
+          {
+            "label": "Сайт",
+            "url": "https://karting-vertikal.ru/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/karting46",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/karting46/",
+            "kind": "instagram"
+          }
+        ]
       }
     },
     {
@@ -434,9 +558,19 @@
         },
         "links": [
           {
-            "label": "Узнать подробнее",
-            "url": "https://welcomekursk.ru/places/550/goncharnaya-shkola-kolokol",
-            "kind": "details"
+            "label": "Сайт",
+            "url": "https://kursk.kolokol.school/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kolokolschool_kursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/kolokolschool_kursk/",
+            "kind": "instagram"
           }
         ]
       }

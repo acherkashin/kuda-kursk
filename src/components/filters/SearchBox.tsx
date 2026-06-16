@@ -44,7 +44,7 @@ export function SearchBox({
 
   return (
     <div
-      className={`grid min-h-12 grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-[15px] text-[var(--color-muted)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 focus-within:border-[var(--color-accent)] focus-within:shadow-[var(--shadow-focus)] max-[700px]:min-h-11 max-[520px]:gap-2 max-[520px]:px-2.5 ${className}`}
+      className={`grid h-12 grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-[15px] text-[var(--color-muted)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 focus-within:border-[var(--color-accent)] focus-within:shadow-[var(--shadow-focus)] max-[520px]:gap-2 max-[520px]:px-2.5 ${className}`}
     >
       <SearchIcon aria-hidden="true" size={18} />
       <input

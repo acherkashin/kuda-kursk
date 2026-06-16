@@ -16,16 +16,16 @@ export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, titl
   const content = (
     <>
       <img
-        className="h-8 w-8 flex-none rounded-lg object-cover max-[520px]:h-7 max-[520px]:w-7"
+        className="h-8 w-8 flex-none rounded-lg object-cover"
         src={resolvePublicPath(logoSrc)}
         alt={`Логотип «${title}»`}
         width="32"
         height="32"
       />
-      <span className="grid min-w-0 gap-0.5">
+      <span className="grid min-w-0 gap-0.5 overflow-hidden">
         <span className="truncate leading-none tracking-[-0.02em]">{title}</span>
         {subtitle ? (
-          <span className="whitespace-normal break-words text-[12px] leading-snug font-medium text-[var(--color-muted)] max-[520px]:text-[11px]">
+          <span className="truncate whitespace-nowrap text-[12px] leading-none font-medium text-[var(--color-muted)]">
             {subtitle}
           </span>
         ) : null}
@@ -37,11 +37,11 @@ export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, titl
   // навигацию домой берёт на себя стрелка.
   if (onBack || actionSlot) {
     // На мобильном бренд-блок тянется на всю ширину строки (actionSlot = поиск справа);
-    // на desktop под-карты он остаётся компактным рядом с полем поиска.
+    // на desktop под-карты остаются на высоте поля поиска, а длинные подписи живут в ширине.
     const widthClass = className ?? (actionSlot ? "w-full" : "w-[430px] max-w-[min(430px,calc(100vw-32px))] flex-none");
 
     return (
-      <div className={`flex min-h-11 min-w-0 items-center gap-2 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 py-[5px] text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 ${widthClass}`}>
+      <div className={`flex h-12 min-w-0 items-center gap-2 overflow-hidden rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-2.5 text-[15px] font-bold text-[var(--color-text)] shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 ${widthClass}`}>
         {onBack ? (
           <>
             <IconButton size="sm" type="button" aria-label="На главную карту" onClick={onBack}>
@@ -65,7 +65,7 @@ export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, titl
 
   return (
     <a
-      className="inline-flex min-h-12 max-w-[280px] flex-none items-center gap-2.5 whitespace-nowrap rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-[15px] font-bold text-[var(--color-text)] no-underline shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:max-w-[210px] max-[700px]:min-h-11 max-[520px]:max-w-[170px] max-[520px]:gap-2 max-[520px]:px-2.5"
+      className="inline-flex h-12 max-w-[280px] flex-none items-center gap-2.5 overflow-hidden whitespace-nowrap rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-[15px] font-bold text-[var(--color-text)] no-underline shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:max-w-[210px] max-[520px]:max-w-[170px] max-[520px]:gap-2 max-[520px]:px-2.5"
       href={import.meta.env.BASE_URL}
       aria-label={title}
     >
