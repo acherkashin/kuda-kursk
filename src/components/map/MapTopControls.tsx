@@ -162,7 +162,7 @@ export function MapTopControls({
           />
         )
       ) : (
-        <div className="inline-flex max-w-full items-start gap-3">
+        <div className="flex w-full max-w-full items-start gap-3">
           <MapLogo
             actionSlot={<BrandActions isAboutOpen={isAboutOpen} onAboutOpen={onAboutOpen} />}
             className="w-fit min-w-[340px] max-w-[min(470px,calc(100vw-32px))] flex-[0_1_auto] max-[1120px]:max-w-[min(470px,48vw)]"
@@ -171,7 +171,7 @@ export function MapTopControls({
             subtitle={subtitle}
             onBack={onBackToMain}
           />
-          <section className="w-[482px] min-w-0 flex-none" aria-label="Поиск">
+          <section className="w-[482px] max-w-[482px] min-w-0 flex-[1_1_482px]" aria-label="Поиск">
             <SearchBox value={query} onChange={onQueryChange} onReset={onQueryReset} />
           </section>
         </div>
