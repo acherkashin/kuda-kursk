@@ -47,11 +47,11 @@ export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, titl
             <IconButton size="sm" type="button" aria-label="На главную карту" onClick={onBack}>
               <ArrowLeftIcon aria-hidden="true" size={18} />
             </IconButton>
-            <span className="flex min-w-0 flex-1 items-center gap-2">{content}</span>
+            <span className="flex w-max max-w-full min-w-0 flex-auto items-center gap-2">{content}</span>
           </>
         ) : (
           <a
-            className="flex min-w-0 flex-1 items-center gap-2 text-[var(--color-text)] no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+            className="flex w-max max-w-full min-w-0 flex-auto items-center gap-2 text-[var(--color-text)] no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
             href={import.meta.env.BASE_URL}
             aria-label={title}
           >

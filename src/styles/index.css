@@ -101,6 +101,10 @@ body {
     width: min(980px, calc(100vw - 476px));
     min-width: 0;
   }
+
+  [data-details-open="true"] .map-top-ui section[aria-label="Поиск"] {
+    width: max(0px, min(482px, calc(100% - 352px)));
+  }
 }
 
 [data-notice-open="true"] .map-results-ui {
