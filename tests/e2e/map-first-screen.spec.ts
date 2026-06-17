@@ -12,11 +12,13 @@ test.describe("первый экран карты", () => {
 
     await expect(page).toHaveURL(appUrlPattern("/maps/main"));
     await expect(page.getByTestId("map-shell")).toBeVisible();
-    await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "42");
+    await expect
+      .poll(async () => Number(await page.getByTestId("map-shell").getAttribute("data-place-count")), { timeout: 15_000 })
+      .toBeGreaterThan(0);
     await expect(page.getByLabel("Куда в Курске")).toBeVisible();
     await expect(page.getByAltText("Логотип «Куда в Курске»")).toBeVisible();
     await expect(page.getByTestId("place-marker")).toHaveCount(0);
-    await expect(page.getByTestId("map-place-control")).toHaveCount(42);
+    await expect(page.getByTestId("map-place-control").first()).toBeAttached();
     await expect(page.getByRole("button", { name: /Парк-отель «Песчаный»/i })).toBeAttached();
   });
 

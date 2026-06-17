@@ -1512,6 +1512,35 @@
           "public": true
         }
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9004,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.192,
+          51.73
+        ]
+      },
+      "properties": {
+        "id": 9004,
+        "mapLink": {
+          "slug": "elena-koltysheva"
+        },
+        "routable": false,
+        "balloonContent": {
+          "name": "Елена Колтышева",
+          "description": "Авторская подборка мест для свиданий, мастер-классов и активных выходных: от творческих студий до маршрутов на воде. Откройте карту Елены, если хочется собрать день вокруг впечатлений.",
+          "address": "Курск, Первомайский парк",
+          "coordinates": "51.730000, 36.192000",
+          "image": "/place-images/elena-koltysheva/portal.webp",
+          "thumbnail": "/place-thumbnails/elena-koltysheva/portal.webp"
+        },
+        "visibility": {
+          "public": true
+        }
+      }
     }
   ]
 }

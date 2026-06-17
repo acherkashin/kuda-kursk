@@ -32,7 +32,7 @@ export const mapCatalog = [
     slug: "elena-koltysheva",
     title: "Елена Колтышева",
     description: "Подборка мест для впечатлений",
-    logo: "/place-thumbnails/elena-koltysheva/white-square.webp",
+    logo: "/place-thumbnails/elena-koltysheva/portal.webp",
     dataPath: "/data/elena-koltysheva-objects.json"
   }
 ] as const satisfies readonly PublicMapConfig[];

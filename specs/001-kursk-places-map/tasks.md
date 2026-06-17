@@ -339,6 +339,16 @@
 
 ---
 
+## Phase 21: Портал карты Елены Колтышевой
+
+**Цель**: добавить на основную карту представительную точку-портал к карте Елены Колтышевой и использовать новое портретное фото как идентичность портала и под-карты без нового автоматизированного покрытия.
+
+- [X] T136 Добавить web-safe ассеты портала из `/Users/cherkalexander/Downloads/Telegram Desktop/photo_2026-06-17_08-57-38.jpg`: `public/place-images/elena-koltysheva/portal.webp` и квадратную миниатюру `public/place-thumbnails/elena-koltysheva/portal.webp`.
+- [X] T137 Добавить в `public/data/main-map.json` портал `id: 9004` с `mapLink.slug: "elena-koltysheva"`, `routable: false`, координатами `[36.192, 51.73]` у Первомайского парка и новым фото; в `src/domain/mapCatalog.ts` заменить логотип карты `elena-koltysheva` на миниатюру портала.
+- [X] T138 По разрешению пользователя убрать из существующих e2e хрупкую привязку основной карты к точному числу мест `42`, сохранив проверку загрузки карты, наличия маркеров и точные счётчики под-карт. Проверка: JSON parse, `pnpm typecheck`, `pnpm build`, `pnpm exec playwright test tests/e2e/map-first-screen.spec.ts tests/e2e/map-routes.spec.ts tests/e2e/search.spec.ts --project=desktop`, ручная visual QA `/maps/main`, `/maps/main?place=9004`, `/maps/elena-koltysheva` на desktop/mobile.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз

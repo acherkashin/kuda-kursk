@@ -13,5 +13,7 @@ test("поиск, пустое состояние и сброс обновляю
   await expect(page.getByTestId("empty-results")).toBeVisible();
 
   await page.getByRole("button", { name: "Сбросить поиск" }).click();
-  await expect(page.getByTestId("map-shell")).toHaveAttribute("data-place-count", "42");
+  await expect
+    .poll(async () => Number(await page.getByTestId("map-shell").getAttribute("data-place-count")), { timeout: 15_000 })
+    .toBeGreaterThan(1);
 });
