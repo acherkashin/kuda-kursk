@@ -3,7 +3,7 @@ import { appPath, appUrlPattern } from "./support/appPath";
 import { waitForMapSourcePlaces, waitForVisibleMapMarkers } from "./support/mapLibre";
 
 const DOZAPRAVKA_PLACE_COUNT = "19";
-const ZAPISHU_ZARISUYU_PLACE_COUNT = "21";
+const ILLUSTRATOR_LIZA_SILAKOVA_PLACE_COUNT = "21";
 const ROUTE_SWITCH_ATTEMPTS = 4;
 
 async function expectMainMapLoaded(page: Page) {
@@ -25,7 +25,11 @@ test.describe("публичные карты", () => {
     const routes = [
       { path: appPath("/maps/main"), title: "Куда в Курске" },
       { path: appPath("/maps/dozapravka"), title: "Дозаправка", count: DOZAPRAVKA_PLACE_COUNT },
-      { path: appPath("/maps/zapishu-zarisuyu"), title: "Запишу, зарисую", count: ZAPISHU_ZARISUYU_PLACE_COUNT }
+      {
+        path: appPath("/maps/illustrator-liza-silakova"),
+        title: "Иллюстратор Лиза Силакова",
+        count: ILLUSTRATOR_LIZA_SILAKOVA_PLACE_COUNT
+      }
     ];
 
     for (const route of routes) {
@@ -52,7 +56,7 @@ test.describe("публичные карты", () => {
   });
 
   test("карточка места показывает image, а не marker thumbnail", async ({ page }) => {
-    await page.goto(appPath("/maps/zapishu-zarisuyu"));
+    await page.goto(appPath("/maps/illustrator-liza-silakova"));
     await page.getByRole("button", { name: "КГУ" }).focus();
     await page.keyboard.press("Enter");
 
@@ -63,7 +67,7 @@ test.describe("публичные карты", () => {
   });
 
   test("неизвестная карта показывает fallback и возврат на основную карту", async ({ page }) => {
-    await page.goto(appPath("/maps/unknown"));
+    await page.goto(appPath("/maps/zapishu-zarisuyu"));
 
     await expect(page.getByTestId("map-fallback")).toBeVisible();
     await page.getByRole("link", { name: /На основную карту/i }).click();

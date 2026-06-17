@@ -170,11 +170,11 @@ const placeWithMapLink: PlaceFeature = {
   properties: {
     ...placeWithLandscapePhoto.properties,
     id: "story-shop-maplink",
-    mapLink: { slug: "zapishu-zarisuyu" },
+    mapLink: { slug: "illustrator-liza-silakova" },
     balloonContent: {
       ...placeWithLandscapePhoto.properties.balloonContent,
       name: "Комета",
-      tip: "Здесь продают авторские открытки сообщества «Запишу, зарисую» — загляните за сувениром."
+      tip: "Здесь продают авторские открытки иллюстратора Лизы Силаковой — загляните за сувениром."
     }
   }
 };

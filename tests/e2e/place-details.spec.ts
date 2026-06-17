@@ -94,8 +94,8 @@ test("прямая ссылка выбранного места работает
   await expect(page).toHaveURL(appUrlPattern("/maps/dozapravka?place=1619"));
 });
 
-test("редакционная Telegram-ссылка в карте зарисовок открывается как подробности", async ({ page }) => {
-  await page.goto(appPath("/maps/zapishu-zarisuyu?place=7"));
+test("редакционная Telegram-ссылка в карте Лизы Силаковой открывается как подробности", async ({ page }) => {
+  await page.goto(appPath("/maps/illustrator-liza-silakova?place=7"));
 
   const panel = page.getByTestId("place-details-panel");
   await expect(panel).toBeVisible();

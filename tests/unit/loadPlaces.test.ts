@@ -34,9 +34,9 @@ describe("loadPlaces", () => {
       }))
     );
 
-    const places = await loadPlaces("/data/zapishu-zarisuyu-objects.json");
+    const places = await loadPlaces("/data/illustrator-liza-silakova-objects.json");
 
-    expect(fetch).toHaveBeenCalledWith("/data/zapishu-zarisuyu-objects.json");
+    expect(fetch).toHaveBeenCalledWith("/data/illustrator-liza-silakova-objects.json");
     expect(places).toHaveLength(1);
     expect(places[0]?.properties.balloonContent.thumbnail).toBe("/place-thumbnails/sketches/1.jpg");
   });

@@ -87,7 +87,7 @@ type PlaceVisibility = {
 - Отображаемые внешние ссылки хранятся в `properties.links`, а не в `balloonContent.url`, `balloonContent.externalUrl` или `balloonContent.socials`.
 - `kind: "site"` и `kind: "details"` показываются как текстовая кнопка «Узнать подробнее».
 - `kind: "vk"`, `kind: "telegram"` и `kind: "instagram"` показываются как кнопки соцсетей с логотипом, только если ссылка ведёт на официальный канал самого места.
-- Редакционные Telegram-посты карты `zapishu-zarisuyu` хранятся как `kind: "details"`, чтобы не выглядеть официальной соцсетью места.
+- Редакционные Telegram-посты карты `illustrator-liza-silakova` хранятся как `kind: "details"`, чтобы не выглядеть официальной соцсетью места.
 - Ссылки на `gokursk.ru` не используются в данных и интерфейсе.
 
 ## Файл карт сообществ

@@ -22,11 +22,11 @@ export const mapCatalog = [
     dataPath: "/data/dozapravka-objects.json"
   },
   {
-    slug: "zapishu-zarisuyu",
-    title: "Запишу, зарисую",
+    slug: "illustrator-liza-silakova",
+    title: "Иллюстратор Лиза Силакова",
     description: "Места для вдохновения",
-    logo: "/brand/zapishu-zarisuyu-logo.webp",
-    dataPath: "/data/zapishu-zarisuyu-objects.json"
+    logo: "/brand/illustrator-liza-silakova-logo.webp",
+    dataPath: "/data/illustrator-liza-silakova-objects.json"
   },
   {
     slug: "elena-koltysheva",

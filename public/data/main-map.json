@@ -1444,7 +1444,7 @@
       "properties": {
         "id": 9002,
         "mapLink": {
-          "slug": "zapishu-zarisuyu"
+          "slug": "illustrator-liza-silakova"
         },
         "balloonContent": {
           "name": "Комета",
@@ -1453,7 +1453,7 @@
           "coordinates": "51.736146, 36.191675",
           "image": "/place-images/9002-kometa.jpg",
           "thumbnail": "/place-thumbnails/9002-kometa.jpg",
-          "tip": "Здесь продают авторские открытки сообщества «Запишу, зарисую» — заберите парочку на память."
+          "tip": "Здесь продают авторские открытки иллюстратора Лизы Силаковой — заберите парочку на память."
         },
         "visibility": {
           "public": true
@@ -1485,7 +1485,7 @@
       "properties": {
         "id": 9003,
         "mapLink": {
-          "slug": "zapishu-zarisuyu"
+          "slug": "illustrator-liza-silakova"
         },
         "balloonContent": {
           "name": "Твоя полка",
@@ -1494,7 +1494,7 @@
           "coordinates": "51.762129, 36.184553",
           "image": "/place-images/9003-tvoya-polka.jpg",
           "thumbnail": "/place-thumbnails/9003-tvoya-polka.jpg",
-          "tip": "Открытки сообщества «Запишу, зарисую» ищите здесь — это одна из точек, где их можно купить."
+          "tip": "Открытки иллюстратора Лизы Силаковой ищите здесь — это одна из точек, где их можно купить."
         },
         "links": [
           {
