@@ -3,7 +3,7 @@
   "features": [
     {
       "type": "Feature",
-      "id": "elena-koltysheva-001",
+      "id": 1,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -13,7 +13,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-001",
+        "id": 1,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/white-square.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/white-square.webp",
@@ -39,7 +39,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-002",
+      "id": 2,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -49,7 +49,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-002",
+        "id": 2,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/quests.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/quests.webp",
@@ -75,7 +75,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-003",
+      "id": 3,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -85,7 +85,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-003",
+        "id": 3,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/padel.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/padel.webp",
@@ -126,7 +126,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-004",
+      "id": 4,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -136,7 +136,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-004",
+        "id": 4,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/quads.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/quads.webp",
@@ -162,7 +162,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-005",
+      "id": 5,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -172,7 +172,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-005",
+        "id": 5,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/jewelry-workshop.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/jewelry-workshop.webp",
@@ -208,7 +208,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-006",
+      "id": 6,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -218,7 +218,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-006",
+        "id": 6,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/warpoint.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/warpoint.webp",
@@ -259,7 +259,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-007",
+      "id": 7,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -269,7 +269,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-007",
+        "id": 7,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/fet-estate.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/fet-estate.webp",
@@ -295,7 +295,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-008",
+      "id": 8,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -305,7 +305,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-008",
+        "id": 8,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/landizayn.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/landizayn.webp",
@@ -331,7 +331,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-009",
+      "id": 9,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -341,7 +341,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-009",
+        "id": 9,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/sup.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/sup.webp",
@@ -356,7 +356,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-010",
+      "id": 10,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -366,7 +366,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-010",
+        "id": 10,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/theatre-3d.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/theatre-3d.webp",
@@ -402,7 +402,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-011",
+      "id": 11,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -412,7 +412,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-011",
+        "id": 11,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/planetarium.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/planetarium.webp",
@@ -443,7 +443,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-012",
+      "id": 12,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -453,7 +453,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-012",
+        "id": 12,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/kayaks.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/kayaks.webp",
@@ -479,7 +479,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-013",
+      "id": 13,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -489,7 +489,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-013",
+        "id": 13,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/alibi.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/alibi.webp",
@@ -520,7 +520,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-014",
+      "id": 14,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -530,7 +530,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-014",
+        "id": 14,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/karting.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/karting.webp",
@@ -561,7 +561,7 @@
     },
     {
       "type": "Feature",
-      "id": "elena-koltysheva-015",
+      "id": 15,
       "geometry": {
         "type": "Point",
         "coordinates": [
@@ -571,7 +571,7 @@
       },
       "properties": {
         "type": "elena-koltysheva",
-        "id": "elena-koltysheva-015",
+        "id": 15,
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/pottery-workshop.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/pottery-workshop.webp",
