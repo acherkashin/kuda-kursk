@@ -139,6 +139,7 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
       map.addSource(PLACE_SOURCE_ID, {
         type: "geojson",
         data: source,
+        promoteId: "id",
         cluster: true,
         clusterRadius: 38
       });

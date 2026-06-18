@@ -1531,12 +1531,19 @@
         "routable": false,
         "balloonContent": {
           "name": "Елена Колтышева",
-          "description": "Авторская подборка мест для свиданий, мастер-классов и активных выходных: от творческих студий до маршрутов на воде. Откройте карту Елены, если хочется собрать день вокруг впечатлений.",
+          "description": "Курск, привет! Меня зовут Лена и я снимаю обзоры про разные места в городе. На этой карте я собрала 15 мест для активного, интеллектуального или творческого времяпрепровождения с друзьями или семьей. Сохраняете карту и подписывайтесь на меня :)",
           "address": "Курск, Первомайский парк",
           "coordinates": "51.730000, 36.192000",
           "image": "/place-images/elena-koltysheva/portal.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/portal.webp"
         },
+        "links": [
+          {
+            "label": "Instagram Лены",
+            "url": "https://www.instagram.com/lpolskaya?igsh=dGN6ejZxbHpoMWdp&utm_source=qr",
+            "kind": "instagram"
+          }
+        ],
         "visibility": {
           "public": true
         }

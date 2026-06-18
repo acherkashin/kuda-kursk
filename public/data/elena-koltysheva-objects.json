@@ -54,7 +54,7 @@
           "image": "/place-images/elena-koltysheva/quests.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/quests.webp",
           "name": "Doors2Quest",
-          "description": "Квесты и прятки в темноте для компании, которой хочется не просто посидеть, а прожить маленькое приключение.",
+          "description": "Хочется пощекотать нервишки? Добро пожаловать на квесты или прятки в темноте. На выбор есть несколько вариантов сценариев как для детей, так и для взрослых.",
           "address": "Курск, ул. Дзержинского, 49",
           "coordinates": "51.724903, 36.178207",
           "button": "Открыть подробности"
@@ -90,7 +90,7 @@
           "image": "/place-images/elena-koltysheva/padel.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/padel.webp",
           "name": "Ace Padel Club",
-          "description": "Падел-клуб для активной встречи с друзьями: динамично, азартно и достаточно понятно даже для первого раза.",
+          "description": "Место для активного отдыха в Курске, где можно поиграть в трендовую игру падел. Правила довольно простые, поэтому справится даже новичок.",
           "address": "Курск, ул. Карла Маркса, 81Б",
           "coordinates": "51.800583, 36.164307",
           "button": "Открыть подробности"
@@ -115,6 +115,11 @@
             "label": "Telegram",
             "url": "https://t.me/acepadelclubchat",
             "kind": "telegram"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/DV1BklLiN5F/?igsh=MWFtZnJ1aXh4NWd2cA==",
+            "kind": "details"
           }
         ]
       }
@@ -136,7 +141,7 @@
           "image": "/place-images/elena-koltysheva/quads.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/quads.webp",
           "name": "Квадроциклы Moto Drive",
-          "description": "Маршруты на квадроциклах для тех, кому хочется выбраться за город и добавить в выходной немного адреналина.",
+          "description": "Прокат мотоциклов и квадроциклов по живописным маршрутам для тех, кому хочется выбраться за город и добавить в выходной немного адреналина.",
           "address": "Курская область, точка старта Moto Drive",
           "coordinates": "51.694811, 35.960125",
           "button": "Открыть подробности"
@@ -172,7 +177,7 @@
           "image": "/place-images/elena-koltysheva/jewelry-workshop.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/jewelry-workshop.webp",
           "name": "Ювелирная мастерская Shevkunov",
-          "description": "Мастерская, где можно попробовать ювелирное дело руками и собрать украшение с личной историей.",
+          "description": "Возможность познакомиться с основами ювелирного искусства и своими руками создать украшение с историей. Для тех, кто уже все попробовал.",
           "address": "Курск, ул. Ленина, 63",
           "coordinates": "51.742199, 36.194358",
           "button": "Открыть подробности"
@@ -218,7 +223,7 @@
           "image": "/place-images/elena-koltysheva/warpoint.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/warpoint.webp",
           "name": "Warpoint",
-          "description": "VR-арена для команды: надеваешь шлем, берёшь оборудование и оказываешься внутри игры.",
+          "description": "Парк виртуальной реальности, где можно поиграть в Counter strike в реальной жизни. Есть как командные игры (где вы играете своей компанией), так и открытые. А еще это отличный способ отметить День рождения.",
           "address": "Курск, ул. Карла Маркса, 10",
           "coordinates": "51.750945, 36.190918",
           "button": "Открыть подробности"
@@ -243,6 +248,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/warpoint_kursk/",
             "kind": "instagram"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/DXTdOMBiJXN/?igsh=YWU1aXcxaGlpMG4w",
+            "kind": "details"
           }
         ]
       }
@@ -264,7 +274,7 @@
           "image": "/place-images/elena-koltysheva/fet-estate.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/fet-estate.webp",
           "name": "Усадьба Афанасия Фета",
-          "description": "Тихая усадьба в Воробьёвке: музей, парк и тот самый размеренный выезд за город, когда хочется воздуха и истории.",
+          "description": "Живописный музей-заповедник, где можно познакомиться с жизнью и творчеством поэта Афанасия Фета, насладиться атмосферой русской усадьбы XIX века или просто прогуляться по старинному парку, устроив пикник в одной из беседок. Потрясающие фото гарантирую!",
           "address": "Золотухинский район, дер. 1-я Воробьёвка, 81А",
           "coordinates": "51.989105, 36.477422",
           "button": "Открыть подробности"
@@ -300,7 +310,7 @@
           "image": "/place-images/elena-koltysheva/landizayn.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/landizayn.webp",
           "name": "Гостевой сад «Ландизайн»",
-          "description": "Загородный сад для прогулок, фотосессий и спокойного дня среди растений, дорожек и зелени.",
+          "description": "Потрясающе живописное место с изобилием зелени самых разных видов и сортов. Подходит для прогулок, фотосессий и просто приятного и спокойного времяпрепровождения.",
           "address": "Курский район, СНТ имени 1 Мая, участок 221",
           "coordinates": "51.84131, 36.06554",
           "button": "Открыть подробности"
@@ -336,7 +346,7 @@
           "image": "/place-images/elena-koltysheva/sup.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/sup.webp",
           "name": "Сапы на Боевой даче",
-          "description": "Водная прогулка на сапе в городской зелени: формат для тёплого вечера, когда хочется двигаться, но без суеты.",
+          "description": "Отличный способ отдохнуть на воде, насладиться природой и попробовать что-то новое. Подходит как для спокойного отдыха, так и для активного времяпрепровождения с друзьями.",
           "address": "Курск, парк «Боева дача»",
           "coordinates": "51.742732, 36.206436",
           "button": "Открыть подробности"
@@ -361,7 +371,7 @@
           "image": "/place-images/elena-koltysheva/theatre-3d.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/theatre-3d.webp",
           "name": "Молодёжный театр «3Д»",
-          "description": "Камерный театр на Радищева: хороший вариант для вечера, когда хочется не большого зала, а близкого контакта со сценой.",
+          "description": "Театр, работающий в стиле пластической драмы. Купить билет не так просто, но если у вас получится, то вы точно не пожалеете. Мои любимые постановки: «Холстомер», «Лавина», «В мире людей».",
           "address": "Курск, ул. Радищева, 35, этаж 1",
           "coordinates": "51.736860, 36.190633",
           "button": "Открыть подробности"
@@ -407,7 +417,7 @@
           "image": "/place-images/elena-koltysheva/planetarium.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/planetarium.webp",
           "name": "Курский областной планетарий",
-          "description": "Место для космической паузы в центре города: лекции, программы под куполом и немного детского удивления.",
+          "description": "Здесь можно познакомиться с тайнами космоса, увидеть звёздное небо и узнать больше о Вселенной в увлекательном формате. Один из самых необычных и познавательных вариантов досуга.",
           "address": "Курск, ул. Сонина, 4",
           "coordinates": "51.726003, 36.192002",
           "button": "Открыть подробности"
@@ -422,6 +432,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/kursk.planetarium",
             "kind": "vk"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/DJwqsrQtjY7/?igsh=MTZqenozaTcwcGE5ZA==",
+            "kind": "details"
           }
         ]
       }
@@ -443,7 +458,7 @@
           "image": "/place-images/elena-koltysheva/kayaks.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/kayaks.webp",
           "name": "Байдарки от «Лаборатории путешествий»",
-          "description": "Организованные сплавы на байдарках с инструктором, трансфером и походным настроением без необходимости собирать всё самому.",
+          "description": "Живописные маршруты, свежий воздух и возможность провести время с друзьями вдали от городской суеты. Маршрут сопровождают опытные инструкторы, а в конце вас ждет вкусный ужин на костре.",
           "address": "Курск, ул. Перекальского, 1, место сбора у филармонии",
           "coordinates": "51.748537, 36.196783",
           "button": "Открыть подробности"
@@ -479,7 +494,7 @@
           "image": "/place-images/elena-koltysheva/alibi.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/alibi.webp",
           "name": "«Алиби»",
-          "description": "Детективная игра для команды: собираете факты, спорите о версиях и проверяете, кто внимательнее всех.",
+          "description": "Детективная игра для команды: расследуйте настоящие преступления, разгадывайте перехваченные шифры, собирайте улики и выносите вердикт, как настоящий детектив. Место проведения уточняйте в официальном сообществе.",
           "address": "Курск, ул. Карла Маркса, 68",
           "coordinates": "51.761850, 36.184228",
           "button": "Открыть подробности"
@@ -489,6 +504,16 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/alibikursk",
             "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/kvizkvest",
+            "kind": "instagram"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/DT59X1BiP-z/?igsh=cmQ0Mmg1YXhtNDI3",
+            "kind": "details"
           }
         ]
       }
@@ -499,8 +524,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          36.2561,
-          51.748762
+          36.255864,
+          51.748820
         ]
       },
       "properties": {
@@ -509,10 +534,10 @@
         "balloonContent": {
           "image": "/place-images/elena-koltysheva/karting.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/karting.webp",
-          "name": "Картинг",
-          "description": "Точка для скоростного заезда: формат, где всё решают траектория, реакция и желание обогнать друзей.",
-          "address": "Курск, точка картинга по GPS фото",
-          "coordinates": "51.748762, 36.256100",
+          "name": "картинг-клуб «Вертикаль»",
+          "description": "Можно устроить гонку с друзьями или просто насладиться скоростью и адреналином.",
+          "address": "ул. 1-я Щигровская, 52А",
+          "coordinates": "51.748820, 36.255864",
           "button": "Открыть подробности"
         },
         "links": [
@@ -551,7 +576,7 @@
           "image": "/place-images/elena-koltysheva/pottery-workshop.webp",
           "thumbnail": "/place-thumbnails/elena-koltysheva/pottery-workshop.webp",
           "name": "Гончарная школа «Колокол»",
-          "description": "Гончарный мастер-класс для тех, кто хочет замедлиться и сделать вещь руками: за кругом, с глиной и внимательным мастером.",
+          "description": "Уютное пространство для творчества, где каждый может поработать за гончарным кругом и создать уникальное изделие своими руками. Огромное количество МК для взрослых и детей.",
           "address": "Курск, ул. Радищева, 87/7",
           "coordinates": "51.746589, 36.190488",
           "button": "Открыть подробности"

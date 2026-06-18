@@ -357,6 +357,17 @@
 
 ---
 
+## Phase 23: Контент карты Елены Колтышевой
+
+**Цель**: обновить текст портала Елены на основной карте, описания мест и ссылки на обзоры без изменения интерфейса, схемы данных и нового автоматизированного покрытия.
+
+- [X] T140 Обновить `public/data/main-map.json`: оставить название портала `id: 9004` «Елена Колтышева», заменить описание на приветственный текст от Лены и добавить Instagram `lpolskaya`.
+- [X] T141 Обновить `public/data/elena-koltysheva-objects.json`: сохранить «Белый квадрат» без изменений, заменить описания 14 остальных мест, добавить официальную Instagram-ссылку «Алиби» и кнопки `Мой обзор` с `kind: "details"` для «Алиби», Ace Padel Club, планетария и Warpoint; текущие сайты Shevkunov и Фета оставить без изменений. Проверка: `jq empty public/data/main-map.json public/data/elena-koltysheva-objects.json`, `pnpm typecheck`, `pnpm build`; новое тестовое покрытие не добавлялось.
+- [X] T142 Исправить hover/selected состояние маркеров на карте `elena-koltysheva`: MapLibre source `places` теперь использует `promoteId: "id"`, поэтому feature-state применяется к строковым id под-карт так же, как к числовым id основной карты. Проверка: `pnpm typecheck`, `pnpm build`, ручная Playwright-диагностика hover на `/maps/main` и `/maps/elena-koltysheva`; новое тестовое покрытие не добавлялось.
+- [X] T143 Уточнить место `elena-koltysheva-014` в `public/data/elena-koltysheva-objects.json`: переименовать в `картинг-клуб «Вертикаль»`, заменить адрес на `ул. 1-я Щигровская, 52А` и обновить координаты на `51.748820, 36.255864` с GeoJSON-порядком `[36.255864, 51.748820]`. Проверка: `jq empty public/data/elena-koltysheva-objects.json`, `pnpm typecheck`; новое тестовое покрытие не добавлялось.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз
