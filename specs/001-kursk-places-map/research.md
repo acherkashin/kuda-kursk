@@ -18,11 +18,11 @@
 
 **Alternatives considered**: CSS transitions достаточно для простых hover states, но хуже покрывают presence transitions; GSAP избыточен для v1.
 
-## Решение: MapLibre GL JS + OpenFreeMap
+## Решение: MapLibre GL JS + CARTO Positron raster tiles
 
-**Rationale**: MapLibre GL JS работает с векторными style JSON, GeoJSON sources, слоями, clustering и кастомными marker interactions. OpenFreeMap предоставляет бесплатные OpenStreetMap-based styles без регистрации, API-ключей и cookies, что соответствует требованию v1. URL style/tiles нужно держать в конфиге, потому что public instance не обещает SLA.
+**Rationale**: MapLibre GL JS работает с raster style JSON, GeoJSON sources, clustering и кастомными marker interactions. CARTO Positron raster tiles дают светлую OSM-based подложку без регистрации, API-ключей, backend и собственного tile-сервера, что соответствует требованию v1 и убирает зависимость от медленной загрузки внешнего TileJSON. URL tiles остаётся в заменяемом style JSON.
 
-**Alternatives considered**: Leaflet проще, но raster tiles хуже подходят для точной настройки подписей и muted map style; Google Maps, Яндекс.Карты и 2ГИС SDK требуют API policy/keys или коммерческих условий и не подходят как базовая карта без ключей.
+**Alternatives considered**: Vector tiles дают точную настройку дорог, воды и подписей, но доступные no-key public endpoints не дают нужной надёжности; Leaflet проще, но потребовал бы миграции текущих MapLibre source/layer interactions; Google Maps, Яндекс.Карты и 2ГИС SDK требуют API policy/keys или коммерческих условий и не подходят как базовая карта без ключей.
 
 ## Решение: vite-plugin-pwa и workbox-window
 

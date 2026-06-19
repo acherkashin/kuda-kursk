@@ -50,8 +50,8 @@
 - [X] T021 Реализовать загрузку и валидацию карт сообществ из статического JSON в `src/data/loadCommunityMaps.ts`
 - [X] T022 Создать declarative routes `/` и `/maps/:slug` в `src/app/router.tsx`
 - [X] T023 Настроить общий layout приложения с полноэкранной картой как первым экраном в `src/app/App.tsx`
-- [X] T024 [P] Создать заменяемый конфиг OpenFreeMap/MapLibre и центра Курска в `src/domain/mapConfig.ts`
-- [X] T025 [P] Подготовить приглушённый style JSON карты с русскими подписями и нужным географическим контекстом в `public/map-styles/kursk-positron.json`
+- [X] T024 [P] Создать заменяемый конфиг MapLibre и центра Курска в `src/domain/mapConfig.ts`
+- [X] T025 [P] Подготовить приглушённый style JSON карты с CARTO Positron raster-подложкой и нужным географическим контекстом в `public/map-styles/kursk-positron.json`
 - [X] T026 [P] Создать no-op analytics adapter, который не создаёт `window.ym` без consent и env counter id, в `src/services/analytics/analyticsAdapter.ts`
 - [X] T027 [P] Создать PWA registration helper с update prompt API в `src/services/pwa/registerServiceWorker.ts`
 
@@ -374,6 +374,7 @@
 **Цель**: убрать предварительную загрузку JSON и медиа всех карт через PWA precache, сохранив фотомаркеры для выбранной карты и ленивую загрузку полных фотографий карточки.
 
 - [X] T145 Сузить PWA precache в `vite.config.ts` до app shell и PWA-иконок: убрать `data/*.json`, `map-styles/*.json`, брендовые изображения и общий glob для `json/webp/png/svg`; оставить runtime cache `/data/`, чтобы кэшировался только фактически запрошенный JSON выбранной карты. В `src/components/map/KurskMap.tsx` удалить дублирующие вызовы `addMarkerImages`, оставив загрузку миниатюр после готовности MapLibre source и изменения текущего набора `places`. Проверка: `pnpm typecheck`, `pnpm build`, инспекция `dist/sw.js` на отсутствие `data/`, `place-images/`, `place-thumbnails/` и `brand/` в precache; новое тестовое покрытие не добавлялось.
+- [X] T146 Заменить старый vector source в `public/map-styles/kursk-positron.json` на no-key CARTO Positron raster tiles: убрать внешний TileJSON, `glyphs` и vector layers базовой карты, сохранить MapLibre и GeoJSON-маркеры поверх raster-подложки. Использовать CARTO `@2x` raster tiles при `tileSize: 256`, чтобы retina/mobile экраны получали 512px тайлы без размытия; обесцветить именно raster tiles через MapLibre paint (`raster-saturation: -1`, лёгкая яркость и мягкий contrast), чтобы не применять CSS-фильтр ко всему canvas и не гасить маркеры/фотографии. Обновить `specs/001-kursk-places-map/plan.md`, `specs/001-kursk-places-map/research.md`, `specs/001-kursk-places-map/quickstart.md` и `specs/001-kursk-places-map/contracts/pwa-behavior.md` под новый источник подложки. Проверка: `pnpm typecheck`, `pnpm build`, поиск по старому endpoint и названию прежнего провайдера в `public`, `src` и `specs/001-kursk-places-map`, ручная проверка через локальный сервер; новое тестовое покрытие не добавлялось.
 
 ---
 
