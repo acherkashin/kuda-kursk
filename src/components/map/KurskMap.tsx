@@ -146,7 +146,6 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
       addMarkerImagePlaceholders(map, places);
       addPlaceLayers(map);
       setMapState("ready");
-      void addMarkerImages(map, places).catch(() => undefined);
     });
     map.on("error", () => setMapState((state) => (state === "loading" ? "error" : state)));
 
@@ -190,7 +189,6 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
       resetMarkerInteractionState(map);
       addMarkerImagePlaceholders(map, places);
       source.setData(createPlaceFeatureCollection(places));
-      void addMarkerImages(map, places).catch(() => undefined);
     };
 
     if (map.getSource(PLACE_SOURCE_ID)) {

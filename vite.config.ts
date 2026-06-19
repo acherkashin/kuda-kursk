@@ -13,9 +13,6 @@ export default defineConfig({
     VitePWA({
       registerType: "prompt",
       includeAssets: [
-        "data/*.json",
-        "map-styles/*.json",
-        "brand/kuda-v-kurske-logo-128.webp",
         "pwa/icon-192.png",
         "pwa/icon-512.png",
         "pwa/apple-touch-icon.png",
@@ -36,7 +33,7 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg,json,webp}"],
+        globPatterns: ["**/*.{js,css,html,ico}"],
         navigateFallback: `${githubPagesBase}index.html`,
         runtimeCaching: [
           {
