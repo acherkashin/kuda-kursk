@@ -1,0 +1,4 @@
+interface:
+  display_name: "Media Place Description Writer"
+  short_description: "Transcribe media and draft place copy"
+  default_prompt: "Use $media-place-description-writer to transcribe this video and draft a place description."

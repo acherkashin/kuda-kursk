@@ -36,14 +36,14 @@
             "kind": "instagram"
           },
           {
-            "label": "Посмотреть, как это выглядит",
-            "url": "https://www.instagram.com/reel/DRyrwNajZbm/",
-            "kind": "site"
+            "label": "Айда смотреть обзор 1",
+            "url": "https://www.instagram.com/p/DRyrwNajZbm/",
+            "kind": "details"
           },
           {
-            "label": "Ещё один вкусный заход",
-            "url": "https://www.instagram.com/reel/DYFuicyNqwY/",
-            "kind": "site"
+            "label": "Айда смотреть обзор 2",
+            "url": "https://www.instagram.com/p/DYFuicyNqwY/",
+            "kind": "details"
           }
         ]
       }
@@ -64,13 +64,19 @@
         "balloonContent": {
           "image": "/place-images/2010-image-11e842fddd.jpg",
           "name": "Мясное место",
-          "description": "Демократичный ресторан в центре Курска с мясными блюдами, стейками, бургерами и грилем.",
+          "description": "Место с фокусом на мясо: здесь логичнее смотреть в сторону рёбер и стейков, а не пытаться угадать идеальное блюдо во всём меню. Ребро в медово-горчичном соусе выглядит самой уверенной позицией, а рибай берёт сочностью и выраженным вкусом мяса. Хороший вариант, если хочется плотного мясного ужина без сложного сценария: пришёл, выбрал стейк или ребро, дальше всё понятно.",
           "address": "Курск, ул. Ленина, 2, 1 этаж",
           "coordinates": "51.731890, 36.192332",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2010-thumbnail-11e842fddd.jpg"
         },
-        "links": []
+        "links": [
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DR38aSmDftv/",
+            "kind": "details"
+          }
+        ]
       }
     },
     {
@@ -110,6 +116,11 @@
             "label": "Telegram",
             "url": "https://t.me/tomatorest",
             "kind": "telegram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DSEuw0KCHmi/",
+            "kind": "details"
           }
         ]
       }
@@ -130,7 +141,7 @@
         "balloonContent": {
           "image": "/place-images/2012-image-7eb76b7ddb.png",
           "name": "Forno Mio",
-          "description": "Итальянский ресторан в центре Курска с открытой кухней, домашней пастой, римской пиццей и десертами.",
+          "description": "Forno Mio — место для тех, кто любит проверять, насколько далеко в Курске может зайти итальянская тема. В меню есть тартар, пицца с пузырчатым тестом, лазанья, густые соусы и десерты, где лимон ведёт себя почти как отдельный ингредиент-аттракцион. Цезарь можно оставить на потом, зато нежный «Наполеон», тирамису и «Киевский» звучат как хороший повод устроить себе сладкий финал без долгих уговоров.",
           "address": "Курск, ул. Ленина, 12, ЦУМ",
           "coordinates": "51.733711, 36.192502",
           "button": "Узнать подробнее",
@@ -151,6 +162,16 @@
             "label": "Telegram",
             "url": "https://t.me/fornomio",
             "kind": "telegram"
+          },
+          {
+            "label": "Айда смотреть обзор 1",
+            "url": "https://www.instagram.com/p/DSJ4a5yCJ2I/",
+            "kind": "details"
+          },
+          {
+            "label": "Айда смотреть обзор 2",
+            "url": "https://www.instagram.com/p/DWm3qASDMMA/",
+            "kind": "details"
           }
         ]
       }
@@ -182,6 +203,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/chicken_house_kursk",
             "kind": "vk"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DTYcIIDDdn8/",
+            "kind": "details"
           }
         ]
       }
@@ -218,6 +244,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/forest_house_kursk/",
             "kind": "instagram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DTnZgKpjaR3/",
+            "kind": "details"
           }
         ]
       }
@@ -295,6 +326,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/anonymouspub46/",
             "kind": "instagram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DT9CQdViM9M/",
+            "kind": "details"
           }
         ]
       }
@@ -315,7 +351,7 @@
         "balloonContent": {
           "image": "/place-images/2017-image-7f1e150208.jpg",
           "name": "Макали Хинкали",
-          "description": "Ресторан кавказской кухни в Курске с хинкали, шашлыком, осетинскими пирогами и доставкой.",
+          "description": "Макали Хинкали — место для проверки, сколько хинкали помещается в человека до фразы «я просто попробую ещё один». В меню — хачапури, грибные хинкали со сливочным соусом, люля из баранины, баклажаны и литровые лимонады, которые подозрительно быстро заканчиваются. Сытно, шумно, по-кавказски: заходить стоит с аппетитом и без планов на лёгкий перекус.",
           "address": "Курск, ул. Ломакина, 17",
           "coordinates": "51.757720, 36.185757",
           "button": "Узнать подробнее",
@@ -336,6 +372,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/makali_hinkali/",
             "kind": "instagram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DUPECkuCLuZ/",
+            "kind": "details"
           }
         ]
       }
@@ -367,6 +408,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/pasteria.visota/",
             "kind": "instagram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DUpjEsyDQxZ/",
+            "kind": "details"
           }
         ]
       }
@@ -403,6 +449,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/gogiarest",
             "kind": "vk"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DVNWvb2DEyS/",
+            "kind": "details"
           }
         ]
       }
@@ -444,6 +495,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/nbcake.studio/",
             "kind": "instagram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DVu2gs1jGZk/",
+            "kind": "details"
           }
         ]
       }
@@ -464,7 +520,7 @@
         "balloonContent": {
           "image": "/place-images/199-image-e6d4fc9f77.jpg",
           "name": "Отель «Bellagio»",
-          "description": "Гостинично-ресторанный комплекс на въезде в Курск со стороны Москвы, рядом с Триумфальной аркой.",
+          "description": "Bellagio — гостинично-ресторанный комплекс, где за столом быстро становится понятно: сюда идут за мангалом. Люля из баранины, свиная шея и корейка звучат как главные поводы для визита: мясо сочное, мягкое и с заметным ароматом огня. Для компании легко собрать большой ужин — от салата с баклажанами и творожным сыром до хачапури, хинкали и пиццы с грушей и горгонзолой. Место подойдёт, когда хочется красиво посидеть и поесть плотно, без лишней церемонии.",
           "address": "Курск, ул. Карла Маркса, 107",
           "coordinates": "51.795791, 36.161646",
           "button": "Узнать подробнее",
@@ -475,6 +531,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/restaurant_kursk",
             "kind": "vk"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DV-QFGhjG2j/",
+            "kind": "details"
           }
         ]
       }
@@ -495,7 +556,7 @@
         "balloonContent": {
           "image": "/place-images/2021-image-ede3387e72.jpg",
           "name": "Wakanda",
-          "description": "Ресторан в бизнес-центре «Электроприбор» на улице Ленина.",
+          "description": "Wakanda — место для тех, кто готов проверять гастрономическое любопытство на прочность. Африканские супы, жареная скумбрия, курица в остром соусе, мясной пирог и рис со специями звучат интригующе, но вкусы здесь скорее специфичные, чем дружелюбные. Плотный рыбный аромат проходит почти через всё меню, а знакомого комфорта в тарелке лучше не ждать. Это не точка «куда всем срочно идти», а опыт из серии: попробовать, удивиться и, возможно, спокойно вернуться к борщу.",
           "address": "Курск, ул. Ленина, 90/2, 1 этаж",
           "coordinates": "51.745887, 36.193717",
           "button": "Открыть подробности",
@@ -511,6 +572,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/wakanda.kursk/",
             "kind": "instagram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DWDmyUdDXaG/",
+            "kind": "details"
           }
         ]
       }
@@ -547,6 +613,11 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/chaihana_46",
             "kind": "vk"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DWTSiTdjYt6/",
+            "kind": "details"
           }
         ]
       }
@@ -588,6 +659,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/odnyshka.rumochnaya",
             "kind": "instagram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DW0XF_HjCDx/",
+            "kind": "details"
           }
         ]
       }
@@ -631,13 +707,13 @@
         "type": "еда",
         "id": 2024,
         "balloonContent": {
-          "image": "/place-images/2024-image-227e81d94e.jpg",
+          "image": "/place-images/2024-image-b3be7a6fd6.jpg",
           "name": "Завтрак тебе",
           "description": "Кафе во дворе Дмитриевских конюшен с завтраками в течение дня, десертами, кофе, смузи и авторскими напитками.",
           "address": "Курск, ул. Димитрова, 66, вход со двора",
           "coordinates": "51.743742, 36.186278",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/2024-thumbnail-227e81d94e.jpg"
+          "thumbnail": "/place-thumbnails/2024-thumbnail-b3be7a6fd6.jpg"
         },
         "links": [
           {
@@ -675,6 +751,99 @@
             "label": "ВКонтакте",
             "url": "https://vk.com/club187510849",
             "kind": "vk"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 2004,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.186764,
+          51.744344
+        ]
+      },
+      "properties": {
+        "type": "еда",
+        "id": 2004,
+        "balloonContent": {
+          "image": "/place-images/2004-image-2b5644de2f.jpg",
+          "name": "Дикий Кабан",
+          "description": "«Дикий кабан» — место, куда идут не за предсказуемым ужином, а за гастрономическим приключением: медведь, бобр, перепела, кабан и другие поводы оживить разговор за столом. Визит ощущается немного как аттракцион с дичью: местами спорно, местами неожиданно, но точно не скучно. Лучше приходить компанией и пробовать несколько позиций сразу.",
+          "address": "Курск, ул. Димитрова, 66",
+          "coordinates": "51.744344, 36.186764",
+          "button": "Открыть сайт",
+          "thumbnail": "/place-thumbnails/2004-thumbnail-2b5644de2f.jpg"
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.ru/club235487508",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/dikiykabanru",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/dikiy.kaban.ru/",
+            "kind": "instagram"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DUkY1Ukjfu5/",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1465,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.133998,
+          51.716408
+        ]
+      },
+      "properties": {
+        "section": "8",
+        "type": "907",
+        "id": 1465,
+        "balloonContent": {
+          "image": "/place-images/1465-image-9eda5c82a9.jpg",
+          "name": "Кофейня «Пышки и не только»",
+          "description": "Кофейня с пышками собственного приготовления",
+          "address": "Курск, проспект Вячеслава Клыкова, 101",
+          "coordinates": "51.716408, 36.133998",
+          "button": "Узнать подробнее",
+          "thumbnail": "/place-thumbnails/1465-91d2bc7ddf.webp"
+        },
+        "links": [
+          {
+            "label": "Узнать подробнее",
+            "url": "https://pyshki-i-ne-tolko.clients.site/",
+            "kind": "site"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/kursk_cafebakery/",
+            "kind": "instagram"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/kursk_cafebakery",
+            "kind": "vk"
+          },
+          {
+            "label": "Айда смотреть обзор",
+            "url": "https://www.instagram.com/p/DVc2AEgDF1Q/",
+            "kind": "details"
           }
         ]
       }

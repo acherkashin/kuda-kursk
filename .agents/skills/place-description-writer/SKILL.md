@@ -28,6 +28,7 @@ Target: short city-guide copy with a confident, conversational voice.
 - Length: usually 2-4 sentences, compact enough for a place card.
 - Opening: name the kind of place and give a hook immediately.
 - Middle: add concrete details from the draft: what to see, try, notice, order, ask about, or why the place matters.
+- Visit feel: the description should briefly convey what it feels like to visit the place.
 - Ending: optional local tip or gentle invitation, not generic marketing.
 - Tone: alive, lightly witty when appropriate, but not mean.
 - Vocabulary: prefer specific nouns and verbs over adjectives. Replace "атмосферное", "уникальное", "обязательно к посещению" with observable details.
