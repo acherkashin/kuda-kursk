@@ -71,6 +71,7 @@ If the helper reports that Local Whisper is missing, explain that `ffmpeg` is pr
 - Do not invent details: no dates, addresses, prices, schedules, names, awards, rooms, services, dishes, or amenities unless present in the transcript or user context.
 - Keep the place description short enough for a map card: usually 2-4 sentences.
 - Preserve uncertainty: if the transcript sounds subjective, write it as an impression from the review instead of a guaranteed fact.
+- Копируй стиль из видео, а не пиши как будто ты ИИ: переноси угол зрения, ритм, степень иронии и живые формулировки, но не тащи в публичное описание речевой мусор, мат или маркеры источника.
 - Публичное описание места должно читаться как самостоятельный текст для карты. Если в нём есть маркеры источника вроде «ролик», «видео», «обзор», «отзыв», «автор», «транскрипт», «в ролике», «по словам» или «хвалят», перепиши его перед ответом.
 - Public copy must stay constructive and safe. Omit rumors, accusations, private data, medical/legal claims, and unsupported negative claims.
 - If the user later asks to update map data, switch to `place-description-writer` and require explicit approval of the exact final text before editing JSON.

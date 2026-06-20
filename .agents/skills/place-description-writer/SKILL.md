@@ -31,6 +31,7 @@ Target: short city-guide copy with a confident, conversational voice.
 - Visit feel: the description should briefly convey what it feels like to visit the place.
 - Ending: optional local tip or gentle invitation, not generic marketing.
 - Tone: alive, lightly witty when appropriate, but not mean.
+- If the source is a video or transcript, copy the style from the video instead of writing like AI: preserve its angle, rhythm, and level of irony while keeping the public copy clean.
 - Vocabulary: prefer specific nouns and verbs over adjectives. Replace "атмосферное", "уникальное", "обязательно к посещению" with observable details.
 
 ## Safety Rules

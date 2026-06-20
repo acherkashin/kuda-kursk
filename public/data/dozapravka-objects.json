@@ -16,13 +16,13 @@
         "type": "163",
         "id": 1619,
         "balloonContent": {
-          "image": "/place-images/1619-image-e144610c12.jpg",
+          "image": "/place-images/1619-image-dozapravka-651501475.jpg",
           "name": "Кухмистерская Atilan",
           "description": "Atilan — это когда берёшь жареную картошечку, жульенчик, драники в сметанке, жареные пельмени собственного приготовления и уже не задаёшь лишних вопросов. Тут всё по делу: сочно, плотно, по-домашнему и с тем самым вайбом «ну просто посмотри».",
           "address": "Курск, ул. Асеева 1к1",
           "coordinates": "51.720962, 36.161583",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/1619-2a4268de2a.webp"
+          "thumbnail": "/place-thumbnails/1619-thumbnail-dozapravka-651501475.jpg"
         },
         "links": [
           {
@@ -62,13 +62,13 @@
         "type": "еда",
         "id": 2010,
         "balloonContent": {
-          "image": "/place-images/2010-image-11e842fddd.jpg",
+          "image": "/place-images/2010-image-dozapravka-589165129.jpg",
           "name": "Мясное место",
           "description": "Место с фокусом на мясо: здесь логичнее смотреть в сторону рёбер и стейков, а не пытаться угадать идеальное блюдо во всём меню. Ребро в медово-горчичном соусе выглядит самой уверенной позицией, а рибай берёт сочностью и выраженным вкусом мяса. Хороший вариант, если хочется плотного мясного ужина без сложного сценария: пришёл, выбрал стейк или ребро, дальше всё понятно.",
           "address": "Курск, ул. Ленина, 2, 1 этаж",
           "coordinates": "51.731890, 36.192332",
           "button": "Открыть подробности",
-          "thumbnail": "/place-thumbnails/2010-thumbnail-11e842fddd.jpg"
+          "thumbnail": "/place-thumbnails/2010-thumbnail-dozapravka-589165129.jpg"
         },
         "links": [
           {
@@ -93,13 +93,13 @@
         "type": "еда",
         "id": 2011,
         "balloonContent": {
-          "image": "/place-images/2011-image-1192fe8dd6.webp",
+          "image": "/place-images/2011-image-dozapravka-582079277.jpg",
           "name": "Томато",
-          "description": "Ресторан сети «Томато» на проспекте Вячеслава Клыкова с пиццей, основным меню и детской зоной.",
+          "description": "«Томато» — место из серии «очень много отзывов, значит надо проверить самим». В меню всё сразу: роллы, бургер, шашлык, пицца, том ям и тирамису, но уверенно вывозят скорее суп, десерт и приятное обслуживание. Остальное — с переменным успехом: где-то домашне, где-то оверпрайс, а где-то будто Курск снова на связи из 2007-го.",
           "address": "Курск, пр-т Вячеслава Клыкова, 1А",
           "coordinates": "51.721893, 36.134479",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/2011-thumbnail-1192fe8dd6.webp"
+          "thumbnail": "/place-thumbnails/2011-thumbnail-dozapravka-582079277.jpg"
         },
         "links": [
           {
@@ -139,13 +139,13 @@
         "type": "еда",
         "id": 2012,
         "balloonContent": {
-          "image": "/place-images/2012-image-7eb76b7ddb.png",
+          "image": "/place-images/2012-image-dozapravka-586687731.jpg",
           "name": "Forno Mio",
           "description": "Forno Mio — место для тех, кто любит проверять, насколько далеко в Курске может зайти итальянская тема. В меню есть тартар, пицца с пузырчатым тестом, лазанья, густые соусы и десерты, где лимон ведёт себя почти как отдельный ингредиент-аттракцион. Цезарь можно оставить на потом, зато нежный «Наполеон», тирамису и «Киевский» звучат как хороший повод устроить себе сладкий финал без долгих уговоров.",
           "address": "Курск, ул. Ленина, 12, ЦУМ",
           "coordinates": "51.733711, 36.192502",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/2012-thumbnail-7eb76b7ddb.png"
+          "thumbnail": "/place-thumbnails/2012-thumbnail-dozapravka-586687731.jpg"
         },
         "links": [
           {
@@ -190,13 +190,13 @@
         "type": "еда",
         "id": 2013,
         "balloonContent": {
-          "image": "/place-images/2013-image-59afaa4849.jpg",
+          "image": "/place-images/2013-image-dozapravka-615320563.jpg",
           "name": "Чикен Хауз",
           "description": "Ресторан быстрого питания в ТЦ «Олимп» с блюдами из курицы и быстрым сервисом.",
           "address": "Курск, Сумская ул., 31, ТЦ «Олимп»",
           "coordinates": "51.710076, 36.148499",
           "button": "Открыть подробности",
-          "thumbnail": "/place-thumbnails/2013-thumbnail-59afaa4849.jpg"
+          "thumbnail": "/place-thumbnails/2013-thumbnail-dozapravka-615320563.jpg"
         },
         "links": [
           {
@@ -226,13 +226,13 @@
         "type": "еда",
         "id": 2014,
         "balloonContent": {
-          "image": "/place-images/2014-image-56e9b4af0e.jpg",
+          "image": "/place-images/2014-image-dozapravka-618503886.jpg",
           "name": "Souffle BAR",
           "description": "Кафе-кондитерская в центре Курска с десертами, кофе, bubble tea и напитками навынос.",
           "address": "Курск, ул. Ленина, 72",
           "coordinates": "51.743208, 36.193680",
           "button": "Открыть подробности",
-          "thumbnail": "/place-thumbnails/2014-thumbnail-56e9b4af0e.jpg"
+          "thumbnail": "/place-thumbnails/2014-thumbnail-dozapravka-618503886.jpg"
         },
         "links": [
           {
@@ -267,13 +267,13 @@
         "type": "еда",
         "id": 2015,
         "balloonContent": {
-          "image": "/place-images/2015-image-7c37e33fe5.jpg",
+          "image": "/place-images/2015-image-dozapravka-621638562.jpg",
           "name": "Рис и Тесто",
           "description": "Служба доставки еды в Курске; публичные карточки относят заведение к доставке готовых блюд.",
           "address": "Курск, Запольная ул., 45Б, киоск",
           "coordinates": "51.742837, 36.151863",
           "button": "Открыть подробности",
-          "thumbnail": "/place-thumbnails/2015-thumbnail-7c37e33fe5.jpg"
+          "thumbnail": "/place-thumbnails/2015-thumbnail-dozapravka-621638562.jpg"
         },
         "links": [
           {
@@ -308,13 +308,13 @@
         "type": "бар",
         "id": 2016,
         "balloonContent": {
-          "image": "/place-images/2016-image-cfec84ebf7.jpg",
+          "image": "/place-images/2016-image-dozapravka-622472348.jpg",
           "name": "Безымянный паб",
           "description": "Speak easy бар в здании бывших Дмитриевских конюшен с собственной кухней и большим выбором напитков.",
           "address": "Курск, ул. Димитрова, 66/1",
           "coordinates": "51.743127, 36.186269",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/1415-3906d52ff6.webp"
+          "thumbnail": "/place-thumbnails/2016-thumbnail-dozapravka-622472348.jpg"
         },
         "links": [
           {
@@ -349,13 +349,13 @@
         "type": "еда",
         "id": 2017,
         "balloonContent": {
-          "image": "/place-images/2017-image-7f1e150208.jpg",
+          "image": "/place-images/2017-image-dozapravka-626167584.jpg",
           "name": "Макали Хинкали",
           "description": "Макали Хинкали — место для проверки, сколько хинкали помещается в человека до фразы «я просто попробую ещё один». В меню — хачапури, грибные хинкали со сливочным соусом, люля из баранины, баклажаны и литровые лимонады, которые подозрительно быстро заканчиваются. Сытно, шумно, по-кавказски: заходить стоит с аппетитом и без планов на лёгкий перекус.",
           "address": "Курск, ул. Ломакина, 17",
           "coordinates": "51.757720, 36.185757",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/2017-thumbnail-7f1e150208.jpg"
+          "thumbnail": "/place-thumbnails/2017-thumbnail-dozapravka-626167584.jpg"
         },
         "links": [
           {
@@ -395,13 +395,13 @@
         "type": "еда",
         "id": 2018,
         "balloonContent": {
-          "image": "/place-images/2018-image-ead1553e96.jpg",
+          "image": "/place-images/2018-image-dozapravka-633127071.jpg",
           "name": "Высота",
-          "description": "Итальянский ресторан в Курске с пастой, пиццей, десертами и видом из зала.",
+          "description": "«Высота» — место из серии «зашли проверить название, а вышли почти без повода ворчать». Порции щедрые, в пасте и ризотто не экономят на начинке, пицца держится бодро, а десерты с цитрусом и смородиной неожиданно не превращаются в сахарную атаку.",
           "address": "Курск, ул. Ленина, 60А",
           "coordinates": "51.738703, 36.193657",
           "button": "Открыть подробности",
-          "thumbnail": "/place-thumbnails/2018-thumbnail-ead1553e96.jpg"
+          "thumbnail": "/place-thumbnails/2018-thumbnail-dozapravka-633127071.jpg"
         },
         "links": [
           {
@@ -431,13 +431,13 @@
         "type": "еда",
         "id": 2019,
         "balloonContent": {
-          "image": "/place-images/2019-image-538c0aa4bd.jpg",
+          "image": "/place-images/2019-image-dozapravka-642116994.jpg",
           "name": "Гогия",
           "description": "Грузинский ресторан с хинкали, мясными блюдами, десертами и доставкой.",
           "address": "Курск, ул. Кирова, 2А, ЦУМ",
           "coordinates": "51.734005, 36.191894",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/2019-thumbnail-538c0aa4bd.jpg"
+          "thumbnail": "/place-thumbnails/2019-thumbnail-dozapravka-642116994.jpg"
         },
         "links": [
           {
@@ -472,13 +472,13 @@
         "type": "еда",
         "id": 2020,
         "balloonContent": {
-          "image": "/place-images/2020-image-b463174e14.webp",
+          "image": "/place-images/2020-image-dozapravka-650537720.jpg",
           "name": "NB cake",
           "description": "Кафе-кондитерская в лофт-комплексе Zavod с завтраками, напитками и десертами собственного производства.",
           "address": "Курск, ул. Димитрова, 66",
           "coordinates": "51.744060, 36.186874",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/2020-thumbnail-b463174e14.webp"
+          "thumbnail": "/place-thumbnails/2020-thumbnail-dozapravka-650537720.jpg"
         },
         "links": [
           {
@@ -518,13 +518,13 @@
         "type": "еда",
         "id": 199,
         "balloonContent": {
-          "image": "/place-images/199-image-e6d4fc9f77.jpg",
+          "image": "/place-images/199-image-dozapravka-651817491.jpg",
           "name": "Отель «Bellagio»",
           "description": "Bellagio — гостинично-ресторанный комплекс, где за столом быстро становится понятно: сюда идут за мангалом. Люля из баранины, свиная шея и корейка звучат как главные поводы для визита: мясо сочное, мягкое и с заметным ароматом огня. Для компании легко собрать большой ужин — от салата с баклажанами и творожным сыром до хачапури, хинкали и пиццы с грушей и горгонзолой. Место подойдёт, когда хочется красиво посидеть и поесть плотно, без лишней церемонии.",
           "address": "Курск, ул. Карла Маркса, 107",
           "coordinates": "51.795791, 36.161646",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/199-d4bc7fbed9.webp"
+          "thumbnail": "/place-thumbnails/199-thumbnail-dozapravka-651817491.jpg"
         },
         "links": [
           {
@@ -554,13 +554,13 @@
         "type": "еда",
         "id": 2021,
         "balloonContent": {
-          "image": "/place-images/2021-image-ede3387e72.jpg",
+          "image": "/place-images/2021-image-dozapravka-654014848.jpg",
           "name": "Wakanda",
           "description": "Wakanda — место для тех, кто готов проверять гастрономическое любопытство на прочность. Африканские супы, жареная скумбрия, курица в остром соусе, мясной пирог и рис со специями звучат интригующе, но вкусы здесь скорее специфичные, чем дружелюбные. Плотный рыбный аромат проходит почти через всё меню, а знакомого комфорта в тарелке лучше не ждать. Это не точка «куда всем срочно идти», а опыт из серии: попробовать, удивиться и, возможно, спокойно вернуться к борщу.",
           "address": "Курск, ул. Ленина, 90/2, 1 этаж",
           "coordinates": "51.745887, 36.193717",
           "button": "Открыть подробности",
-          "thumbnail": "/place-thumbnails/2021-thumbnail-ede3387e72.jpg"
+          "thumbnail": "/place-thumbnails/2021-thumbnail-dozapravka-654014848.jpg"
         },
         "links": [
           {
@@ -595,13 +595,13 @@
         "type": "еда",
         "id": 2022,
         "balloonContent": {
-          "image": "/place-images/2022-image-0cdd5f59ca.jpg",
+          "image": "/place-images/2022-image-dozapravka-658796368.jpg",
           "name": "Чайхана",
           "description": "Ресторан восточной кухни на 4 этаже ТРЦ Central Park.",
           "address": "Курск, ул. Карла Маркса, 6, ТРЦ Central Park, 4 этаж",
           "coordinates": "51.748955, 36.191721",
           "button": "Открыть подробности",
-          "thumbnail": "/place-thumbnails/2022-thumbnail-0cdd5f59ca.jpg"
+          "thumbnail": "/place-thumbnails/2022-thumbnail-dozapravka-658796368.jpg"
         },
         "links": [
           {
@@ -636,13 +636,13 @@
         "type": "бар",
         "id": 1489,
         "balloonContent": {
-          "image": "/place-images/1489-image-7618679f81.jpg",
+          "image": "/place-images/1489-image-dozapravka-660497411.jpg",
           "name": "Рюмочная «Однушка»",
           "description": "Рюмочная с собственными настойками и кухней.",
           "address": "Курск, ул. Димитрова, 66/1",
           "coordinates": "51.742821, 36.186788",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/1489-bb3e248f12.webp"
+          "thumbnail": "/place-thumbnails/1489-thumbnail-dozapravka-660497411.jpg"
         },
         "links": [
           {
@@ -709,7 +709,7 @@
         "balloonContent": {
           "image": "/place-images/2024-image-b3be7a6fd6.jpg",
           "name": "Завтрак тебе",
-          "description": "Кафе во дворе Дмитриевских конюшен с завтраками в течение дня, десертами, кофе, смузи и авторскими напитками.",
+          "description": "«Завтрак тебе» — новое место в центре, где если не придираться, то всё вкусно. Шакшука бодрая, грибы у них прям хорошо, сэндвич внушительный, салат попал. За такие деньги, с таким интерьером и обслуживанием — топчик, если не испортятся.",
           "address": "Курск, ул. Димитрова, 66, вход со двора",
           "coordinates": "51.743742, 36.186278",
           "button": "Узнать подробнее",
@@ -738,13 +738,13 @@
         "type": "бар",
         "id": 2025,
         "balloonContent": {
-          "image": "/place-images/2025-image-4772809e98.jpg",
+          "image": "/place-images/2025-image-dozapravka-682067010.jpg",
           "name": "Гуарана",
           "description": "Гастробар в центре Курска с европейской кухней, бизнес-ланчами, винной картой и вечерней программой.",
           "address": "Курск, ул. Карла Маркса, 14А, 1 этаж",
           "coordinates": "51.742961, 36.188065",
           "button": "Открыть подробности",
-          "thumbnail": "/place-thumbnails/2025-thumbnail-4772809e98.jpg"
+          "thumbnail": "/place-thumbnails/2025-thumbnail-dozapravka-682067010.jpg"
         },
         "links": [
           {
@@ -769,13 +769,13 @@
         "type": "еда",
         "id": 2004,
         "balloonContent": {
-          "image": "/place-images/2004-image-2b5644de2f.jpg",
+          "image": "/place-images/2004-image-dozapravka-632771465.jpg",
           "name": "Дикий Кабан",
           "description": "«Дикий кабан» — место, куда идут не за предсказуемым ужином, а за гастрономическим приключением: медведь, бобр, перепела, кабан и другие поводы оживить разговор за столом. Визит ощущается немного как аттракцион с дичью: местами спорно, местами неожиданно, но точно не скучно. Лучше приходить компанией и пробовать несколько позиций сразу.",
           "address": "Курск, ул. Димитрова, 66",
           "coordinates": "51.744344, 36.186764",
           "button": "Открыть сайт",
-          "thumbnail": "/place-thumbnails/2004-thumbnail-2b5644de2f.jpg"
+          "thumbnail": "/place-thumbnails/2004-thumbnail-dozapravka-632771465.jpg"
         },
         "links": [
           {
@@ -816,13 +816,13 @@
         "type": "907",
         "id": 1465,
         "balloonContent": {
-          "image": "/place-images/1465-image-9eda5c82a9.jpg",
+          "image": "/place-images/1465-image-dozapravka-645775121.jpg",
           "name": "Кофейня «Пышки и не только»",
           "description": "Кофейня с пышками собственного приготовления",
           "address": "Курск, проспект Вячеслава Клыкова, 101",
           "coordinates": "51.716408, 36.133998",
           "button": "Узнать подробнее",
-          "thumbnail": "/place-thumbnails/1465-91d2bc7ddf.webp"
+          "thumbnail": "/place-thumbnails/1465-thumbnail-dozapravka-645775121.jpg"
         },
         "links": [
           {
