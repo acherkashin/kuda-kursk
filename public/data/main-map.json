@@ -217,6 +217,9 @@
           "coordinates": "51.786985, 36.173535",
           "button": "Открыть подробности",
           "thumbnail": "/place-thumbnails/2001-thumbnail-80a4ffdba7.jpg"
+        },
+        "visibility": {
+          "public": false
         }
       }
     },
@@ -248,7 +251,10 @@
             "url": "https://vk.com/sskvystrel",
             "kind": "vk"
           }
-        ]
+        ],
+        "visibility": {
+          "public": false
+        }
       }
     },
     {
@@ -423,7 +429,10 @@
             "url": "https://www.instagram.com/iguana_lounge/",
             "kind": "instagram"
           }
-        ]
+        ],
+        "visibility": {
+          "public": false
+        }
       }
     },
     {
@@ -577,7 +586,10 @@
             "url": "https://www.instagram.com/we.are.rwr/",
             "kind": "instagram"
           }
-        ]
+        ],
+        "visibility": {
+          "public": false
+        }
       }
     },
     {
@@ -1519,7 +1531,7 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          36.192,
+          36.1942,
           51.73
         ]
       },

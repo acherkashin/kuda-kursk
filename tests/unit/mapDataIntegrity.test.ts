@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { validateGeoJsonPlace } from "../../src/data/validateGeoJsonPlace";
 import { mapCatalog } from "../../src/domain/mapCatalog";
+import { filterVisiblePlaces } from "../../src/domain/places";
 
 const projectRoot = process.cwd();
 describe("map data files", () => {
@@ -54,5 +55,22 @@ describe("map data files", () => {
         }
       }
     }
+  });
+
+  it("keeps temporarily hidden main-map places in raw data but excludes them from visible places", () => {
+    const dataPath = join(projectRoot, "public", "data", "main-map.json");
+    const raw = JSON.parse(readFileSync(dataPath, "utf8")) as unknown;
+
+    expect(raw).toMatchObject({ type: "FeatureCollection" });
+    const features = (raw as { features?: unknown }).features;
+    expect(Array.isArray(features)).toBe(true);
+
+    const places = (features as unknown[]).map(validateGeoJsonPlace);
+    const hiddenPlaceIds = [2001, 2002, 2005, 2007];
+    const hiddenPlaces = places.filter((place) => hiddenPlaceIds.includes(Number(place.id)));
+
+    expect(hiddenPlaces.map((place) => place.id).sort()).toEqual(hiddenPlaceIds);
+    expect(hiddenPlaces.every((place) => place.properties.visibility?.public === false)).toBe(true);
+    expect(filterVisiblePlaces(places).some((place) => hiddenPlaceIds.includes(Number(place.id)))).toBe(false);
   });
 });

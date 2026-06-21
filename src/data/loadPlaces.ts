@@ -1,4 +1,4 @@
-import type { PlaceFeature } from "../domain/places";
+import { filterVisiblePlaces, type PlaceFeature } from "../domain/places";
 import { resolvePublicPath } from "../services/publicPath";
 import { validateGeoJsonPlace } from "./validateGeoJsonPlace";
 
@@ -21,5 +21,5 @@ export async function loadPlaces(path = "/data/main-map.json"): Promise<PlaceFea
     throw new Error("Map data must contain a GeoJSON FeatureCollection");
   }
 
-  return (raw as { features: unknown[] }).features.map(validateGeoJsonPlace);
+  return filterVisiblePlaces((raw as { features: unknown[] }).features.map(validateGeoJsonPlace));
 }

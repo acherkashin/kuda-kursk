@@ -68,6 +68,10 @@ export function getPlaceName(place: PlaceFeature): string {
   return place.properties.balloonContent.name;
 }
 
-export function isPublicPlace(place: PlaceFeature): boolean {
+export function isVisiblePlace(place: PlaceFeature): boolean {
   return place.properties.visibility?.public !== false && place.properties.visibility?.linkOnly !== true;
+}
+
+export function filterVisiblePlaces(places: PlaceFeature[]): PlaceFeature[] {
+  return places.filter(isVisiblePlace);
 }
