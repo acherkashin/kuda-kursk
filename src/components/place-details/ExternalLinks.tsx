@@ -63,6 +63,10 @@ function isDetailsLink(link: ExternalLink) {
   return link.kind === "site" || link.kind === "details";
 }
 
+export function hasRenderableExternalLinks(links: ExternalLink[]) {
+  return links.some((link) => isDetailsLink(link) || isSocialLink(link));
+}
+
 export function ExternalLinks({ links, onOpen }: ExternalLinksProps) {
   if (links.length === 0) {
     return null;
@@ -71,7 +75,7 @@ export function ExternalLinks({ links, onOpen }: ExternalLinksProps) {
   const detailsLinks = links.filter(isDetailsLink);
   const socialLinks = links.filter(isSocialLink);
 
-  if (detailsLinks.length === 0 && socialLinks.length === 0) {
+  if (!hasRenderableExternalLinks(links)) {
     return null;
   }
 

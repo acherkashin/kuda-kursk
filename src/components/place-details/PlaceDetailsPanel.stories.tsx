@@ -107,6 +107,30 @@ const placeWithLongAddress: PlaceFeature = {
   }
 };
 
+const placeWithoutExternalLinks: PlaceFeature = {
+  ...placeWithLandscapePhoto,
+  id: "story-without-external-links",
+  properties: {
+    ...placeWithLandscapePhoto.properties,
+    id: "story-without-external-links",
+    links: [],
+    balloonContent: {
+      name: "Ул. Ломоносова, 7",
+      description: "Историческое здание на улице Ломоносова.",
+      address: "ул. Ломоносова, 7",
+      coordinates: "51.725233, 36.174121",
+      images: [
+        {
+          src: "/place-images/13-image-local-d61f833ba8.jpg",
+          thumbnail: "/place-thumbnails/sketches/13.jpg",
+          caption: "Ул. Ломоносова, 7",
+          order: 1
+        }
+      ]
+    }
+  }
+};
+
 const placeWithTallPhoto: PlaceFeature = {
   ...placeWithLandscapePhoto,
   id: "story-tall-photo",
@@ -244,6 +268,12 @@ export const WithoutPhoto: Story = {
 export const LongAddressLocationRow: Story = {
   args: {
     place: placeWithLongAddress
+  }
+};
+
+export const WithoutExternalLinks: Story = {
+  args: {
+    place: placeWithoutExternalLinks
   }
 };
 

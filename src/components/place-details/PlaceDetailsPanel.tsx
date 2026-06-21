@@ -8,7 +8,7 @@ import { buildRouteLinks, type RouteLink } from "../../domain/routeLinks";
 import { resolvePublicPath } from "../../services/publicPath";
 import { Button } from "../ui/Button";
 import { IconButton } from "../ui/IconButton";
-import { ExternalLinks } from "./ExternalLinks";
+import { ExternalLinks, hasRenderableExternalLinks } from "./ExternalLinks";
 import { PlaceTip } from "./PlaceTip";
 import { RouteActions } from "./RouteActions";
 
@@ -83,6 +83,9 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   const extraPhotos = viewModel.photos.slice(1);
   const isHeroPhotoLoaded = heroPhoto ? loadedHeroPhotoSrc === heroPhoto.src : false;
   const showLocationRow = viewModel.routable && viewModel.address.trim().length > 0;
+  const hasContentAfterLocationRow =
+    Boolean(viewModel.tip) || Boolean(viewModel.mapLink) || hasRenderableExternalLinks(viewModel.links) || extraPhotos.length > 0;
+  const locationRowDividerClass = hasContentAfterLocationRow ? "border-y" : "border-t";
   const isCoordinatesCopied = coordinatesCopyStatus === "copied";
   const isCoordinatesFallbackVisible = coordinatesCopyStatus === "fallback";
   const coordinatesButtonLabel = isCoordinatesCopied
@@ -209,7 +212,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
         <p className="m-0 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">{viewModel.description}</p>
         {showLocationRow ? (
           <div
-            className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2 border-y border-[var(--color-line)] py-3"
+            className={`grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2 ${locationRowDividerClass} border-[var(--color-line)] py-3`}
             data-testid="place-location-row"
           >
             <div className="grid gap-1">
