@@ -32,7 +32,7 @@ const placeWithPhotos: PlaceFeature = {
       images: [
         {
           src: "/place-images/1-image-local-dba58e76a6.jpg",
-          thumbnail: "/place-thumbnails/2010-thumbnail-11e842fddd.jpg",
+          thumbnail: "/place-thumbnails/2010-thumbnail-dozapravka-589165129.jpg",
           caption: "Зал кофейни",
           order: 1
         },
