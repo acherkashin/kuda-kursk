@@ -4,6 +4,7 @@ Thumbs.db
 *.swp
 .vscode/
 .idea/
+.playwright-cli/
 
 # Node/Vite
 node_modules/
@@ -18,3 +19,6 @@ coverage/
 # Playwright
 playwright-report/
 test-results/
+
+# Storybook
+storybook-static/

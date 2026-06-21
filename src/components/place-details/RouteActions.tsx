@@ -3,6 +3,7 @@ import { ChevronDownIcon, ExternalLinkIcon, MapIcon, NavigationIcon } from "luci
 import { buildRouteUrl, type RouteLink } from "../../domain/routeLinks";
 import { Button } from "../ui/Button";
 import { ButtonLink } from "../ui/ButtonLink";
+import { IconButton } from "../ui/IconButton";
 
 type RouteActionsProps = {
   links: RouteLink[];
@@ -52,27 +53,42 @@ export function RouteActions({ links, onOpen, variant = "stacked" }: RouteAction
 
   return (
     <div className={isCompact ? "relative" : "grid gap-2"} aria-label="Маршруты">
-      <Button
-        variant="primary"
-        size={isCompact ? "sm" : "md"}
-        className={isCompact ? "min-h-10 gap-1.5 px-2.5 py-1.5" : ""}
-        type="button"
-        aria-label="Построить маршрут"
-        aria-controls={routesId}
-        aria-expanded={isOpen}
-        onClick={() => setIsOpen((current) => !current)}
-      >
-        <NavigationIcon aria-hidden="true" size={isCompact ? 16 : 18} />
-        <span>{isCompact ? "Маршрут" : "Построить маршрут"}</span>
-        <ChevronDownIcon
-          className={`transition-transform duration-150 ${isOpen ? "rotate-180" : ""}`}
-          aria-hidden="true"
-          size={16}
-        />
-      </Button>
+      {isCompact ? (
+        <IconButton
+          variant="primary"
+          size="md"
+          type="button"
+          aria-label="Построить маршрут"
+          title="Построить маршрут"
+          aria-haspopup="menu"
+          aria-controls={routesId}
+          aria-expanded={isOpen}
+          className="rounded-lg"
+          onClick={() => setIsOpen((current) => !current)}
+        >
+          <NavigationIcon aria-hidden="true" size={16} strokeWidth={2.1} />
+        </IconButton>
+      ) : (
+        <Button
+          variant="primary"
+          type="button"
+          aria-controls={routesId}
+          aria-expanded={isOpen}
+          onClick={() => setIsOpen((current) => !current)}
+        >
+          <NavigationIcon aria-hidden="true" size={18} />
+          <span>Построить маршрут</span>
+          <ChevronDownIcon
+            className={`transition-transform duration-150 ${isOpen ? "rotate-180" : ""}`}
+            aria-hidden="true"
+            size={16}
+          />
+        </Button>
+      )}
       {isOpen ? (
         <div
           id={routesId}
+          role={isCompact ? "menu" : undefined}
           className={isCompact ? "absolute right-0 top-[calc(100%+6px)] z-10 grid min-w-[190px] gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-1.5 shadow-[var(--shadow-raised)]" : "grid gap-2"}
         >
           {links.map((link) => {
@@ -83,6 +99,7 @@ export function RouteActions({ links, onOpen, variant = "stacked" }: RouteAction
                 href={link.url}
                 key={link.provider}
                 size={isCompact ? "sm" : "md"}
+                role={isCompact ? "menuitem" : undefined}
                 className={isCompact ? "min-h-10 px-2.5 py-1.5" : ""}
                 target="_blank"
                 rel="noreferrer"

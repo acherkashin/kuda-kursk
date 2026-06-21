@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 
 type IconButtonSize = "sm" | "md";
-type IconButtonVariant = "default" | "overlay";
+type IconButtonVariant = "default" | "overlay" | "primary";
 
 type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: IconButtonSize;
@@ -19,6 +19,8 @@ const variants: Record<IconButtonVariant, string> = {
     "border-[var(--color-line)] bg-[var(--color-surface-lower)] text-[var(--color-text)] transition-[border-color,box-shadow,transform] hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-rest)] focus-visible:outline-[var(--color-accent)]",
   overlay:
     "border-white/25 bg-black/35 text-white backdrop-blur-sm transition-[background-color,border-color,transform] hover:bg-black/55 focus-visible:outline-white",
+  primary:
+    "border-[var(--color-text)] bg-[var(--color-text)] text-white transition-[border-color,box-shadow,transform] hover:shadow-[var(--shadow-raised)] focus-visible:outline-[var(--color-accent)]",
 };
 
 export function IconButton({

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CheckIcon, CopyIcon, MapIcon, MessageCircleWarningIcon, XIcon } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { buildFeedbackUrl } from "../../domain/feedbackLinks";
@@ -19,6 +19,8 @@ type PlaceDetailsPanelProps = {
   onExternalLinkOpen: (kind: string) => void;
   onOpenMap: (slug: string) => void;
 };
+
+type CoordinatesCopyStatus = "idle" | "copied" | "fallback";
 
 function usePanelLayout() {
   if (typeof window === "undefined") {
@@ -49,7 +51,25 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   const reduceMotion = useReducedMotion();
   const layout = usePanelLayout();
   const [loadedHeroPhotoSrc, setLoadedHeroPhotoSrc] = useState<string | null>(null);
-  const [isCoordinatesCopied, setIsCoordinatesCopied] = useState(false);
+  const [coordinatesCopyStatus, setCoordinatesCopyStatus] = useState<CoordinatesCopyStatus>("idle");
+  const copyStatusResetTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyStatusResetTimer.current !== null) {
+        window.clearTimeout(copyStatusResetTimer.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (copyStatusResetTimer.current !== null) {
+      window.clearTimeout(copyStatusResetTimer.current);
+      copyStatusResetTimer.current = null;
+    }
+
+    setCoordinatesCopyStatus("idle");
+  }, [place?.id]);
 
   if (!place) {
     return null;
@@ -63,16 +83,63 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   const extraPhotos = viewModel.photos.slice(1);
   const isHeroPhotoLoaded = heroPhoto ? loadedHeroPhotoSrc === heroPhoto.src : false;
   const showLocationRow = viewModel.routable && viewModel.address.trim().length > 0;
+  const isCoordinatesCopied = coordinatesCopyStatus === "copied";
+  const isCoordinatesFallbackVisible = coordinatesCopyStatus === "fallback";
+  const coordinatesButtonLabel = isCoordinatesCopied
+    ? "Координаты скопированы"
+    : isCoordinatesFallbackVisible
+      ? "Координаты показаны ниже"
+      : "Скопировать координаты";
+
+  function showCoordinatesFallback() {
+    if (copyStatusResetTimer.current !== null) {
+      window.clearTimeout(copyStatusResetTimer.current);
+      copyStatusResetTimer.current = null;
+    }
+
+    setCoordinatesCopyStatus("fallback");
+  }
 
   function copyCoordinates() {
     if (!navigator.clipboard) {
+      showCoordinatesFallback();
       return;
     }
 
+    let isCopyRequestSettled = false;
+    const fallbackTimer = window.setTimeout(() => {
+      if (!isCopyRequestSettled) {
+        isCopyRequestSettled = true;
+        showCoordinatesFallback();
+      }
+    }, 800);
+
     void navigator.clipboard.writeText(viewModel.coordinates).then(() => {
-      setIsCoordinatesCopied(true);
-      window.setTimeout(() => setIsCoordinatesCopied(false), 1400);
-    }).catch(() => undefined);
+      if (isCopyRequestSettled) {
+        return;
+      }
+
+      isCopyRequestSettled = true;
+      window.clearTimeout(fallbackTimer);
+
+      if (copyStatusResetTimer.current !== null) {
+        window.clearTimeout(copyStatusResetTimer.current);
+      }
+
+      setCoordinatesCopyStatus("copied");
+      copyStatusResetTimer.current = window.setTimeout(() => {
+        setCoordinatesCopyStatus("idle");
+        copyStatusResetTimer.current = null;
+      }, 1400);
+    }).catch(() => {
+      if (isCopyRequestSettled) {
+        return;
+      }
+
+      isCopyRequestSettled = true;
+      window.clearTimeout(fallbackTimer);
+      showCoordinatesFallback();
+    });
   }
 
   return (
@@ -142,19 +209,33 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
         <p className="m-0 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">{viewModel.description}</p>
         {showLocationRow ? (
           <div
-            className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 border-y border-[var(--color-line)] py-3 max-[380px]:gap-2"
+            className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2 border-y border-[var(--color-line)] py-3"
             data-testid="place-location-row"
           >
             <div className="grid gap-1">
               <span className="text-[10.5px] font-semibold text-[var(--color-muted)] uppercase tracking-[0.08em]">Адрес</span>
               <p className="m-0 break-words text-[14px] leading-[1.45] text-[var(--color-text)]">{viewModel.address}</p>
+              <p
+                className={isCoordinatesFallbackVisible ? "m-0 text-[12px] leading-[1.35] text-[var(--color-muted)]" : "sr-only"}
+                aria-live="polite"
+              >
+                {isCoordinatesFallbackVisible ? (
+                  <>
+                    Координаты: <span className="tabular-nums">{viewModel.coordinates}</span>
+                  </>
+                ) : isCoordinatesCopied ? (
+                  "Координаты скопированы"
+                ) : (
+                  ""
+                )}
+              </p>
             </div>
-            <div className="flex shrink-0 items-start gap-1.5">
+            <div className="flex shrink-0 items-start gap-1">
               <IconButton
                 size="md"
                 type="button"
-                aria-label={isCoordinatesCopied ? "Координаты скопированы" : "Скопировать координаты"}
-                title={isCoordinatesCopied ? "Координаты скопированы" : "Скопировать координаты"}
+                aria-label={coordinatesButtonLabel}
+                title={coordinatesButtonLabel}
                 className="rounded-lg"
                 onClick={copyCoordinates}
               >
