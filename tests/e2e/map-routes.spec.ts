@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { appPath, appUrlPattern } from "./support/appPath";
 import { waitForMapSourcePlaces, waitForVisibleMapMarkers } from "./support/mapLibre";
 
-const DOZAPRAVKA_PLACE_COUNT = "19";
+const DOZAPRAVKA_PLACE_COUNT = "21";
 const ILLUSTRATOR_LIZA_SILAKOVA_PLACE_COUNT = "21";
 const ROUTE_SWITCH_ATTEMPTS = 4;
 
