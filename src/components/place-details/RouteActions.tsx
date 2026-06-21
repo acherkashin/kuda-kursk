@@ -7,6 +7,7 @@ import { ButtonLink } from "../ui/ButtonLink";
 type RouteActionsProps = {
   links: RouteLink[];
   onOpen: (provider: RouteLink["provider"]) => void;
+  variant?: "stacked" | "compact";
 };
 
 const icons = {
@@ -44,21 +45,25 @@ function openRouteAfterGeolocation(link: RouteLink) {
   );
 }
 
-export function RouteActions({ links, onOpen }: RouteActionsProps) {
+export function RouteActions({ links, onOpen, variant = "stacked" }: RouteActionsProps) {
   const [isOpen, setIsOpen] = useState(false);
   const routesId = useId();
+  const isCompact = variant === "compact";
 
   return (
-    <div className="grid gap-2" aria-label="Маршруты">
+    <div className={isCompact ? "relative" : "grid gap-2"} aria-label="Маршруты">
       <Button
         variant="primary"
+        size={isCompact ? "sm" : "md"}
+        className={isCompact ? "min-h-10 gap-1.5 px-2.5 py-1.5" : ""}
         type="button"
+        aria-label="Построить маршрут"
         aria-controls={routesId}
         aria-expanded={isOpen}
         onClick={() => setIsOpen((current) => !current)}
       >
-        <NavigationIcon aria-hidden="true" size={18} />
-        <span>Построить маршрут</span>
+        <NavigationIcon aria-hidden="true" size={isCompact ? 16 : 18} />
+        <span>{isCompact ? "Маршрут" : "Построить маршрут"}</span>
         <ChevronDownIcon
           className={`transition-transform duration-150 ${isOpen ? "rotate-180" : ""}`}
           aria-hidden="true"
@@ -66,7 +71,10 @@ export function RouteActions({ links, onOpen }: RouteActionsProps) {
         />
       </Button>
       {isOpen ? (
-        <div id={routesId} className="grid gap-2">
+        <div
+          id={routesId}
+          className={isCompact ? "absolute right-0 top-[calc(100%+6px)] z-10 grid min-w-[190px] gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-1.5 shadow-[var(--shadow-raised)]" : "grid gap-2"}
+        >
           {links.map((link) => {
             const Icon = icons[link.provider];
 
@@ -74,6 +82,8 @@ export function RouteActions({ links, onOpen }: RouteActionsProps) {
               <ButtonLink
                 href={link.url}
                 key={link.provider}
+                size={isCompact ? "sm" : "md"}
+                className={isCompact ? "min-h-10 px-2.5 py-1.5" : ""}
                 target="_blank"
                 rel="noreferrer"
                 onClick={(event) => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MapIcon, MessageCircleWarningIcon, XIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, MapIcon, MessageCircleWarningIcon, XIcon } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { buildFeedbackUrl } from "../../domain/feedbackLinks";
 import { buildPlaceDetails } from "../../domain/placeDetails";
@@ -49,6 +49,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   const reduceMotion = useReducedMotion();
   const layout = usePanelLayout();
   const [loadedHeroPhotoSrc, setLoadedHeroPhotoSrc] = useState<string | null>(null);
+  const [isCoordinatesCopied, setIsCoordinatesCopied] = useState(false);
 
   if (!place) {
     return null;
@@ -61,6 +62,18 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   const heroPhoto = hasPhotos ? viewModel.photos[0] : null;
   const extraPhotos = viewModel.photos.slice(1);
   const isHeroPhotoLoaded = heroPhoto ? loadedHeroPhotoSrc === heroPhoto.src : false;
+  const showLocationRow = viewModel.routable && viewModel.address.trim().length > 0;
+
+  function copyCoordinates() {
+    if (!navigator.clipboard) {
+      return;
+    }
+
+    void navigator.clipboard.writeText(viewModel.coordinates).then(() => {
+      setIsCoordinatesCopied(true);
+      window.setTimeout(() => setIsCoordinatesCopied(false), 1400);
+    }).catch(() => undefined);
+  }
 
   return (
     <motion.aside
@@ -127,18 +140,35 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
 
       <div className="grid gap-4 p-5 max-[700px]:px-5 max-[700px]:pb-[calc(24px+env(safe-area-inset-bottom))]">
         <p className="m-0 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">{viewModel.description}</p>
-        <dl className="m-0 grid gap-0 border-y border-[var(--color-line)]">
-          <div className="grid gap-1 py-3">
-            <dt className="text-[10.5px] font-semibold text-[var(--color-muted)] uppercase tracking-[0.08em]">Адрес</dt>
-            <dd className="m-0 text-[14px]">{viewModel.address}</dd>
+        {showLocationRow ? (
+          <div
+            className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3 border-y border-[var(--color-line)] py-3 max-[380px]:gap-2"
+            data-testid="place-location-row"
+          >
+            <div className="grid gap-1">
+              <span className="text-[10.5px] font-semibold text-[var(--color-muted)] uppercase tracking-[0.08em]">Адрес</span>
+              <p className="m-0 break-words text-[14px] leading-[1.45] text-[var(--color-text)]">{viewModel.address}</p>
+            </div>
+            <div className="flex shrink-0 items-start gap-1.5">
+              <IconButton
+                size="md"
+                type="button"
+                aria-label={isCoordinatesCopied ? "Координаты скопированы" : "Скопировать координаты"}
+                title={isCoordinatesCopied ? "Координаты скопированы" : "Скопировать координаты"}
+                className="rounded-lg"
+                onClick={copyCoordinates}
+              >
+                {isCoordinatesCopied ? (
+                  <CheckIcon aria-hidden="true" size={16} strokeWidth={2.2} />
+                ) : (
+                  <CopyIcon aria-hidden="true" size={16} strokeWidth={2.1} />
+                )}
+              </IconButton>
+              <RouteActions links={routeLinks} onOpen={onRouteOpen} variant="compact" />
+            </div>
           </div>
-          <div className="grid gap-1 border-t border-[var(--color-line)] py-3">
-            <dt className="text-[10.5px] font-semibold text-[var(--color-muted)] uppercase tracking-[0.08em]">Координаты</dt>
-            <dd className="m-0 text-[14px] tabular-nums">{viewModel.coordinates}</dd>
-          </div>
-        </dl>
+        ) : null}
         {viewModel.tip ? <PlaceTip tip={viewModel.tip} /> : null}
-        {viewModel.routable ? <RouteActions links={routeLinks} onOpen={onRouteOpen} /> : null}
         {viewModel.mapLink ? (
           <Button
             variant="accent-soft"

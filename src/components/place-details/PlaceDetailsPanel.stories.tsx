@@ -93,6 +93,20 @@ const placeWithLandscapePhoto: PlaceFeature = {
   }
 };
 
+const placeWithLongAddress: PlaceFeature = {
+  ...placeWithLandscapePhoto,
+  id: "story-long-address",
+  properties: {
+    ...placeWithLandscapePhoto.properties,
+    id: "story-long-address",
+    balloonContent: {
+      ...placeWithLandscapePhoto.properties.balloonContent,
+      name: "Место с длинным адресом",
+      address: "Курск, Центральный округ, улица Карла Маркса, 6, торгово-развлекательный центр Central Park, 4 этаж, рядом с кинотеатром"
+    }
+  }
+};
+
 const placeWithTallPhoto: PlaceFeature = {
   ...placeWithLandscapePhoto,
   id: "story-tall-photo",
@@ -224,6 +238,12 @@ export const TallPhotoLimit: Story = {
 export const WithoutPhoto: Story = {
   args: {
     place: placeWithoutPhotos
+  }
+};
+
+export const LongAddressLocationRow: Story = {
+  args: {
+    place: placeWithLongAddress
   }
 };
 
