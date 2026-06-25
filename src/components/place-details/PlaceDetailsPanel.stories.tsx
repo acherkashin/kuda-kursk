@@ -27,7 +27,6 @@ const placeWithPhotos: PlaceFeature = {
       description:
         "Небольшое место для спокойного завтрака и короткой встречи в центре. Внутри тихо, а из окон хорошо видно городское движение.",
       address: "Курск, Красная площадь, 2",
-      coordinates: "51.730000, 36.193000",
       tip: "Лучше приходить до полудня: в это время здесь светлее всего и проще занять стол у окна.",
       images: [
         {
@@ -107,6 +106,35 @@ const placeWithLongAddress: PlaceFeature = {
   }
 };
 
+const placeWithMultilineDescription: PlaceFeature = {
+  ...placeWithLandscapePhoto,
+  id: "story-multiline-description",
+  geometry: {
+    type: "Point",
+    coordinates: [36.209583, 51.753512]
+  },
+  properties: {
+    ...placeWithLandscapePhoto.properties,
+    id: "story-multiline-description",
+    balloonContent: {
+      ...placeWithLandscapePhoto.properties.balloonContent,
+      name: "Пляжный комплекс Городской",
+      description:
+        "Боевка — классическое место для прогулок по воде. Но иногда там ощущение, что весь Курск одновременно решил выйти на сапах, лодках и катамаранах.\n\nЕсли не хотите стоять в такой водной пробке, то вам на Пляжный комплекс Городской на Перекальского.\n\nОтплываете 10 метров от берега — и наслаждаетесь такими же прекрасными видами, как и на Боевке, только без необходимости лавировать между другими отдыхающими 🛶\n\nЛожитесь на сап, слушайте пение птиц, неспешно плывите по воде и наблюдайте за утятами, которые явно лучше всех понимают, как правильно проводить выходные.",
+      address: "Курск, улица Перекальского",
+      images: [
+        {
+          src: "/place-images/9005-plyazhnyy-kompleks-gorodskoy.webp",
+          thumbnail: "/place-thumbnails/9005-plyazhnyy-kompleks-gorodskoy.webp",
+          caption: "Пляжный комплекс Городской",
+          order: 1
+        }
+      ]
+    },
+    links: []
+  }
+};
+
 const placeWithoutExternalLinks: PlaceFeature = {
   ...placeWithLandscapePhoto,
   id: "story-without-external-links",
@@ -118,7 +146,6 @@ const placeWithoutExternalLinks: PlaceFeature = {
       name: "Ул. Ломоносова, 7",
       description: "Историческое здание на улице Ломоносова.",
       address: "ул. Ломоносова, 7",
-      coordinates: "51.725233, 36.174121",
       images: [
         {
           src: "/place-images/13-image-local-d61f833ba8.jpg",
@@ -165,7 +192,6 @@ const placeWithoutPhotos: PlaceFeature = {
       description:
         "Небольшой городской двор рядом с привычным маршрутом по центру. Хороший пример карточки, где у места пока нет фотографии.",
       address: "Курск, улица Ленина, 12",
-      coordinates: "51.736000, 36.191000",
       tip: "Загляните вечером: двор становится спокойнее, а вывески вокруг дают мягкий свет."
     },
     visibility: {
@@ -190,7 +216,6 @@ const portalPlace: PlaceFeature = {
       description:
         "Сообщество о курских кофейнях и местах, где можно выдохнуть и перезагрузиться. Откройте отдельную карту — мы собрали проверенные точки города.",
       address: "Курск",
-      coordinates: "51.730800, 36.187400",
       socials: [
         { label: "Telegram", url: "https://t.me/example", kind: "telegram" },
         { label: "ВКонтакте", url: "https://vk.com/example", kind: "vk" }
@@ -268,6 +293,12 @@ export const WithoutPhoto: Story = {
 export const LongAddressLocationRow: Story = {
   args: {
     place: placeWithLongAddress
+  }
+};
+
+export const MultilineDescription: Story = {
+  args: {
+    place: placeWithMultilineDescription
   }
 };
 

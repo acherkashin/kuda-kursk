@@ -14,7 +14,6 @@ const places = [
         name: "Площадка на Боевке",
         description: "Спортивная зона",
         address: "Парк Боева дача",
-        coordinates: "51.7, 36.1"
       }
     }
   },
@@ -28,7 +27,6 @@ const places = [
         name: "Дозаправка",
         description: "Городское место",
         address: "Центр",
-        coordinates: "51.8, 36.2"
       }
     }
   }

@@ -426,6 +426,30 @@
 
 ---
 
+## Phase 27: Новое место на основной карте
+
+**Цель**: добавить на основную публичную карту «Пляжный комплекс Городской» с локальным фото и пользовательским описанием без изменения схемы данных.
+
+- [X] T179 Добавить место «Пляжный комплекс Городской» (`id: 9005`) в `public/data/main-map.json` с координатами `[36.209583, 51.753512]`, адресом `Курск, улица Перекальского`, пользовательским описанием без автомобильного emoji по ревью, `visibility.public: true` и локальными webp-ассетами из `/photo_2026-06-25_08-14-20.jpg` в `public/place-images/` и `public/place-thumbnails/`. Проверка: `jq empty public/data/main-map.json`, `pnpm test:unit -- tests/unit/mapDataIntegrity.test.ts`, `pnpm typecheck`, `pnpm build`; новое автоматизированное тестовое покрытие не добавлялось.
+
+---
+
+## Phase 28: Абзацы в описании места
+
+**Цель**: сохранить авторское деление длинных описаний на абзацы в карточке места без изменения JSON-схемы и данных.
+
+- [X] T180 Обновить `src/components/place-details/PlaceDetailsPanel.tsx`: безопасно делить `balloonContent.description` по пустым строкам после нормализации переносов `\r\n`/`\n`, выводить непустые части отдельными `<p>` с текущим стилем описания и небольшим вертикальным расстоянием; `dangerouslySetInnerHTML` не использовать. Добавить Storybook story `MultilineDescription` в `src/components/place-details/PlaceDetailsPanel.stories.tsx` на примере «Пляжного комплекса Городской». Проверка: `pnpm typecheck`, `pnpm build`, `pnpm build-storybook`, ручная browser QA `/maps/main?place=9005` на desktop/mobile и контроль обычного однострочного описания; новое автоматизированное тестовое покрытие не добавлялось.
+
+---
+
+## Phase 29: Единый источник координат места
+
+**Цель**: убрать дублирование координат в `balloonContent` и использовать `geometry.coordinates` как единственный источник истины для карты, маршрутов, показа и копирования координат.
+
+- [X] T181 Удалить `properties.balloonContent.coordinates` из контракта данных, статических JSON-файлов, Storybook fixtures и unit fixtures; обновить тип `BalloonContent`, валидатор `validateGeoJsonPlace` и `buildPlaceDetails`, чтобы строка координат для карточки вычислялась из `geometry.coordinates` в порядке `latitude, longitude`. Обновить `spec.md`, `plan.md`, `data-model.md` и `contracts/data-format.md`. Проверка: `pnpm typecheck`, `pnpm test:unit -- tests/unit/mapDataIntegrity.test.ts`, `pnpm test:unit`, `pnpm build`, ручная smoke-проверка карточки обычного места; новое автоматизированное тестовое покрытие не добавлялось.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз

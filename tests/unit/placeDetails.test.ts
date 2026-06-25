@@ -14,7 +14,6 @@ describe("buildPlaceDetails", () => {
           name: "Парк-отель",
           description: "Описание",
           address: "Адрес",
-          coordinates: "52.231969, 35.392868",
           image: "/place-images/320-image-photo.jpg",
           thumbnail: "/place-thumbnails/320-f29160ce22.webp"
         }
@@ -39,7 +38,6 @@ describe("buildPlaceDetails", () => {
           name: "КГУ",
           description: "Описание",
           address: "Адрес",
-          coordinates: "51.735498, 36.191748",
           thumbnail: "/place-thumbnails/sketches/1.jpg"
         }
       }
@@ -62,7 +60,6 @@ describe("buildPlaceDetails", () => {
           name: "Парк-отель",
           description: "Описание",
           address: "Адрес",
-          coordinates: "52.231969, 35.392868",
           url: "/objects/park-otel-peschanyy/"
         }
       }
@@ -83,7 +80,6 @@ describe("buildPlaceDetails", () => {
           name: "Парк-отель",
           description: "Описание",
           address: "Адрес",
-          coordinates: "52.231969, 35.392868",
           url: "/objects/park-otel-peschanyy/",
           externalUrl: "https://example.com/place"
         },

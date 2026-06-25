@@ -21,7 +21,6 @@ export type BalloonContent = {
   name: string;
   description: string;
   address: string;
-  coordinates: string;
   tip?: string;
   socials?: ExternalLink[];
   externalUrl?: string;

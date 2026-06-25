@@ -59,8 +59,7 @@ function validateBalloonContent(value: unknown): BalloonContent {
     ...value,
     name: requireString(value.name, "name"),
     description: requireString(value.description, "description"),
-    address: requireString(value.address, "address"),
-    coordinates: requireString(value.coordinates, "coordinates")
+    address: requireString(value.address, "address")
   };
 }
 

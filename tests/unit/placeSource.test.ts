@@ -13,7 +13,6 @@ function makePlace(id: string, image?: string, thumbnail?: string): PlaceFeature
         name: `Место ${id}`,
         description: "Описание",
         address: "Курск",
-        coordinates: "51.7, 36.1",
         ...(image ? { image } : {}),
         ...(thumbnail ? { thumbnail } : {})
       }

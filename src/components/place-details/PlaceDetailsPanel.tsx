@@ -22,6 +22,15 @@ type PlaceDetailsPanelProps = {
 
 type CoordinatesCopyStatus = "idle" | "copied" | "fallback";
 
+function splitDescriptionParagraphs(description: string): string[] {
+  return description
+    .trim()
+    .replace(/\r\n?/g, "\n")
+    .split(/\n\s*\n/g)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
+}
+
 function usePanelLayout() {
   if (typeof window === "undefined") {
     return "side-panel";
@@ -76,6 +85,7 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   }
 
   const viewModel = buildPlaceDetails(place);
+  const descriptionParagraphs = splitDescriptionParagraphs(viewModel.description);
   const [longitude, latitude] = place.geometry.coordinates;
   const routeLinks = buildRouteLinks({ longitude, latitude });
   const hasPhotos = viewModel.photos.length > 0;
@@ -209,7 +219,13 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       )}
 
       <div className="grid gap-4 p-5 max-[700px]:px-5 max-[700px]:pb-[calc(24px+env(safe-area-inset-bottom))]">
-        <p className="m-0 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">{viewModel.description}</p>
+        <div className="grid gap-3 text-[14px] leading-[1.55] text-[var(--color-text-secondary)]">
+          {descriptionParagraphs.map((paragraph, index) => (
+            <p className="m-0" key={`${viewModel.id}-description-${index}`}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
         {showLocationRow ? (
           <div
             className={`grid grid-cols-[minmax(0,1fr)_auto] items-start gap-2 ${locationRowDividerClass} border-[var(--color-line)] py-3`}

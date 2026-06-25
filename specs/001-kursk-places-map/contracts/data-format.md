@@ -28,7 +28,6 @@ type BalloonContent = {
   name: string;
   description: string;
   address: string;
-  coordinates: string;
   tip?: string;
   [key: string]: unknown;
 };
@@ -71,7 +70,6 @@ type PlaceVisibility = {
       "name": "Государственное управление Банка России по Курской области",
       "description": "Курское отделение Государственного банка открыто 8 сентября 1865 года.",
       "address": "г. Курск・ул. Ленина, 83",
-      "coordinates": "51.745877, 36.194813",
       "thumbnail": "/place-thumbnails/4-5f91ca7cc3.webp"
     }
   }
@@ -82,6 +80,7 @@ type PlaceVisibility = {
 
 - `geometry.coordinates` всегда `[longitude, latitude]`.
 - Если координаты для Курска выглядят как `[latitude, longitude]`, импорт должен завершиться ошибкой валидации.
+- Строка координат для карточки и копирования вычисляется из `geometry.coordinates` в порядке `latitude, longitude`; `balloonContent.coordinates` не используется.
 - Дополнительные поля в `properties` разрешены и должны сохраняться для будущего backend/CMS, но UI показывает только поддержанные поля.
 - Отсутствующие optional поля не создают пустые блоки интерфейса.
 - Отображаемые внешние ссылки хранятся в `properties.links`, а не в `balloonContent.url`, `balloonContent.externalUrl` или `balloonContent.socials`.

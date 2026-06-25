@@ -14,7 +14,6 @@ function makePlace(id: string, visibility?: PlaceFeature["properties"]["visibili
         name: `Место ${id}`,
         description: "Описание",
         address: "Курск",
-        coordinates: "51.7, 36.1"
       }
     }
   };

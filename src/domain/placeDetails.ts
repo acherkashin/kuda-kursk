@@ -23,6 +23,7 @@ export type PlaceDetailsViewModel = {
 
 export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
   const content = place.properties.balloonContent;
+  const [longitude, latitude] = place.geometry.coordinates;
   const photos = [...(content.images ?? [])].sort((left, right) => (left.order ?? 0) - (right.order ?? 0));
 
   if (photos.length === 0 && (content.image || content.thumbnail)) {
@@ -49,7 +50,7 @@ export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
     name: content.name,
     description: content.description,
     address: content.address,
-    coordinates: content.coordinates,
+    coordinates: `${latitude}, ${longitude}`,
     photos,
     links,
     routable: place.properties.routable !== false

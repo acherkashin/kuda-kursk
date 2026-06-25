@@ -24,7 +24,6 @@ describe("loadPlaces", () => {
                   name: "КГУ",
                   description: "Учебный корпус",
                   address: "г. Курск",
-                  coordinates: "51.735498, 36.191748",
                   thumbnail: "/place-thumbnails/sketches/1.jpg"
                 }
               }
@@ -59,7 +58,6 @@ describe("loadPlaces", () => {
                   name: "Видимое место",
                   description: "Публичная точка",
                   address: "г. Курск",
-                  coordinates: "51.735498, 36.191748"
                 }
               }
             },
@@ -74,7 +72,6 @@ describe("loadPlaces", () => {
                   name: "Скрытое место",
                   description: "Временно не показывается",
                   address: "г. Курск",
-                  coordinates: "51.745498, 36.201748"
                 }
               }
             },
@@ -89,7 +86,6 @@ describe("loadPlaces", () => {
                   name: "Место по ссылке",
                   description: "Не участвует в общем наборе",
                   address: "г. Курск",
-                  coordinates: "51.755498, 36.211748"
                 }
               }
             }

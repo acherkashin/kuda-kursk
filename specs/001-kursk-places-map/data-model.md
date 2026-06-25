@@ -17,7 +17,8 @@ GeoJSON-like объект места.
 
 **Правила валидации**
 - Координаты всегда `[longitude, latitude]`; для Курска ожидаемые диапазоны примерно `35..38` longitude и `50..53` latitude. Значение, похожее на `[latitude, longitude]`, является ошибкой импорта.
-- Обязательные поля карточки: `name`, `description`, `address`, `coordinates`; `image` и `thumbnail` optional, но хотя бы одно пригодное изображение желательно для карточки.
+- Обязательные поля карточки: `name`, `description`, `address`; `image` и `thumbnail` optional, но хотя бы одно пригодное изображение желательно для карточки.
+- Пользовательская строка координат для показа и копирования вычисляется из `geometry.coordinates` в порядке `latitude, longitude` и не хранится отдельно в `balloonContent`.
 - Optional поля не рендерятся пустыми блоками.
 
 ## BalloonContent
@@ -31,7 +32,6 @@ GeoJSON-like объект места.
 - `name`: название места.
 - `description`: описание.
 - `address`: адрес.
-- `coordinates`: строковое представление координат для пользователя.
 - `tip`: optional личный совет.
 - `socials`: optional ссылки на соцсети.
 - `externalUrl`: optional основной внешний URL.
