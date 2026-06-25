@@ -472,6 +472,14 @@
 
 ---
 
+## Phase 33: Временный режим аналитики без consent UI
+
+**Цель**: временно скрыть пользовательский UI управления аналитикой, сохранив быстрый технический возврат старого opt-in режима.
+
+- [X] T185 Добавить центральный флаг `ANALYTICS_CONSENT_UI_ENABLED` в `src/config/analytics.ts` с дефолтом `false` и env override `VITE_ANALYTICS_CONSENT_UI_ENABLED`; подключить его в `src/app/App.tsx`, чтобы в дефолтном режиме Метрика загружалась при открытии сайта, `AnalyticsConsent` не рендерился, а отсутствие consent не влияло на нижние уведомления. В `src/components/about-project/AboutProjectDialog.tsx` добавить `showAnalyticsSettings` и полностью скрывать секцию аналитики без пустого разделителя, когда флаг выключен. В `playwright.config.ts` выставить `VITE_ANALYTICS_CONSENT_UI_ENABLED=true`, чтобы существующий e2e consent-сценарий продолжал проверять opt-in режим без изменения теста; dev-заглушка Метрики зеркалирует вызовы в `window.ymQueue`, чтобы существующая e2e-проверка видела очередь без изменения production-поведения. Обновить `spec.md` и `plan.md`; новое автоматизированное тестовое покрытие не добавлялось. Проверка: `pnpm typecheck`, `pnpm build`, `pnpm exec playwright test tests/e2e/analytics-consent.spec.ts --project=desktop`; ручной smoke дефолтного режима на Vite dev server с `VITE_YANDEX_METRIKA_ID=123456` подтвердил `consentCount: 0`, `analyticsSettingsCount: 0`, `metrikaScriptCount: 1`, наличие `ym`, события `hit`/`app_open` при открытии `/maps/main` и отсутствие сырого текста поискового запроса в analytics queue.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз

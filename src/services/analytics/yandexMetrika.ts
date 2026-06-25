@@ -13,6 +13,10 @@ export function loadYandexMetrika(counterId: string | undefined): boolean {
     window.ym ??
     function ym(...args: unknown[]) {
       ((window.ym as { a?: unknown[][] }).a ??= []).push(args);
+
+      if (import.meta.env.DEV) {
+        ((window as { ymQueue?: unknown[][] }).ymQueue ??= []).push(args);
+      }
     };
 
   const script = document.createElement("script");

@@ -10,6 +10,7 @@ import { KurskMap } from "../components/map/KurskMap";
 import { MapTopControls } from "../components/map/MapTopControls";
 import { PublicMapFallback } from "../components/map/PublicMapFallback";
 import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel";
+import { ANALYTICS_CONSENT_UI_ENABLED } from "../config/analytics";
 import { loadPlaces } from "../data/loadPlaces";
 import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
 import { findMapBySlug } from "../domain/mapCatalog";
@@ -29,10 +30,10 @@ export function App() {
   const [query, setQuery] = useState("");
   const [analyticsConsent, setAnalyticsConsent] = useState<AnalyticsConsentRecord | null>(() => readStoredAnalyticsConsent());
   const [pwaUpdatePrompt, setPwaUpdatePrompt] = useState<ServiceWorkerUpdatePrompt | null>(null);
-  const analyticsAccepted = analyticsConsent?.status === "accepted";
+  const analyticsEnabled = ANALYTICS_CONSENT_UI_ENABLED ? analyticsConsent?.status === "accepted" : true;
   const analytics = useMemo(
-    () => createAnalyticsAdapter(import.meta.env.VITE_YANDEX_METRIKA_ID, analyticsAccepted),
-    [analyticsAccepted]
+    () => createAnalyticsAdapter(import.meta.env.VITE_YANDEX_METRIKA_ID, analyticsEnabled),
+    [analyticsEnabled]
   );
   const { slug } = useParams();
   const location = useLocation();
@@ -47,7 +48,10 @@ export function App() {
   const visiblePlaces = useMemo(() => searchPlaces(basePlaces, query), [basePlaces, query]);
   const hasActiveSearch = query.trim().length > 0;
   const hasActivePlace = activePlace !== null;
-  const hasFloatingNotice = !hasActivePlace && !isAboutOpen && (!analyticsConsent || pwaUpdatePrompt?.needRefresh);
+  const hasFloatingNotice =
+    !hasActivePlace &&
+    !isAboutOpen &&
+    ((ANALYTICS_CONSENT_UI_ENABLED && !analyticsConsent) || pwaUpdatePrompt?.needRefresh);
 
   const resetSearch = useCallback(() => {
     setQuery("");
@@ -121,10 +125,10 @@ export function App() {
   }, []);
 
   useEffect(() => {
-    if (analyticsAccepted) {
+    if (analyticsEnabled) {
       loadYandexMetrika(import.meta.env.VITE_YANDEX_METRIKA_ID);
     }
-  }, [analyticsAccepted]);
+  }, [analyticsEnabled]);
 
   useEffect(() => {
     analytics.hit(location.pathname);
@@ -285,9 +289,12 @@ export function App() {
         analyticsConsent={analyticsConsent}
         isOpen={isAboutOpen}
         onAnalyticsConsentChange={handleConsentChange}
+        showAnalyticsSettings={ANALYTICS_CONSENT_UI_ENABLED}
         onClose={handleAboutClose}
       />
-      <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace || isAboutOpen} onChange={handleConsentChange} />
+      {ANALYTICS_CONSENT_UI_ENABLED ? (
+        <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace || isAboutOpen} onChange={handleConsentChange} />
+      ) : null}
       {pwaUpdatePrompt?.needRefresh && !hasActivePlace ? (
         <section
           className="fixed right-[calc(max(16px,env(safe-area-inset-right))+56px)] bottom-[calc(max(16px,env(safe-area-inset-bottom))+112px)] z-5 grid w-[min(360px,calc(100vw-96px))] gap-2.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:bottom-[calc(max(12px,env(safe-area-inset-bottom))+116px)] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto"

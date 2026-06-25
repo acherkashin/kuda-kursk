@@ -12,6 +12,7 @@ type AboutProjectDialogProps = {
   analyticsConsent: AnalyticsConsentRecord | null;
   isOpen: boolean;
   onAnalyticsConsentChange: (consent: AnalyticsConsentRecord) => void;
+  showAnalyticsSettings?: boolean;
   onClose: () => void;
 };
 
@@ -58,7 +59,13 @@ function getAnalyticsLabel(consent: AnalyticsConsentRecord | null) {
   return "не выбрана";
 }
 
-export function AboutProjectDialog({ analyticsConsent, isOpen, onAnalyticsConsentChange, onClose }: AboutProjectDialogProps) {
+export function AboutProjectDialog({
+  analyticsConsent,
+  isOpen,
+  onAnalyticsConsentChange,
+  showAnalyticsSettings = true,
+  onClose
+}: AboutProjectDialogProps) {
   const isAnalyticsAccepted = analyticsConsent?.status === "accepted";
   const analyticsLabel = getAnalyticsLabel(analyticsConsent);
 
@@ -130,30 +137,32 @@ export function AboutProjectDialog({ analyticsConsent, isOpen, onAnalyticsConsen
           <ProjectLink href={buildFeedbackUrl({ source: "about" })} icon={MessageCircleIcon}>Обратная связь</ProjectLink>
         </div>
 
-        <section className="mt-5 border-t border-[var(--color-line)] pt-4" aria-label="Настройки аналитики">
-          <div className="flex items-start gap-3">
-            <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-[var(--color-surface-lower)] text-[var(--color-text)]">
-              <BarChart3Icon aria-hidden="true" size={18} />
-            </span>
-            <div className="min-w-0 flex-1">
-              <h3 className="m-0 text-[15px] font-bold text-[var(--color-text)]">Аналитика</h3>
-              <p className="mt-1 mb-0 text-[13px] leading-snug text-[var(--color-muted)]">
-                Сейчас: {analyticsLabel}. Мы используем только обезличенные события, чтобы понимать, какие сценарии стоит улучшать.
-              </p>
+        {showAnalyticsSettings ? (
+          <section className="mt-5 border-t border-[var(--color-line)] pt-4" aria-label="Настройки аналитики">
+            <div className="flex items-start gap-3">
+              <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-[var(--color-surface-lower)] text-[var(--color-text)]">
+                <BarChart3Icon aria-hidden="true" size={18} />
+              </span>
+              <div className="min-w-0 flex-1">
+                <h3 className="m-0 text-[15px] font-bold text-[var(--color-text)]">Аналитика</h3>
+                <p className="mt-1 mb-0 text-[13px] leading-snug text-[var(--color-muted)]">
+                  Сейчас: {analyticsLabel}. Мы используем только обезличенные события, чтобы понимать, какие сценарии стоит улучшать.
+                </p>
+              </div>
             </div>
-          </div>
-          <Button
-            className="mt-3"
-            type="button"
-            variant={isAnalyticsAccepted ? "secondary" : "primary"}
-            shape="pill"
-            fullWidth
-            onClick={() => onAnalyticsConsentChange(createAnalyticsConsent(nextAnalyticsStatus))}
-          >
-            {isAnalyticsAccepted ? <XIcon aria-hidden="true" size={16} /> : <CheckIcon aria-hidden="true" size={16} />}
-            {isAnalyticsAccepted ? "Отключить аналитику" : "Включить аналитику"}
-          </Button>
-        </section>
+            <Button
+              className="mt-3"
+              type="button"
+              variant={isAnalyticsAccepted ? "secondary" : "primary"}
+              shape="pill"
+              fullWidth
+              onClick={() => onAnalyticsConsentChange(createAnalyticsConsent(nextAnalyticsStatus))}
+            >
+              {isAnalyticsAccepted ? <XIcon aria-hidden="true" size={16} /> : <CheckIcon aria-hidden="true" size={16} />}
+              {isAnalyticsAccepted ? "Отключить аналитику" : "Включить аналитику"}
+            </Button>
+          </section>
+        ) : null}
       </section>
     </div>
   );

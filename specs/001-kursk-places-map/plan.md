@@ -175,6 +175,14 @@ tests/
 
 Проверка: `pnpm typecheck`, `pnpm build`, Storybook-состояния диалога и ручная visual QA desktop/mobile. Новое автоматизированное тестовое покрытие не добавляется без отдельного разрешения пользователя.
 
+## Дополнение: временное скрытие consent UI и автозагрузка аналитики (FR-046)
+
+Временный режим реализуется через центральный технический флаг `ANALYTICS_CONSENT_UI_ENABLED` в `src/config/analytics.ts`. Дефолт `false` скрывает первичную плашку `AnalyticsConsent` и секцию аналитики в `AboutProjectDialog`, не удаляя старый opt-in UI из кода. В этом режиме `App` считает аналитику включённой при открытии сайта и вызывает `loadYandexMetrika`, если задан `VITE_YANDEX_METRIKA_ID`; сохранённый `localStorage` consent не удаляется и снова используется после возврата флага.
+
+Для быстрого отката старое поведение включается через `VITE_ANALYTICS_CONSENT_UI_ENABLED=true` или смену дефолтной константы. Playwright webServer выставляет этот env-флаг в `true`, чтобы существующий e2e-сценарий consent продолжал проверять opt-in режим без изменения теста.
+
+Проверка: `pnpm typecheck`, `pnpm build`, focused e2e `pnpm exec playwright test tests/e2e/analytics-consent.spec.ts --project=desktop` и ручной smoke дефолтного режима без test env. Новое автоматизированное тестовое покрытие не добавляется.
+
 ## Дополнение: обратная связь в карточке места (US7, FR-038)
 
 Подход переиспользует уже созданный источник `projectInfo.feedbackUrl` и добавляет единый helper для ссылок на Яндекс Форму:
