@@ -1,0 +1,4 @@
+interface:
+  display_name: "Добавить место на карту"
+  short_description: "Добавляет место в карту Курска"
+  default_prompt: "Use $add-map-place to add a new Kursk place to the map."
