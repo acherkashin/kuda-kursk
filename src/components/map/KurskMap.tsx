@@ -1,6 +1,7 @@
 import maplibregl, { type GeoJSONSource, type MapLayerMouseEvent } from "maplibre-gl";
 import { useEffect, useRef, useState } from "react";
 import { mapConfig } from "../../domain/mapConfig";
+import { areMapZoomsEqual } from "../../domain/mapUrlState";
 import type { PlaceFeature } from "../../domain/places";
 import { getPlaceName } from "../../domain/places";
 import { MapFallback } from "./MapFallback";
@@ -25,6 +26,8 @@ type KurskMapProps = {
   activePlace: PlaceFeature | null;
   places: PlaceFeature[];
   onPlaceSelect?: (place: PlaceFeature, source: "map") => void;
+  onZoomChange?: (zoom: number) => void;
+  zoom: number | undefined;
 };
 
 type FeatureId = string | number;
@@ -39,7 +42,7 @@ function easeMarkerHover(progress: number) {
   return 1 - (1 - progress) ** 3;
 }
 
-export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) {
+export function KurskMap({ activePlace, places, onPlaceSelect, onZoomChange, zoom }: KurskMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const hoverAnimationsRef = useRef<Map<FeatureId, HoverAnimation>>(new Map());
@@ -124,7 +127,7 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
       container: containerRef.current,
       style: mapConfig.styleUrl,
       center: mapConfig.center,
-      zoom: mapConfig.zoom,
+      zoom: zoom ?? mapConfig.zoom,
       minZoom: mapConfig.minZoom,
       maxZoom: mapConfig.maxZoom,
       attributionControl: false
@@ -163,6 +166,34 @@ export function KurskMap({ activePlace, places, onPlaceSelect }: KurskMapProps) 
       mapRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    const map = mapRef.current;
+
+    if (!map || mapState !== "ready" || zoom === undefined || areMapZoomsEqual(map.getZoom(), zoom)) {
+      return;
+    }
+
+    map.jumpTo({ zoom });
+  }, [mapState, zoom]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+
+    if (!map || mapState !== "ready" || !onZoomChange) {
+      return;
+    }
+
+    const syncZoom = () => {
+      onZoomChange(map.getZoom());
+    };
+
+    map.on("zoomend", syncZoom);
+
+    return () => {
+      map.off("zoomend", syncZoom);
+    };
+  }, [mapState, onZoomChange]);
 
   useEffect(() => {
     const map = mapRef.current;

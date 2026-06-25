@@ -13,6 +13,7 @@ import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel
 import { loadPlaces } from "../data/loadPlaces";
 import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
 import { findMapBySlug } from "../domain/mapCatalog";
+import { formatMapZoom, MAP_ZOOM_SEARCH_PARAM, parseMapZoom } from "../domain/mapUrlState";
 import { getPlaceId, type PlaceFeature } from "../domain/places";
 import type { RouteProvider } from "../domain/routeLinks";
 import { searchPlaces } from "../domain/search";
@@ -42,6 +43,7 @@ export function App() {
   const basePlaces = places;
   const placeById = useMemo(() => new Map(basePlaces.map((place) => [getPlaceId(place), place])), [basePlaces]);
   const selectedPlaceId = searchParams.get("place")?.trim() ?? "";
+  const mapZoom = parseMapZoom(searchParams.get(MAP_ZOOM_SEARCH_PARAM)) ?? undefined;
   const visiblePlaces = useMemo(() => searchPlaces(basePlaces, query), [basePlaces, query]);
   const hasActiveSearch = query.trim().length > 0;
   const hasActivePlace = activePlace !== null;
@@ -158,6 +160,21 @@ export function App() {
     [analytics, searchParams, setSearchParams]
   );
 
+  const handleMapZoomChange = useCallback(
+    (zoom: number) => {
+      const nextZoom = formatMapZoom(zoom);
+
+      if (searchParams.get(MAP_ZOOM_SEARCH_PARAM) === nextZoom) {
+        return;
+      }
+
+      const nextSearchParams = new URLSearchParams(searchParams);
+      nextSearchParams.set(MAP_ZOOM_SEARCH_PARAM, nextZoom);
+      setSearchParams(nextSearchParams, { replace: true });
+    },
+    [searchParams, setSearchParams]
+  );
+
   const handlePlaceDetailsClose = useCallback(() => {
     const nextSearchParams = new URLSearchParams(searchParams);
     nextSearchParams.delete("place");
@@ -222,6 +239,8 @@ export function App() {
         <KurskMap
           activePlace={activePlace}
           places={visiblePlaces}
+          zoom={mapZoom}
+          onZoomChange={handleMapZoomChange}
           onPlaceSelect={handlePlaceSelect}
         />
       ) : null}
