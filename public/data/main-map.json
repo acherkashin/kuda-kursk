@@ -1536,6 +1536,47 @@
           "public": true
         }
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9006,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.18655,
+          51.722453
+        ]
+      },
+      "properties": {
+        "id": 9006,
+        "balloonContent": {
+          "image": "/place-images/9006-image-nevesomost.png",
+          "thumbnail": "/place-thumbnails/9006-thumbnail-nevesomost.png",
+          "images": [
+            {
+              "src": "/place-images/9006-image-nevesomost.png",
+              "thumbnail": "/place-thumbnails/9006-thumbnail-nevesomost.png",
+              "order": 1
+            },
+            {
+              "src": "/place-images/9006-image-nevesomost-2.jpg",
+              "order": 2
+            },
+            {
+              "src": "/place-images/9006-image-nevesomost-3.jpg",
+              "order": 3
+            },
+            {
+              "src": "/place-images/9006-image-nevesomost-4.jpg",
+              "order": 4
+            }
+          ],
+          "name": "Невесомость",
+          "description": "Если хочется почувствовать на себе эффект Мёртвого моря, вам в «Невесомость». Здесь можно попробовать флоатинг: солёная вода сама держит тело, над головой мерцают звёзды, а вокруг играет расслабляющая музыка. А для тех, кто предпочитает расслабляться на суше, здесь есть массаж.",
+          "address": "ул. Гайдара, 26А",
+          "coordinates": "51.722453, 36.186550"
+        }
+      }
     }
   ]
 }
