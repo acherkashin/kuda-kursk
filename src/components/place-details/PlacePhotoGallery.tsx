@@ -108,12 +108,9 @@ export function PlacePhotoGallery({ photos, placeId, title, onClose }: PlacePhot
         pointerStart.current = null;
       }}
     >
-      <img
-        className="pointer-events-none absolute inset-0 block h-full w-full scale-110 object-cover saturate-[0.72] blur-2xl"
-        src={activePhotoSrc}
-        alt=""
-        aria-hidden="true"
-        draggable={false}
+      <div
+        className="pointer-events-none absolute inset-0 scale-110 bg-cover bg-center saturate-[0.72] blur-2xl"
+        style={{ backgroundImage: `url(${JSON.stringify(activePhotoSrc)})` }}
       />
       <div className="pointer-events-none absolute inset-0 bg-[rgba(50,34,22,0.32)]" />
 

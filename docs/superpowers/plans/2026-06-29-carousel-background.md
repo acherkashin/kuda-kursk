@@ -4,7 +4,7 @@
 
 **Цель:** заменить броскую почти чёрную подложку фотокарусели на мягкое размытое продолжение активной фотографии, сохранив показ исходного кадра целиком.
 
-**Архитектура:** `PlacePhotoGallery` продолжает владеть всем визуальным состоянием галереи. Перед основным `motion.img` добавляется декоративная копия активного изображения с `object-cover`, увеличением, размытием и тёплой вуалью; основной кадр остаётся `object-contain`, а существующее поведение навигации не меняется.
+**Архитектура:** `PlacePhotoGallery` продолжает владеть всем визуальным состоянием галереи. Перед основным `motion.img` добавляется декоративный CSS-фон активного изображения с `background-size: cover`, увеличением, размытием и тёплой вуалью; основной кадр остаётся единственным `<img>` в DOM и использует `object-contain`, а существующее поведение навигации не меняется.
 
 **Технологии:** React 19, TypeScript, Tailwind CSS v4, Motion, Vite.
 
@@ -17,16 +17,13 @@
 
 - [x] **Шаг 1: Заменить чёрную подложку и добавить декоративный слой**
 
-В `PlacePhotoGallery` оставить тёпло-коричневый fallback на контейнере, добавить перед `motion.img` декоративную копию активной фотографии и тёплую вуаль:
+В `PlacePhotoGallery` оставить тёпло-коричневый fallback на контейнере, добавить перед `motion.img` декоративный CSS-фон активной фотографии и тёплую вуаль:
 
 ```tsx
 <section className="relative h-[min(65dvh,520px)] overflow-hidden bg-[var(--color-text-secondary)] ...">
-  <img
-    className="pointer-events-none absolute inset-0 block h-full w-full scale-110 object-cover saturate-[0.72] blur-2xl"
-    src={resolvePublicPath(activePhoto.src)}
-    alt=""
-    aria-hidden="true"
-    draggable={false}
+  <div
+    className="pointer-events-none absolute inset-0 scale-110 bg-cover bg-center saturate-[0.72] blur-2xl"
+    style={{ backgroundImage: `url(${JSON.stringify(activePhotoSrc)})` }}
   />
   <div className="pointer-events-none absolute inset-0 bg-[rgba(50,34,22,0.32)]" />
 
