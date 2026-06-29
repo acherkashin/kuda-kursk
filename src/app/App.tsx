@@ -20,7 +20,7 @@ import type { RouteProvider } from "../domain/routeLinks";
 import { searchPlaces } from "../domain/search";
 import { createAnalyticsAdapter } from "../services/analytics/analyticsAdapter";
 import { loadYandexMetrika } from "../services/analytics/yandexMetrika";
-import { registerServiceWorker, type ServiceWorkerUpdatePrompt } from "../services/pwa/registerServiceWorker";
+import { registerServiceWorker } from "../services/pwa/registerServiceWorker";
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router";
 
 export function App() {
@@ -29,7 +29,6 @@ export function App() {
   const [activePlace, setActivePlace] = useState<PlaceFeature | null>(null);
   const [query, setQuery] = useState("");
   const [analyticsConsent, setAnalyticsConsent] = useState<AnalyticsConsentRecord | null>(() => readStoredAnalyticsConsent());
-  const [pwaUpdatePrompt, setPwaUpdatePrompt] = useState<ServiceWorkerUpdatePrompt | null>(null);
   const analyticsEnabled = ANALYTICS_CONSENT_UI_ENABLED ? analyticsConsent?.status === "accepted" : true;
   const analytics = useMemo(
     () => createAnalyticsAdapter(import.meta.env.VITE_YANDEX_METRIKA_ID, analyticsEnabled),
@@ -49,9 +48,7 @@ export function App() {
   const hasActiveSearch = query.trim().length > 0;
   const hasActivePlace = activePlace !== null;
   const hasFloatingNotice =
-    !hasActivePlace &&
-    !isAboutOpen &&
-    ((ANALYTICS_CONSENT_UI_ENABLED && !analyticsConsent) || pwaUpdatePrompt?.needRefresh);
+    !hasActivePlace && !isAboutOpen && ANALYTICS_CONSENT_UI_ENABLED && !analyticsConsent;
 
   const resetSearch = useCallback(() => {
     setQuery("");
@@ -119,9 +116,7 @@ export function App() {
   }, [currentMap, loadState, placeById, searchParams, selectedPlaceId, setSearchParams]);
 
   useEffect(() => {
-    registerServiceWorker({
-      onNeedRefresh: setPwaUpdatePrompt
-    });
+    registerServiceWorker();
   }, []);
 
   useEffect(() => {
@@ -294,22 +289,6 @@ export function App() {
       />
       {ANALYTICS_CONSENT_UI_ENABLED ? (
         <AnalyticsConsent consent={analyticsConsent} isSuppressed={hasActivePlace || isAboutOpen} onChange={handleConsentChange} />
-      ) : null}
-      {pwaUpdatePrompt?.needRefresh && !hasActivePlace ? (
-        <section
-          className="fixed right-[calc(max(16px,env(safe-area-inset-right))+56px)] bottom-[calc(max(16px,env(safe-area-inset-bottom))+112px)] z-5 grid w-[min(360px,calc(100vw-96px))] gap-2.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-3 shadow-[var(--shadow-panel)] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:bottom-[calc(max(12px,env(safe-area-inset-bottom))+116px)] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto"
-          data-testid="pwa-update"
-          aria-label="Доступно обновление приложения"
-        >
-          <p className="m-0 text-[13px] leading-snug text-[var(--color-muted)]">Доступна новая версия карты.</p>
-          <button
-            className="inline-flex min-h-9 items-center justify-center gap-2 rounded-full border border-[var(--color-text)] bg-[var(--color-text)] px-3 py-1.5 text-[13px] font-semibold tracking-[-0.01em] text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
-            type="button"
-            onClick={() => void pwaUpdatePrompt.updateServiceWorker()}
-          >
-            Обновить
-          </button>
-        </section>
       ) : null}
     </main>
   );

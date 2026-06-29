@@ -11,7 +11,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
-      registerType: "prompt",
+      injectRegister: false,
       includeAssets: [
         "pwa/icon-192.png",
         "pwa/icon-512.png",
@@ -33,12 +33,14 @@ export default defineConfig({
         ]
       },
       workbox: {
+        skipWaiting: true,
+        clientsClaim: false,
         globPatterns: ["**/*.{js,css,html,ico}"],
         navigateFallback: `${githubPagesBase}index.html`,
         runtimeCaching: [
           {
             urlPattern: ({ url }) => url.pathname.startsWith("/data/"),
-            handler: "StaleWhileRevalidate",
+            handler: "NetworkFirst",
             options: { cacheName: "kursk-map-data" }
           }
         ]

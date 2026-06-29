@@ -496,6 +496,14 @@
 
 ---
 
+## Phase 37: Бесшумное обновление PWA
+
+**Цель**: устанавливать обновления app shell без prompt и перезагрузки активной страницы, сохраняя свежесть online-данных и offline fallback.
+
+- [X] T189 Отключить встроенный `registerSW.js`, оставить единственную автоматическую регистрацию Workbox из приложения, включить `skipWaiting` без `clientsClaim`, удалить update prompt из `App` и перевести `/data/` с `StaleWhileRevalidate` на `NetworkFirst`. Обновить разрешённый существующий unit-тест и синхронизировать `spec.md`, `plan.md`, `tasks.md`, `contracts/pwa-behavior.md` и `quickstart.md`. Проверка: `pnpm exec vitest run tests/unit/registerServiceWorker.test.ts`, `pnpm test:unit`, `pnpm typecheck`, `pnpm build`, инспекция production-артефактов и ручной двухверсионный PWA-smoke; новое дополнительное автоматизированное покрытие не добавлялось.
+
+---
+
 ## Phase 38: Обзор ювелирного мастер-класса
 
 **Цель**: добавить переданный редакционный Instagram-обзор в карточку существующего места на карте Елены Колтышевой без изменения данных самого места, схемы и интерфейса.

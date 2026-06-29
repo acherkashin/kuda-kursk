@@ -1,33 +1,20 @@
 import { describe, expect, it, vi } from "vitest";
-import { registerServiceWorker, type ServiceWorkerUpdatePrompt } from "../../src/services/pwa/registerServiceWorker";
+import { registerServiceWorker } from "../../src/services/pwa/registerServiceWorker";
 
 describe("registerServiceWorker", () => {
-  it("notifies callers when an update is waiting and exposes an update action", async () => {
-    const listeners = new Map<string, () => void>();
+  it("registers the service worker without update listeners", async () => {
     const workbox = {
-      addEventListener: vi.fn((eventName: string, listener: () => void) => {
-        listeners.set(eventName, listener);
-      }),
+      addEventListener: vi.fn(),
       messageSkipWaiting: vi.fn(),
       register: vi.fn(async () => undefined)
     };
-    let prompt: ServiceWorkerUpdatePrompt | undefined;
 
-    registerServiceWorker({
-      createWorkbox: async () => workbox,
-      onNeedRefresh: (nextPrompt) => {
-        prompt = nextPrompt;
-      },
-      reload: vi.fn()
-    });
+    const result = registerServiceWorker({ createWorkbox: async () => workbox });
     await Promise.resolve();
 
-    listeners.get("waiting")?.();
-
-    expect(prompt).toBeDefined();
-    const updatePrompt = prompt as ServiceWorkerUpdatePrompt;
-    expect(updatePrompt.needRefresh).toBe(true);
-    await updatePrompt.updateServiceWorker();
-    expect(workbox.messageSkipWaiting).toHaveBeenCalledTimes(1);
+    expect(result).toBeUndefined();
+    expect(workbox.addEventListener).not.toHaveBeenCalled();
+    expect(workbox.messageSkipWaiting).not.toHaveBeenCalled();
+    expect(workbox.register).toHaveBeenCalledTimes(1);
   });
 });
