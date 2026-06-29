@@ -204,6 +204,26 @@ const placeWithTallPhoto: PlaceFeature = {
   }
 };
 
+const placeWithBrokenPhoto: PlaceFeature = {
+  ...placeWithLandscapePhoto,
+  id: "story-broken-photo",
+  properties: {
+    ...placeWithLandscapePhoto.properties,
+    id: "story-broken-photo",
+    balloonContent: {
+      ...placeWithLandscapePhoto.properties.balloonContent,
+      name: "Фото временно недоступно",
+      images: [
+        {
+          src: "/place-images/story-missing-photo.jpg",
+          caption: "Недоступная фотография",
+          order: 1
+        }
+      ]
+    }
+  }
+};
+
 const placeWithoutPhotos: PlaceFeature = {
   type: "Feature",
   id: "story-square",
@@ -313,6 +333,12 @@ export const PortraitPhoto: Story = {
 export const TallPhotoLimit: Story = {
   args: {
     place: placeWithTallPhoto
+  }
+};
+
+export const PhotoLoadError: Story = {
+  args: {
+    place: placeWithBrokenPhoto
   }
 };
 
