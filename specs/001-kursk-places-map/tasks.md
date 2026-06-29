@@ -496,6 +496,14 @@
 
 ---
 
+## Phase 36: Индексируемые маршруты и базовое SEO
+
+**Цель**: сохранить публичные `/maps/<slug>` на GitHub Pages, устранить ошибочный конечный HTTP-статус известных маршрутов и опубликовать базовые сигналы для Google и Яндекса.
+
+- [X] T188 Создать build-time генератор `tools/generateSeoArtifacts.ts`, подключить его в `vite.config.ts` и расширить SEO-блок `index.html`: для каждого slug из `mapCatalog` выпускать `dist/maps/<slug>/index.html` с уникальными `title`, `description`, canonical, Open Graph и Twitter metadata; генерировать `dist/robots.txt` и `dist/sitemap.xml`; сохранить `404.html` для неизвестных маршрутов. Синхронизировать `spec.md`, `plan.md` и `tasks.md`. Проверка: `pnpm typecheck`, `pnpm build`, инспекция generated artifacts и локальный HTTP-smoke известных/неизвестного маршрутов и служебных файлов. Новое автоматизированное тестовое покрытие не добавлялось по правилу проекта.
+
+---
+
 ## Phase 37: Бесшумное обновление PWA
 
 **Цель**: устанавливать обновления app shell без prompt и перезагрузки активной страницы, сохраняя свежесть online-данных и offline fallback.
