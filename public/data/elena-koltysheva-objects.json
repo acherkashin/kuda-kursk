@@ -197,6 +197,11 @@
             "label": "Telegram",
             "url": "https://t.me/SHEVKUNOV_l",
             "kind": "telegram"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/DaLCChJoVnT/?igsh=MTRnbWRrejhvNGIzcQ==",
+            "kind": "details"
           }
         ]
       }
