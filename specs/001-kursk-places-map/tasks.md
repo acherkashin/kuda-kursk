@@ -102,7 +102,7 @@
 ### Реализация для User Story 2
 
 - [X] T043 [P] [US2] Создать модель представления карточки места из `BalloonContent` в `src/domain/placeDetails.ts`
-- [X] T044 [P] [US2] Реализовать фотокарусель для одной или нескольких фотографий в `src/components/place-details/PhotoCarousel.tsx`
+- [X] T044 [P] [US2] Реализовать первоначальный просмотр одной или нескольких фотографий в компоненте карточки места; дальнейшая замена на единый фотоблок зафиксирована в T186.
 - [X] T045 [P] [US2] Реализовать редакционный совет без пустых заглушек в `src/components/place-details/PlaceTip.tsx`
 - [X] T046 [US2] Реализовать desktop side panel и mobile drawer с `prefers-reduced-motion` в `src/components/place-details/PlaceDetailsPanel.tsx`
 - [X] T047 [P] [US2] Реализовать кнопки маршрутов Яндекс.Карты, 2ГИС и Google Maps с lucide icons в `src/components/place-details/RouteActions.tsx`
@@ -192,7 +192,7 @@
 - [X] T083 Привести Tailwind design tokens, монохромную палитру, тени, радиусы, типографику Inter и focus states к `DESIGN_SYSTEM.md` в `src/styles/index.css`
 - [X] T084 Привести карту, overlays, public/community headers, search/status карточки, fallback состояния и логотип к модели небольших плавающих карточек поверх карты в `src/app/App.tsx`, `src/components/map/PublicMapHeader.tsx`, `src/components/map/CommunityMapHeader.tsx`, `src/components/map/CommunityMapFallback.tsx`, `src/components/map/MapLogo.tsx`, `src/components/filters/SearchBox.tsx` и `src/components/filters/ResultsSummary.tsx`
 - [X] T085 Привести базовый style JSON карты, маркеры, hover/selected состояния и слои карты к монохромной системе с фотографиями как главным цветовым носителем в `public/map-styles/kursk-positron.json`, `src/components/map/placeLayers.ts`, `src/components/map/MarkerTooltip.tsx` и `src/components/map/markerImages.ts`
-- [X] T086 Привести детальную панель, фотокарусель, route actions, внешние ссылки и совет к floating-card layout, сдержанной глубине и touch-friendly mobile поведению в `src/components/place-details/`
+- [X] T086 Привести детальную панель, просмотр фотографий, route actions, внешние ссылки и совет к floating-card layout, сдержанной глубине и touch-friendly mobile поведению в `src/components/place-details/`
 - [X] T087 Настроить функциональные анимации: Motion для React-панелей и overlay-состояний, MapLibre `easeTo`/paint transitions для перецентровки карты и появления/исчезновения маркеров, с учётом `prefers-reduced-motion` и без декоративной зацикленной анимации в `src/components/map/KurskMap.tsx` и `src/components/place-details/PlaceDetailsPanel.tsx`
 - [X] T088 Обновить редакционный контент seed-мест под короткий разговорный тон и локальные советы без изменения схемы данных в `public/data/places.json`
 - [X] T089 Провести ручную visual QA-проверку desktop/mobile по `DESIGN_SYSTEM.md`: первый экран, поиск, выбранный маркер, детальная панель, пустое состояние, `/maps/:slug` route и неизвестный fallback; зафиксировать результат в `specs/001-kursk-places-map/tasks.md`, поскольку дизайн-выравнивание проверяется существующими e2e и ручной визуальной проверкой без добавления нового тестового покрытия
@@ -422,7 +422,7 @@
 
 - [X] T174 [US2] Обновить `src/components/place-details/PlaceDetailsPanel.tsx`, `src/components/place-details/RouteActions.tsx`, связанные UI-примитивы при необходимости и `src/components/place-details/PlaceDetailsPanel.stories.tsx`: обычное место показывает один компактный логический ряд с полным адресом, доступом к копированию или вспомогательному показу координат и действиями маршрута; координаты не выводятся отдельным блоком; кнопку копирования можно сделать меньше вторичных CTA, а варианты маршрута можно сгруппировать в выпадающее меню; портальные места без физического адреса не показывают адрес и маршрут, сохраняя primary-действие перехода на под-карту. При недоступном или отклонённом Clipboard API координаты показываются тихим fallback-текстом под адресом внутри того же логического ряда. Проверка на `main`: `pnpm typecheck`, `pnpm test:unit`, `pnpm build`, `pnpm build-storybook`, ручной Playwright DOM QA на `http://127.0.0.1:5177/maps/main?place=320` и `http://127.0.0.1:5177/maps/main?place=9001`; обычное место имеет один ряд местоположения, полный текст адреса, не показывает отдельный блок «Координаты» и раскрывает 3 ссылки маршрута, портальное место не показывает адрес/маршрут и сохраняет кнопку перехода на под-карту. Полный `pnpm test:e2e` не запускался, потому что порт `5173` уже занят внешним Vite-процессом, а конфиг Playwright требует собственный server без reuse. Новое автоматизированное тестовое покрытие не добавлялось.
 - [X] T175 [US2] Уточнить компактный ряд после ручной проверки `place=1247`: действие маршрута в `RouteActions` compact сделать icon-only через `IconButton`, убрать текст «Маршрут» и chevron, оставить выпадающее меню провайдеров, а в `PlaceDetailsPanel` уменьшить ширину правых действий, чтобы адрес получал основное место. Проверка: `pnpm typecheck`, `pnpm build`, `pnpm test:unit`, ручной Playwright DOM QA на `http://localhost:5173/maps/main?place=1247` при viewport `375×812` показал ширину адресной колонки `243px`, ширину действий `84px`, пустой текст route-кнопки и dropdown `Яндекс.Карты`, `2ГИС`, `Google Maps`; копирование координат меняет состояние на «Координаты скопированы». Ручная проверка `http://localhost:5173/maps/main?place=9001` подтвердила отсутствие адресного ряда и маршрута у портала при сохранённой кнопке под-карты. Новое автоматизированное тестовое покрытие не добавлялось.
-- [X] T177 [US2] Убрать двойной визуальный разделитель у обычного места без совета, под-карты, внешних ссылок/соцсетей и дополнительных фотографий: добавить общий helper для отображаемых external links, переключать адресный ряд с `border-y` на `border-t`, если ниже него до футера нет содержимого, и добавить Storybook story `WithoutExternalLinks`. Проверка: `pnpm typecheck`, `pnpm build`, `pnpm build-storybook`, `pnpm test:unit`; ручной Playwright DOM QA на `http://localhost:5173/maps/illustrator-liza-silakova?place=13` подтвердил `externalCount: 0`, класс адресного ряда `border-t`, `rowBorderBottom: 0px solid`, `footerBorderTop: 1px solid`; на `http://localhost:5173/maps/illustrator-liza-silakova?place=1` подтвердил `externalCount: 1`, класс адресного ряда `border-y`, `rowBorderBottom: 1px solid`; в viewport `375×812` оба сценария сохранили компактный ряд с `rowWidth: 335`, `addressWidth: 243`, `actionsWidth: 84`. Новое автоматизированное тестовое покрытие не добавлялось.
+- [X] T177 [US2] Убрать двойной визуальный разделитель у обычного места без совета, под-карты и внешних ссылок/соцсетей: добавить общий helper для отображаемых external links, переключать адресный ряд с `border-y` на `border-t`, если ниже него до футера нет содержимого, и добавить Storybook story `WithoutExternalLinks`. Проверка: `pnpm typecheck`, `pnpm build`, `pnpm build-storybook`, `pnpm test:unit`; ручной Playwright DOM QA на `http://localhost:5173/maps/illustrator-liza-silakova?place=13` подтвердил `externalCount: 0`, класс адресного ряда `border-t`, `rowBorderBottom: 0px solid`, `footerBorderTop: 1px solid`; на `http://localhost:5173/maps/illustrator-liza-silakova?place=1` подтвердил `externalCount: 1`, класс адресного ряда `border-y`, `rowBorderBottom: 1px solid`; в viewport `375×812` оба сценария сохранили компактный ряд с `rowWidth: 335`, `addressWidth: 243`, `actionsWidth: 84`. Новое автоматизированное тестовое покрытие не добавлялось.
 
 ---
 
@@ -480,6 +480,14 @@
 
 ---
 
+## Phase 34: Единый фотоблок карточки места
+
+**Цель**: дать всем фотографиям места один крупный и предсказуемый сценарий просмотра без отдельной ленты миниатюр или полноэкранного режима.
+
+- [X] T186 [US2] Добавить `PlacePhotoGallery` со стабильной областью, `object-contain`, циклическими кнопками, счётчиком, клавиатурой, touch-свайпом, reduced motion, состоянием ошибки и сбросом по `placeId`; подключить его в `PlaceDetailsPanel`, удалить нижнюю ленту и неиспользуемый `PhotoCarousel`, добавить Storybook story `MultiplePhotos`, расширить `IconButton` размером `lg` и разрешённые пользователем unit-тесты без новых/изменённых e2e. Синхронизировать `spec.md`, `plan.md` и `tasks.md`. Проверка: `pnpm test:unit` — 39/39, `pnpm typecheck`, `pnpm build`, `pnpm build-storybook`; visual QA `/maps/main?place=9006` подтвердила один активный full-size кадр, кнопки/счётчик, листание мышью и клавиатурой, отсутствие нижних миниатюр на desktop, `375×812` и phone landscape, а отдельная проверка с `prefers-reduced-motion: reduce` подтвердила переключение без анимации; Storybook `WithoutPhoto` и реальное место с одной фотографией проверены отдельно. Из 16 запущенных неизменённых place-details e2e прошли 9, ещё 7 выявили существующее рассогласование вне scope галереи: route actions сейчас имеют роль `menuitem`, тогда как тесты ищут `link`, а optional-тест ищет скрытое место «Картинг»; e2e не изменялись по ограничению пользователя.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз
@@ -523,7 +531,7 @@ Task: "T034 [P] [US1] Реализовать маленький ненавязч
 ```bash
 Task: "T040 [P] [US2] Написать Playwright-тест открытия карточки полного места и route actions в tests/e2e/place-details.spec.ts"
 Task: "T041 [P] [US2] Написать Playwright-тест скрытия optional блоков для неполного места в tests/e2e/place-details-optional.spec.ts"
-Task: "T044 [P] [US2] Реализовать фотокарусель для одной или нескольких фотографий в src/components/place-details/PhotoCarousel.tsx"
+Task: "T186 [US2] Реализовать единый крупный фотоблок PlacePhotoGallery с кнопками, клавиатурой и touch-свайпом"
 Task: "T047 [P] [US2] Реализовать кнопки маршрутов Яндекс.Карты, 2ГИС и Google Maps с lucide icons в src/components/place-details/RouteActions.tsx"
 Task: "T048 [P] [US2] Реализовать список внешних ссылок и соцсетей без отправки произвольных URL в аналитику в src/components/place-details/ExternalLinks.tsx"
 ```

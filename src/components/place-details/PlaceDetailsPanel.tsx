@@ -5,10 +5,10 @@ import { buildFeedbackUrl } from "../../domain/feedbackLinks";
 import { buildPlaceDetails } from "../../domain/placeDetails";
 import type { PlaceFeature } from "../../domain/places";
 import { buildRouteLinks, type RouteLink } from "../../domain/routeLinks";
-import { resolvePublicPath } from "../../services/publicPath";
 import { Button } from "../ui/Button";
 import { IconButton } from "../ui/IconButton";
 import { ExternalLinks, hasRenderableExternalLinks } from "./ExternalLinks";
+import { PlacePhotoGallery } from "./PlacePhotoGallery";
 import { PlaceTip } from "./PlaceTip";
 import { RouteActions } from "./RouteActions";
 
@@ -59,7 +59,6 @@ function PlaceFeedbackLink({ placeId, placeName }: { placeId: string | number; p
 export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkOpen, onOpenMap }: PlaceDetailsPanelProps) {
   const reduceMotion = useReducedMotion();
   const layout = usePanelLayout();
-  const [loadedHeroPhotoSrc, setLoadedHeroPhotoSrc] = useState<string | null>(null);
   const [coordinatesCopyStatus, setCoordinatesCopyStatus] = useState<CoordinatesCopyStatus>("idle");
   const copyStatusResetTimer = useRef<number | null>(null);
 
@@ -89,12 +88,9 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
   const [longitude, latitude] = place.geometry.coordinates;
   const routeLinks = buildRouteLinks({ longitude, latitude });
   const hasPhotos = viewModel.photos.length > 0;
-  const heroPhoto = hasPhotos ? viewModel.photos[0] : null;
-  const extraPhotos = viewModel.photos.slice(1);
-  const isHeroPhotoLoaded = heroPhoto ? loadedHeroPhotoSrc === heroPhoto.src : false;
   const showLocationRow = viewModel.routable && viewModel.address.trim().length > 0;
   const hasContentAfterLocationRow =
-    Boolean(viewModel.tip) || Boolean(viewModel.mapLink) || hasRenderableExternalLinks(viewModel.links) || extraPhotos.length > 0;
+    Boolean(viewModel.tip) || Boolean(viewModel.mapLink) || hasRenderableExternalLinks(viewModel.links);
   const locationRowDividerClass = hasContentAfterLocationRow ? "border-y" : "border-t";
   const isCoordinatesCopied = coordinatesCopyStatus === "copied";
   const isCoordinatesFallbackVisible = coordinatesCopyStatus === "fallback";
@@ -165,41 +161,8 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       animate={{ opacity: 1, x: 0, y: 0 }}
       transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
-      {heroPhoto ? (
-        <div className="relative [container-type:inline-size]">
-          <div
-            className={
-              isHeroPhotoLoaded
-                ? "relative grid max-h-[150cqw] place-items-center overflow-hidden bg-[var(--color-surface-lower)]"
-                : "relative grid h-[300px] place-items-center overflow-hidden bg-[var(--color-surface-lower)] max-[700px]:h-[40dvh]"
-            }
-          >
-            <img
-              className={isHeroPhotoLoaded ? "block h-auto w-full" : "block h-full w-full object-cover"}
-              src={resolvePublicPath(heroPhoto.src)}
-              alt={heroPhoto.caption ?? viewModel.name}
-              fetchPriority="high"
-              onLoad={() => setLoadedHeroPhotoSrc(heroPhoto.src)}
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(20,14,8,0.80)_0%,rgba(20,14,8,0.40)_28%,rgba(20,14,8,0.06)_52%,transparent_65%)]" />
-            <IconButton
-              variant="overlay"
-              type="button"
-              aria-label="Закрыть карточку"
-              className="absolute top-4 right-4 z-2 max-[700px]:top-[max(16px,env(safe-area-inset-top))]"
-              onClick={onClose}
-            >
-              <XIcon aria-hidden="true" size={20} strokeWidth={2.2} />
-            </IconButton>
-            <div className="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-14">
-              <h1
-                className="m-0 text-[28px] font-bold leading-[1.1] tracking-[-0.01em] text-white [font-family:var(--font-editorial)] [text-wrap:balance] [text-shadow:0_1px_10px_rgba(20,14,8,0.55)]"
-              >
-                {viewModel.name}
-              </h1>
-            </div>
-          </div>
-        </div>
+      {hasPhotos ? (
+        <PlacePhotoGallery photos={viewModel.photos} placeId={viewModel.id} title={viewModel.name} onClose={onClose} />
       ) : (
         <div className="relative min-h-16 px-5 pb-4 pt-5 max-[700px]:pt-[max(20px,env(safe-area-inset-top))]">
           <IconButton
@@ -281,22 +244,6 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
           </Button>
         ) : null}
         <ExternalLinks links={viewModel.links} onOpen={onExternalLinkOpen} />
-        {extraPhotos.length > 0 && (
-          <div
-            className="-mx-5 grid auto-cols-[160px] grid-flow-col gap-2 overflow-x-auto px-5 [scroll-snap-type:x_mandatory]"
-            aria-label="Ещё фотографии"
-          >
-            {extraPhotos.map((photo) => (
-              <img
-                key={`${photo.src}-${photo.caption ?? ""}`}
-                className="h-[110px] w-full rounded-lg object-cover [scroll-snap-align:start]"
-                src={resolvePublicPath(photo.thumbnail ?? photo.src)}
-                alt={photo.caption ?? viewModel.name}
-                loading="lazy"
-              />
-            ))}
-          </div>
-        )}
         <PlaceFeedbackLink placeId={viewModel.id} placeName={viewModel.name} />
       </div>
     </motion.aside>

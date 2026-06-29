@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 
-type IconButtonSize = "sm" | "md";
+type IconButtonSize = "sm" | "md" | "lg";
 type IconButtonVariant = "default" | "overlay" | "primary";
 
 type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -12,6 +12,7 @@ type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 const sizes: Record<IconButtonSize, string> = {
   sm: "h-9 w-9 active:scale-[0.95]",
   md: "h-10 w-10 active:scale-[0.98]",
+  lg: "h-11 w-11 active:scale-[0.98]",
 };
 
 const variants: Record<IconButtonVariant, string> = {

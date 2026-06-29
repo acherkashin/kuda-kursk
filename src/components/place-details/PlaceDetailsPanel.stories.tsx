@@ -71,6 +71,32 @@ const placeWithPhotos: PlaceFeature = {
   }
 };
 
+const placeWithMultiplePhotos: PlaceFeature = {
+  ...placeWithPhotos,
+  id: "story-multiple-photos",
+  properties: {
+    ...placeWithPhotos.properties,
+    id: "story-multiple-photos",
+    balloonContent: {
+      ...placeWithPhotos.properties.balloonContent,
+      name: "Невесомость",
+      description:
+        "Пространство для флоатинга и спокойного отдыха: солёная вода держит тело, над головой мерцают звёзды, а вокруг играет расслабляющая музыка.",
+      address: "Курск, улица Гайдара, 26А",
+      images: [
+        {
+          src: "/place-images/9006-image-nevesomost.png",
+          thumbnail: "/place-thumbnails/9006-thumbnail-nevesomost.png",
+          order: 1
+        },
+        { src: "/place-images/9006-image-nevesomost-2.jpg", order: 2 },
+        { src: "/place-images/9006-image-nevesomost-3.jpg", order: 3 },
+        { src: "/place-images/9006-image-nevesomost-4.jpg", order: 4 }
+      ]
+    }
+  }
+};
+
 const placeWithLandscapePhoto: PlaceFeature = {
   ...placeWithPhotos,
   id: "story-park-hotel",
@@ -269,6 +295,12 @@ type Story = StoryObj<typeof meta>;
 export const WithPhoto: Story = {
   args: {
     place: placeWithLandscapePhoto
+  }
+};
+
+export const MultiplePhotos: Story = {
+  args: {
+    place: placeWithMultiplePhotos
   }
 };
 
