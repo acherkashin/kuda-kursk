@@ -344,13 +344,15 @@ export function App() {
             onBackToMain={currentMap.slug !== "main" ? handleBackToMain : undefined}
             onCategorySelect={handleCategorySelect}
           />
-          <div className="map-results-ui fixed bottom-[max(16px,env(safe-area-inset-bottom))] left-[max(16px,env(safe-area-inset-left))] z-3 max-w-[min(420px,calc(100vw-32px))] max-[700px]:bottom-[max(12px,env(safe-area-inset-bottom))] max-[700px]:left-[max(12px,env(safe-area-inset-left))]">
-            <ResultsSummary
-              count={visiblePlaces.length}
-              total={basePlaces.length}
-              isFiltered={isFiltered}
-            />
-          </div>
+          {loadState === "ready" ? (
+            <div className="map-results-ui fixed bottom-[max(16px,env(safe-area-inset-bottom))] left-[max(16px,env(safe-area-inset-left))] z-3 max-w-[min(420px,calc(100vw-32px))] max-[700px]:bottom-[max(12px,env(safe-area-inset-bottom))] max-[700px]:left-[max(12px,env(safe-area-inset-left))]">
+              <ResultsSummary
+                count={visiblePlaces.length}
+                total={basePlaces.length}
+                isFiltered={isFiltered}
+              />
+            </div>
+          ) : null}
         </>
       ) : null}
       <PlaceDetailsPanel
