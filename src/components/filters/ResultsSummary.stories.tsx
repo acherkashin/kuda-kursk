@@ -23,7 +23,7 @@ export const AllPlacesOnMap: Story = {
   args: {
     count: 128,
     total: 128,
-    hasActiveSearch: false
+    isFiltered: false
   }
 };
 
@@ -31,7 +31,7 @@ export const ActiveSearch: Story = {
   args: {
     count: 12,
     total: 128,
-    hasActiveSearch: true
+    isFiltered: true
   }
 };
 
@@ -39,6 +39,6 @@ export const EmptyResults: Story = {
   args: {
     count: 0,
     total: 128,
-    hasActiveSearch: true
+    isFiltered: true
   }
 };

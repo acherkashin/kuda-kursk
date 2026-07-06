@@ -163,6 +163,7 @@
         "section": "8",
         "type": "1009",
         "id": 1587,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1587-image-a54a636bda.jpg",
           "name": "База отдыха «DonVillage»",
@@ -935,6 +936,7 @@
         "section": "8",
         "type": "3104",
         "id": 322,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/322-image-e2c731b7cb.jpg",
           "name": "База отдыха «Серебряно»",
@@ -971,6 +973,7 @@
         "section": "8",
         "type": "3104",
         "id": 336,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/336-image-7458aaf3b9.jpg",
           "name": "Загородный клуб «Шале у леса»",
@@ -1012,6 +1015,7 @@
         "section": "8",
         "type": "3104",
         "id": 1516,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1516-image-16b813be28.jpg",
           "name": "«Яхонты Красниково» эко-отель",
@@ -1053,6 +1057,7 @@
         "section": "8",
         "type": "3104",
         "id": 1588,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1588-image-5af27a6635.jpg",
           "name": "Глэмпинг НовоШемякино",
@@ -1084,6 +1089,7 @@
         "section": "8",
         "type": "3104",
         "id": 1591,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1591-image-92148fda66.jpg",
           "name": "Глэмпинг Berloga Barn",
@@ -1115,6 +1121,7 @@
         "section": "8",
         "type": "3104",
         "id": 1592,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1592-image-b73ad598a4.jpg",
           "name": "Forest House",
@@ -1151,6 +1158,7 @@
         "section": "8",
         "type": "3104",
         "id": 1593,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1593-image-9bbb27b03d.jpg",
           "name": "Тишина",
@@ -1187,6 +1195,7 @@
         "section": "8",
         "type": "3104",
         "id": 1597,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1597-image-69f566943c.jpg",
           "name": "Riverland",
@@ -1228,6 +1237,7 @@
         "section": "8",
         "type": "3104",
         "id": 1598,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1598-image-209b28cda1.jpg",
           "name": "Шале у реки",
@@ -1269,6 +1279,7 @@
         "section": "8",
         "type": "3104",
         "id": 1599,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1599-image-bce38e4ba4.jpg",
           "name": "Ёлки-иголки",
@@ -1300,6 +1311,7 @@
         "section": "8",
         "type": "3104",
         "id": 1600,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1600-image-3ee55fa028.jpg",
           "name": "Шик&Шале",
@@ -1336,6 +1348,7 @@
         "section": "8",
         "type": "3104",
         "id": 1601,
+        "categories": ["chalet"],
         "balloonContent": {
           "image": "/place-images/1601-image-930853e6cc.jpg",
           "name": "Шале «River House»",

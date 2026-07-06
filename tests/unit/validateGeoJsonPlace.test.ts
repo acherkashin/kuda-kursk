@@ -26,6 +26,40 @@ describe("validateGeoJsonPlace", () => {
     });
   });
 
+  it("accepts known unique place categories", () => {
+    expect(
+      validateGeoJsonPlace({
+        ...validPlace,
+        properties: {
+          ...validPlace.properties,
+          categories: ["chalet"]
+        }
+      })
+    ).toMatchObject({ properties: { categories: ["chalet"] } });
+  });
+
+  it("rejects unknown or duplicate place categories", () => {
+    expect(() =>
+      validateGeoJsonPlace({
+        ...validPlace,
+        properties: {
+          ...validPlace.properties,
+          categories: ["unknown"]
+        }
+      })
+    ).toThrow(/categor/i);
+
+    expect(() =>
+      validateGeoJsonPlace({
+        ...validPlace,
+        properties: {
+          ...validPlace.properties,
+          categories: ["chalet", "chalet"]
+        }
+      })
+    ).toThrow(/categor/i);
+  });
+
   it("rejects latitude-longitude coordinates that look swapped for Kursk", () => {
     expect(() =>
       validateGeoJsonPlace({

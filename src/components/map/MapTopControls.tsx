@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { InfoIcon, SearchIcon } from "lucide-react";
 import { IconButton } from "../ui/IconButton";
+import { CategoryFilter, type CategoryFilterItem } from "../filters/CategoryFilter";
 import { SearchBox } from "../filters/SearchBox";
 import { MapLogo } from "./MapLogo";
 
@@ -16,6 +17,9 @@ type MapTopControlsProps = {
   onBackToMain?: (() => void) | undefined;
   onAboutOpen: () => void;
   isAboutOpen?: boolean;
+  categories: readonly CategoryFilterItem[];
+  activeCategory: string | null;
+  onCategorySelect: (slug: string) => void;
 };
 
 function getIsMobileViewport() {
@@ -109,10 +113,13 @@ function SearchPanel({
 }
 
 export function MapTopControls({
+  activeCategory,
+  categories,
   isAboutOpen = false,
   logo,
   onAboutOpen,
   onBackToMain,
+  onCategorySelect,
   onQueryChange,
   onQueryReset,
   query,
@@ -141,41 +148,48 @@ export function MapTopControls({
 
   return (
     <div className="map-top-ui fixed top-[max(16px,env(safe-area-inset-top))] left-[max(16px,env(safe-area-inset-left))] z-3 w-fit max-w-[min(980px,calc(100vw-476px))] max-[1120px]:max-w-[calc(100vw-32px)] max-[700px]:top-[max(12px,env(safe-area-inset-top))] max-[700px]:right-[max(12px,env(safe-area-inset-right))] max-[700px]:left-[max(12px,env(safe-area-inset-left))] max-[700px]:w-auto max-[700px]:max-w-none">
-      {isMobile ? (
-        mobileMode === "brand" ? (
-          <BrandBar
-            isAboutOpen={isAboutOpen}
-            logo={logo}
-            title={title}
-            subtitle={subtitle}
-            onAboutOpen={onAboutOpen}
-            onBack={onBackToMain}
-            onSearchOpen={openSearch}
-          />
+      <div className="min-w-0 max-w-full">
+        {isMobile ? (
+          mobileMode === "brand" ? (
+            <BrandBar
+              isAboutOpen={isAboutOpen}
+              logo={logo}
+              title={title}
+              subtitle={subtitle}
+              onAboutOpen={onAboutOpen}
+              onBack={onBackToMain}
+              onSearchOpen={openSearch}
+            />
+          ) : (
+            <SearchPanel
+              query={query}
+              onClose={closeSearch}
+              onEscape={handleEscape}
+              onQueryChange={onQueryChange}
+              onQueryReset={onQueryReset}
+            />
+          )
         ) : (
-          <SearchPanel
-            query={query}
-            onClose={closeSearch}
-            onEscape={handleEscape}
-            onQueryChange={onQueryChange}
-            onQueryReset={onQueryReset}
-          />
-        )
-      ) : (
-        <div className="flex w-full max-w-full items-start gap-3">
-          <MapLogo
-            actionSlot={<BrandActions isAboutOpen={isAboutOpen} onAboutOpen={onAboutOpen} />}
-            className="w-fit min-w-[340px] max-w-[min(470px,calc(100vw-32px))] flex-[0_1_auto] max-[1120px]:max-w-[min(470px,48vw)]"
-            logoSrc={logo}
-            title={title}
-            subtitle={subtitle}
-            onBack={onBackToMain}
-          />
-          <section className="w-[482px] max-w-[482px] min-w-0 flex-[1_1_482px]" aria-label="Поиск">
-            <SearchBox value={query} onChange={onQueryChange} onReset={onQueryReset} />
-          </section>
-        </div>
-      )}
+          <div className="flex w-full max-w-full items-start gap-3">
+            <MapLogo
+              actionSlot={<BrandActions isAboutOpen={isAboutOpen} onAboutOpen={onAboutOpen} />}
+              className="w-fit min-w-[340px] max-w-[min(470px,calc(100vw-32px))] flex-[0_1_auto] max-[1120px]:max-w-[min(470px,48vw)]"
+              logoSrc={logo}
+              title={title}
+              subtitle={subtitle}
+              onBack={onBackToMain}
+            />
+            <section className="w-[482px] max-w-[482px] min-w-0 flex-[1_1_482px]" aria-label="Поиск">
+              <SearchBox value={query} onChange={onQueryChange} onReset={onQueryReset} />
+            </section>
+          </div>
+        )}
+        <CategoryFilter
+          activeCategory={activeCategory}
+          categories={categories}
+          onCategorySelect={onCategorySelect}
+        />
+      </div>
     </div>
   );
 }

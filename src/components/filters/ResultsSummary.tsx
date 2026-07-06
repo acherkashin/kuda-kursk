@@ -1,7 +1,7 @@
 type ResultsSummaryProps = {
   count: number;
   total: number;
-  hasActiveSearch: boolean;
+  isFiltered: boolean;
 };
 
 function pluralizePlaces(count: number): string {
@@ -19,15 +19,15 @@ function pluralizePlaces(count: number): string {
   return `${count} мест`;
 }
 
-export function ResultsSummary({ count, total, hasActiveSearch }: ResultsSummaryProps) {
+export function ResultsSummary({ count, total, isFiltered }: ResultsSummaryProps) {
   return (
     <div
       className="flex flex-wrap items-center gap-2 rounded-full border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-[13px] font-semibold text-[var(--color-text-secondary)] shadow-[var(--shadow-rest)] tabular-nums"
       data-testid="results-summary"
     >
-      <span className={`h-2 w-2 rounded-full ${hasActiveSearch ? "bg-[var(--color-accent)]" : "bg-[var(--color-text)]"}`} aria-hidden="true" />
+      <span className={`h-2 w-2 rounded-full ${isFiltered ? "bg-[var(--color-accent)]" : "bg-[var(--color-text)]"}`} aria-hidden="true" />
       <span className="whitespace-nowrap">
-        {hasActiveSearch ? `${pluralizePlaces(count)} из ${total}` : `${pluralizePlaces(count)} на карте`}
+        {isFiltered ? `${pluralizePlaces(count)} из ${total}` : `${pluralizePlaces(count)} на карте`}
       </span>
       {count === 0 ? (
         <div className="basis-full px-4 font-bold text-[var(--color-text)]" data-testid="empty-results">

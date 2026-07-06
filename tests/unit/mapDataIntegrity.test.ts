@@ -73,4 +73,20 @@ describe("map data files", () => {
     expect(hiddenPlaces.every((place) => place.properties.visibility?.public === false)).toBe(true);
     expect(filterVisiblePlaces(places).some((place) => hiddenPlaceIds.includes(Number(place.id)))).toBe(false);
   });
+
+  it("assigns the chalet category to the approved main-map places", () => {
+    const dataPath = join(projectRoot, "public", "data", "main-map.json");
+    const raw = JSON.parse(readFileSync(dataPath, "utf8")) as unknown;
+    const features = (raw as { features?: unknown }).features;
+
+    expect(Array.isArray(features)).toBe(true);
+
+    const chaletPlaceIds = (features as unknown[])
+      .map(validateGeoJsonPlace)
+      .filter((place) => place.properties.categories?.includes("chalet"))
+      .map((place) => Number(place.id))
+      .sort((first, second) => first - second);
+
+    expect(chaletPlaceIds).toEqual([322, 336, 1516, 1587, 1588, 1591, 1592, 1593, 1597, 1598, 1599, 1600, 1601]);
+  });
 });

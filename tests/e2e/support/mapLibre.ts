@@ -8,6 +8,11 @@ type RenderedMarkerPoint = {
   y: number;
 };
 
+export type MapCamera = {
+  center: { latitude: number; longitude: number };
+  zoom: number;
+};
+
 export async function waitForMapSourcePlaces(page: Page, expectedCount: number) {
   await expect
     .poll(
@@ -35,6 +40,61 @@ export async function waitForMapSourcePlaces(page: Page, expectedCount: number) 
       { timeout: 5_000 }
     )
     .toBe(expectedCount);
+}
+
+export async function waitForMapSourcePlacesWithinBounds(page: Page) {
+  await expect
+    .poll(
+      () =>
+        page.evaluate(async () => {
+          const map = (window as typeof window & {
+            __kurskMap?: {
+              getBounds: () => { contains: (coordinates: [number, number]) => boolean };
+              getSource: (sourceId: string) =>
+                | {
+                    getData?: () => Promise<{
+                      features?: Array<{ geometry?: { coordinates?: [number, number] } }>;
+                    }>;
+                  }
+                | undefined;
+            };
+          }).__kurskMap;
+          const source = map?.getSource("places");
+
+          if (!map || !source?.getData) {
+            return false;
+          }
+
+          const data = await source.getData();
+          const coordinates = data.features?.map((feature) => feature.geometry?.coordinates) ?? [];
+
+          return coordinates.length > 0 && coordinates.every((coordinate) => coordinate && map.getBounds().contains(coordinate));
+        }),
+      { timeout: 10_000 }
+    )
+    .toBe(true);
+}
+
+export async function getMapCamera(page: Page): Promise<MapCamera | null> {
+  return page.evaluate(() => {
+    const map = (window as typeof window & {
+      __kurskMap?: {
+        getCenter: () => { lat: number; lng: number };
+        getZoom: () => number;
+      };
+    }).__kurskMap;
+
+    if (!map) {
+      return null;
+    }
+
+    const center = map.getCenter();
+
+    return {
+      center: { latitude: center.lat, longitude: center.lng },
+      zoom: map.getZoom()
+    };
+  });
 }
 
 export async function waitForVisibleMapMarkers(page: Page) {

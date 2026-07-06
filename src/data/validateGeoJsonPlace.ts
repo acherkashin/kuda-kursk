@@ -1,4 +1,5 @@
 import type { BalloonContent, Coordinates, PlaceFeature } from "../domain/places";
+import { isPlaceCategorySlug, type PlaceCategorySlug } from "../domain/placeCategories";
 
 type JsonObject = Record<string, unknown>;
 
@@ -63,6 +64,22 @@ function validateBalloonContent(value: unknown): BalloonContent {
   };
 }
 
+function validateCategories(value: unknown): PlaceCategorySlug[] | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  if (!Array.isArray(value) || value.some((category) => typeof category !== "string" || !isPlaceCategorySlug(category))) {
+    throw new Error("Place properties.categories must contain known category slugs");
+  }
+
+  if (new Set(value).size !== value.length) {
+    throw new Error("Place properties.categories must not contain duplicate category slugs");
+  }
+
+  return [...value];
+}
+
 export function validateGeoJsonPlace(value: unknown): PlaceFeature {
   if (!isObject(value)) {
     throw new Error("Place must be an object");
@@ -88,6 +105,7 @@ export function validateGeoJsonPlace(value: unknown): PlaceFeature {
     throw new Error("Place properties.id must match id");
   }
 
+  const categories = validateCategories(value.properties.categories);
   const place: PlaceFeature = {
     type: "Feature",
     id: value.id,
@@ -98,7 +116,8 @@ export function validateGeoJsonPlace(value: unknown): PlaceFeature {
     properties: {
       ...value.properties,
       id: value.properties.id,
-      balloonContent: validateBalloonContent(value.properties.balloonContent)
+      balloonContent: validateBalloonContent(value.properties.balloonContent),
+      ...(categories !== undefined ? { categories } : {})
     }
   };
 

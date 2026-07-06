@@ -13,6 +13,7 @@ import {
   PLACE_SYMBOL_LAYER_ID
 } from "./placeLayers";
 import { createPlaceFeatureCollection } from "./placeSource";
+import { calculatePlaceBounds } from "./placeBounds";
 import {
   addMarkerImagePlaceholders,
   addMarkerImages,
@@ -24,10 +25,16 @@ const MARKER_HOVER_TRANSITION_MS = 310;
 
 type KurskMapProps = {
   activePlace: PlaceFeature | null;
+  fitBoundsRequest: MapFitBoundsRequest | null;
   places: PlaceFeature[];
   onPlaceSelect?: (place: PlaceFeature, source: "map") => void;
   onZoomChange?: (zoom: number) => void;
   zoom: number | undefined;
+};
+
+export type MapFitBoundsRequest = {
+  id: number;
+  places: PlaceFeature[];
 };
 
 type FeatureId = string | number;
@@ -42,7 +49,7 @@ function easeMarkerHover(progress: number) {
   return 1 - (1 - progress) ** 3;
 }
 
-export function KurskMap({ activePlace, places, onPlaceSelect, onZoomChange, zoom }: KurskMapProps) {
+export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect, onZoomChange, zoom }: KurskMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const hoverAnimationsRef = useRef<Map<FeatureId, HoverAnimation>>(new Map());
@@ -50,6 +57,7 @@ export function KurskMap({ activePlace, places, onPlaceSelect, onZoomChange, zoo
   const placeByIdRef = useRef<Map<string, PlaceFeature>>(new Map());
   const previousActivePlaceIdRef = useRef<string | number | null>(null);
   const hoveredPlaceIdRef = useRef<string | number | null>(null);
+  const handledFitBoundsRequestIdRef = useRef<number | null>(null);
   const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
 
   placeByIdRef.current = new Map(places.map((place) => [String(place.id), place]));
@@ -194,6 +202,38 @@ export function KurskMap({ activePlace, places, onPlaceSelect, onZoomChange, zoo
       map.off("zoomend", syncZoom);
     };
   }, [mapState, onZoomChange]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+
+    if (
+      !map ||
+      mapState !== "ready" ||
+      !fitBoundsRequest ||
+      handledFitBoundsRequestIdRef.current === fitBoundsRequest.id
+    ) {
+      return;
+    }
+
+    const bounds = calculatePlaceBounds(fitBoundsRequest.places);
+    handledFitBoundsRequestIdRef.current = fitBoundsRequest.id;
+
+    if (!bounds) {
+      return;
+    }
+
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const padding = isMobile
+      ? { top: 116, right: 24, bottom: 96, left: 24 }
+      : { top: 124, right: activePlace ? 466 : 56, bottom: 72, left: 56 };
+
+    map.fitBounds(bounds, {
+      duration: prefersReducedMotion ? 0 : 420,
+      maxZoom: 14,
+      padding
+    });
+  }, [activePlace, fitBoundsRequest, mapState]);
 
   useEffect(() => {
     const map = mapRef.current;

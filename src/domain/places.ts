@@ -1,3 +1,5 @@
+import type { PlaceCategorySlug } from "./placeCategories";
+
 export type Coordinates = [longitude: number, latitude: number];
 
 export type Photo = {
@@ -50,6 +52,7 @@ export type PlaceFeature = {
     id: string | number;
     balloonContent: BalloonContent;
     links?: ExternalLink[];
+    categories?: PlaceCategorySlug[];
     visibility?: PlaceVisibility;
     /** Место является входом в под-карту с указанным slug. */
     mapLink?: PlaceMapLink;

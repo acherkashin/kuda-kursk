@@ -10,14 +10,18 @@ function isPwaPlugin(plugin: PluginOption): boolean {
   return isNamedPlugin(plugin) && plugin.name.startsWith("vite-plugin-pwa");
 }
 
+function isSeoPlugin(plugin: PluginOption): boolean {
+  return isNamedPlugin(plugin) && plugin.name === "generate-seo-artifacts";
+}
+
 function isTailwindPlugin(plugin: PluginOption): boolean {
   return isNamedPlugin(plugin) && plugin.name.startsWith("@tailwindcss/vite");
 }
 
-function removePwaPlugins(plugins: PluginOption[]): PluginOption[] {
+function removeAppBuildPlugins(plugins: PluginOption[]): PluginOption[] {
   return plugins
-    .map((plugin) => (Array.isArray(plugin) ? removePwaPlugins(plugin) : plugin))
-    .filter((plugin) => !isPwaPlugin(plugin));
+    .map((plugin) => (Array.isArray(plugin) ? removeAppBuildPlugins(plugin) : plugin))
+    .filter((plugin) => !isPwaPlugin(plugin) && !isSeoPlugin(plugin));
 }
 
 function hasTailwindPlugin(plugins: PluginOption[]): boolean {
@@ -30,7 +34,7 @@ const config: StorybookConfig = {
   framework: "@storybook/react-vite",
   staticDirs: ["../public"],
   viteFinal: async (config) => {
-    const plugins = removePwaPlugins(config.plugins ?? []);
+    const plugins = removeAppBuildPlugins(config.plugins ?? []);
 
     return {
       ...config,
