@@ -1,23 +1,20 @@
 #!/usr/bin/env node
 
-import { copyFile, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
-import { existsSync } from "node:fs";
-import { dirname, extname, relative, resolve } from "node:path";
-import { spawnSync } from "node:child_process";
+import { readFile, readdir, unlink, writeFile } from "node:fs/promises";
+import { relative, resolve } from "node:path";
 import process from "node:process";
+import { generatePlaceAssets, planPlaceAssets } from "../../../../tools/generate-place-assets.mjs";
 
 const PROJECT_ROOT = process.cwd();
 const MAP_CATALOG_PATH = "src/domain/mapCatalog.ts";
 const DATA_DIR = "public/data";
-const PLACE_IMAGES_DIR = "public/place-images";
-const PLACE_THUMBNAILS_DIR = "public/place-thumbnails";
 const DEFAULT_MAP_TITLE = "Куда в Курске";
 const KURSK_LONGITUDE_RANGE = [35, 38];
 const KURSK_LATITUDE_RANGE = [50, 53];
 
 function usage() {
   return `Usage:
-  node .agents/skills/add-map-place/scripts/add-map-place.mjs --image /path/photo.webp --name "Place" --address "Address" --description "Description" --latitude 51.730846 --longitude 36.193015 [--map-title "Куда в Курске"] [--dry-run]
+  node .agents/skills/add-map-place/scripts/add-map-place.mjs --image /path/photo.heic --name "Place" --address "Address" --description "Description" --latitude 51.730846 --longitude 36.193015 [--map-title "Куда в Курске"] [--dry-run]
 
 Required:
   --image          Local image path
@@ -111,56 +108,6 @@ function normalize(value) {
     .replace(/[«»"']/g, "")
     .replace(/\s+/g, " ")
     .trim();
-}
-
-function transliterate(value) {
-  const map = {
-    а: "a",
-    б: "b",
-    в: "v",
-    г: "g",
-    д: "d",
-    е: "e",
-    ё: "e",
-    ж: "zh",
-    з: "z",
-    и: "i",
-    й: "y",
-    к: "k",
-    л: "l",
-    м: "m",
-    н: "n",
-    о: "o",
-    п: "p",
-    р: "r",
-    с: "s",
-    т: "t",
-    у: "u",
-    ф: "f",
-    х: "h",
-    ц: "ts",
-    ч: "ch",
-    ш: "sh",
-    щ: "sch",
-    ъ: "",
-    ы: "y",
-    ь: "",
-    э: "e",
-    ю: "yu",
-    я: "ya"
-  };
-
-  return [...value].map((char) => map[char.toLocaleLowerCase("ru-RU")] ?? char).join("");
-}
-
-function slugify(value) {
-  const slug = transliterate(value)
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 64);
-
-  return slug || "place";
 }
 
 async function readJson(filePath) {
@@ -257,55 +204,13 @@ function assertNoDuplicateName(json, name) {
   }
 }
 
-function publicAssetPath(filePath) {
-  return `/${relative(resolve(PROJECT_ROOT, "public"), filePath).split("/").join("/")}`;
-}
-
 async function prepareImagePaths(imagePath, id, name) {
-  const absoluteImagePath = resolve(PROJECT_ROOT, imagePath);
-
-  if (!existsSync(absoluteImagePath)) {
-    throw new Error(`Image file does not exist: ${imagePath}`);
-  }
-
-  const extension = extname(absoluteImagePath).toLowerCase() || ".jpg";
-  const slug = slugify(name);
-  const imageFileName = `${id}-image-${slug}${extension}`;
-  const thumbnailFileName = `${id}-thumbnail-${slug}${extension}`;
-  const imageOutputPath = resolve(PROJECT_ROOT, PLACE_IMAGES_DIR, imageFileName);
-  const thumbnailOutputPath = resolve(PROJECT_ROOT, PLACE_THUMBNAILS_DIR, thumbnailFileName);
-
-  if (existsSync(imageOutputPath)) {
-    throw new Error(`Image output already exists: ${relative(PROJECT_ROOT, imageOutputPath)}`);
-  }
-
-  if (existsSync(thumbnailOutputPath)) {
-    throw new Error(`Thumbnail output already exists: ${relative(PROJECT_ROOT, thumbnailOutputPath)}`);
-  }
-
-  return {
-    source: absoluteImagePath,
-    imageOutputPath,
-    thumbnailOutputPath,
-    imagePublicPath: publicAssetPath(imageOutputPath),
-    thumbnailPublicPath: publicAssetPath(thumbnailOutputPath)
-  };
-}
-
-async function copyImages(paths) {
-  await mkdir(dirname(paths.imageOutputPath), { recursive: true });
-  await mkdir(dirname(paths.thumbnailOutputPath), { recursive: true });
-  await copyFile(paths.source, paths.imageOutputPath);
-
-  const sips = spawnSync("sips", ["-Z", "480", paths.source, "--out", paths.thumbnailOutputPath], {
-    encoding: "utf8"
+  return planPlaceAssets({
+    imagePath,
+    placeId: id,
+    placeName: name,
+    projectRoot: PROJECT_ROOT
   });
-
-  if (sips.status !== 0) {
-    await copyFile(paths.source, paths.thumbnailOutputPath);
-    const message = (sips.stderr || sips.stdout || "sips failed").trim();
-    console.warn(`Warning: could not create resized thumbnail with sips; copied original instead. ${message}`);
-  }
 }
 
 function createFeature({ id, name, address, description, latitude, longitude, imagePublicPath, thumbnailPublicPath }) {
@@ -384,15 +289,33 @@ async function main() {
     thumbnailPublicPath: imagePaths.thumbnailPublicPath
   });
 
-  printSummary({ dryRun: args.dryRun, map, dataFilePath, feature, imagePaths });
-
   if (args.dryRun) {
+    printSummary({ dryRun: true, map, dataFilePath, feature, imagePaths });
     return;
   }
 
-  await copyImages(imagePaths);
-  data.features.push(feature);
-  await writeFile(dataFilePath, `${JSON.stringify(data, null, 2)}\n`, "utf8");
+  const generatedAssets = await generatePlaceAssets({
+    imagePath: image,
+    placeId: id,
+    placeName: name,
+    projectRoot: PROJECT_ROOT
+  });
+
+  try {
+    data.features.push(feature);
+    await writeFile(dataFilePath, `${JSON.stringify(data, null, 2)}\n`, "utf8");
+  } catch (error) {
+    if (generatedAssets.created) {
+      await Promise.all([
+        unlink(generatedAssets.imageOutputPath).catch(() => undefined),
+        unlink(generatedAssets.thumbnailOutputPath).catch(() => undefined)
+      ]);
+    }
+
+    throw error;
+  }
+
+  printSummary({ dryRun: false, map, dataFilePath, feature, imagePaths });
 }
 
 main().catch((error) => {

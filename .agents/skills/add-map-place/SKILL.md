@@ -11,7 +11,7 @@ description: "Add a new place to the Kursk map data from a local image path, nam
 
 ## Required Inputs
 
-- `imagePath`: локальный путь к картинке.
+- `imagePath`: локальный путь к JPEG, PNG, WebP или HEIC.
 - `name`: название места.
 - `address`: адрес.
 - `description`: описание для карточки места.
@@ -51,8 +51,8 @@ description: "Add a new place to the Kursk map data from a local image path, nam
     - Картинка: <imagePath>
     ```
 
-11. Выполни dry-run helper-скрипта и проверь вывод.
-12. Если dry-run корректен и пользователь уже подтвердил итог, выполни helper-скрипт без `--dry-run`.
+11. Выполни dry-run helper-скрипта и проверь рассчитанные hash-имена WebP-обложки и миниатюры.
+12. Если dry-run корректен и пользователь уже подтвердил итог, выполни helper-скрипт без `--dry-run`; он вызовет общий `tools/generate-place-assets.mjs`, нормализует ориентацию и не будет копировать исходник.
 13. После записи проверь diff и запусти существующую проверку, обычно `pnpm typecheck` или `pnpm build`. Не добавляй новые автоматические тесты без отдельного разрешения пользователя.
 
 ## Helper Script
@@ -99,6 +99,7 @@ node .agents/skills/add-map-place/scripts/add-map-place.mjs \
 
 - `geometry.coordinates` всегда записывай как `[longitude, latitude]`.
 - `balloonContent.coordinates` всегда записывай как строку `"latitude, longitude"`.
+- `balloonContent.image` и `thumbnail` всегда должны ссылаться на созданные helper-ом WebP-файлы; не сохраняй исходный JPEG, PNG или HEIC в `public/`.
 - Не добавляй пустые optional поля.
 - Не меняй существующие места, если задача только добавить новое место.
 - Не трогай чужие незакоммиченные изменения в рабочем дереве.

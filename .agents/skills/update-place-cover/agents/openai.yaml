@@ -1,0 +1,4 @@
+interface:
+  display_name: "Обновить обложку места"
+  short_description: "Обновляет обложку и миниатюру места"
+  default_prompt: "Use $update-place-cover to replace a Kursk map place cover and thumbnail from a local image."
