@@ -688,12 +688,29 @@
         "type": "театр",
         "id": 1172,
         "balloonContent": {
-          "image": "/place-images/1172-image-local-fa5d80b55b.webp",
+          "image": "/place-images/1172-image-molodezhnyy-teatr-3d-09ad50d6d9.webp",
           "name": "Молодёжный театр «3Д»",
           "description": "Если вы засыпаете в обычном театре, попробуйте театр 3D.\n\nСпектакли здесь длятся меньше полутора часов, без длинных антрактов и мыслей «а там ещё долго?». Можно прийти в чём удобно, а дальше смотреть, как музыка, свет и актёры делают своё дело.\n\nТеатр создали люди без профильного образования, поэтому здесь всё ощущается немного иначе. Билеты разбирают быстро, но иногда спасает Авито.",
           "address": "Курск, ул. Радищева, 35, этаж 1",
           "button": "Открыть сайт",
-          "thumbnail": "/place-thumbnails/1172-theatre-3d.webp"
+          "thumbnail": "/place-thumbnails/1172-thumbnail-molodezhnyy-teatr-3d-09ad50d6d9.webp",
+          "images": [
+            {
+              "src": "/place-images/1172-image-molodezhnyy-teatr-3d-09ad50d6d9.webp",
+              "thumbnail": "/place-thumbnails/1172-thumbnail-molodezhnyy-teatr-3d-09ad50d6d9.webp",
+              "order": 1
+            },
+            {
+              "src": "/place-images/1172-image-molodezhnyy-teatr-3d-2082208941.webp",
+              "thumbnail": "/place-thumbnails/1172-thumbnail-molodezhnyy-teatr-3d-2082208941.webp",
+              "order": 2
+            },
+            {
+              "src": "/place-images/1172-image-molodezhnyy-teatr-3d-adf4644f18.webp",
+              "thumbnail": "/place-thumbnails/1172-thumbnail-molodezhnyy-teatr-3d-adf4644f18.webp",
+              "order": 3
+            }
+          ]
         },
         "links": [
           {
