@@ -10,7 +10,7 @@ import { KurskMap, type MapFitBoundsRequest } from "../components/map/KurskMap";
 import { MapTopControls } from "../components/map/MapTopControls";
 import { PublicMapFallback } from "../components/map/PublicMapFallback";
 import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel";
-import { ANALYTICS_CONSENT_UI_ENABLED } from "../config/analytics";
+import { ANALYTICS_CONSENT_UI_ENABLED, isAnalyticsSessionOptOutActive } from "../config/analytics";
 import { loadPlaces } from "../data/loadPlaces";
 import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
 import { findMapBySlug } from "../domain/mapCatalog";
@@ -38,7 +38,9 @@ export function App() {
   const fitBoundsRequestIdRef = useRef(0);
   const handledAutomaticFitKeyRef = useRef<string | null>(null);
   const [analyticsConsent, setAnalyticsConsent] = useState<AnalyticsConsentRecord | null>(() => readStoredAnalyticsConsent());
-  const analyticsEnabled = ANALYTICS_CONSENT_UI_ENABLED ? analyticsConsent?.status === "accepted" : true;
+  const analyticsEnabled =
+    !isAnalyticsSessionOptOutActive() &&
+    (ANALYTICS_CONSENT_UI_ENABLED ? analyticsConsent?.status === "accepted" : true);
   const analytics = useMemo(
     () => createAnalyticsAdapter(import.meta.env.VITE_YANDEX_METRIKA_ID, analyticsEnabled),
     [analyticsEnabled]

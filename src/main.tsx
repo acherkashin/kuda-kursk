@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./styles/index.css";
 import { AppRouter } from "./app/router";
+import { initializeAnalyticsSessionOptOut } from "./config/analytics";
+
+initializeAnalyticsSessionOptOut();
 
 const rootElement = document.getElementById("root");
 
