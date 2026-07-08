@@ -76,6 +76,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
   const markerLayoutByIdRef = useRef<Map<string, MarkerLayout>>(new Map());
   const markerLayoutFingerprintRef = useRef<string | null>(null);
   const placeByIdRef = useRef<Map<string, PlaceFeature>>(new Map());
+  const placesRef = useRef<PlaceFeature[]>(places);
   const previousActivePlaceIdRef = useRef<string | number | null>(null);
   const hoveredPlaceIdRef = useRef<string | number | null>(null);
   const handledFitBoundsRequestIdRef = useRef<number | null>(null);
@@ -83,6 +84,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
   const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
 
   placeByIdRef.current = new Map(places.map((place) => [String(place.id), place]));
+  placesRef.current = places;
 
   const stopHoverAnimation = (id: FeatureId) => {
     const animation = hoverAnimationsRef.current.get(id);
@@ -507,7 +509,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
 
         animateMarkerHoverProgress(map, place.id, 1);
         hoveredPlaceIdRef.current = place.id;
-        setPlaceSourceSortData(map, places);
+        setPlaceSourceSortData(map, placesRef.current);
         map.getCanvas().style.cursor = "pointer";
       }
     };
@@ -515,7 +517,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
       if (hoveredPlaceIdRef.current !== null) {
         animateMarkerHoverProgress(map, hoveredPlaceIdRef.current, 0);
         hoveredPlaceIdRef.current = null;
-        setPlaceSourceSortData(map, places);
+        setPlaceSourceSortData(map, placesRef.current);
       }
 
       map.getCanvas().style.cursor = "";
