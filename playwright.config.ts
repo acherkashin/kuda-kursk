@@ -9,7 +9,7 @@ export default defineConfig({
     trace: "retain-on-failure"
   },
   webServer: {
-    command: "pnpm dev --host 127.0.0.1 --port 5173",
+    command: "./node_modules/.bin/vite --host 127.0.0.1 --port 5173",
     env: {
       ...process.env,
       VITE_ANALYTICS_CONSENT_UI_ENABLED: "true",

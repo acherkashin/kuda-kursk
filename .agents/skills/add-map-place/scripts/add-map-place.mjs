@@ -231,8 +231,7 @@ function createFeature({ id, name, address, description, latitude, longitude, im
         thumbnail: thumbnailPublicPath,
         name,
         description,
-        address,
-        coordinates: `${formattedLatitude}, ${formattedLongitude}`
+        address
       }
     }
   };
@@ -240,6 +239,8 @@ function createFeature({ id, name, address, description, latitude, longitude, im
 
 function printSummary({ dryRun, map, dataFilePath, feature, imagePaths }) {
   const prefix = dryRun ? "Dry run: would add place" : "Added place";
+  const [longitude, latitude] = feature.geometry.coordinates;
+  const formattedCoordinates = `${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
 
   console.log(`${prefix}:`);
   console.log(`- Map: ${map.title} (${map.slug})`);
@@ -247,7 +248,7 @@ function printSummary({ dryRun, map, dataFilePath, feature, imagePaths }) {
   console.log(`- ID: ${feature.id}`);
   console.log(`- Name: ${feature.properties.balloonContent.name}`);
   console.log(`- Address: ${feature.properties.balloonContent.address}`);
-  console.log(`- Coordinates: ${feature.properties.balloonContent.coordinates}`);
+  console.log(`- Coordinates: ${formattedCoordinates}`);
   console.log(`- Image: ${imagePaths.imagePublicPath}`);
   console.log(`- Thumbnail: ${imagePaths.thumbnailPublicPath}`);
 }

@@ -46,7 +46,7 @@
 - **Separation of concerns**: PASS. React-компоненты отвечают за композицию и состояние интерфейса; импорт/валидация данных, поиск, построение ссылок маршрутов и analytics adapter выносятся в focused modules.
 - **User-approved testing**: PASS. В текущей фиче уже есть созданные unit/e2e проверки, которые можно запускать как регрессионные; новое покрытие не добавляется без отдельного разрешения, visual/PWA/mobile проверки могут фиксироваться вручную.
 - **Consistent UX**: PASS. Полноэкранная карта остаётся главным экраном; optional content скрывается без пустых заглушек; mobile drawer и consent UI проектируются как доступные элементы.
-- **Performance**: PASS. Используется MapLibre GeoJSON source/clustering, локальная нормализация поискового индекса и opt-in lazy loading Метрики; Fuse/search engine не добавляется до подтверждённой необходимости.
+- **Performance**: PASS. Используется MapLibre GeoJSON source с runtime screen-space раскладкой маркеров, локальная нормализация поискового индекса и opt-in lazy loading Метрики; Fuse/search engine не добавляется до подтверждённой необходимости.
 
 ## Структура проекта
 
@@ -71,8 +71,10 @@ specs/001-kursk-places-map/
 ```text
 public/
 ├── data/
-│   ├── places.json
-│   └── community-maps.json
+│   ├── main-map.json
+│   ├── dozapravka-objects.json
+│   ├── elena-koltysheva-objects.json
+│   └── illustrator-liza-silakova-objects.json
 ├── map-styles/
 │   └── kursk-positron.json
 └── pwa/
@@ -116,6 +118,12 @@ tests/
 
 Нарушений конституции нет.
 
+## Дополнение: оптимизация структуры `main-map.json`
+
+Главная карта сохраняет GeoJSON-like формат как совместимый и читаемый контракт данных, но очищается от legacy-полей, которые не используются интерфейсом: `properties.section`, `properties.type`, `balloonContent.button`, `balloonContent.coordinates`, а также явного `visibility.public: true`, совпадающего со значением по умолчанию. Генератор добавления новых мест больше не записывает `balloonContent.coordinates`; строка координат для вывода и копирования строится из `geometry.coordinates`.
+
+Проверка: `jq empty public/data/main-map.json`, контроль отсутствия legacy-полей через `jq`, `pnpm typecheck`, `pnpm build`. Новое автоматизированное тестовое покрытие не добавлялось.
+
 ## Phase 0: Research
 
 См. `specs/001-kursk-places-map/research.md`.
@@ -130,7 +138,15 @@ tests/
 - **Separation of concerns**: PASS. Контракты фиксируют границы данных, роутинга, PWA и аналитики; будущие задачи должны сохранять эти границы.
 - **User-approved testing**: PASS. Контракты и quickstart описывают существующие проверки качества; новые или изменённые тесты требуют отдельного разрешения пользователя.
 - **Consistent UX**: PASS. План учитывает `DESIGN_SYSTEM.md`: карта остаётся главным холстом, UI плавает поверх карты, фотографии несут идентичность мест, активные состояния выражаются контрастом, а visual QA закрывает desktop/mobile состояния без наложений.
-- **Performance**: PASS. Требования к 500 местам закрываются локальной нормализацией данных, MapLibre source/clustering и отказом от преждевременного fuzzy engine.
+- **Performance**: PASS. Требования к 500 местам закрываются локальной нормализацией данных, MapLibre source с непрерывным screen-space layout маркеров и отказом от преждевременного fuzzy engine.
+
+## Дополнение: маркеры без кластеризации
+
+Карта больше не использует MapLibre clustering: все места текущего набора остаются отдельными фотомаркерами. Для близких координат `KurskMap` вычисляет runtime screen-space смещения через отдельный layout-модуль, строит для MapLibre source временную смещённую геометрию через `project → offset → unproject` и сохраняет служебные layout properties (`markerOffset`, `markerTextOffset`, `markerSortKey`) для диагностики/сортировки. Symbol layers читают `markerSortKey`, а иконка, hitbox и подпись следуют за смещённой runtime-геометрией.
+
+Layout работает как непрерывный solver в экранных координатах: маркеры притягиваются к истинной точке, используют предыдущий offset для стабильности, могут частично пересекаться не более чем на половину визуальной площади и пересчитываются через `requestAnimationFrame` во время `zoom` и `resize`, а также при смене набора мест или `selected`-состояния, но не при обычном `pan` на неизменном масштабе. При чистом перемещении карты текущие pixel offsets считаются валидными, потому что MapLibre сдвигает runtime-геометрию вместе с картой; физический solver дополнительно защищён fingerprint-ом по zoom, viewport, видимым местам и active id. `selected` участвует в физической раскладке и получает максимальный `markerSortKey`. `hovered` не меняет `markerOffset` и runtime-геометрию: он только показывает подпись и поднимается над обычными маркерами через пересчёт `markerSortKey`, оставаясь ниже выбранного, если это разные места.
+
+Подход сохраняет текущую MapLibre-архитектуру без DOM-маркеров и новых runtime-зависимостей. Географические координаты в данных не меняются и продолжают использоваться для маршрутов, URL, fit bounds и выбора места; смещение является только визуальным свойством отрисовки. Проверка: существующий typecheck, production build и ручная visual QA desktop/mobile; новое или изменённое автоматизированное тестовое покрытие для этой правки не добавляется без отдельного разрешения.
 
 ## Дополнение: переход с основной карты на под-карты (US5, FR-031–FR-033)
 

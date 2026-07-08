@@ -49,4 +49,26 @@ describe("createPlaceFeatureCollection", () => {
 
     expect(createPlaceFeatureCollection(places).features).toHaveLength(500);
   });
+
+  it("adds runtime marker layout properties when they are available", () => {
+    const collection = createPlaceFeatureCollection(
+      [makePlace("shifted", "/images/full.jpg")],
+      new Map([
+        [
+          "shifted",
+          {
+            labelOffset: [2, 4.65],
+            markerOffset: [24, 24],
+            sortKey: 1
+          }
+        ]
+      ])
+    );
+
+    expect(collection.features[0]?.properties).toMatchObject({
+      markerOffset: [24, 24],
+      markerSortKey: 1,
+      markerTextOffset: [2, 4.65]
+    });
+  });
 });

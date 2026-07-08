@@ -73,7 +73,7 @@
 ### Реализация для User Story 1
 
 - [X] T030 [P] [US1] Реализовать MapLibre контейнер, lifecycle и cleanup карты в `src/components/map/KurskMap.tsx`
-- [X] T031 [P] [US1] Реализовать подготовку GeoJSON source для публичных мест и clustering-ready данных в `src/components/map/placeSource.ts`
+- [X] T031 [P] [US1] Реализовать подготовку GeoJSON source для публичных мест и runtime layout properties маркеров в `src/components/map/placeSource.ts`
 - [X] T032 [US1] Добавить слои маркеров мест с изображениями и заметным visual priority в `src/components/map/placeLayers.ts`
 - [X] T033 [US1] Реализовать hover tooltip с названием места для устройств с hover в `src/components/map/MarkerTooltip.tsx`
 - [X] T034 [P] [US1] Реализовать маленький ненавязчивый логотип поверх карты в `src/components/map/MapLogo.tsx`
@@ -584,6 +584,35 @@
 
 ---
 
+## Phase 47: Оптимизация структуры главной карты
+
+**Цель**: уменьшить размер `public/data/main-map.json` и закрепить один источник истины для координат без изменения пользовательского поведения.
+
+- [X] T199 Удалить из `public/data/main-map.json` неиспользуемые `properties.section`, `properties.type`, `balloonContent.button`, остаточный `balloonContent.coordinates` и избыточный `visibility.public: true`; сохранить скрытые места с `visibility.public: false`, не менять остальные карты и нормализовать только крайние пробелы/CRLF в описаниях. Обновить `.agents/skills/add-map-place/scripts/add-map-place.mjs`, `.agents/skills/add-map-place/SKILL.md`, `.agents/skills/add-map-place/references/place-data-rules.md`, `specs/001-kursk-places-map/contracts/data-format.md`, `specs/001-kursk-places-map/plan.md` и `tasks.md`, чтобы новые места не создавали legacy-поля. Проверка: `jq empty public/data/main-map.json`, контроль legacy-полей через `jq`, `pnpm typecheck`, `pnpm build`; новое автоматизированное тестовое покрытие не добавлялось.
+
+---
+
+## Phase 48: Маркеры без кластеризации
+
+**Цель**: показывать все места отдельными фотомаркерами и разносить близкие точки без cluster circles/counts, сохраняя маркеры максимально близко к истинным позициям.
+
+- [X] T200 Убрать MapLibre clustering из source и слоёв карты; добавить детерминированный screen-space layout маркеров в `src/components/map/markerLayout.ts`, передавать служебные `markerOffset`, `markerTextOffset` и `markerSortKey` через `placeSource`, применять смещение как runtime-геометрию MapLibre source и `markerSortKey` в `placeLayers`, пересчитывать раскладку в `KurskMap` при смене мест, active place, zoom и resize. Обновить существующий e2e-сценарий кластеров на проверку отсутствия cluster layers и добавить разрешённые unit-тесты layout/source. Проверка: `vitest run tests/unit/markerLayout.test.ts tests/unit/placeSource.test.ts`, `tsc -b --pretty false`, targeted Playwright `tests/e2e/map-interactions.spec.ts` на desktop через dev server `5174`, `vite build` и копирование `dist/index.html` в `dist/404.html`; ручная visual QA desktop/mobile подтвердила отсутствие cluster layers, наличие marker layer, работу hover по смещённому маркеру и 41 место в source. `pnpm build` в этом worktree не дошёл до build script из-за политики `ERR_PNPM_IGNORED_BUILDS` для `esbuild`.
+- [X] T201 Заменить дискретный layout близких маркеров на непрерывный screen-space solver: маркеры используют предыдущий offset для стабильности, притягиваются к истинной точке, допускают не более половины визуальной площади перекрытия, пересчитываются во время `zoom`/`move` через `requestAnimationFrame`, а `selected` и `hovered` получают приоритетный `markerSortKey` поверх обычных маркеров. Новые или изменённые automated tests не добавлялись по ограничению пользователя. Проверка: прямой `./node_modules/.bin/tsc -b --pretty false`, прямой `./node_modules/.bin/vite build && cp dist/index.html dist/404.html`; Playwright visual/diagnostic QA на `1440×900` и `390×844` через dev server `5174`: cluster layers отсутствуют, в source 41 место, desktop max overlap ratio `0.4706`, mobile max overlap ratio `0.4997`, hover и selected поднимают целевой маркер до максимального sort key, во время zoom source обновился 13 раз до `zoomend`, скриншоты сохранены в `output/playwright/marker-layout-desktop.png` и `output/playwright/marker-layout-mobile-map.png`. `pnpm exec tsc` не запускал TypeScript из-за политики `ERR_PNPM_IGNORED_BUILDS` для `esbuild`, поэтому использован уже установленный локальный бинарь.
+- [X] T202 Разделить физическую раскладку и порядок отрисовки hover-состояния: `selected` продолжает влиять на solver, а `hovered` больше не меняет `markerOffset` и runtime-геометрию; при hover пересчитываются только `markerSortKey` поверх текущих сохранённых offset-ов, поэтому подпись появляется и маркер поднимается без сдвига группы. Новые или изменённые automated tests не добавлялись по ограничению пользователя. Проверка: прямой `./node_modules/.bin/tsc -b --pretty false`, прямой `./node_modules/.bin/vite build && cp dist/index.html dist/404.html`; Playwright visual/diagnostic QA через dev server `5174` на desktop `1440×900` и mobile `390×844`: при hover delta runtime coordinates/`markerOffset`/projected point равна `0`, `hoverProgress` достигает `1`, hovered marker получает максимальный доступный `markerSortKey`, а при одновременном selected+hover другого маркера selected остаётся выше (`41` против `40`). Скриншоты сохранены в `output/playwright/hover-no-shift-desktop.png` и `output/playwright/hover-no-shift-mobile.png`.
+- [X] T203 Заморозить физическую раскладку при обычном `pan` без изменения zoom: убрать `move` как причину запуска solver-а, добавить fingerprint физического layout по zoom, viewport, видимым местам и active id, сохранять текущие `markerOffset` при перемещении карты и продолжать пересчитывать solver на `zoom`, `resize`, смену мест и selected-состояние. Новые или изменённые automated tests не добавлялись по ограничению пользователя. Проверка: прямой `./node_modules/.bin/tsc -b --pretty false`, прямой `./node_modules/.bin/vite build && cp dist/index.html dist/404.html`; Playwright diagnostic QA на `/maps/main?zoom=9.23`: desktop после серии `panBy` показал `changedOffsets: 0`, `maxOffsetDelta: 0` и residual единого screen-сдвига около `1e-13`, mobile pan показал те же `0` для offsets; при zoom был один `source.setData` и 27 изменившихся offsets; hover сохранил `offsetDelta: 0`, а selected остался выше hovered (`41` против `40`).
+
+---
+
+## Phase 49: PR-проверки в GitHub Actions
+
+**Цель**: запускать существующие typecheck, unit, build и e2e проверки для pull request автоматически и вручную без добавления нового тестового покрытия.
+
+- [X] T204 Добавить workflow `.github/workflows/pr-checks.yml` с триггерами `pull_request` и `workflow_dispatch`: установить pnpm `10.6.2`, Node `lts/*`, зависимости, Chromium для Playwright, затем выполнить `pnpm typecheck`, `pnpm test:unit`, `pnpm build` и `pnpm test:e2e`; Playwright report загружать artifact-ом только при падении. При локальном прогоне unit-проверки выявили дрейф active-маркера на доли пикселя, поэтому solver закрепляет active-маркер в collision-парах с обычными маркерами; e2e-проверки выявили, что route actions должны оставаться настоящими ссылками, а optional-карточка должна проверять публичное неполное место `«Тепловские высоты»`, сохраняя hidden fixture «Картинг» скрытым по data integrity контракту; Playwright webServer запускает локальный Vite binary напрямую, чтобы не упираться в локальную политику `ERR_PNPM_IGNORED_BUILDS`. Проверка пройдена локально: `./node_modules/.bin/tsc -b --pretty false`, `./node_modules/.bin/vitest run` (`69` passed), `./node_modules/.bin/vite build && cp dist/index.html dist/404.html`, `./node_modules/.bin/playwright test` (`45` passed, `1` skipped); после push проверить запуск workflow на PR.
+- [X] T205 Исправить CI-падение search e2e: GitHub Actions trace показал, что клик по категории применял фильтр и запускал fit bounds, но последующий `zoomend` записывал `zoom` из устаревшего snapshot-а `searchParams` и затирал `category`; затем повторный прогон выявил, что `fillSearchBox` проверял desktop searchbox через мгновенный `isVisible()` до завершения первого render-а и преждевременно уходил в mobile fallback. В `src/app/App.tsx` добавлен синхронный ref текущих query params и единый helper обновления URL-состояния, поэтому быстрые записи `category`/`zoom`/`place`/`about` больше не перезаписывают соседние параметры; в `tests/e2e/support/searchControls.ts` helper теперь ждёт появления либо desktop searchbox, либо mobile-кнопки поиска перед заполнением. Новое тестовое покрытие не добавлялось: проверка выполняется существующим e2e-сценарием и PR workflow.
+- [X] T206 Исправить замечания review по PR: hover-sort в `KurskMap` использует актуальный `placesRef.current`, поэтому после поиска или категории hover больше не может перезаписать MapLibre source устаревшим набором мест; visual QA screenshots удалены из git index, а `output/playwright/` добавлен в `.gitignore`, чтобы будущие ручные проверки не создавали binary churn в PR.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз
@@ -618,7 +647,7 @@
 Task: "T028 [P] [US1] Написать Playwright-тест первого экрана desktop/mobile с картой, логотипом и маркерами в tests/e2e/map-first-screen.spec.ts"
 Task: "T029 [P] [US1] Написать Playwright-тест hover названия маркера и pan/zoom устойчивости карты в tests/e2e/map-interactions.spec.ts"
 Task: "T030 [P] [US1] Реализовать MapLibre контейнер, lifecycle и cleanup карты в src/components/map/KurskMap.tsx"
-Task: "T031 [P] [US1] Реализовать подготовку GeoJSON source для публичных мест и clustering-ready данных в src/components/map/placeSource.ts"
+Task: "T031 [P] [US1] Реализовать подготовку GeoJSON source для публичных мест и runtime layout properties маркеров в src/components/map/placeSource.ts"
 Task: "T034 [P] [US1] Реализовать маленький ненавязчивый логотип поверх карты в src/components/map/MapLogo.tsx"
 ```
 

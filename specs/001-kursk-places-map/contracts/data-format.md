@@ -2,7 +2,7 @@
 
 ## Файл мест
 
-Путь по умолчанию: `public/data/places.json`.
+Путь главной карты по умолчанию: `public/data/main-map.json`.
 
 ```ts
 type PlaceFeature = {
@@ -81,6 +81,7 @@ type PlaceVisibility = {
 - `geometry.coordinates` всегда `[longitude, latitude]`.
 - Если координаты для Курска выглядят как `[latitude, longitude]`, импорт должен завершиться ошибкой валидации.
 - Строка координат для карточки и копирования вычисляется из `geometry.coordinates` в порядке `latitude, longitude`; `balloonContent.coordinates` не используется.
+- Устаревшие поля `properties.section`, `properties.type` и `balloonContent.button` не используются интерфейсом и не должны добавляться в новые записи.
 - Дополнительные поля в `properties` разрешены и должны сохраняться для будущего backend/CMS, но UI показывает только поддержанные поля.
 - Отсутствующие optional поля не создают пустые блоки интерфейса.
 - Отображаемые внешние ссылки хранятся в `properties.links`, а не в `balloonContent.url`, `balloonContent.externalUrl` или `balloonContent.socials`.

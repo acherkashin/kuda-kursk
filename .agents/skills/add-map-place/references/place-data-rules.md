@@ -21,8 +21,7 @@
       "thumbnail": "/place-thumbnails/123-thumbnail-name.webp",
       "name": "Название места",
       "description": "Описание места.",
-      "address": "Курск, улица Ленина, 1",
-      "coordinates": "51.730846, 36.193015"
+      "address": "Курск, улица Ленина, 1"
     }
   }
 }
@@ -31,7 +30,7 @@
 ## Координаты
 
 - `geometry.coordinates`: строго `[longitude, latitude]`.
-- `balloonContent.coordinates`: строка `"latitude, longitude"`.
+- `balloonContent.coordinates` не записывай: строка `"latitude, longitude"` вычисляется из `geometry.coordinates`.
 - Для Курска и Курской области ожидаемые диапазоны: longitude `35..38`, latitude `50..53`.
 - Если координаты похожи на `[latitude, longitude]`, не записывай их.
 

@@ -8,7 +8,6 @@ import { MapFallback } from "./MapFallback";
 import {
   addPlaceLayers,
   DEFAULT_PLACE_MARKER_IMAGE_ID,
-  PLACE_CLUSTER_LAYER_ID,
   PLACE_SOURCE_ID,
   PLACE_SYMBOL_LAYER_ID
 } from "./placeLayers";
@@ -20,6 +19,7 @@ import {
   createDefaultMarkerImage,
   MARKER_IMAGE_PIXEL_RATIO
 } from "./markerImages";
+import { createMarkerLayout, type MarkerLayout, updateMarkerLayoutSortKeys } from "./markerLayout";
 
 const MARKER_HOVER_TRANSITION_MS = 310;
 
@@ -45,6 +45,25 @@ type HoverAnimation = {
   to: number;
 };
 
+function createMarkerLayoutFingerprint(
+  targetMap: maplibregl.Map,
+  nextPlaces: PlaceFeature[],
+  activePlace: PlaceFeature | null
+) {
+  const canvas = targetMap.getCanvas();
+  const placeSignature = nextPlaces
+    .map((place) => `${place.id}:${place.geometry.coordinates[0]},${place.geometry.coordinates[1]}`)
+    .join("|");
+
+  return [
+    targetMap.getZoom(),
+    canvas.clientWidth,
+    canvas.clientHeight,
+    activePlace?.id ?? "",
+    placeSignature
+  ].join(";");
+}
+
 function easeMarkerHover(progress: number) {
   return 1 - (1 - progress) ** 3;
 }
@@ -54,13 +73,18 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
   const mapRef = useRef<maplibregl.Map | null>(null);
   const hoverAnimationsRef = useRef<Map<FeatureId, HoverAnimation>>(new Map());
   const hoverProgressByIdRef = useRef<Map<FeatureId, number>>(new Map());
+  const markerLayoutByIdRef = useRef<Map<string, MarkerLayout>>(new Map());
+  const markerLayoutFingerprintRef = useRef<string | null>(null);
   const placeByIdRef = useRef<Map<string, PlaceFeature>>(new Map());
+  const placesRef = useRef<PlaceFeature[]>(places);
   const previousActivePlaceIdRef = useRef<string | number | null>(null);
   const hoveredPlaceIdRef = useRef<string | number | null>(null);
   const handledFitBoundsRequestIdRef = useRef<number | null>(null);
+  const scheduleMarkerLayoutUpdateRef = useRef<(() => void) | null>(null);
   const [mapState, setMapState] = useState<"loading" | "ready" | "error">("loading");
 
   placeByIdRef.current = new Map(places.map((place) => [String(place.id), place]));
+  placesRef.current = places;
 
   const stopHoverAnimation = (id: FeatureId) => {
     const animation = hoverAnimationsRef.current.get(id);
@@ -126,6 +150,103 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
     hoverAnimationsRef.current.clear();
   };
 
+  const createMapMarkerPoints = (targetMap: maplibregl.Map, nextPlaces: PlaceFeature[]) => {
+    const activePlaceId = activePlace ? String(activePlace.id) : null;
+    const hoveredPlaceId = hoveredPlaceIdRef.current !== null ? String(hoveredPlaceIdRef.current) : null;
+
+    return nextPlaces.map((place) => {
+      const placeId = String(place.id);
+
+      return {
+        id: place.id,
+        isActive: activePlaceId === placeId,
+        isHovered: hoveredPlaceId === placeId,
+        point: targetMap.project(place.geometry.coordinates)
+      };
+    });
+  };
+
+  const createMapMarkerLayout = (targetMap: maplibregl.Map, nextPlaces: PlaceFeature[]) => {
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+    const markerLayout = createMarkerLayout(
+      createMapMarkerPoints(targetMap, nextPlaces),
+      {
+        maxOffset: isMobile ? 136 : 204,
+        previousLayout: markerLayoutByIdRef.current
+      }
+    );
+
+    markerLayoutByIdRef.current = markerLayout;
+
+    return markerLayout;
+  };
+
+  const restoreMarkerFeatureStates = (targetMap: maplibregl.Map) => {
+    if (activePlace) {
+      targetMap.setFeatureState({ id: activePlace.id, source: PLACE_SOURCE_ID }, { selected: true });
+    }
+
+    hoverProgressByIdRef.current.forEach((progress, id) => {
+      targetMap.setFeatureState({ id, source: PLACE_SOURCE_ID }, { hoverProgress: progress });
+    });
+  };
+
+  const setPlaceSourceDataWithMarkerLayout = (
+    targetMap: maplibregl.Map,
+    nextPlaces: PlaceFeature[],
+    markerLayout: Map<string, MarkerLayout>
+  ) => {
+    const source = targetMap.getSource(PLACE_SOURCE_ID) as GeoJSONSource | undefined;
+
+    if (!source) {
+      return;
+    }
+
+    const shiftedPlaces = nextPlaces.map((place) => {
+      const markerOffset = markerLayout.get(String(place.id))?.markerOffset;
+
+      if (!markerOffset || (markerOffset[0] === 0 && markerOffset[1] === 0)) {
+        return place;
+      }
+
+      const point = targetMap.project(place.geometry.coordinates);
+      const coordinates = targetMap.unproject([point.x + markerOffset[0], point.y + markerOffset[1]]).toArray() as [number, number];
+
+      return {
+        ...place,
+        geometry: {
+          ...place.geometry,
+          coordinates
+        }
+      };
+    });
+
+    source.setData(createPlaceFeatureCollection(shiftedPlaces, markerLayout));
+
+    restoreMarkerFeatureStates(targetMap);
+  };
+
+  const setPlaceSourceData = (targetMap: maplibregl.Map, nextPlaces: PlaceFeature[]) => {
+    const markerLayoutFingerprint = createMarkerLayoutFingerprint(targetMap, nextPlaces, activePlace);
+    const markerLayout =
+      markerLayoutFingerprint === markerLayoutFingerprintRef.current
+        ? markerLayoutByIdRef.current
+        : createMapMarkerLayout(targetMap, nextPlaces);
+
+    markerLayoutFingerprintRef.current = markerLayoutFingerprint;
+    setPlaceSourceDataWithMarkerLayout(targetMap, nextPlaces, markerLayout);
+  };
+
+  const setPlaceSourceSortData = (targetMap: maplibregl.Map, nextPlaces: PlaceFeature[]) => {
+    const markerLayout = updateMarkerLayoutSortKeys(
+      markerLayoutByIdRef.current,
+      createMapMarkerPoints(targetMap, nextPlaces)
+    );
+
+    markerLayoutByIdRef.current = markerLayout;
+    setPlaceSourceDataWithMarkerLayout(targetMap, nextPlaces, markerLayout);
+  };
+
   useEffect(() => {
     if (!containerRef.current || mapRef.current) {
       return;
@@ -150,11 +271,10 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
       map.addSource(PLACE_SOURCE_ID, {
         type: "geojson",
         data: source,
-        promoteId: "id",
-        cluster: true,
-        clusterRadius: 38
+        promoteId: "id"
       });
       addMarkerImagePlaceholders(map, places);
+      setPlaceSourceData(map, places);
       addPlaceLayers(map);
       setMapState("ready");
     });
@@ -259,7 +379,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
 
       resetMarkerInteractionState(map);
       addMarkerImagePlaceholders(map, places);
-      source.setData(createPlaceFeatureCollection(places));
+      setPlaceSourceData(map, places);
     };
 
     if (map.getSource(PLACE_SOURCE_ID)) {
@@ -272,6 +392,44 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
       map.off("load", updateSource);
     };
   }, [places]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+
+    if (!map || mapState !== "ready") {
+      return;
+    }
+
+    let frameId: number | null = null;
+    const scheduleMarkerLayoutUpdate = () => {
+      if (frameId !== null) {
+        return;
+      }
+
+      frameId = window.requestAnimationFrame(() => {
+        frameId = null;
+        setPlaceSourceData(map, places);
+      });
+    };
+
+    scheduleMarkerLayoutUpdateRef.current = scheduleMarkerLayoutUpdate;
+    scheduleMarkerLayoutUpdate();
+    map.on("zoom", scheduleMarkerLayoutUpdate);
+    map.on("resize", scheduleMarkerLayoutUpdate);
+
+    return () => {
+      if (scheduleMarkerLayoutUpdateRef.current === scheduleMarkerLayoutUpdate) {
+        scheduleMarkerLayoutUpdateRef.current = null;
+      }
+
+      if (frameId !== null) {
+        window.cancelAnimationFrame(frameId);
+      }
+
+      map.off("zoom", scheduleMarkerLayoutUpdate);
+      map.off("resize", scheduleMarkerLayoutUpdate);
+    };
+  }, [activePlace, mapState, places]);
 
   useEffect(() => {
     const map = mapRef.current;
@@ -351,6 +509,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
 
         animateMarkerHoverProgress(map, place.id, 1);
         hoveredPlaceIdRef.current = place.id;
+        setPlaceSourceSortData(map, placesRef.current);
         map.getCanvas().style.cursor = "pointer";
       }
     };
@@ -358,43 +517,19 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
       if (hoveredPlaceIdRef.current !== null) {
         animateMarkerHoverProgress(map, hoveredPlaceIdRef.current, 0);
         hoveredPlaceIdRef.current = null;
+        setPlaceSourceSortData(map, placesRef.current);
       }
 
       map.getCanvas().style.cursor = "";
     };
-    const showClusterPointer = () => {
-      map.getCanvas().style.cursor = "pointer";
-    };
-    const expandCluster = (event: MapLayerMouseEvent) => {
-      const feature = event.features?.[0];
-      const clusterId = feature?.properties?.cluster_id;
-      const source = map.getSource(PLACE_SOURCE_ID) as GeoJSONSource | undefined;
-
-      if (!feature || typeof clusterId !== "number" || !source) {
-        return;
-      }
-
-      void source.getClusterExpansionZoom(clusterId).then((zoom) => {
-        const center = (feature.geometry as unknown as { coordinates: [number, number] }).coordinates;
-
-        map.easeTo({ center, zoom });
-      });
-    };
-
     map.on("click", PLACE_SYMBOL_LAYER_ID, selectPlace);
     map.on("mousemove", PLACE_SYMBOL_LAYER_ID, syncMarkerHover);
     map.on("mouseleave", PLACE_SYMBOL_LAYER_ID, hideMarkerLabel);
-    map.on("click", PLACE_CLUSTER_LAYER_ID, expandCluster);
-    map.on("mouseenter", PLACE_CLUSTER_LAYER_ID, showClusterPointer);
-    map.on("mouseleave", PLACE_CLUSTER_LAYER_ID, hideMarkerLabel);
 
     return () => {
       map.off("click", PLACE_SYMBOL_LAYER_ID, selectPlace);
       map.off("mousemove", PLACE_SYMBOL_LAYER_ID, syncMarkerHover);
       map.off("mouseleave", PLACE_SYMBOL_LAYER_ID, hideMarkerLabel);
-      map.off("click", PLACE_CLUSTER_LAYER_ID, expandCluster);
-      map.off("mouseenter", PLACE_CLUSTER_LAYER_ID, showClusterPointer);
-      map.off("mouseleave", PLACE_CLUSTER_LAYER_ID, hideMarkerLabel);
     };
   }, [mapState, onPlaceSelect]);
 

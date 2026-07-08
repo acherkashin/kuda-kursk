@@ -49,6 +49,7 @@ export function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
+  const searchParamsRef = useRef(new URLSearchParams(location.search));
   const isAboutOpen = searchParams.has("about");
   const currentMap = useMemo(() => findMapBySlug(slug), [slug]);
   const basePlaces = places;
@@ -71,6 +72,21 @@ export function App() {
   const hasActivePlace = activePlace !== null;
   const hasFloatingNotice =
     !hasActivePlace && !isAboutOpen && ANALYTICS_CONSENT_UI_ENABLED && !analyticsConsent;
+
+  useEffect(() => {
+    searchParamsRef.current = new URLSearchParams(location.search);
+  }, [location.search]);
+
+  const updateSearchParams = useCallback(
+    (update: (nextSearchParams: URLSearchParams) => void, options?: { replace?: boolean }) => {
+      const nextSearchParams = new URLSearchParams(searchParamsRef.current);
+
+      update(nextSearchParams);
+      searchParamsRef.current = nextSearchParams;
+      setSearchParams(nextSearchParams, options);
+    },
+    [setSearchParams]
+  );
 
   const resetSearch = useCallback(() => {
     setQuery("");
@@ -143,11 +159,11 @@ export function App() {
     }
 
     if (searchParams.has(PLACE_CATEGORY_SEARCH_PARAM) && !activeCategory) {
-      const nextSearchParams = new URLSearchParams(searchParams);
-      nextSearchParams.delete(PLACE_CATEGORY_SEARCH_PARAM);
-      setSearchParams(nextSearchParams, { replace: true });
+      updateSearchParams((nextSearchParams) => {
+        nextSearchParams.delete(PLACE_CATEGORY_SEARCH_PARAM);
+      }, { replace: true });
     }
-  }, [activeCategory, currentMap, loadState, searchParams, setSearchParams]);
+  }, [activeCategory, currentMap, loadState, searchParams, updateSearchParams]);
 
   useEffect(() => {
     if (loadState !== "ready" || !currentMap) {
@@ -166,11 +182,11 @@ export function App() {
       return;
     }
 
-    const nextSearchParams = new URLSearchParams(searchParams);
-    nextSearchParams.delete("place");
     setActivePlace(null);
-    setSearchParams(nextSearchParams, { replace: true });
-  }, [activeCategory, currentMap, loadState, placeById, searchParams, selectedPlaceId, setSearchParams]);
+    updateSearchParams((nextSearchParams) => {
+      nextSearchParams.delete("place");
+    }, { replace: true });
+  }, [activeCategory, currentMap, loadState, placeById, searchParams, selectedPlaceId, updateSearchParams]);
 
   useEffect(() => {
     registerServiceWorker();
@@ -207,36 +223,36 @@ export function App() {
 
   const handlePlaceSelect = useCallback(
     (place: PlaceFeature, source: "map") => {
-      const nextSearchParams = new URLSearchParams(searchParams);
-      nextSearchParams.set("place", getPlaceId(place));
-      setSearchParams(nextSearchParams);
+      updateSearchParams((nextSearchParams) => {
+        nextSearchParams.set("place", getPlaceId(place));
+      });
       setActivePlace(place);
       analytics.track({ name: "marker_selected", params: { placeId: place.id, source } });
     },
-    [analytics, searchParams, setSearchParams]
+    [analytics, updateSearchParams]
   );
 
   const handleMapZoomChange = useCallback(
     (zoom: number) => {
       const nextZoom = formatMapZoom(zoom);
 
-      if (searchParams.get(MAP_ZOOM_SEARCH_PARAM) === nextZoom) {
+      if (searchParamsRef.current.get(MAP_ZOOM_SEARCH_PARAM) === nextZoom) {
         return;
       }
 
-      const nextSearchParams = new URLSearchParams(searchParams);
-      nextSearchParams.set(MAP_ZOOM_SEARCH_PARAM, nextZoom);
-      setSearchParams(nextSearchParams, { replace: true });
+      updateSearchParams((nextSearchParams) => {
+        nextSearchParams.set(MAP_ZOOM_SEARCH_PARAM, nextZoom);
+      }, { replace: true });
     },
-    [searchParams, setSearchParams]
+    [updateSearchParams]
   );
 
   const handlePlaceDetailsClose = useCallback(() => {
-    const nextSearchParams = new URLSearchParams(searchParams);
-    nextSearchParams.delete("place");
-    setSearchParams(nextSearchParams);
+    updateSearchParams((nextSearchParams) => {
+      nextSearchParams.delete("place");
+    });
     setActivePlace(null);
-  }, [searchParams, setSearchParams]);
+  }, [updateSearchParams]);
 
   const handleCategorySelect = useCallback(
     (slug: string) => {
@@ -247,37 +263,42 @@ export function App() {
       }
 
       const nextCategory = activeCategory === selectedCategory ? null : selectedCategory;
-      const nextSearchParams = new URLSearchParams(searchParams);
 
       if (nextCategory) {
-        nextSearchParams.set(PLACE_CATEGORY_SEARCH_PARAM, nextCategory);
         handledAutomaticFitKeyRef.current = currentMap ? `${currentMap.slug}:${nextCategory}` : null;
         requestPlacesFit(filterPlacesByCategory(basePlaces, nextCategory));
-      } else {
-        nextSearchParams.delete(PLACE_CATEGORY_SEARCH_PARAM);
       }
 
       if (activePlace && nextCategory && !activePlace.properties.categories?.includes(nextCategory)) {
-        nextSearchParams.delete("place");
         setActivePlace(null);
       }
 
-      setSearchParams(nextSearchParams);
+      updateSearchParams((nextSearchParams) => {
+        if (nextCategory) {
+          nextSearchParams.set(PLACE_CATEGORY_SEARCH_PARAM, nextCategory);
+        } else {
+          nextSearchParams.delete(PLACE_CATEGORY_SEARCH_PARAM);
+        }
+
+        if (activePlace && nextCategory && !activePlace.properties.categories?.includes(nextCategory)) {
+          nextSearchParams.delete("place");
+        }
+      });
     },
-    [activeCategory, activePlace, basePlaces, currentMap, requestPlacesFit, searchParams, setSearchParams]
+    [activeCategory, activePlace, basePlaces, currentMap, requestPlacesFit, updateSearchParams]
   );
 
   const handleAboutOpen = useCallback(() => {
-    const nextSearchParams = new URLSearchParams(searchParams);
-    nextSearchParams.set("about", "1");
-    setSearchParams(nextSearchParams);
-  }, [searchParams, setSearchParams]);
+    updateSearchParams((nextSearchParams) => {
+      nextSearchParams.set("about", "1");
+    });
+  }, [updateSearchParams]);
 
   const handleAboutClose = useCallback(() => {
-    const nextSearchParams = new URLSearchParams(searchParams);
-    nextSearchParams.delete("about");
-    setSearchParams(nextSearchParams, { replace: true });
-  }, [searchParams, setSearchParams]);
+    updateSearchParams((nextSearchParams) => {
+      nextSearchParams.delete("about");
+    }, { replace: true });
+  }, [updateSearchParams]);
 
   const handleOpenMap = useCallback(
     (targetSlug: string) => {

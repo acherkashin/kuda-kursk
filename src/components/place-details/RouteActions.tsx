@@ -88,7 +88,6 @@ export function RouteActions({ links, onOpen, variant = "stacked" }: RouteAction
       {isOpen ? (
         <div
           id={routesId}
-          role={isCompact ? "menu" : undefined}
           className={isCompact ? "absolute right-0 top-[calc(100%+6px)] z-10 grid min-w-[190px] gap-1.5 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-1.5 shadow-[var(--shadow-raised)]" : "grid gap-2"}
         >
           {links.map((link) => {
@@ -99,7 +98,6 @@ export function RouteActions({ links, onOpen, variant = "stacked" }: RouteAction
                 href={link.url}
                 key={link.provider}
                 size={isCompact ? "sm" : "md"}
-                role={isCompact ? "menuitem" : undefined}
                 className={isCompact ? "min-h-10 px-2.5 py-1.5" : ""}
                 target="_blank"
                 rel="noreferrer"
