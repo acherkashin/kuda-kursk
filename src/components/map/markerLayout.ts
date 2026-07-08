@@ -255,6 +255,10 @@ function getMarkerOverlap(first: MarkerNode, second: MarkerNode, markerSize: num
 }
 
 function getMovementShare(first: MarkerNode, second: MarkerNode) {
+  if (first.layoutPriority !== second.layoutPriority) {
+    return first.layoutPriority > second.layoutPriority ? 0 : 1;
+  }
+
   const firstWeight = getAnchorWeight(first);
   const secondWeight = getAnchorWeight(second);
 

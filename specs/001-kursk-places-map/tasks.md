@@ -603,6 +603,14 @@
 
 ---
 
+## Phase 49: PR-проверки в GitHub Actions
+
+**Цель**: запускать существующие typecheck, unit, build и e2e проверки для pull request автоматически и вручную без добавления нового тестового покрытия.
+
+- [X] T204 Добавить workflow `.github/workflows/pr-checks.yml` с триггерами `pull_request` и `workflow_dispatch`: установить pnpm `10.6.2`, Node `lts/*`, зависимости, Chromium для Playwright, затем выполнить `pnpm typecheck`, `pnpm test:unit`, `pnpm build` и `pnpm test:e2e`; Playwright report загружать artifact-ом только при падении. При локальном прогоне unit-проверки выявили дрейф active-маркера на доли пикселя, поэтому solver закрепляет active-маркер в collision-парах с обычными маркерами; e2e-проверки выявили, что route actions должны оставаться настоящими ссылками, а optional-карточка должна проверять публичное неполное место `«Тепловские высоты»`, сохраняя hidden fixture «Картинг» скрытым по data integrity контракту; Playwright webServer запускает локальный Vite binary напрямую, чтобы не упираться в локальную политику `ERR_PNPM_IGNORED_BUILDS`. Проверка пройдена локально: `./node_modules/.bin/tsc -b --pretty false`, `./node_modules/.bin/vitest run` (`69` passed), `./node_modules/.bin/vite build && cp dist/index.html dist/404.html`, `./node_modules/.bin/playwright test` (`45` passed, `1` skipped); после push проверить запуск workflow на PR.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз
