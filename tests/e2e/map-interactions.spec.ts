@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { appPath } from "./support/appPath";
 import {
-  getFirstRenderedClusterPoint,
+  expectMapLayerMissing,
   getFirstRenderedMarkerPoint,
   getPlaceHoverProgress,
   waitForMarkerImagesWithLayer,
@@ -46,19 +46,14 @@ test("маркер показывает название при hover, а пан
   await expect(marker).toBeAttached();
 });
 
-test("клик по кластеру раскрывает кликабельные маркеры", async ({ page }) => {
+test("карта показывает места маркерами без кластеризации", async ({ page }) => {
   await page.setViewportSize({ height: 720, width: 1280 });
   await page.goto(appPath("/"));
 
   await expect(page.getByTestId("map-shell")).toBeVisible();
   await waitForVisibleMapMarkers(page);
 
-  const clusterPoint = await getFirstRenderedClusterPoint(page);
-  expect(clusterPoint).not.toBeNull();
-
-  if (clusterPoint) {
-    await page.mouse.click(clusterPoint.x, clusterPoint.y);
-  }
-
+  await expectMapLayerMissing(page, "place-clusters");
+  await expectMapLayerMissing(page, "place-cluster-counts");
   await waitForRenderedMarkerImages(page);
 });

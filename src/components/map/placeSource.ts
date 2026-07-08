@@ -1,4 +1,5 @@
 import type { PlaceFeature } from "../../domain/places";
+import type { MarkerLayout } from "./markerLayout";
 
 export type PlaceProperties = {
   id: string | number;
@@ -7,6 +8,9 @@ export type PlaceProperties = {
   markerImage?: string;
   markerImageId?: string;
   activeMarkerImageId?: string;
+  markerOffset?: [number, number];
+  markerSortKey?: number;
+  markerTextOffset?: [number, number];
 };
 
 export type PlaceFeatureCollection = {
@@ -19,7 +23,10 @@ export type PlaceFeatureCollection = {
   }>;
 };
 
-export function createPlaceFeatureCollection(places: PlaceFeature[]): PlaceFeatureCollection {
+export function createPlaceFeatureCollection(
+  places: PlaceFeature[],
+  markerLayoutById: Map<string, MarkerLayout> = new Map()
+): PlaceFeatureCollection {
   return {
     type: "FeatureCollection",
     features: places.map((place) => {
@@ -38,6 +45,14 @@ export function createPlaceFeatureCollection(places: PlaceFeature[]): PlaceFeatu
         properties.markerImage = markerImage;
         properties.markerImageId = `place-marker-${safeId}`;
         properties.activeMarkerImageId = `place-marker-active-${safeId}`;
+      }
+
+      const markerLayout = markerLayoutById.get(String(place.id));
+
+      if (markerLayout) {
+        properties.markerOffset = markerLayout.markerOffset;
+        properties.markerSortKey = markerLayout.sortKey;
+        properties.markerTextOffset = markerLayout.labelOffset;
       }
 
       return {

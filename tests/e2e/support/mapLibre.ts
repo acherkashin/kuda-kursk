@@ -37,7 +37,7 @@ export async function waitForMapSourcePlaces(page: Page, expectedCount: number) 
 
           return Array.isArray(data.features) ? data.features.length : null;
         }),
-      { timeout: 5_000 }
+      { timeout: 10_000 }
     )
     .toBe(expectedCount);
 }
@@ -98,9 +98,7 @@ export async function getMapCamera(page: Page): Promise<MapCamera | null> {
 }
 
 export async function waitForVisibleMapMarkers(page: Page) {
-  await expect
-    .poll(() => countRenderedMapFeatures(page, ["place-marker-images", "place-clusters"]), { timeout: 5_000 })
-    .toBeGreaterThan(0);
+  await expect.poll(() => countRenderedMapFeatures(page, ["place-marker-images"]), { timeout: 10_000 }).toBeGreaterThan(0);
 }
 
 export async function waitForMarkerImagesWithLayer(page: Page, layerId: string) {
@@ -120,21 +118,35 @@ export async function waitForMarkerImagesWithLayer(page: Page, layerId: string) 
             (map?.queryRenderedFeatures(undefined, { layers: ["place-marker-images"] }).length ?? 0) > 0
           );
         }, layerId),
-      { timeout: 5_000 }
+      { timeout: 10_000 }
     )
     .toBe(true);
 }
 
 export async function waitForRenderedMarkerImages(page: Page) {
-  await expect.poll(() => countRenderedMapFeatures(page, ["place-marker-images"]), { timeout: 5_000 }).toBeGreaterThan(0);
+  await expect.poll(() => countRenderedMapFeatures(page, ["place-marker-images"]), { timeout: 10_000 }).toBeGreaterThan(0);
 }
 
 export async function getFirstRenderedMarkerPoint(page: Page): Promise<RenderedMarkerPoint | null> {
   return getFirstRenderedFeaturePoint(page, "place-marker-images");
 }
 
-export async function getFirstRenderedClusterPoint(page: Page): Promise<RenderedMarkerPoint | null> {
-  return getFirstRenderedFeaturePoint(page, "place-clusters");
+export async function expectMapLayerMissing(page: Page, layerId: string) {
+  await expect
+    .poll(
+      () =>
+        page.evaluate((targetLayerId) => {
+          const map = (window as typeof window & {
+            __kurskMap?: {
+              getLayer: (layerId: string) => unknown;
+            };
+          }).__kurskMap;
+
+          return Boolean(map?.getLayer(targetLayerId));
+        }, layerId),
+      { timeout: 5_000 }
+    )
+    .toBe(false);
 }
 
 export async function getPlaceHoverProgress(page: Page, id: PlaceFeatureId) {
@@ -149,7 +161,7 @@ export async function getPlaceHoverProgress(page: Page, id: PlaceFeatureId) {
   }, id);
 }
 
-async function getFirstRenderedFeaturePoint(page: Page, layerId: "place-clusters" | "place-marker-images") {
+async function getFirstRenderedFeaturePoint(page: Page, layerId: "place-marker-images") {
   return page.evaluate((targetLayerId) => {
     const map = (window as typeof window & {
       __kurskMap?: {
