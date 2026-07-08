@@ -45,6 +45,25 @@ type HoverAnimation = {
   to: number;
 };
 
+function createMarkerLayoutFingerprint(
+  targetMap: maplibregl.Map,
+  nextPlaces: PlaceFeature[],
+  activePlace: PlaceFeature | null
+) {
+  const canvas = targetMap.getCanvas();
+  const placeSignature = nextPlaces
+    .map((place) => `${place.id}:${place.geometry.coordinates[0]},${place.geometry.coordinates[1]}`)
+    .join("|");
+
+  return [
+    targetMap.getZoom(),
+    canvas.clientWidth,
+    canvas.clientHeight,
+    activePlace?.id ?? "",
+    placeSignature
+  ].join(";");
+}
+
 function easeMarkerHover(progress: number) {
   return 1 - (1 - progress) ** 3;
 }
@@ -55,6 +74,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
   const hoverAnimationsRef = useRef<Map<FeatureId, HoverAnimation>>(new Map());
   const hoverProgressByIdRef = useRef<Map<FeatureId, number>>(new Map());
   const markerLayoutByIdRef = useRef<Map<string, MarkerLayout>>(new Map());
+  const markerLayoutFingerprintRef = useRef<string | null>(null);
   const placeByIdRef = useRef<Map<string, PlaceFeature>>(new Map());
   const previousActivePlaceIdRef = useRef<string | number | null>(null);
   const hoveredPlaceIdRef = useRef<string | number | null>(null);
@@ -205,8 +225,13 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
   };
 
   const setPlaceSourceData = (targetMap: maplibregl.Map, nextPlaces: PlaceFeature[]) => {
-    const markerLayout = createMapMarkerLayout(targetMap, nextPlaces);
+    const markerLayoutFingerprint = createMarkerLayoutFingerprint(targetMap, nextPlaces, activePlace);
+    const markerLayout =
+      markerLayoutFingerprint === markerLayoutFingerprintRef.current
+        ? markerLayoutByIdRef.current
+        : createMapMarkerLayout(targetMap, nextPlaces);
 
+    markerLayoutFingerprintRef.current = markerLayoutFingerprint;
     setPlaceSourceDataWithMarkerLayout(targetMap, nextPlaces, markerLayout);
   };
 
@@ -388,7 +413,6 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
     scheduleMarkerLayoutUpdateRef.current = scheduleMarkerLayoutUpdate;
     scheduleMarkerLayoutUpdate();
     map.on("zoom", scheduleMarkerLayoutUpdate);
-    map.on("move", scheduleMarkerLayoutUpdate);
     map.on("resize", scheduleMarkerLayoutUpdate);
 
     return () => {
@@ -401,7 +425,6 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
       }
 
       map.off("zoom", scheduleMarkerLayoutUpdate);
-      map.off("move", scheduleMarkerLayoutUpdate);
       map.off("resize", scheduleMarkerLayoutUpdate);
     };
   }, [activePlace, mapState, places]);
