@@ -23,6 +23,8 @@
 
 Все локальные public-пути приложения (`/data/...`, `/map-styles/...`, `/place-images/...`, `/place-thumbnails/...`, `/pwa/...`, `/sw.js`) должны резолвиться через Vite `BASE_URL`. Для локальной разработки и GitHub Pages production на custom domain `BASE_URL` остаётся `/`.
 
+`index.html` должен содержать iOS standalone metadata: `apple-mobile-web-app-capable=yes`, `apple-mobile-web-app-title` и `apple-mobile-web-app-status-bar-style`.
+
 ## Service worker
 
 **Кешировать**
@@ -42,6 +44,14 @@
 - Новая версия app shell устанавливается и активируется в фоне через `skipWaiting`, получает контроль над открытой вкладкой через `clientsClaim` и вызывает одну автоматическую перезагрузку только для update-события.
 - Update prompt не показывается; первичная установка service worker не перезагружает страницу.
 - Если приложение было полностью закрыто во время deploy, первый запуск может установить worker в фоне, а последующий update-сценарий применит свежий app shell автоматически.
+
+## Install UX
+
+- На мобильных экранах приложение показывает мягкую dismissible-подсказку установки только если оно не открыто в standalone-режиме и нет более важного overlay: карточки места, диалога «О проекте» или нижнего consent/notice.
+- Android и другие браузеры, которые отправили `beforeinstallprompt`, запускают native prompt только по явному нажатию пользователя.
+- iOS показывает ручную инструкцию Safari: «Поделиться» → «На экран “Домой”» → «Добавить»; программный prompt на iOS не вызывается.
+- Диалог «О проекте» сохраняет повторный доступ к установке только пока приложение не открыто standalone; в установленной PWA install-секция полностью скрыта.
+- События install UX отправляются только через typed analytics adapter для пользовательских действий и только с безопасными labels `platform`, `source` и `outcome`.
 
 ## Offline fallback
 

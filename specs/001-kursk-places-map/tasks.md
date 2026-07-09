@@ -631,6 +631,14 @@
 
 ---
 
+## Phase 52: Установка PWA на экран телефона
+
+**Цель**: сделать установку PWA обнаружимой на Android и iOS и отследить использование install-сценария через Яндекс.Метрику.
+
+- [X] T210 Добавить `usePwaInstallPrompt`, мобильную dismissible-подсказку установки, секцию установки в диалоге «О проекте» только до standalone-режима, iOS standalone meta tags и обычные manifest icons без maskable purpose. Android использует `beforeinstallprompt` по явному клику, iOS показывает инструкцию Safari «Поделиться» → «На экран “Домой”» → «Добавить», standalone-состояние не показывает install CTA или install-секцию в «О проекте». Расширить typed analytics events событиями действий `pwa_install_prompt_clicked`, `pwa_install_prompt_result`, `pwa_install_dismissed` и `pwa_app_installed`; параметры ограничить безопасными labels `platform`, `source` и `outcome`, без auto-tracking показов подсказки. Обновить `AGENTS.md`, `spec.md`, `plan.md`, `quickstart.md`, `contracts/pwa-behavior.md`, `contracts/analytics-events.md` и поднять `package.json.version` до `0.2.0` как minor-функцию. Новое автоматизированное тестовое покрытие не добавлялось по ограничению пользователя. Проверка: `pnpm typecheck`, `pnpm build`, ручная visual QA desktop/mobile и ручная Android/iOS PWA QA.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз

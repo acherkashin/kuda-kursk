@@ -10,9 +10,11 @@ import { KurskMap, type MapFitBoundsRequest } from "../components/map/KurskMap";
 import { MapTopControls } from "../components/map/MapTopControls";
 import { PublicMapFallback } from "../components/map/PublicMapFallback";
 import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel";
+import { PwaInstallNotice } from "../components/pwa/PwaInstallNotice";
 import { ANALYTICS_CONSENT_UI_ENABLED, isAnalyticsSessionOptOutActive } from "../config/analytics";
 import { loadPlaces } from "../data/loadPlaces";
 import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
+import type { PwaInstallAnalyticsSource } from "../domain/analyticsEvents";
 import { findMapBySlug } from "../domain/mapCatalog";
 import { formatMapZoom, MAP_ZOOM_SEARCH_PARAM, parseMapZoom } from "../domain/mapUrlState";
 import {
@@ -27,6 +29,7 @@ import { searchPlaces } from "../domain/search";
 import { createAnalyticsAdapter } from "../services/analytics/analyticsAdapter";
 import { loadYandexMetrika } from "../services/analytics/yandexMetrika";
 import { registerServiceWorker } from "../services/pwa/registerServiceWorker";
+import { usePwaInstallPrompt } from "../services/pwa/usePwaInstallPrompt";
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router";
 
 export function App() {
@@ -45,6 +48,13 @@ export function App() {
     () => createAnalyticsAdapter(import.meta.env.VITE_YANDEX_METRIKA_ID, analyticsEnabled),
     [analyticsEnabled]
   );
+  const handlePwaAppInstalled = useCallback(
+    (platform: "android" | "ios" | "other") => {
+      analytics.track({ name: "pwa_app_installed", params: { platform } });
+    },
+    [analytics]
+  );
+  const pwaInstall = usePwaInstallPrompt({ onAppInstalled: handlePwaAppInstalled });
   const { slug } = useParams();
   const location = useLocation();
   const navigate = useNavigate();
@@ -70,8 +80,16 @@ export function App() {
   const hasActiveSearch = query.trim().length > 0;
   const isFiltered = hasActiveSearch || activeCategory !== null;
   const hasActivePlace = activePlace !== null;
-  const hasFloatingNotice =
+  const hasAnalyticsNotice =
     !hasActivePlace && !isAboutOpen && ANALYTICS_CONSENT_UI_ENABLED && !analyticsConsent;
+  const showPwaInstallNotice =
+    currentMap !== undefined &&
+    currentMap !== null &&
+    !hasActivePlace &&
+    !isAboutOpen &&
+    !hasAnalyticsNotice &&
+    pwaInstall.shouldShowFloatingNotice;
+  const hasFloatingNotice = hasAnalyticsNotice || showPwaInstallNotice;
 
   useEffect(() => {
     searchParamsRef.current = new URLSearchParams(location.search);
@@ -326,6 +344,43 @@ export function App() {
     [analytics, categoryPlaces]
   );
 
+  const handlePwaInstallClick = useCallback(
+    (source: PwaInstallAnalyticsSource) => {
+      if (pwaInstall.installMode === "unavailable") {
+        return;
+      }
+
+      analytics.track({
+        name: "pwa_install_prompt_clicked",
+        params: { platform: pwaInstall.platform, source }
+      });
+
+      if (pwaInstall.installMode === "manual-ios") {
+        return;
+      }
+
+      void pwaInstall.promptInstall().then((outcome) => {
+        if (!outcome) {
+          return;
+        }
+
+        analytics.track({
+          name: "pwa_install_prompt_result",
+          params: { outcome, platform: pwaInstall.platform, source }
+        });
+      });
+    },
+    [analytics, pwaInstall]
+  );
+
+  const handlePwaInstallDismiss = useCallback(() => {
+    pwaInstall.dismissFloatingNotice();
+    analytics.track({
+      name: "pwa_install_dismissed",
+      params: { platform: pwaInstall.platform, source: "floating_notice" }
+    });
+  }, [analytics, pwaInstall]);
+
   return (
     <main
       className="relative h-dvh min-h-dvh w-full overflow-hidden bg-[var(--color-page)]"
@@ -376,6 +431,14 @@ export function App() {
               />
             </div>
           ) : null}
+          {showPwaInstallNotice ? (
+            <PwaInstallNotice
+              installMode={pwaInstall.installMode}
+              platform={pwaInstall.platform}
+              onDismiss={handlePwaInstallDismiss}
+              onInstallClick={() => handlePwaInstallClick("floating_notice")}
+            />
+          ) : null}
         </>
       ) : null}
       <PlaceDetailsPanel
@@ -397,6 +460,12 @@ export function App() {
         analyticsConsent={analyticsConsent}
         isOpen={isAboutOpen}
         onAnalyticsConsentChange={handleConsentChange}
+        onPwaInstallClick={() => handlePwaInstallClick("about_dialog")}
+        pwaInstall={{
+          installMode: pwaInstall.installMode,
+          isStandalone: pwaInstall.isStandalone,
+          platform: pwaInstall.platform
+        }}
         showAnalyticsSettings={ANALYTICS_CONSENT_UI_ENABLED}
         onClose={handleAboutClose}
       />

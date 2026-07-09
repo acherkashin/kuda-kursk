@@ -1,4 +1,6 @@
 export type AnalyticsConsentStatus = "accepted" | "rejected";
+export type PwaInstallAnalyticsPlatform = "android" | "ios" | "other";
+export type PwaInstallAnalyticsSource = "floating_notice" | "about_dialog";
 
 export type AnalyticsConsent = {
   status: AnalyticsConsentStatus;
@@ -14,7 +16,18 @@ export type AnalyticsEvent =
   | { name: "external_link_clicked"; params: { placeId: string | number; kind: string } }
   | { name: "community_map_opened"; params: { slug: string; placeCount: number; linkOnlyCount: number } }
   | { name: "submap_opened"; params: { fromPlaceId: string | number; toSlug: string } }
-  | { name: "analytics_consent_changed"; params: { status: AnalyticsConsentStatus } };
+  | { name: "analytics_consent_changed"; params: { status: AnalyticsConsentStatus } }
+  | { name: "pwa_install_prompt_clicked"; params: { platform: PwaInstallAnalyticsPlatform; source: PwaInstallAnalyticsSource } }
+  | {
+      name: "pwa_install_prompt_result";
+      params: {
+        outcome: "accepted" | "dismissed";
+        platform: PwaInstallAnalyticsPlatform;
+        source: PwaInstallAnalyticsSource;
+      };
+    }
+  | { name: "pwa_install_dismissed"; params: { platform: PwaInstallAnalyticsPlatform; source: PwaInstallAnalyticsSource } }
+  | { name: "pwa_app_installed"; params: { platform: PwaInstallAnalyticsPlatform } };
 
 export const ANALYTICS_CONSENT_STORAGE_KEY = "kursk-map:analytics-consent:v1";
 export const ANALYTICS_POLICY_VERSION = "2026-05-31";

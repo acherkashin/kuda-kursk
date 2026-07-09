@@ -50,3 +50,25 @@ export const AnalyticsRejected: Story = {
     }
   }
 };
+
+export const WithPwaInstall: Story = {
+  args: {
+    analyticsConsent: null,
+    pwaInstall: {
+      installMode: "manual-ios",
+      isStandalone: false,
+      platform: "ios"
+    }
+  }
+};
+
+export const InstalledPwa: Story = {
+  args: {
+    analyticsConsent: null,
+    pwaInstall: {
+      installMode: "unavailable",
+      isStandalone: true,
+      platform: "ios"
+    }
+  }
+};

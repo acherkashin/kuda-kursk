@@ -1,10 +1,20 @@
-import { useEffect } from "react";
-import { BarChart3Icon, CheckIcon, ExternalLinkIcon, MessageCircleIcon, SendIcon, XIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import {
+  BarChart3Icon,
+  CheckIcon,
+  DownloadIcon,
+  ExternalLinkIcon,
+  MessageCircleIcon,
+  SendIcon,
+  ShareIcon,
+  XIcon
+} from "lucide-react";
 import type { AnalyticsConsent as AnalyticsConsentRecord, AnalyticsConsentStatus } from "../../domain/analyticsEvents";
 import { ANALYTICS_POLICY_VERSION } from "../../domain/analyticsEvents";
 import { buildFeedbackUrl } from "../../domain/feedbackLinks";
 import { projectInfo } from "../../domain/projectInfo";
 import { resolvePublicPath } from "../../services/publicPath";
+import type { PwaInstallMode, PwaInstallPlatform } from "../../services/pwa/usePwaInstallPrompt";
 import { Button } from "../ui/Button";
 import { IconButton } from "../ui/IconButton";
 
@@ -13,6 +23,12 @@ type AboutProjectDialogProps = {
   isOpen: boolean;
   onAnalyticsConsentChange: (consent: AnalyticsConsentRecord) => void;
   showAnalyticsSettings?: boolean;
+  pwaInstall?: {
+    installMode: PwaInstallMode;
+    isStandalone: boolean;
+    platform: PwaInstallPlatform;
+  };
+  onPwaInstallClick?: () => void;
   onClose: () => void;
 };
 
@@ -63,14 +79,23 @@ export function AboutProjectDialog({
   analyticsConsent,
   isOpen,
   onAnalyticsConsentChange,
+  onPwaInstallClick,
+  pwaInstall,
   showAnalyticsSettings = true,
   onClose
 }: AboutProjectDialogProps) {
   const isAnalyticsAccepted = analyticsConsent?.status === "accepted";
   const analyticsLabel = getAnalyticsLabel(analyticsConsent);
+  const [isPwaInstructionVisible, setIsPwaInstructionVisible] = useState(false);
+  const isPwaInstallAvailable =
+    pwaInstall?.isStandalone !== true &&
+    pwaInstall?.installMode !== undefined &&
+    pwaInstall.installMode !== "unavailable";
+  const isIosManualInstall = pwaInstall?.installMode === "manual-ios";
 
   useEffect(() => {
     if (!isOpen) {
+      setIsPwaInstructionVisible(false);
       return;
     }
 
@@ -92,6 +117,13 @@ export function AboutProjectDialog({
   }
 
   const nextAnalyticsStatus: AnalyticsConsentStatus = isAnalyticsAccepted ? "rejected" : "accepted";
+  const handlePwaInstallClick = () => {
+    onPwaInstallClick?.();
+
+    if (isIosManualInstall) {
+      setIsPwaInstructionVisible(true);
+    }
+  };
 
   return (
     <div
@@ -139,6 +171,42 @@ export function AboutProjectDialog({
           <ProjectLink href={projectInfo.telegramUrl} icon={SendIcon}>Telegram</ProjectLink>
           <ProjectLink href={buildFeedbackUrl({ source: "about" })} icon={MessageCircleIcon}>Обратная связь</ProjectLink>
         </div>
+
+        {isPwaInstallAvailable ? (
+          <section className="mt-5 border-t border-[var(--color-line)] pt-4" aria-label="Установка приложения">
+            <div className="flex items-start gap-3">
+              <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+                {isIosManualInstall ? <ShareIcon aria-hidden="true" size={18} /> : <DownloadIcon aria-hidden="true" size={18} />}
+              </span>
+              <div className="min-w-0 flex-1">
+                <h3 className="m-0 text-[15px] font-bold text-[var(--color-text)]">
+                  Установить приложение
+                </h3>
+                <p className="mt-1 mb-0 text-[13px] leading-snug text-[var(--color-muted)]">
+                  Добавьте «Куда в Курске» на экран телефона, чтобы быстро возвращаться к карте.
+                </p>
+              </div>
+            </div>
+            {isPwaInstructionVisible ? (
+              <ol className="mt-3 mb-0 grid gap-1.5 pl-5 text-[13px] leading-snug text-[var(--color-text-secondary)]">
+                <li>Откройте меню «Поделиться» в Safari.</li>
+                <li>Выберите «На экран “Домой”».</li>
+                <li>Нажмите «Добавить».</li>
+              </ol>
+            ) : null}
+            <Button
+              className="mt-3"
+              type="button"
+              variant="accent"
+              shape="pill"
+              fullWidth
+              onClick={handlePwaInstallClick}
+            >
+              {isIosManualInstall ? <ShareIcon aria-hidden="true" size={16} /> : <DownloadIcon aria-hidden="true" size={16} />}
+              {isIosManualInstall ? "Показать шаги" : "Установить"}
+            </Button>
+          </section>
+        ) : null}
 
         {showAnalyticsSettings ? (
           <section className="mt-5 border-t border-[var(--color-line)] pt-4" aria-label="Настройки аналитики">

@@ -118,11 +118,11 @@ body {
   }
 
   [data-notice-open="true"] .maplibregl-ctrl-bottom-right {
-    bottom: 148px;
+    bottom: 180px;
   }
 
   [data-notice-open="true"] .map-results-ui {
-    bottom: 136px;
+    display: none;
   }
 
   [data-details-open="true"] .map-top-ui,

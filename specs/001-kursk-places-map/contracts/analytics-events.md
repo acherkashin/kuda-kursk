@@ -33,7 +33,24 @@ type AnalyticsEvent =
   | { name: "external_link_clicked"; params: { placeId: string | number; kind: string } }
   | { name: "community_map_opened"; params: { slug: string; placeCount: number; linkOnlyCount: number } }
   | { name: "submap_opened"; params: { fromPlaceId: string | number; toSlug: string } }
-  | { name: "analytics_consent_changed"; params: { status: "accepted" | "rejected" } };
+  | { name: "analytics_consent_changed"; params: { status: "accepted" | "rejected" } }
+  | {
+      name: "pwa_install_prompt_clicked";
+      params: { platform: "android" | "ios" | "other"; source: "floating_notice" | "about_dialog" };
+    }
+  | {
+      name: "pwa_install_prompt_result";
+      params: {
+        outcome: "accepted" | "dismissed";
+        platform: "android" | "ios" | "other";
+        source: "floating_notice" | "about_dialog";
+      };
+    }
+  | {
+      name: "pwa_install_dismissed";
+      params: { platform: "android" | "ios" | "other"; source: "floating_notice" | "about_dialog" };
+    }
+  | { name: "pwa_app_installed"; params: { platform: "android" | "ios" | "other" } };
 ```
 
 ## Запрещённые данные
@@ -41,6 +58,7 @@ type AnalyticsEvent =
 - Сырые поисковые запросы.
 - Имена, телефоны, email и другие персональные данные.
 - Произвольные URL внешних ссылок, если они могут содержать пользовательские параметры.
+- User agent, raw platform strings и другие нестабильные browser fingerprints.
 - Идентификаторы аккаунтов, потому что аккаунтов нет в v1.
 
 ## Mapping в Яндекс.Метрику
