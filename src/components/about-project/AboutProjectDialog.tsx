@@ -124,6 +124,9 @@ export function AboutProjectDialog({
             <h2 id="about-project-title" className="m-0 text-[22px] font-bold leading-tight text-[var(--color-text)]">
               {projectInfo.title}
             </h2>
+            <p className="mt-1 mb-0 text-[12px] font-medium leading-none text-[var(--color-muted)]">
+              Версия {projectInfo.version}
+            </p>
           </div>
           <IconButton type="button" aria-label="Закрыть диалог" onClick={onClose}>
             <XIcon aria-hidden="true" size={18} />

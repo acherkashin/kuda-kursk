@@ -1,5 +1,8 @@
+import packageJson from "../../package.json";
+
 export const projectInfo = {
   title: "Куда в Курске",
+  version: packageJson.version,
   logo: "/brand/kuda-v-kurske-logo-128.webp",
   telegramUrl: "https://t.me/kudakursk",
   feedbackUrl: "https://forms.yandex.ru/u/6a2f8b0ceb61469c8e25393e",
