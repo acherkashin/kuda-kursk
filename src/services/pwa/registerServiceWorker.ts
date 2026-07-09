@@ -1,11 +1,13 @@
 import { resolvePublicPath } from "../publicPath";
 
 type WorkboxLike = {
+  addEventListener: (type: "controlling", listener: (event: { isUpdate?: boolean }) => void) => void;
   register: () => Promise<unknown>;
 };
 
 export type RegisterServiceWorkerOptions = {
   createWorkbox?: () => Promise<WorkboxLike>;
+  reloadPage?: () => void;
 };
 
 export function registerServiceWorker(options: RegisterServiceWorkerOptions = {}): void {
@@ -25,6 +27,18 @@ export function registerServiceWorker(options: RegisterServiceWorkerOptions = {}
     });
 
   void createWorkbox().then((workbox) => {
+    let hasReloadedForUpdate = false;
+    const reloadPage = options.reloadPage ?? (() => window.location.reload());
+
+    workbox.addEventListener("controlling", (event) => {
+      if (!event.isUpdate || hasReloadedForUpdate) {
+        return;
+      }
+
+      hasReloadedForUpdate = true;
+      reloadPage();
+    });
+
     void workbox.register();
   });
 }

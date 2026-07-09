@@ -35,7 +35,7 @@ export default defineConfig({
       },
       workbox: {
         skipWaiting: true,
-        clientsClaim: false,
+        clientsClaim: true,
         globPatterns: ["**/*.{js,css,html,ico}"],
         navigateFallback: `${githubPagesBase}index.html`,
         runtimeCaching: [

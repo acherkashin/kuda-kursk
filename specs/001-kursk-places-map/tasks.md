@@ -622,6 +622,14 @@
 
 ---
 
+## Phase 51: Свежесть PWA-кеша
+
+**Цель**: применять новый app shell после deploy без hard refresh, сохраняя отсутствие update prompt.
+
+- [X] T209 Включить `clientsClaim` в Workbox и добавить обработчик `controlling` в `src/services/pwa/registerServiceWorker.ts`: при update-событии страница автоматически перезагружается ровно один раз, а первичная установка worker не вызывает reload. Обновить разрешённый существующий unit-тест, синхронизировать `spec.md`, `plan.md`, `tasks.md`, `contracts/pwa-behavior.md` и `quickstart.md`, инкрементировать `package.json.version` до `0.1.1`. Новое дополнительное автоматизированное покрытие не добавлялось. Проверка: `./node_modules/.bin/vitest run tests/unit/registerServiceWorker.test.ts`, `./node_modules/.bin/tsc -b --pretty false`, `./node_modules/.bin/vite build && cp dist/index.html dist/404.html`, инспекция `dist/sw.js`; ручной двухверсионный PWA-smoke запланирован для production preview.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз
