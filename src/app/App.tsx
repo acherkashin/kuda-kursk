@@ -328,7 +328,7 @@ export function App() {
 
   return (
     <main
-      className="relative min-h-dvh w-full overflow-hidden bg-[var(--color-page)]"
+      className="relative h-dvh min-h-dvh w-full overflow-hidden bg-[var(--color-page)]"
       data-details-open={hasActivePlace ? "true" : "false"}
       data-notice-open={hasFloatingNotice ? "true" : "false"}
     >

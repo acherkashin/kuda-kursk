@@ -148,6 +148,12 @@ Layout работает как непрерывный solver в экранных
 
 Подход сохраняет текущую MapLibre-архитектуру без DOM-маркеров и новых runtime-зависимостей. Географические координаты в данных не меняются и продолжают использоваться для маршрутов, URL, fit bounds и выбора места; смещение является только визуальным свойством отрисовки. Проверка: существующий typecheck, production build и ручная visual QA desktop/mobile; новое или изменённое автоматизированное тестовое покрытие для этой правки не добавляется без отдельного разрешения.
 
+## Дополнение: синхронизация размера MapLibre canvas (FR-055)
+
+`App` фиксирует корневую оболочку как `h-dvh min-h-dvh`, чтобы full-screen слой карты был привязан к dynamic viewport. Обычные изменения размера контейнера остаются ответственностью встроенного MapLibre `trackResize` и его `ResizeObserver`. `KurskMap` добавляет только lifecycle fallback для iOS Safari/PWA restore: события `visualViewport`, `pageshow`, `visibilitychange`, `orientationchange`, `focus` и `resize` ставят один `requestAnimationFrame`, сравнивают `container.clientWidth/clientHeight` с `map.getCanvas().clientWidth/clientHeight` и вызывают `map.resize({ source: "app-viewport-sync" })` только при реальном расхождении и ненулевом размере контейнера.
+
+Подход не меняет визуальную композицию, публичные маршруты, данные или зависимости. Он закрывает сценарий iOS Safari/PWA, где MapLibre мог измерить временную короткую высоту viewport и не получить корректирующий resize после восстановления full-screen области. Проверка: `./node_modules/.bin/tsc -b --pretty false`, `./node_modules/.bin/vite build && cp dist/index.html dist/404.html`, локальная desktop/mobile diagnostic QA размеров canvas и ручная iPhone Safari/PWA проверка; новое автоматизированное покрытие не добавляется без отдельного разрешения пользователя.
+
 ## Дополнение: переход с основной карты на под-карты (US5, FR-031–FR-033)
 
 Подход переиспользует существующую маршрутизацию `/maps/:slug` и каталог карт, добавляя минимальные поля в модель места без новых подсистем:

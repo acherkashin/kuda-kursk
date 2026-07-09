@@ -22,6 +22,7 @@ import {
 import { createMarkerLayout, type MarkerLayout, updateMarkerLayoutSortKeys } from "./markerLayout";
 
 const MARKER_HOVER_TRANSITION_MS = 310;
+const MAP_VIEWPORT_SYNC_EVENT_DATA = { source: "app-viewport-sync" } as const;
 
 type KurskMapProps = {
   activePlace: PlaceFeature | null;
@@ -66,6 +67,59 @@ function createMarkerLayoutFingerprint(
 
 function easeMarkerHover(progress: number) {
   return 1 - (1 - progress) ** 3;
+}
+
+function addMapViewportSizeSynchronizer(targetMap: maplibregl.Map, container: HTMLElement) {
+  let frameId: number | null = null;
+  const visualViewport = window.visualViewport;
+
+  const syncMapSize = () => {
+    frameId = null;
+
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+
+    if (width <= 0 || height <= 0) {
+      return;
+    }
+
+    const canvas = targetMap.getCanvas();
+
+    if (canvas.clientWidth !== width || canvas.clientHeight !== height) {
+      targetMap.resize(MAP_VIEWPORT_SYNC_EVENT_DATA);
+    }
+  };
+
+  const scheduleMapSizeSync = () => {
+    if (frameId !== null) {
+      return;
+    }
+
+    frameId = window.requestAnimationFrame(syncMapSize);
+  };
+
+  window.addEventListener("resize", scheduleMapSizeSync);
+  window.addEventListener("orientationchange", scheduleMapSizeSync);
+  window.addEventListener("focus", scheduleMapSizeSync);
+  window.addEventListener("pageshow", scheduleMapSizeSync);
+  document.addEventListener("visibilitychange", scheduleMapSizeSync);
+  visualViewport?.addEventListener("resize", scheduleMapSizeSync);
+  visualViewport?.addEventListener("scroll", scheduleMapSizeSync);
+  scheduleMapSizeSync();
+
+  return () => {
+    window.removeEventListener("resize", scheduleMapSizeSync);
+    window.removeEventListener("orientationchange", scheduleMapSizeSync);
+    window.removeEventListener("focus", scheduleMapSizeSync);
+    window.removeEventListener("pageshow", scheduleMapSizeSync);
+    document.removeEventListener("visibilitychange", scheduleMapSizeSync);
+    visualViewport?.removeEventListener("resize", scheduleMapSizeSync);
+    visualViewport?.removeEventListener("scroll", scheduleMapSizeSync);
+
+    if (frameId !== null) {
+      window.cancelAnimationFrame(frameId);
+    }
+  };
 }
 
 export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect, onZoomChange, zoom }: KurskMapProps) {
@@ -252,8 +306,9 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
       return;
     }
 
+    const container = containerRef.current;
     const map = new maplibregl.Map({
-      container: containerRef.current,
+      container,
       style: mapConfig.styleUrl,
       center: mapConfig.center,
       zoom: zoom ?? mapConfig.zoom,
@@ -281,11 +336,14 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
     map.on("error", () => setMapState((state) => (state === "loading" ? "error" : state)));
 
     mapRef.current = map;
+    const stopMapViewportSizeSync = addMapViewportSizeSynchronizer(map, container);
+
     if (import.meta.env.DEV) {
       (window as typeof window & { __kurskMap?: maplibregl.Map }).__kurskMap = map;
     }
 
     return () => {
+      stopMapViewportSizeSync();
       stopAllHoverAnimations();
       if (import.meta.env.DEV) {
         delete (window as typeof window & { __kurskMap?: maplibregl.Map }).__kurskMap;
