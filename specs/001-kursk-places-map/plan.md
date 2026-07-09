@@ -36,7 +36,7 @@
 
 **Scale/Scope**: v1 покрывает публичную карту, карты сообществ по ссылке, статический контент, поиск, карточки, маршруты, PWA и аналитику; будущие backend, аккаунты, сохранённые места, отметки посещений, заявки пользователей и Telegram mini app не реализуются
 
-**Deployment**: проект публикуется через GitHub Actions workflow в GitHub Pages от push в ветку `main`. Custom domain репозитория — `kudakursk.ru`; DNS-зона обслуживается Selectel и должна указывать apex-домен на GitHub Pages A-записи, а `www` — CNAME на `acherkashin.github.io`. Vite `base` равен `/`; локальные public assets, JSON-данные, MapLibre style, PWA manifest и service worker должны строить URL с учётом `import.meta.env.BASE_URL`, чтобы SPA работала от корня домена.
+**Deployment**: проект публикуется через GitHub Actions workflow в GitHub Pages от push в ветку `main`. Отдельный workflow PR-проверок запускает полный регрессионный набор (`pnpm typecheck`, `pnpm test:unit`, `pnpm build`, `pnpm test:e2e`) на pull request, ручной `workflow_dispatch` и каждый push в `main`, чтобы новые коммиты основной ветки проходили Playwright e2e до дальнейшей ручной проверки релиза. Custom domain репозитория — `kudakursk.ru`; DNS-зона обслуживается Selectel и должна указывать apex-домен на GitHub Pages A-записи, а `www` — CNAME на `acherkashin.github.io`. Vite `base` равен `/`; локальные public assets, JSON-данные, MapLibre style, PWA manifest и service worker должны строить URL с учётом `import.meta.env.BASE_URL`, чтобы SPA работала от корня домена.
 
 ## Проверка конституции
 
