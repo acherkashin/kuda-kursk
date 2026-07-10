@@ -641,6 +641,14 @@
 
 ---
 
+## Phase 53: Обложка усадьбы Фета
+
+**Цель**: обновить визуальное представление места на основной карте без изменения данных одноимённой community-карты.
+
+- [X] T213 Обновить обложку и миниатюру места «Усадьба Афанасия Фета» (`id: 91`) только в `public/data/main-map.json` из локального файла `/Users/cherkalexander/Downloads/ChatGPT Image Jul 10, 2026, 09_50_07 PM.png`; создать hash-именованные WebP-ассеты `public/place-images/91-image-usadba-afanasiya-feta-14c3e826f1.webp` и `public/place-thumbnails/91-thumbnail-usadba-afanasiya-feta-14c3e826f1.webp`, удалить старые неиспользуемые ассеты и поднять `package.json.version` до `0.2.3` как patch. Новое автоматизированное тестовое покрытие не добавлялось. Проверка: `jq empty public/data/main-map.json public/data/elena-koltysheva-objects.json`, dry-run helper-а перед записью, проверка WebP-размеров через `file`.
+
+---
+
 ## Зависимости и порядок выполнения
 
 ### Зависимости фаз
