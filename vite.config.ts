@@ -21,7 +21,7 @@ export default defineConfig({
       ],
       manifest: {
         name: "Куда в Курске",
-        short_name: "Курск",
+        short_name: "Куда в Курске",
         description: "Карта мест Курска для жителей и туристов",
         start_url: githubPagesBase,
         scope: githubPagesBase,

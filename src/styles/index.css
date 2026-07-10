@@ -122,7 +122,7 @@ body {
   }
 
   [data-notice-open="true"] .map-results-ui {
-    display: none;
+    bottom: 180px;
   }
 
   [data-details-open="true"] .map-top-ui,
