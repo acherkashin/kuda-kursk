@@ -1540,6 +1540,61 @@
           "address": "ул. Гайдара, 26А"
         }
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9007,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.156445,
+          51.704379
+        ]
+      },
+      "properties": {
+        "id": 9007,
+        "balloonContent": {
+          "image": "/place-images/9007-image-akademiya-tennisa-b5801c3785.webp",
+          "thumbnail": "/place-thumbnails/9007-thumbnail-akademiya-tennisa-b5801c3785.webp",
+          "images": [
+            {
+              "src": "/place-images/9007-image-akademiya-tennisa-b5801c3785.webp",
+              "thumbnail": "/place-thumbnails/9007-thumbnail-akademiya-tennisa-b5801c3785.webp",
+              "order": 1
+            },
+            {
+              "src": "/place-images/9007-image-akademiya-tennisa-3a19924ff7.webp",
+              "thumbnail": "/place-thumbnails/9007-thumbnail-akademiya-tennisa-3a19924ff7.webp",
+              "order": 2
+            },
+            {
+              "src": "/place-images/9007-image-akademiya-tennisa-7800677c94.webp",
+              "thumbnail": "/place-thumbnails/9007-thumbnail-akademiya-tennisa-7800677c94.webp",
+              "order": 3
+            },
+            {
+              "src": "/place-images/9007-image-akademiya-tennisa-f02cd77008.webp",
+              "thumbnail": "/place-thumbnails/9007-thumbnail-akademiya-tennisa-f02cd77008.webp",
+              "order": 4
+            }
+          ],
+          "name": "Академия Тенниса",
+          "description": "«Академия Тенниса» — спортивная школа на Сумской улице с теннисными кортами. Хорошая точка для тех, кто хочет попробовать большой теннис, вернуться к тренировкам или просто добавить в расписание больше движения.",
+          "address": "Курск, Сумская ул., 6"
+        },
+        "links": [
+          {
+            "label": "Сайт",
+            "url": "https://tennis-kursk.gosuslugi.ru/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/public210837825",
+            "kind": "vk"
+          }
+        ]
+      }
     }
   ]
 }
