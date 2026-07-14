@@ -41,7 +41,7 @@ export function IconButton({
 
   return (
     <button
-      className={`grid ${sizes[size]} flex-none cursor-pointer place-items-center rounded-full border duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 ${variants[variant]} ${activeClass} ${className}`.trim()}
+      className={`grid ${sizes[size]} flex-none cursor-pointer place-items-center rounded-full border duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-45 disabled:active:scale-100 ${variants[variant]} ${activeClass} ${className}`.trim()}
       {...dataActive}
       {...props}
     />

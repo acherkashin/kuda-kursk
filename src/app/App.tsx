@@ -265,6 +265,20 @@ export function App() {
     [updateSearchParams]
   );
 
+  const handleFitPlaces = useCallback(
+    (placeCount: number) => {
+      if (!currentMap) {
+        return;
+      }
+
+      analytics.track({
+        name: "map_fit_places_clicked",
+        params: { mapSlug: currentMap.slug, placeCount, isFiltered }
+      });
+    },
+    [analytics, currentMap, isFiltered]
+  );
+
   const handlePlaceDetailsClose = useCallback(() => {
     updateSearchParams((nextSearchParams) => {
       nextSearchParams.delete("place");
@@ -402,6 +416,7 @@ export function App() {
           fitBoundsRequest={fitBoundsRequest}
           places={visiblePlaces}
           zoom={mapZoom}
+          onFitPlaces={handleFitPlaces}
           onZoomChange={handleMapZoomChange}
           onPlaceSelect={handlePlaceSelect}
         />

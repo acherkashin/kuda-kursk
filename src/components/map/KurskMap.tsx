@@ -1,5 +1,7 @@
 import maplibregl, { type GeoJSONSource, type MapLayerMouseEvent } from "maplibre-gl";
+import { ShrinkIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { IconButton } from "../ui/IconButton";
 import { mapConfig } from "../../domain/mapConfig";
 import { areMapZoomsEqual } from "../../domain/mapUrlState";
 import type { PlaceFeature } from "../../domain/places";
@@ -28,6 +30,7 @@ type KurskMapProps = {
   activePlace: PlaceFeature | null;
   fitBoundsRequest: MapFitBoundsRequest | null;
   places: PlaceFeature[];
+  onFitPlaces?: (placeCount: number) => void;
   onPlaceSelect?: (place: PlaceFeature, source: "map") => void;
   onZoomChange?: (zoom: number) => void;
   zoom: number | undefined;
@@ -45,6 +48,32 @@ type HoverAnimation = {
   startedAt: number;
   to: number;
 };
+
+function fitPlacesInViewport(
+  targetMap: maplibregl.Map,
+  places: PlaceFeature[],
+  activePlace: PlaceFeature | null
+) {
+  const bounds = calculatePlaceBounds(places);
+
+  if (!bounds) {
+    return false;
+  }
+
+  const isMobile = window.matchMedia("(max-width: 700px)").matches;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const padding = isMobile
+    ? { top: 116, right: 24, bottom: 96, left: 24 }
+    : { top: 124, right: activePlace ? 466 : 56, bottom: 72, left: 56 };
+
+  targetMap.fitBounds(bounds, {
+    duration: prefersReducedMotion ? 0 : 420,
+    maxZoom: 14,
+    padding
+  });
+
+  return true;
+}
 
 function createMarkerLayoutFingerprint(
   targetMap: maplibregl.Map,
@@ -122,7 +151,7 @@ function addMapViewportSizeSynchronizer(targetMap: maplibregl.Map, container: HT
   };
 }
 
-export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect, onZoomChange, zoom }: KurskMapProps) {
+export function KurskMap({ activePlace, fitBoundsRequest, places, onFitPlaces, onPlaceSelect, onZoomChange, zoom }: KurskMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const hoverAnimationsRef = useRef<Map<FeatureId, HoverAnimation>>(new Map());
@@ -393,25 +422,19 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
       return;
     }
 
-    const bounds = calculatePlaceBounds(fitBoundsRequest.places);
     handledFitBoundsRequestIdRef.current = fitBoundsRequest.id;
+    fitPlacesInViewport(map, fitBoundsRequest.places, activePlace);
+  }, [activePlace, fitBoundsRequest, mapState]);
 
-    if (!bounds) {
+  const handleFitPlaces = () => {
+    const map = mapRef.current;
+
+    if (!map || mapState !== "ready" || !fitPlacesInViewport(map, places, activePlace)) {
       return;
     }
 
-    const isMobile = window.matchMedia("(max-width: 700px)").matches;
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const padding = isMobile
-      ? { top: 116, right: 24, bottom: 96, left: 24 }
-      : { top: 124, right: activePlace ? 466 : 56, bottom: 72, left: 56 };
-
-    map.fitBounds(bounds, {
-      duration: prefersReducedMotion ? 0 : 420,
-      maxZoom: 14,
-      padding
-    });
-  }, [activePlace, fitBoundsRequest, mapState]);
+    onFitPlaces?.(places.length);
+  };
 
   useEffect(() => {
     const map = mapRef.current;
@@ -599,6 +622,19 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onPlaceSelect,
       aria-label="Карта мест Курска"
     >
       <div className="!absolute !inset-0 !h-full !w-full" ref={containerRef} />
+      <div className="map-fit-ui fixed z-3">
+        <IconButton
+          className="bg-[var(--color-surface)] shadow-[var(--shadow-rest)]"
+          disabled={mapState !== "ready" || places.length === 0}
+          size="lg"
+          title="Показать все места на карте"
+          type="button"
+          aria-label="Показать все места на карте"
+          onClick={handleFitPlaces}
+        >
+          <ShrinkIcon aria-hidden="true" size={20} />
+        </IconButton>
+      </div>
       <div aria-label="Места на карте">
         {places.map((place) => (
           <button

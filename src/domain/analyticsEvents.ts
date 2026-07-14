@@ -12,6 +12,7 @@ export type AnalyticsEvent =
   | { name: "app_open"; params: { route: string; mapSlug?: string } }
   | { name: "search_used"; params: { queryLength: number; hasResults: boolean; resultCount: number } }
   | { name: "marker_selected"; params: { placeId: string | number; source: "map" | "list" } }
+  | { name: "map_fit_places_clicked"; params: { mapSlug: string; placeCount: number; isFiltered: boolean } }
   | { name: "route_opened"; params: { placeId: string | number; provider: "yandex" | "2gis" | "google" } }
   | { name: "external_link_clicked"; params: { placeId: string | number; kind: string } }
   | { name: "community_map_opened"; params: { slug: string; placeCount: number; linkOnlyCount: number } }

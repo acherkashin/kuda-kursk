@@ -29,6 +29,7 @@ type AnalyticsEvent =
   | { name: "app_open"; params: { route: string; communitySlug?: string } }
   | { name: "search_used"; params: { queryLength: number; hasResults: boolean; resultCount: number } }
   | { name: "marker_selected"; params: { placeId: string | number; source: "map" | "list" } }
+  | { name: "map_fit_places_clicked"; params: { mapSlug: string; placeCount: number; isFiltered: boolean } }
   | { name: "route_opened"; params: { placeId: string | number; provider: "yandex" | "2gis" | "google" } }
   | { name: "external_link_clicked"; params: { placeId: string | number; kind: string } }
   | { name: "community_map_opened"; params: { slug: string; placeCount: number; linkOnlyCount: number } }
@@ -66,3 +67,5 @@ type AnalyticsEvent =
 После consent adapter вызывает `ym(counterId, "reachGoal", event.name, event.params)` для событий взаимодействия и `ym(counterId, "hit", route)` для значимых route changes SPA.
 
 Если `VITE_YANDEX_METRIKA_ID` отсутствует, adapter работает как no-op и не создаёт ошибок UI.
+
+Событие `map_fit_places_clicked` отправляется только после явного нажатия кнопки вписывания мест. Оно содержит slug текущей публичной карты, число видимых мест и булев признак активного поиска или категории; текст запроса и другие пользовательские данные не передаются.
