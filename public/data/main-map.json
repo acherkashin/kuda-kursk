@@ -1595,6 +1595,138 @@
           }
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9008,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.186924,
+          51.7435
+        ]
+      },
+      "properties": {
+        "id": 9008,
+        "balloonContent": {
+          "image": "/place-images/9008-image-noculture-f26ecd93c0.webp",
+          "thumbnail": "/place-thumbnails/9008-thumbnail-noculture-f26ecd93c0.webp",
+          "name": "NoCulture",
+          "description": "Бар с авторскими коктейлями, закусками, выразительным интерьером с витражами и живой музыкой.",
+          "address": "Курск, ул. Димитрова, 66/1"
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.ru/noculture_kursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/no_culture.kursk/",
+            "kind": "instagram"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9009,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.186799,
+          51.742828
+        ]
+      },
+      "properties": {
+        "id": 9009,
+        "balloonContent": {
+          "image": "/place-images/9009-image-ryumochnaya-odnushka-b19570fa66.webp",
+          "thumbnail": "/place-thumbnails/9009-thumbnail-ryumochnaya-odnushka-b19570fa66.webp",
+          "name": "Рюмочная «Однушка»",
+          "description": "Рюмочная с настойками, закусками и полноценным меню — от бизнес-ланчей до горячих блюд.",
+          "address": "Курск, ул. Димитрова, 66/1"
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/odnyshka.rumochnaya",
+            "kind": "vk"
+          },
+          {
+            "label": "Telegram",
+            "url": "https://t.me/rumochnaya_odnyshka",
+            "kind": "telegram"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/odnyshka.rumochnaya",
+            "kind": "instagram"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9010,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.192709,
+          51.741654
+        ]
+      },
+      "properties": {
+        "id": 9010,
+        "balloonContent": {
+          "image": "/place-images/9010-image-nastoykin-33e5eaade7.webp",
+          "thumbnail": "/place-thumbnails/9010-thumbnail-nastoykin-33e5eaade7.webp",
+          "name": "Настойкин",
+          "description": "Бар с большим выбором настоек, пивом и закусками для встреч с друзьями.",
+          "address": "Курск, ул. Садовая, 10"
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.com/nastoykin_bar",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/nastoykin_bar/",
+            "kind": "instagram"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9011,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.185913,
+          51.744013
+        ]
+      },
+      "properties": {
+        "id": 9011,
+        "balloonContent": {
+          "image": "/place-images/9011-image-bebop-17245a953b.webp",
+          "thumbnail": "/place-thumbnails/9011-thumbnail-bebop-17245a953b.webp",
+          "name": "Bebop",
+          "description": "Небольшой изакая-бар в эстетике Cowboy Bebop с авторскими настойками, коктейлями, саке и азиатской атмосферой.",
+          "address": "Курск, ул. Димитрова, 66"
+        },
+        "links": [
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/bebop_izakaya/",
+            "kind": "instagram"
+          }
+        ]
+      }
     }
   ]
 }
