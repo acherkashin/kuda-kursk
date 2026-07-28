@@ -1727,6 +1727,27 @@
           }
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9012,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.186112,
+          51.744402
+        ]
+      },
+      "properties": {
+        "id": 9012,
+        "balloonContent": {
+          "image": "/place-images/9008-image-borodatyy-dym-65efbaad26.webp",
+          "thumbnail": "/place-thumbnails/9008-thumbnail-borodatyy-dym-65efbaad26.webp",
+          "name": "Бородатый дым",
+          "description": "Кальянная с уютной верандой для вечернего отдыха.",
+          "address": "Курск, улица Димитрова, 66"
+        }
+      }
     }
   ]
 }
