@@ -575,13 +575,18 @@
       "properties": {
         "id": 1619,
         "balloonContent": {
-          "image": "/place-images/1619-image-e144610c12.jpg",
+          "image": "/place-images/1619-image-kuhmisterskaya-atilan-2f52d3901b.webp",
           "name": "Кухмистерская Atilan",
-          "description": "Кафе в стиле СССР",
+          "description": "«Кухмистерская Atilan» — кафе с интерьером советской квартиры: ковры на стенах, хрусталь в стенке и плакаты возвращают в знакомую домашнюю эпоху. Деталей здесь столько, что их хочется рассматривать между блюдами; в меню — борщ, драники со сметаной и котлета по-киевски. Приходите поностальгировать и спокойно поесть под музыку.",
           "address": "Курск, ул. Асеева 1к1",
-          "thumbnail": "/place-thumbnails/1619-2a4268de2a.webp"
+          "thumbnail": "/place-thumbnails/1619-thumbnail-kuhmisterskaya-atilan-2f52d3901b.webp"
         },
         "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.ru/kuxmesterck_ussr",
+            "kind": "vk"
+          },
           {
             "label": "Instagram",
             "url": "https://www.instagram.com/kuxmisterskaya_atilan/",
