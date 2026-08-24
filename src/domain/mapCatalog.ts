@@ -34,6 +34,13 @@ export const mapCatalog = [
     description: "Подборка мест для впечатлений",
     logo: "/place-thumbnails/elena-koltysheva/portal.webp",
     dataPath: "/data/elena-koltysheva-objects.json"
+  },
+  {
+    slug: "fotohistory-kursk",
+    title: "Фотоистория Курска",
+    description: "Исторические места Курска по материалам сообщества «Фотоистория Курска»",
+    logo: "/place-thumbnails/fotohistory-103600-thumbnail-krasnaya-ploschad-e4c77328e0.webp",
+    dataPath: "/data/fotohistory-kursk-objects.json"
   }
 ] as const satisfies readonly PublicMapConfig[];
 

@@ -443,6 +443,8 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onFitPlaces, o
       return;
     }
 
+    const isCurrentMap = () => mapRef.current === map;
+
     const resetMarkerInteractionState = (targetMap: maplibregl.Map) => {
       stopAllHoverAnimations();
       targetMap.removeFeatureState({ source: PLACE_SOURCE_ID });
@@ -452,6 +454,10 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onFitPlaces, o
     };
 
     const updateSource = () => {
+      if (!isCurrentMap()) {
+        return;
+      }
+
       const source = map.getSource(PLACE_SOURCE_ID) as GeoJSONSource | undefined;
 
       if (!source) {
@@ -463,7 +469,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onFitPlaces, o
       setPlaceSourceData(map, places);
     };
 
-    if (map.getSource(PLACE_SOURCE_ID)) {
+    if (isCurrentMap() && map.getSource(PLACE_SOURCE_ID)) {
       updateSource();
     } else {
       map.once("load", updateSource);

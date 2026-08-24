@@ -1753,6 +1753,38 @@
           "address": "Курск, улица Димитрова, 66"
         }
       }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-portal",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.192628,
+          51.730843
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-portal",
+        "mapLink": {
+          "slug": "fotohistory-kursk"
+        },
+        "routable": false,
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103600-image-krasnaya-ploschad-e4c77328e0.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103600-thumbnail-krasnaya-ploschad-e4c77328e0.webp",
+          "name": "Фотоистория Курска",
+          "description": "Исторические места Курска по материалам сообщества «Фотоистория Курска»: городские площади, здания, парки и точки памяти на старых и новых снимках.",
+          "address": "Курск"
+        },
+        "links": [
+          {
+            "label": "Сообщество «Фотоистория Курска»",
+            "url": "https://vk.ru/clubfotohistorykursk",
+            "kind": "details"
+          }
+        ]
+      }
     }
   ]
 }

@@ -1,0 +1,1249 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "fotohistory-104287",
+      "geometry": { "type": "Point", "coordinates": [36.165339, 51.720091] },
+      "properties": {
+        "id": "fotohistory-104287",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104287-image-perekrestok-dzerzhinskogo-i-50-let-oktyabrya-70de310d57.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104287-thumbnail-perekrestok-dzerzhinskogo-i-50-let-oktyabrya-70de310d57.webp",
+          "name": "Перекрёсток Дзержинского и 50 лет Октября",
+          "description": "Городской перекрёсток на снимке А. И. Наседкина 1976 года — ещё до привычного сегодняшнего ритма магистрали.",
+          "address": "Курск, пересечение ул. Дзержинского и проспекта 50 лет Октября"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_104287", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-104225",
+      "geometry": { "type": "Point", "coordinates": [36.189965, 51.735461] },
+      "properties": {
+        "id": "fotohistory-104225",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104225-image-dom-na-radischeva-40-8d817d8cd1.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104225-thumbnail-dom-na-radischeva-40-8d817d8cd1.webp",
+          "name": "Дом на Радищева, 40",
+          "description": "Жилой дом на Радищева в начале 1950-х — один из адресных кадров послевоенного Курска.",
+          "address": "Курск, ул. Радищева, 40"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_104225", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-104053",
+      "geometry": { "type": "Point", "coordinates": [36.171035, 51.720470] },
+      "properties": {
+        "id": "fotohistory-104053",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104053-image-park-imeni-dzerzhinskogo-2c21b3f0c3.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104053-thumbnail-park-imeni-dzerzhinskogo-2c21b3f0c3.webp",
+          "name": "Парк имени Дзержинского",
+          "description": "Центральная аллея парка на фотографии 1952 года. В подборке сообщества парк раскрывается как одно из самых узнаваемых мест довоенного и послевоенного отдыха.",
+          "address": "Курск, парк имени Дзержинского"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_104053", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103791",
+      "geometry": { "type": "Point", "coordinates": [36.138872, 51.667050] },
+      "properties": {
+        "id": "fotohistory-103791",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103791-image-torgovyy-tsentr-evropa-1-01b5f0e799.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103791-thumbnail-torgovyy-tsentr-evropa-1-01b5f0e799.webp",
+          "name": "Торговый центр «Европа 1»",
+          "description": "Кадр неизвестного года фиксирует «Европу 1» на проспекте Кулакова — уже знакомую горожанам точку района.",
+          "address": "Курск, проспект Кулакова, 43"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103791", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103774",
+      "geometry": { "type": "Point", "coordinates": [36.192002, 51.726003] },
+      "properties": {
+        "id": "fotohistory-103774",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103774-image-prisutstvennye-mesta-bf7d81fba5.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103774-thumbnail-prisutstvennye-mesta-bf7d81fba5.webp",
+          "name": "Присутственные места",
+          "description": "Бывшее здание присутственных мест и окружного суда на улице Сонина: публикация рассказывает о его строительстве для губернских учреждений в XIX веке.",
+          "address": "Курск, ул. Сонина, 4"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103774", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103600",
+      "geometry": { "type": "Point", "coordinates": [36.192628, 51.730843] },
+      "properties": {
+        "id": "fotohistory-103600",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103600-image-krasnaya-ploschad-e4c77328e0.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103600-thumbnail-krasnaya-ploschad-e4c77328e0.webp",
+          "name": "Красная площадь",
+          "description": "Красная площадь на фотографии 1950-х — городской центр, где история читается в каждом изменении фасадов и пространства.",
+          "address": "Курск, Красная площадь"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103600", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103576",
+      "geometry": { "type": "Point", "coordinates": [36.190689, 51.751873] },
+      "properties": {
+        "id": "fotohistory-103576",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103576-image-moskovskaya-ploschad-27a2e9f958.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103576-thumbnail-moskovskaya-ploschad-27a2e9f958.webp",
+          "name": "Московская площадь",
+          "description": "Московская площадь в 1980-х — снимок из недавнего для города прошлого, где узнаётся каркас северной части Курска.",
+          "address": "Курск, Московская площадь"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103576", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103570",
+      "geometry": { "type": "Point", "coordinates": [36.189455, 51.758054] },
+      "properties": {
+        "id": "fotohistory-103570",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103570-image-severnaya-avtostantsiya-666634298e.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103570-thumbnail-severnaya-avtostantsiya-666634298e.webp",
+          "name": "Северная автостанция",
+          "description": "Северная автостанция на фотографии 1980-х — транспортная точка, с которой для многих начиналась дорога в районы области.",
+          "address": "Курск, Северная автостанция, Хуторская ул."
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103570", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103444",
+      "geometry": { "type": "Point", "coordinates": [36.180980, 51.730106] },
+      "properties": {
+        "id": "fotohistory-103444",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103444-image-dom-na-verhney-lugovoy-24-d07ecd4ad2.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103444-thumbnail-dom-na-verhney-lugovoy-24-d07ecd4ad2.webp",
+          "name": "Дом на Верхней Луговой, 24",
+          "description": "Адресный снимок середины 1970-х, сделанный фотографом В. Н. Зубцом.",
+          "address": "Курск, ул. Верхняя Луговая, 24"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103444", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103322",
+      "geometry": { "type": "Point", "coordinates": [36.190385, 51.727947] },
+      "properties": {
+        "id": "fotohistory-103322",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103322-image-polugora-be3e049ee2.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103322-thumbnail-polugora-be3e049ee2.webp",
+          "name": "Полугора",
+          "description": "Фотографии Полугоры 1960–1970-х годов и газетная публикация 1968 года помогают увидеть знакомый склон в историческом контексте.",
+          "address": "Курск, Полугора"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103322", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103218",
+      "geometry": { "type": "Point", "coordinates": [36.112772, 51.686345] },
+      "properties": {
+        "id": "fotohistory-103218",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103218-image-krasnyy-most-bef7622179.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103218-thumbnail-krasnyy-most-bef7622179.webp",
+          "name": "Красный мост",
+          "description": "Строительство нового Красного моста, стилизованного под прежний, — современный кадр из истории важной городской переправы.",
+          "address": "Курск, Красный мост"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103218", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103161",
+      "geometry": { "type": "Point", "coordinates": [36.188804, 51.756830] },
+      "properties": {
+        "id": "fotohistory-103161",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103161-image-ploschad-geroev-kurskoy-bitvy-11bac891cd.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103161-thumbnail-ploschad-geroev-kurskoy-bitvy-11bac891cd.webp",
+          "name": "Площадь Героев Курской битвы",
+          "description": "Площадь, где в 2026 году началась замена фонтана: публикация фиксирует один из заметных этапов изменения городского пространства.",
+          "address": "Курск, площадь Героев Курской битвы"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103161", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103129",
+      "geometry": { "type": "Point", "coordinates": [36.186424, 51.755184] },
+      "properties": {
+        "id": "fotohistory-103129",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103129-image-nikitskoe-kladbische-b8f881ea1b.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103129-thumbnail-nikitskoe-kladbische-b8f881ea1b.webp",
+          "name": "Никитское кладбище",
+          "description": "Мемориал на Никитском кладбище в сопоставлении кадров 1981 и 2026 годов.",
+          "address": "Курск, Никитское кладбище"
+        },
+        "links": [{ "label": "Открыть пост в VK", "url": "https://vk.ru/wall-35885835_103129", "kind": "details" }]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-104328",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.160542,
+          51.725062
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-104328",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104328-image-kurskiy-ippodrom-ff70b833b6.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104328-thumbnail-kurskiy-ippodrom-ff70b833b6.webp",
+          "name": "Курский ипподром",
+          "description": "Ипподром Курского бегового общества располагался здесь с 1873 года. Сегодня это территория завода «Маяк».",
+          "address": "Курск, территория завода «Маяк», проспект 50 лет Октября"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_104328",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-104326",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.14748,
+          51.736989
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-104326",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104326-image-uchebnyy-korpus-politehnicheskogo-instituta-6b1291a876.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104326-thumbnail-uchebnyy-korpus-politehnicheskogo-instituta-6b1291a876.webp",
+          "name": "Учебный корпус политехнического института",
+          "description": "Учебный корпус на снимке 1979 года — один из ориентиров западной части города.",
+          "address": "Курск, район ЮЗГУ, ул. 50 лет Октября"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_104326",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-104275",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.191311,
+          51.749721
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-104275",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104275-image-severnyy-rynok-76a0f71246.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104275-thumbnail-severnyy-rynok-76a0f71246.webp",
+          "name": "Северный рынок",
+          "description": "Вид с улицы Радищева: вход на Северный рынок и парковка у магазина «Стрела» в 1980-е.",
+          "address": "Курск, Северный рынок, ул. Карла Маркса"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_104275",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-104100",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.211161,
+          51.744733
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-104100",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104100-image-vodnyy-stadion-na-boevoy-dache-352e91d638.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104100-thumbnail-vodnyy-stadion-na-boevoy-dache-352e91d638.webp",
+          "name": "Водный стадион на Боевой даче",
+          "description": "Водный стадион на Тускари — популярное место отдыха на фотографиях 1950–1960-х годов.",
+          "address": "Курск, урочище «Боева дача»"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_104100",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103912",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.206084,
+          51.755774
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103912",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103912-image-kirovskiy-most-88a572f338.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103912-thumbnail-kirovskiy-most-88a572f338.webp",
+          "name": "Кировский мост",
+          "description": "Новый Кировский мост, построенный в 1955 году, виден на историческом снимке Тускари.",
+          "address": "Курск, Кировский мост через Тускарь"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103912",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103707",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.148566,
+          51.680055
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103707",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103707-image-seymskiy-lamonovskiy-most-3a59fba6b0.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103707-thumbnail-seymskiy-lamonovskiy-most-3a59fba6b0.webp",
+          "name": "Сеймский (Ламоновский) мост",
+          "description": "Снимок Сейма сделан с Ламоновского, или Сеймского, моста 9 августа 1961 года.",
+          "address": "Курск, Сеймский мост"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103707",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103598",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.122156,
+          51.654907
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103598",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103598-image-prospekt-kulakova-e31f76fd30.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103598-thumbnail-prospekt-kulakova-e31f76fd30.webp",
+          "name": "Проспект Кулакова",
+          "description": "Конец проспекта Кулакова на фотографии конца 1970-х — один из кадров развития южной части Курска.",
+          "address": "Курск, проспект Кулакова"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103598",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103543",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.190432,
+          51.731708
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103543",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103543-image-georgievskaya-apteka-94a81bbdd4.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103543-thumbnail-georgievskaya-apteka-94a81bbdd4.webp",
+          "name": "Георгиевская аптека",
+          "description": "Неприметное на первый взгляд здание Георгиевской аптеки хранит городской сюжет нескольких эпох.",
+          "address": "Курск, ул. Радищева, 13/15"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103543",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103527",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.18834,
+          51.728255
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103527",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103527-image-dom-na-dzerzhinskogo-62-eb04ef53a5.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103527-thumbnail-dom-na-dzerzhinskogo-62-eb04ef53a5.webp",
+          "name": "Дом на Дзержинского, 62",
+          "description": "Доходный дом Толубеева на исторической Херсонской улице, построенный в 1880-х годах.",
+          "address": "Курск, ул. Дзержинского, 62"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103527",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103508",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.193657,
+          51.738703
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103508",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103508-image-kvartal-na-lenina-22-26-9bb78e3e52.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103508-thumbnail-kvartal-na-lenina-22-26-9bb78e3e52.webp",
+          "name": "Квартал на Ленина, 22–26",
+          "description": "Левая сторона улицы Ленина в конце 1960-х: квартал между Кирова и Золотой перед сносом старых домов.",
+          "address": "Курск, ул. Ленина, 22–26"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103508",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103316",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.196125,
+          51.748814
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103316",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103316-image-skver-u-filarmonii-0b7992f266.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103316-thumbnail-skver-u-filarmonii-0b7992f266.webp",
+          "name": "Сквер у филармонии",
+          "description": "Сквер у бывшего драмтеатра имени Пушкина и история гастронома «Курск» на площади Перекальского.",
+          "address": "Курск, ул. Перекальского, Курская филармония"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103316",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102657",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.189326,
+          51.725726
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102657",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102657-image-kurskiy-tsirk-6bb2131b2b.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102657-thumbnail-kurskiy-tsirk-6bb2131b2b.webp",
+          "name": "Курский цирк",
+          "description": "Субботник 1971 года у строящегося цирка — кадр благоустройства городской площадки.",
+          "address": "Курск, Курский государственный цирк"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102657",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102466",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.174421,
+          51.750471
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102466",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102466-image-ulitsa-krasnyy-oktyabr-0b2971f9b0.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102466-thumbnail-ulitsa-krasnyy-oktyabr-0b2971f9b0.webp",
+          "name": "Улица Красный Октябрь",
+          "description": "Сооружение насыпи и новая трамвайная линия в северо-западной части Курска, середина 1960-х.",
+          "address": "Курск, ул. Красный Октябрь"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102466",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102204",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.178536,
+          51.731179
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102204",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102204-image-ulitsa-karla-libknehta-8e59970ae5.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102204-thumbnail-ulitsa-karla-libknehta-8e59970ae5.webp",
+          "name": "Улица Карла Либкнехта",
+          "description": "Уличный кадр из 1990-х сохраняет бытовую историю тогдашнего Курска.",
+          "address": "Курск, ул. Карла Либкнехта"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102204",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102096",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.188665,
+          51.724961
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102096",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102096-image-ulitsa-aleksandra-nevskogo-135c0887c4.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102096-thumbnail-ulitsa-aleksandra-nevskogo-135c0887c4.webp",
+          "name": "Улица Александра Невского",
+          "description": "После ливня в июне 2012 года улица Александра Невского показана как часть недавней городской истории.",
+          "address": "Курск, ул. Александра Невского"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102096",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102095",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.193539,
+          51.724073
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102095",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102095-image-streletskaya-naberezhnaya-d52aed5707.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102095-thumbnail-streletskaya-naberezhnaya-d52aed5707.webp",
+          "name": "Стрелецкая набережная",
+          "description": "Половодье в Стрелецкой на снимке 1970 года — история жизни у Тускари.",
+          "address": "Курск, ул. Стрелецкая Набережная"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102095",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102078",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.136732,
+          51.655689
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102078",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102078-image-ryshkovo-i-lamonovo-724acadca7.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102078-thumbnail-ryshkovo-i-lamonovo-724acadca7.webp",
+          "name": "Рышково и Ламоново",
+          "description": "Рышково и Ламоново на снимках 1977–1978 годов: застройка меняет облик южной окраины города.",
+          "address": "Курск, микрорайон Рышково"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102078",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102035",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.171237,
+          51.692465
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102035",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102035-image-ulitsa-engelsa-u-kztz-3e95688d86.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102035-thumbnail-ulitsa-engelsa-u-kztz-3e95688d86.webp",
+          "name": "Улица Энгельса у КЗТЗ",
+          "description": "Жилой дом завода КЗТЗ и старые частные дома на фотографии мая 1975 года.",
+          "address": "Курск, ул. Энгельса"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102035",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102013",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.189282,
+          51.722226
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102013",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102013-image-ploschad-dobrolyubova-202210cf29.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102013-thumbnail-ploschad-dobrolyubova-202210cf29.webp",
+          "name": "Площадь Добролюбова",
+          "description": "Барнышёвская площадь с трамвайным кольцом на кадрах конца 1940-х и начала 1950-х.",
+          "address": "Курск, площадь Добролюбова"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102013",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-101899",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.155967,
+          51.70544
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-101899",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-101899-image-park-kztz-c4977ff05f.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-101899-thumbnail-park-kztz-c4977ff05f.webp",
+          "name": "Парк КЗТЗ",
+          "description": "Праздник в парке КЗТЗ в начале 1980-х — городской досуг промышленного района.",
+          "address": "Курск, парк КЗТЗ"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_101899",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-101891",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.189887,
+          51.751273
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-101891",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-101891-image-dom-na-radischeva-118-bdb97343d2.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-101891-thumbnail-dom-na-radischeva-118-bdb97343d2.webp",
+          "name": "Дом на Радищева, 118",
+          "description": "Первое двенадцатиэтажное здание города: дом построен в 1974 году и снят в 1994-м.",
+          "address": "Курск, ул. Радищева, 118"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_101891",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-101882",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.183056,
+          51.724931
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-101882",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-101882-image-dom-rebindera-13151b961d.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-101882-thumbnail-dom-rebindera-13151b961d.webp",
+          "name": "Дом Ребиндера",
+          "description": "Бывший дом Н. М. Ребиндера на улице Гайдара — второй сюжет публикации о разливе Тускари.",
+          "address": "Курск, ул. Гайдара, 7"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_101882",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-101707",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.196376,
+          51.750302
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-101707",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-101707-image-obschezhitie-medinstituta-dd3f6e24e7.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-101707-thumbnail-obschezhitie-medinstituta-dd3f6e24e7.webp",
+          "name": "Общежитие мединститута",
+          "description": "Общежитие студентов мединститута на фотографии 1953 года.",
+          "address": "Курск, Курский государственный медицинский университет"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_101707",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-101695",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.194554,
+          51.743766
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-101695",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-101695-image-dvorets-pionerov-8ed76ee967.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-101695-thumbnail-dvorets-pionerov-8ed76ee967.webp",
+          "name": "Дворец пионеров",
+          "description": "Дворец пионеров на улице Ленина в 1960 году — кадр городской детской инфраструктуры.",
+          "address": "Курск, ул. Ленина, 69"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_101695",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-104214",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.192322,
+          51.737897
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-104214",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104214-image-perekrestok-lenina-i-sadovoy-a5884d10c2.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104214-thumbnail-perekrestok-lenina-i-sadovoy-a5884d10c2.webp",
+          "name": "Перекрёсток Ленина и Садовой",
+          "description": "Перекрёсток в центре Курска на фотографии 1967 года.",
+          "address": "Курск, пересечение ул. Ленина и ул. Садовой"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_104214",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-104256",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.18834,
+          51.728255
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-104256",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-104256-image-nachalo-ulitsy-radischeva-7cc0b762c5.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-104256-thumbnail-nachalo-ulitsy-radischeva-7cc0b762c5.webp",
+          "name": "Начало улицы Радищева",
+          "description": "Начало улицы Радищева на снимке 1960-х; координата ориентировочная для исторического перекрёстка.",
+          "address": "Курск, район пересечения ул. Радищева и ул. Дзержинского"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_104256",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103555",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.187008,
+          51.727998
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103555",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103555-image-bank-filiptsova-a78dbf46a7.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103555-thumbnail-bank-filiptsova-a78dbf46a7.webp",
+          "name": "Банк Филипцова",
+          "description": "Бывший городской общественный банк Филипцова на исторической Херсонской улице.",
+          "address": "Курск, ул. Дзержинского, 21"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103555",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-103089",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.19301,
+          51.720588
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-103089",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-103089-image-perekrestok-malyh-i-streletskoy-naberezhnoy-8d7119ddcb.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-103089-thumbnail-perekrestok-malyh-i-streletskoy-naberezhnoy-8d7119ddcb.webp",
+          "name": "Перекрёсток Малых и Стрелецкой Набережной",
+          "description": "Исторический перекрёсток Раздельной, ныне Малых, и Стрелецкой Набережной на снимке 1970-х.",
+          "address": "Курск, район пересечения ул. Малых и Стрелецкой Набережной"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_103089",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102676",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.191541,
+          51.739068
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102676",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102676-image-skver-u-dramteatra-f242ae5ee0.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102676-thumbnail-skver-u-dramteatra-f242ae5ee0.webp",
+          "name": "Сквер у драмтеатра",
+          "description": "Сквер у театра драмы имени Пушкина на фотографии 1950-х годов.",
+          "address": "Курск, ул. Ленина, 26"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102676",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102619",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.192442,
+          51.748067
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102619",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102619-image-vodonapornaya-bashnya-na-pavlova-f3216771b8.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102619-thumbnail-vodonapornaya-bashnya-na-pavlova-f3216771b8.webp",
+          "name": "Водонапорная башня на Павлова",
+          "description": "Водонапорная башня, построенная в 1929–1931 годах, — памятник промышленной архитектуры.",
+          "address": "Курск, ул. Павлова (бывшая Подвальная)"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102619",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102610",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.167928,
+          51.745129
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102610",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102610-image-ugol-verhney-lugovoy-i-skoryatina-9ca36f46e1.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102610-thumbnail-ugol-verhney-lugovoy-i-skoryatina-9ca36f46e1.webp",
+          "name": "Угол Верхней Луговой и Скорятина",
+          "description": "Угол Верхней Луговой и Узенькой, ныне Скорятина, в середине 1970-х; координата ориентировочная.",
+          "address": "Курск, район пересечения ул. Верхней Луговой и ул. Скорятина"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102610",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102592",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.191372,
+          51.726889
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102592",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102592-image-kurskaya-muzhskaya-gimnaziya-65a562e2f6.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102592-thumbnail-kurskaya-muzhskaya-gimnaziya-65a562e2f6.webp",
+          "name": "Курская мужская гимназия",
+          "description": "Бывшая мужская классическая гимназия 1836–1842 годов: после реставрации здесь должен разместиться краеведческий музей.",
+          "address": "Курск, ул. Луначарского, 8"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102592",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102287",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.185565,
+          51.725869
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102287",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102287-image-perekrestok-dzerzhinskogo-verhney-lugovoy-i-dobrolyubova-b45c264060.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102287-thumbnail-perekrestok-dzerzhinskogo-verhney-lugovoy-i-dobrolyubova-b45c264060.webp",
+          "name": "Перекрёсток Дзержинского, Верхней Луговой и Добролюбова",
+          "description": "Городской узел трёх улиц на фотографии 2004 года; координата ориентировочная.",
+          "address": "Курск, район пересечения ул. Дзержинского, Верхней Луговой и Добролюбова"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102287",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-101894",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.191144,
+          51.737901
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-101894",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-101894-image-stadion-dinamo-4e01d26525.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-101894-thumbnail-stadion-dinamo-4e01d26525.webp",
+          "name": "Стадион «Динамо»",
+          "description": "Стадион «Динамо» на снимках 1950–1960-х, включая кадры периода оккупации.",
+          "address": "Курск, ул. Ленина, 38"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_101894",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102513",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.191781,
+          51.736043
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102513",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102513-image-perekrestok-lenina-i-zolotoy-acdcc4359f.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102513-thumbnail-perekrestok-lenina-i-zolotoy-acdcc4359f.webp",
+          "name": "Перекрёсток Ленина и Золотой",
+          "description": "Перекрёсток улиц Ленина и Золотой на снимке 1971 года; координата ориентировочная.",
+          "address": "Курск, район пересечения ул. Ленина и ул. Золотой"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102513",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-102415",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.187707,
+          51.732307
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-102415",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-102415-image-kostel-uspeniya-presvyatoy-devy-marii-98c0e59e75.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-102415-thumbnail-kostel-uspeniya-presvyatoy-devy-marii-98c0e59e75.webp",
+          "name": "Костёл Успения Пресвятой Девы Марии",
+          "description": "Вид на город с холма у костёла на фотографии около 1890 года.",
+          "address": "Курск, ул. Марата, 31"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_102415",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fotohistory-101700",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.1947,
+          51.7293
+        ]
+      },
+      "properties": {
+        "id": "fotohistory-101700",
+        "balloonContent": {
+          "image": "/place-images/fotohistory-101700-image-park-imeni-1-maya-1a8a8c44c5.webp",
+          "thumbnail": "/place-thumbnails/fotohistory-101700-thumbnail-park-imeni-1-maya-1a8a8c44c5.webp",
+          "name": "Парк имени 1 Мая",
+          "description": "Вид на старейший городской парк в 1949 году.",
+          "address": "Курск, парк имени 1 Мая, Красная площадь"
+        },
+        "links": [
+          {
+            "label": "Открыть пост в VK",
+            "url": "https://vk.ru/wall-35885835_101700",
+            "kind": "details"
+          }
+        ]
+      }
+    }
+  ]
+}

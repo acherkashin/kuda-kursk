@@ -25,3 +25,6 @@ test-results/
 storybook-static/
 
 .superpowers
+
+# Локальные выгрузки и исходные изображения для редакционного импорта.
+.cache/
