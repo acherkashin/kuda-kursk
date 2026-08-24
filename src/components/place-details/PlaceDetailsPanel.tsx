@@ -162,7 +162,13 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
       transition={{ duration: reduceMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
       {hasPhotos ? (
-        <PlacePhotoGallery photos={viewModel.photos} placeId={viewModel.id} title={viewModel.name} onClose={onClose} />
+        <PlacePhotoGallery
+          eyebrow={viewModel.historicalEra}
+          photos={viewModel.photos}
+          placeId={viewModel.id}
+          title={viewModel.name}
+          onClose={onClose}
+        />
       ) : (
         <div className="relative min-h-16 px-5 pb-4 pt-5 max-[700px]:pt-[max(20px,env(safe-area-inset-top))]">
           <IconButton
@@ -173,6 +179,11 @@ export function PlaceDetailsPanel({ place, onClose, onRouteOpen, onExternalLinkO
           >
             <XIcon aria-hidden="true" size={20} strokeWidth={2.2} />
           </IconButton>
+          {viewModel.historicalEra ? (
+            <p className="m-0 mb-1.5 text-[10.5px] font-semibold tracking-[0.08em] text-[var(--color-muted)] uppercase">
+              {viewModel.historicalEra}
+            </p>
+          ) : null}
           <h1
             className="m-0 pr-12 text-[28px] font-bold leading-[1.05] tracking-[-0.02em] [font-family:var(--font-editorial)] [text-wrap:balance]"
           >

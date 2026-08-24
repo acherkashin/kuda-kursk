@@ -7,6 +7,7 @@
       "geometry": { "type": "Point", "coordinates": [36.165339, 51.720091] },
       "properties": {
         "id": "fotohistory-104287",
+        "categories": ["history-era-1970s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104287-image-perekrestok-dzerzhinskogo-i-50-let-oktyabrya-70de310d57.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104287-thumbnail-perekrestok-dzerzhinskogo-i-50-let-oktyabrya-70de310d57.webp",
@@ -26,6 +27,7 @@
       "geometry": { "type": "Point", "coordinates": [36.189965, 51.735461] },
       "properties": {
         "id": "fotohistory-104225",
+        "categories": ["history-era-1940s-1950s","history-theme-architecture"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104225-image-dom-na-radischeva-40-8d817d8cd1.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104225-thumbnail-dom-na-radischeva-40-8d817d8cd1.webp",
@@ -45,6 +47,7 @@
       "geometry": { "type": "Point", "coordinates": [36.171035, 51.720470] },
       "properties": {
         "id": "fotohistory-104053",
+        "categories": ["history-era-1940s-1950s","history-theme-leisure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104053-image-park-imeni-dzerzhinskogo-2c21b3f0c3.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104053-thumbnail-park-imeni-dzerzhinskogo-2c21b3f0c3.webp",
@@ -64,6 +67,7 @@
       "geometry": { "type": "Point", "coordinates": [36.138872, 51.667050] },
       "properties": {
         "id": "fotohistory-103791",
+        "categories": ["history-era-undated","history-theme-architecture"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103791-image-torgovyy-tsentr-evropa-1-01b5f0e799.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103791-thumbnail-torgovyy-tsentr-evropa-1-01b5f0e799.webp",
@@ -83,6 +87,7 @@
       "geometry": { "type": "Point", "coordinates": [36.192002, 51.726003] },
       "properties": {
         "id": "fotohistory-103774",
+        "categories": ["history-era-2000s-now","history-theme-architecture","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103774-image-prisutstvennye-mesta-bf7d81fba5.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103774-thumbnail-prisutstvennye-mesta-bf7d81fba5.webp",
@@ -102,6 +107,7 @@
       "geometry": { "type": "Point", "coordinates": [36.192628, 51.730843] },
       "properties": {
         "id": "fotohistory-103600",
+        "categories": ["history-era-1940s-1950s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103600-image-krasnaya-ploschad-e4c77328e0.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103600-thumbnail-krasnaya-ploschad-e4c77328e0.webp",
@@ -121,6 +127,7 @@
       "geometry": { "type": "Point", "coordinates": [36.190689, 51.751873] },
       "properties": {
         "id": "fotohistory-103576",
+        "categories": ["history-era-1980s-1990s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103576-image-moskovskaya-ploschad-27a2e9f958.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103576-thumbnail-moskovskaya-ploschad-27a2e9f958.webp",
@@ -140,6 +147,7 @@
       "geometry": { "type": "Point", "coordinates": [36.189455, 51.758054] },
       "properties": {
         "id": "fotohistory-103570",
+        "categories": ["history-era-1980s-1990s","history-theme-infrastructure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103570-image-severnaya-avtostantsiya-666634298e.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103570-thumbnail-severnaya-avtostantsiya-666634298e.webp",
@@ -159,6 +167,7 @@
       "geometry": { "type": "Point", "coordinates": [36.180980, 51.730106] },
       "properties": {
         "id": "fotohistory-103444",
+        "categories": ["history-era-1970s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103444-image-dom-na-verhney-lugovoy-24-d07ecd4ad2.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103444-thumbnail-dom-na-verhney-lugovoy-24-d07ecd4ad2.webp",
@@ -178,6 +187,7 @@
       "geometry": { "type": "Point", "coordinates": [36.190385, 51.727947] },
       "properties": {
         "id": "fotohistory-103322",
+        "categories": ["history-era-1960s","history-theme-streets","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103322-image-polugora-be3e049ee2.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103322-thumbnail-polugora-be3e049ee2.webp",
@@ -197,6 +207,7 @@
       "geometry": { "type": "Point", "coordinates": [36.112772, 51.686345] },
       "properties": {
         "id": "fotohistory-103218",
+        "categories": ["history-era-2000s-now","history-theme-water","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103218-image-krasnyy-most-bef7622179.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103218-thumbnail-krasnyy-most-bef7622179.webp",
@@ -216,6 +227,7 @@
       "geometry": { "type": "Point", "coordinates": [36.188804, 51.756830] },
       "properties": {
         "id": "fotohistory-103161",
+        "categories": ["history-era-before-1917","history-theme-architecture","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103161-image-ploschad-geroev-kurskoy-bitvy-11bac891cd.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103161-thumbnail-ploschad-geroev-kurskoy-bitvy-11bac891cd.webp",
@@ -235,6 +247,7 @@
       "geometry": { "type": "Point", "coordinates": [36.186424, 51.755184] },
       "properties": {
         "id": "fotohistory-103129",
+        "categories": ["history-era-1980s-1990s","history-theme-city-change","history-theme-comparison"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103129-image-nikitskoe-kladbische-b8f881ea1b.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103129-thumbnail-nikitskoe-kladbische-b8f881ea1b.webp",
@@ -260,6 +273,7 @@
       },
       "properties": {
         "id": "fotohistory-104328",
+        "categories": ["history-era-before-1917","history-theme-leisure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104328-image-kurskiy-ippodrom-ff70b833b6.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104328-thumbnail-kurskiy-ippodrom-ff70b833b6.webp",
@@ -291,6 +305,7 @@
       },
       "properties": {
         "id": "fotohistory-104326",
+        "categories": ["history-era-1970s","history-theme-architecture"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104326-image-uchebnyy-korpus-politehnicheskogo-instituta-6b1291a876.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104326-thumbnail-uchebnyy-korpus-politehnicheskogo-instituta-6b1291a876.webp",
@@ -322,6 +337,7 @@
       },
       "properties": {
         "id": "fotohistory-104275",
+        "categories": ["history-era-1980s-1990s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104275-image-severnyy-rynok-76a0f71246.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104275-thumbnail-severnyy-rynok-76a0f71246.webp",
@@ -353,6 +369,7 @@
       },
       "properties": {
         "id": "fotohistory-104100",
+        "categories": ["history-era-1940s-1950s","history-theme-water","history-theme-leisure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104100-image-vodnyy-stadion-na-boevoy-dache-352e91d638.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104100-thumbnail-vodnyy-stadion-na-boevoy-dache-352e91d638.webp",
@@ -384,6 +401,7 @@
       },
       "properties": {
         "id": "fotohistory-103912",
+        "categories": ["history-era-1940s-1950s","history-theme-water","history-theme-infrastructure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103912-image-kirovskiy-most-88a572f338.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103912-thumbnail-kirovskiy-most-88a572f338.webp",
@@ -415,6 +433,7 @@
       },
       "properties": {
         "id": "fotohistory-103707",
+        "categories": ["history-era-1960s","history-theme-water","history-theme-infrastructure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103707-image-seymskiy-lamonovskiy-most-3a59fba6b0.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103707-thumbnail-seymskiy-lamonovskiy-most-3a59fba6b0.webp",
@@ -446,6 +465,7 @@
       },
       "properties": {
         "id": "fotohistory-103598",
+        "categories": ["history-era-1970s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103598-image-prospekt-kulakova-e31f76fd30.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103598-thumbnail-prospekt-kulakova-e31f76fd30.webp",
@@ -477,6 +497,7 @@
       },
       "properties": {
         "id": "fotohistory-103543",
+        "categories": ["history-era-before-1917","history-theme-architecture","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103543-image-georgievskaya-apteka-94a81bbdd4.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103543-thumbnail-georgievskaya-apteka-94a81bbdd4.webp",
@@ -508,6 +529,7 @@
       },
       "properties": {
         "id": "fotohistory-103527",
+        "categories": ["history-era-1980s-1990s","history-theme-architecture"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103527-image-dom-na-dzerzhinskogo-62-eb04ef53a5.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103527-thumbnail-dom-na-dzerzhinskogo-62-eb04ef53a5.webp",
@@ -539,6 +561,7 @@
       },
       "properties": {
         "id": "fotohistory-103508",
+        "categories": ["history-era-1960s","history-theme-streets","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103508-image-kvartal-na-lenina-22-26-9bb78e3e52.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103508-thumbnail-kvartal-na-lenina-22-26-9bb78e3e52.webp",
@@ -570,6 +593,7 @@
       },
       "properties": {
         "id": "fotohistory-103316",
+        "categories": ["history-era-1960s","history-theme-streets","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103316-image-skver-u-filarmonii-0b7992f266.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103316-thumbnail-skver-u-filarmonii-0b7992f266.webp",
@@ -601,6 +625,7 @@
       },
       "properties": {
         "id": "fotohistory-102657",
+        "categories": ["history-era-1970s","history-theme-leisure","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102657-image-kurskiy-tsirk-6bb2131b2b.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102657-thumbnail-kurskiy-tsirk-6bb2131b2b.webp",
@@ -632,6 +657,7 @@
       },
       "properties": {
         "id": "fotohistory-102466",
+        "categories": ["history-era-1960s","history-theme-streets","history-theme-infrastructure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102466-image-ulitsa-krasnyy-oktyabr-0b2971f9b0.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102466-thumbnail-ulitsa-krasnyy-oktyabr-0b2971f9b0.webp",
@@ -663,6 +689,7 @@
       },
       "properties": {
         "id": "fotohistory-102204",
+        "categories": ["history-era-1980s-1990s","history-theme-streets","history-theme-infrastructure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102204-image-ulitsa-karla-libknehta-8e59970ae5.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102204-thumbnail-ulitsa-karla-libknehta-8e59970ae5.webp",
@@ -694,6 +721,7 @@
       },
       "properties": {
         "id": "fotohistory-102096",
+        "categories": ["history-era-2000s-now","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102096-image-ulitsa-aleksandra-nevskogo-135c0887c4.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102096-thumbnail-ulitsa-aleksandra-nevskogo-135c0887c4.webp",
@@ -725,6 +753,7 @@
       },
       "properties": {
         "id": "fotohistory-102095",
+        "categories": ["history-era-1970s","history-theme-water","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102095-image-streletskaya-naberezhnaya-d52aed5707.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102095-thumbnail-streletskaya-naberezhnaya-d52aed5707.webp",
@@ -756,6 +785,7 @@
       },
       "properties": {
         "id": "fotohistory-102078",
+        "categories": ["history-era-1970s","history-theme-architecture","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102078-image-ryshkovo-i-lamonovo-724acadca7.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102078-thumbnail-ryshkovo-i-lamonovo-724acadca7.webp",
@@ -787,6 +817,7 @@
       },
       "properties": {
         "id": "fotohistory-102035",
+        "categories": ["history-era-1970s","history-theme-architecture","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102035-image-ulitsa-engelsa-u-kztz-3e95688d86.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102035-thumbnail-ulitsa-engelsa-u-kztz-3e95688d86.webp",
@@ -818,6 +849,7 @@
       },
       "properties": {
         "id": "fotohistory-102013",
+        "categories": ["history-era-1940s-1950s","history-theme-streets","history-theme-comparison"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102013-image-ploschad-dobrolyubova-202210cf29.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102013-thumbnail-ploschad-dobrolyubova-202210cf29.webp",
@@ -849,6 +881,7 @@
       },
       "properties": {
         "id": "fotohistory-101899",
+        "categories": ["history-era-1980s-1990s","history-theme-leisure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-101899-image-park-kztz-c4977ff05f.webp",
           "thumbnail": "/place-thumbnails/fotohistory-101899-thumbnail-park-kztz-c4977ff05f.webp",
@@ -880,6 +913,7 @@
       },
       "properties": {
         "id": "fotohistory-101891",
+        "categories": ["history-era-1980s-1990s","history-theme-architecture"],
         "balloonContent": {
           "image": "/place-images/fotohistory-101891-image-dom-na-radischeva-118-bdb97343d2.webp",
           "thumbnail": "/place-thumbnails/fotohistory-101891-thumbnail-dom-na-radischeva-118-bdb97343d2.webp",
@@ -911,6 +945,7 @@
       },
       "properties": {
         "id": "fotohistory-101882",
+        "categories": ["history-era-before-1917","history-theme-water","history-theme-comparison"],
         "balloonContent": {
           "image": "/place-images/fotohistory-101882-image-dom-rebindera-13151b961d.webp",
           "thumbnail": "/place-thumbnails/fotohistory-101882-thumbnail-dom-rebindera-13151b961d.webp",
@@ -942,6 +977,7 @@
       },
       "properties": {
         "id": "fotohistory-101707",
+        "categories": ["history-era-1940s-1950s","history-theme-architecture"],
         "balloonContent": {
           "image": "/place-images/fotohistory-101707-image-obschezhitie-medinstituta-dd3f6e24e7.webp",
           "thumbnail": "/place-thumbnails/fotohistory-101707-thumbnail-obschezhitie-medinstituta-dd3f6e24e7.webp",
@@ -973,6 +1009,7 @@
       },
       "properties": {
         "id": "fotohistory-101695",
+        "categories": ["history-era-1960s","history-theme-architecture"],
         "balloonContent": {
           "image": "/place-images/fotohistory-101695-image-dvorets-pionerov-8ed76ee967.webp",
           "thumbnail": "/place-thumbnails/fotohistory-101695-thumbnail-dvorets-pionerov-8ed76ee967.webp",
@@ -1004,6 +1041,7 @@
       },
       "properties": {
         "id": "fotohistory-104214",
+        "categories": ["history-era-1960s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104214-image-perekrestok-lenina-i-sadovoy-a5884d10c2.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104214-thumbnail-perekrestok-lenina-i-sadovoy-a5884d10c2.webp",
@@ -1035,6 +1073,7 @@
       },
       "properties": {
         "id": "fotohistory-104256",
+        "categories": ["history-era-1960s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-104256-image-nachalo-ulitsy-radischeva-7cc0b762c5.webp",
           "thumbnail": "/place-thumbnails/fotohistory-104256-thumbnail-nachalo-ulitsy-radischeva-7cc0b762c5.webp",
@@ -1066,6 +1105,7 @@
       },
       "properties": {
         "id": "fotohistory-103555",
+        "categories": ["history-era-undated","history-theme-architecture","history-theme-comparison"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103555-image-bank-filiptsova-a78dbf46a7.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103555-thumbnail-bank-filiptsova-a78dbf46a7.webp",
@@ -1097,6 +1137,7 @@
       },
       "properties": {
         "id": "fotohistory-103089",
+        "categories": ["history-era-1970s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-103089-image-perekrestok-malyh-i-streletskoy-naberezhnoy-8d7119ddcb.webp",
           "thumbnail": "/place-thumbnails/fotohistory-103089-thumbnail-perekrestok-malyh-i-streletskoy-naberezhnoy-8d7119ddcb.webp",
@@ -1128,6 +1169,7 @@
       },
       "properties": {
         "id": "fotohistory-102676",
+        "categories": ["history-era-1940s-1950s","history-theme-leisure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102676-image-skver-u-dramteatra-f242ae5ee0.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102676-thumbnail-skver-u-dramteatra-f242ae5ee0.webp",
@@ -1159,6 +1201,7 @@
       },
       "properties": {
         "id": "fotohistory-102619",
+        "categories": ["history-era-1960s","history-theme-architecture","history-theme-infrastructure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102619-image-vodonapornaya-bashnya-na-pavlova-f3216771b8.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102619-thumbnail-vodonapornaya-bashnya-na-pavlova-f3216771b8.webp",
@@ -1190,6 +1233,7 @@
       },
       "properties": {
         "id": "fotohistory-102610",
+        "categories": ["history-era-1970s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102610-image-ugol-verhney-lugovoy-i-skoryatina-9ca36f46e1.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102610-thumbnail-ugol-verhney-lugovoy-i-skoryatina-9ca36f46e1.webp",
@@ -1221,6 +1265,7 @@
       },
       "properties": {
         "id": "fotohistory-102592",
+        "categories": ["history-era-2000s-now","history-theme-architecture","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102592-image-kurskaya-muzhskaya-gimnaziya-65a562e2f6.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102592-thumbnail-kurskaya-muzhskaya-gimnaziya-65a562e2f6.webp",
@@ -1252,6 +1297,7 @@
       },
       "properties": {
         "id": "fotohistory-102287",
+        "categories": ["history-era-2000s-now","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102287-image-perekrestok-dzerzhinskogo-verhney-lugovoy-i-dobrolyubova-b45c264060.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102287-thumbnail-perekrestok-dzerzhinskogo-verhney-lugovoy-i-dobrolyubova-b45c264060.webp",
@@ -1283,6 +1329,7 @@
       },
       "properties": {
         "id": "fotohistory-101894",
+        "categories": ["history-era-1940s-1950s","history-theme-leisure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-101894-image-stadion-dinamo-4e01d26525.webp",
           "thumbnail": "/place-thumbnails/fotohistory-101894-thumbnail-stadion-dinamo-4e01d26525.webp",
@@ -1314,6 +1361,7 @@
       },
       "properties": {
         "id": "fotohistory-102513",
+        "categories": ["history-era-1970s","history-theme-streets"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102513-image-perekrestok-lenina-i-zolotoy-acdcc4359f.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102513-thumbnail-perekrestok-lenina-i-zolotoy-acdcc4359f.webp",
@@ -1345,6 +1393,7 @@
       },
       "properties": {
         "id": "fotohistory-102415",
+        "categories": ["history-era-before-1917","history-theme-architecture","history-theme-city-change"],
         "balloonContent": {
           "image": "/place-images/fotohistory-102415-image-kostel-uspeniya-presvyatoy-devy-marii-98c0e59e75.webp",
           "thumbnail": "/place-thumbnails/fotohistory-102415-thumbnail-kostel-uspeniya-presvyatoy-devy-marii-98c0e59e75.webp",
@@ -1376,6 +1425,7 @@
       },
       "properties": {
         "id": "fotohistory-101700",
+        "categories": ["history-era-1940s-1950s","history-theme-leisure"],
         "balloonContent": {
           "image": "/place-images/fotohistory-101700-image-park-imeni-1-maya-1a8a8c44c5.webp",
           "thumbnail": "/place-thumbnails/fotohistory-101700-thumbnail-park-imeni-1-maya-1a8a8c44c5.webp",

@@ -13,15 +13,19 @@ import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel
 import { PwaInstallNotice } from "../components/pwa/PwaInstallNotice";
 import { ANALYTICS_CONSENT_UI_ENABLED, isAnalyticsSessionOptOutActive } from "../config/analytics";
 import { loadPlaces } from "../data/loadPlaces";
-import type { AnalyticsConsent as AnalyticsConsentRecord } from "../domain/analyticsEvents";
-import type { PwaInstallAnalyticsSource } from "../domain/analyticsEvents";
+import type { AnalyticsConsent as AnalyticsConsentRecord, PwaInstallAnalyticsSource } from "../domain/analyticsEvents";
 import { findMapBySlug } from "../domain/mapCatalog";
 import { formatMapZoom, MAP_ZOOM_SEARCH_PARAM, parseMapZoom } from "../domain/mapUrlState";
 import {
   filterPlacesByCategory,
+  formatPlaceCategoryGroup,
   getAvailablePlaceCategories,
+  getPlaceCategoryGroup,
   parsePlaceCategory,
-  PLACE_CATEGORY_SEARCH_PARAM
+  parsePlaceCategoryGroup,
+  PLACE_CATEGORY_GROUP_SEARCH_PARAM,
+  PLACE_CATEGORY_SEARCH_PARAM,
+  type PlaceCategoryGroup
 } from "../domain/placeCategories";
 import { getPlaceId, type PlaceFeature } from "../domain/places";
 import type { RouteProvider } from "../domain/routeLinks";
@@ -63,7 +67,24 @@ export function App() {
   const isAboutOpen = searchParams.has("about");
   const currentMap = useMemo(() => findMapBySlug(slug), [slug]);
   const basePlaces = places;
-  const availableCategories = useMemo(() => getAvailablePlaceCategories(basePlaces), [basePlaces]);
+  const configuredCategoryGroups = currentMap?.categoryFilterGroups ?? [];
+  const parsedCategoryGroup = parsePlaceCategoryGroup(searchParams.get(PLACE_CATEGORY_GROUP_SEARCH_PARAM));
+  const activeCategoryGroup =
+    parsedCategoryGroup && configuredCategoryGroups.includes(parsedCategoryGroup)
+      ? parsedCategoryGroup
+      : (configuredCategoryGroups[0] ?? undefined);
+  const categoryGroupItems = useMemo(
+    () =>
+      configuredCategoryGroups.map((group) => ({
+        value: group,
+        label: group === "history-era" ? "Эпохи" : "Сюжеты"
+      })),
+    [configuredCategoryGroups]
+  );
+  const availableCategories = useMemo(
+    () => getAvailablePlaceCategories(basePlaces, activeCategoryGroup),
+    [activeCategoryGroup, basePlaces]
+  );
   const parsedCategory = parsePlaceCategory(searchParams.get(PLACE_CATEGORY_SEARCH_PARAM));
   const activeCategory =
     parsedCategory && availableCategories.some((category) => category.slug === parsedCategory)
@@ -176,12 +197,23 @@ export function App() {
       return;
     }
 
-    if (searchParams.has(PLACE_CATEGORY_SEARCH_PARAM) && !activeCategory) {
+    const shouldClearCategory = searchParams.has(PLACE_CATEGORY_SEARCH_PARAM) && !activeCategory;
+    const shouldClearCategoryGroup =
+      searchParams.has(PLACE_CATEGORY_GROUP_SEARCH_PARAM) &&
+      (!parsedCategoryGroup || !configuredCategoryGroups.includes(parsedCategoryGroup));
+
+    if (shouldClearCategory || shouldClearCategoryGroup) {
       updateSearchParams((nextSearchParams) => {
-        nextSearchParams.delete(PLACE_CATEGORY_SEARCH_PARAM);
+        if (shouldClearCategory) {
+          nextSearchParams.delete(PLACE_CATEGORY_SEARCH_PARAM);
+        }
+
+        if (shouldClearCategoryGroup) {
+          nextSearchParams.delete(PLACE_CATEGORY_GROUP_SEARCH_PARAM);
+        }
       }, { replace: true });
     }
-  }, [activeCategory, currentMap, loadState, searchParams, updateSearchParams]);
+  }, [activeCategory, configuredCategoryGroups, currentMap, loadState, parsedCategoryGroup, searchParams, updateSearchParams]);
 
   useEffect(() => {
     if (loadState !== "ready" || !currentMap) {
@@ -294,6 +326,10 @@ export function App() {
         return;
       }
 
+      if (activeCategoryGroup && getPlaceCategoryGroup(selectedCategory) !== activeCategoryGroup) {
+        return;
+      }
+
       const nextCategory = activeCategory === selectedCategory ? null : selectedCategory;
 
       if (nextCategory) {
@@ -308,6 +344,9 @@ export function App() {
       updateSearchParams((nextSearchParams) => {
         if (nextCategory) {
           nextSearchParams.set(PLACE_CATEGORY_SEARCH_PARAM, nextCategory);
+          if (activeCategoryGroup) {
+            nextSearchParams.set(PLACE_CATEGORY_GROUP_SEARCH_PARAM, formatPlaceCategoryGroup(activeCategoryGroup));
+          }
         } else {
           nextSearchParams.delete(PLACE_CATEGORY_SEARCH_PARAM);
         }
@@ -316,8 +355,33 @@ export function App() {
           nextSearchParams.delete("place");
         }
       });
+
+      if (activeCategoryGroup) {
+        analytics.track({
+          name: "history_category_filter_changed",
+          params: {
+            facet: activeCategoryGroup === "history-era" ? "era" : "theme",
+            category: nextCategory ?? selectedCategory,
+            action: nextCategory ? "selected" : "cleared"
+          }
+        });
+      }
     },
-    [activeCategory, activePlace, basePlaces, currentMap, requestPlacesFit, updateSearchParams]
+    [activeCategory, activeCategoryGroup, activePlace, analytics, basePlaces, currentMap, requestPlacesFit, updateSearchParams]
+  );
+
+  const handleCategoryGroupSelect = useCallback(
+    (group: PlaceCategoryGroup) => {
+      if (group === activeCategoryGroup || !configuredCategoryGroups.includes(group)) {
+        return;
+      }
+
+      updateSearchParams((nextSearchParams) => {
+        nextSearchParams.set(PLACE_CATEGORY_GROUP_SEARCH_PARAM, formatPlaceCategoryGroup(group));
+        nextSearchParams.delete(PLACE_CATEGORY_SEARCH_PARAM);
+      });
+    },
+    [activeCategoryGroup, configuredCategoryGroups, updateSearchParams]
   );
 
   const handleAboutOpen = useCallback(() => {
@@ -425,7 +489,9 @@ export function App() {
         <>
           <MapTopControls
             activeCategory={activeCategory}
+            activeCategoryGroup={activeCategoryGroup}
             categories={availableCategories}
+            categoryGroups={categoryGroupItems}
             title={currentMap.title}
             subtitle={currentMap.description}
             logo={currentMap.logo}
@@ -435,6 +501,7 @@ export function App() {
             onQueryChange={handleQueryChange}
             onQueryReset={() => handleQueryChange("")}
             onBackToMain={currentMap.slug !== "main" ? handleBackToMain : undefined}
+            onCategoryGroupSelect={handleCategoryGroupSelect}
             onCategorySelect={handleCategorySelect}
           />
           {loadState === "ready" ? (

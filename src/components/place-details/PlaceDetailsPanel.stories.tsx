@@ -118,6 +118,22 @@ const placeWithLandscapePhoto: PlaceFeature = {
   }
 };
 
+const historicalPlace: PlaceFeature = {
+  ...placeWithLandscapePhoto,
+  id: "story-historical-era",
+  properties: {
+    ...placeWithLandscapePhoto.properties,
+    id: "story-historical-era",
+    categories: ["history-era-1970s", "history-theme-streets"],
+    balloonContent: {
+      ...placeWithLandscapePhoto.properties.balloonContent,
+      name: "Улица Ленина",
+      description: "Историческая фотография улицы Ленина в 1970-е годы.",
+      address: "Курск, улица Ленина"
+    }
+  }
+};
+
 const placeWithLongAddress: PlaceFeature = {
   ...placeWithLandscapePhoto,
   id: "story-long-address",
@@ -315,6 +331,12 @@ type Story = StoryObj<typeof meta>;
 export const WithPhoto: Story = {
   args: {
     place: placeWithLandscapePhoto
+  }
+};
+
+export const HistoricalEra: Story = {
+  args: {
+    place: historicalPlace
   }
 };
 

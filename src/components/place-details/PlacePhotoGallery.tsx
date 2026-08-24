@@ -9,6 +9,7 @@ type PlacePhotoGalleryProps = {
   photos: Photo[];
   placeId: string | number;
   title: string;
+  eyebrow?: string | undefined;
   onClose: () => void;
 };
 
@@ -22,7 +23,7 @@ type PointerStart = {
 
 const SWIPE_THRESHOLD_PX = 48;
 
-export function PlacePhotoGallery({ photos, placeId, title, onClose }: PlacePhotoGalleryProps) {
+export function PlacePhotoGallery({ eyebrow, photos, placeId, title, onClose }: PlacePhotoGalleryProps) {
   const reduceMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const [imageStatus, setImageStatus] = useState<ImageStatus>("loading");
@@ -188,6 +189,11 @@ export function PlacePhotoGallery({ photos, placeId, title, onClose }: PlacePhot
       </IconButton>
 
       <div className="pointer-events-none absolute right-0 bottom-0 left-0 z-3 px-5 pt-14 pb-5">
+        {eyebrow ? (
+          <p className="mb-1.5 text-[10.5px] font-semibold tracking-[0.08em] text-white/80 uppercase [text-shadow:0_1px_8px_rgba(20,14,8,0.55)]">
+            {eyebrow}
+          </p>
+        ) : null}
         <h1 className="m-0 text-[28px] leading-[1.1] font-bold tracking-[-0.01em] text-white [font-family:var(--font-editorial)] [text-shadow:0_1px_10px_rgba(20,14,8,0.55)] [text-wrap:balance]">
           {title}
         </h1>

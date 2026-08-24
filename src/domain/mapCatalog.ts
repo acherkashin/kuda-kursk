@@ -1,9 +1,12 @@
+import type { PlaceCategoryGroup } from "./placeCategories";
+
 export type PublicMapConfig = {
   slug: string;
   title: string;
   description: string;
   logo: string;
   dataPath: string;
+  categoryFilterGroups?: readonly PlaceCategoryGroup[];
 };
 
 export const mapCatalog = [
@@ -40,7 +43,8 @@ export const mapCatalog = [
     title: "Фотоистория Курска",
     description: "Исторические места Курска по материалам сообщества «Фотоистория Курска»",
     logo: "/place-thumbnails/fotohistory-103600-thumbnail-krasnaya-ploschad-e4c77328e0.webp",
-    dataPath: "/data/fotohistory-kursk-objects.json"
+    dataPath: "/data/fotohistory-kursk-objects.json",
+    categoryFilterGroups: ["history-era", "history-theme"]
   }
 ] as const satisfies readonly PublicMapConfig[];
 

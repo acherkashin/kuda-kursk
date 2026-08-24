@@ -34,6 +34,10 @@ type AnalyticsEvent =
   | { name: "external_link_clicked"; params: { placeId: string | number; kind: string } }
   | { name: "community_map_opened"; params: { slug: string; placeCount: number; linkOnlyCount: number } }
   | { name: "submap_opened"; params: { fromPlaceId: string | number; toSlug: string } }
+  | {
+      name: "history_category_filter_changed";
+      params: { facet: "era" | "theme"; category: string; action: "selected" | "cleared" };
+    }
   | { name: "analytics_consent_changed"; params: { status: "accepted" | "rejected" } }
   | {
       name: "pwa_install_prompt_clicked";
@@ -69,3 +73,5 @@ type AnalyticsEvent =
 Если `VITE_YANDEX_METRIKA_ID` отсутствует, adapter работает как no-op и не создаёт ошибок UI.
 
 Событие `map_fit_places_clicked` отправляется только после явного нажатия кнопки вписывания мест. Оно содержит slug текущей публичной карты, число видимых мест и булев признак активного поиска или категории; текст запроса и другие пользовательские данные не передаются.
+
+Событие `history_category_filter_changed` отправляется только при выборе или снятии фиксированной редакционной категории на под-карте «Фотоистория Курска». Параметры содержат только facet, безопасный стабильный slug категории и действие; пользовательские данные, поисковый запрос и URL в событие не передаются.

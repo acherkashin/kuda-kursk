@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { InfoIcon, SearchIcon } from "lucide-react";
+import type { PlaceCategoryGroup } from "../../domain/placeCategories";
+import { CategoryGroupToggle, type CategoryGroupToggleItem } from "../filters/CategoryGroupToggle";
 import { IconButton } from "../ui/IconButton";
 import { CategoryFilter, type CategoryFilterItem } from "../filters/CategoryFilter";
 import { SearchBox } from "../filters/SearchBox";
@@ -19,7 +21,10 @@ type MapTopControlsProps = {
   isAboutOpen?: boolean;
   categories: readonly CategoryFilterItem[];
   activeCategory: string | null;
+  categoryGroups?: readonly CategoryGroupToggleItem[];
+  activeCategoryGroup?: PlaceCategoryGroup | undefined;
   onCategorySelect: (slug: string) => void;
+  onCategoryGroupSelect?: (group: PlaceCategoryGroup) => void;
 };
 
 function getIsMobileViewport() {
@@ -114,11 +119,14 @@ function SearchPanel({
 
 export function MapTopControls({
   activeCategory,
+  activeCategoryGroup,
   categories,
+  categoryGroups = [],
   isAboutOpen = false,
   logo,
   onAboutOpen,
   onBackToMain,
+  onCategoryGroupSelect,
   onCategorySelect,
   onQueryChange,
   onQueryReset,
@@ -184,11 +192,14 @@ export function MapTopControls({
             </section>
           </div>
         )}
-        <CategoryFilter
-          activeCategory={activeCategory}
-          categories={categories}
-          onCategorySelect={onCategorySelect}
-        />
+        {activeCategoryGroup && onCategoryGroupSelect ? (
+          <CategoryGroupToggle
+            activeGroup={activeCategoryGroup}
+            groups={categoryGroups}
+            onGroupSelect={onCategoryGroupSelect}
+          />
+        ) : null}
+        <CategoryFilter activeCategory={activeCategory} categories={categories} onCategorySelect={onCategorySelect} />
       </div>
     </div>
   );

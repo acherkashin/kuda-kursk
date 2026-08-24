@@ -1,4 +1,5 @@
 import { findMapBySlug } from "./mapCatalog";
+import { getPlaceCategoryGroup, getPlaceCategoryLabel } from "./placeCategories";
 import type { ExternalLink, Photo, PlaceFeature } from "./places";
 
 export type PlaceMapLinkView = {
@@ -12,6 +13,7 @@ export type PlaceDetailsViewModel = {
   description: string;
   address: string;
   coordinates: string;
+  historicalEra?: string;
   photos: Photo[];
   tip?: string;
   links: ExternalLink[];
@@ -55,6 +57,14 @@ export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
     links,
     routable: place.properties.routable !== false
   };
+
+  const historicalEra = place.properties.categories?.find(
+    (category) => getPlaceCategoryGroup(category) === "history-era"
+  );
+
+  if (historicalEra) {
+    viewModel.historicalEra = getPlaceCategoryLabel(historicalEra);
+  }
 
   const mapLinkSlug = place.properties.mapLink?.slug;
   const linkedMap = mapLinkSlug ? findMapBySlug(mapLinkSlug) : undefined;

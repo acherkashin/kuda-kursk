@@ -1,6 +1,8 @@
 export type AnalyticsConsentStatus = "accepted" | "rejected";
 export type PwaInstallAnalyticsPlatform = "android" | "ios" | "other";
 export type PwaInstallAnalyticsSource = "floating_notice" | "about_dialog";
+export type HistoryCategoryFacet = "era" | "theme";
+export type HistoryCategoryFilterAction = "selected" | "cleared";
 
 export type AnalyticsConsent = {
   status: AnalyticsConsentStatus;
@@ -17,6 +19,10 @@ export type AnalyticsEvent =
   | { name: "external_link_clicked"; params: { placeId: string | number; kind: string } }
   | { name: "community_map_opened"; params: { slug: string; placeCount: number; linkOnlyCount: number } }
   | { name: "submap_opened"; params: { fromPlaceId: string | number; toSlug: string } }
+  | {
+      name: "history_category_filter_changed";
+      params: { facet: HistoryCategoryFacet; category: string; action: HistoryCategoryFilterAction };
+    }
   | { name: "analytics_consent_changed"; params: { status: AnalyticsConsentStatus } }
   | { name: "pwa_install_prompt_clicked"; params: { platform: PwaInstallAnalyticsPlatform; source: PwaInstallAnalyticsSource } }
   | {
