@@ -1,6 +1,7 @@
 import maplibregl, { type GeoJSONSource, type MapLayerMouseEvent } from "maplibre-gl";
 import { ShrinkIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { addCartoBasemapApiKey } from "../../config/cartoBasemap";
 import { IconButton } from "../ui/IconButton";
 import { mapConfig } from "../../domain/mapConfig";
 import { areMapZoomsEqual } from "../../domain/mapUrlState";
@@ -343,6 +344,7 @@ export function KurskMap({ activePlace, fitBoundsRequest, places, onFitPlaces, o
       zoom: zoom ?? mapConfig.zoom,
       minZoom: mapConfig.minZoom,
       maxZoom: mapConfig.maxZoom,
+      transformRequest: addCartoBasemapApiKey,
       attributionControl: false
     });
 
