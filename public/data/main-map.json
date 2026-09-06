@@ -1753,6 +1753,49 @@
           "address": "Курск, улица Димитрова, 66"
         }
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9013,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.055887,
+          51.172546
+        ]
+      },
+      "properties": {
+        "id": 9013,
+        "balloonContent": {
+          "image": "/place-images/9013-image-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-5489691b6d.webp",
+          "thumbnail": "/place-thumbnails/9013-thumbnail-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-5489691b6d.webp",
+          "images": [
+            {
+              "src": "/place-images/9013-image-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-5489691b6d.webp",
+              "thumbnail": "/place-thumbnails/9013-thumbnail-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-5489691b6d.webp",
+              "order": 1
+            },
+            {
+              "src": "/place-images/9013-image-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-69ff18891c.webp",
+              "thumbnail": "/place-thumbnails/9013-thumbnail-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-69ff18891c.webp",
+              "order": 2
+            },
+            {
+              "src": "/place-images/9013-image-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-0d5c1a91da.webp",
+              "thumbnail": "/place-thumbnails/9013-thumbnail-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-0d5c1a91da.webp",
+              "order": 3
+            },
+            {
+              "src": "/place-images/9013-image-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-74d3244c79.webp",
+              "thumbnail": "/place-thumbnails/9013-thumbnail-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-74d3244c79.webp",
+              "order": 4
+            }
+          ],
+          "name": "Деревянная церковь Покрова Пресвятой Богородицы",
+          "description": "Деревянная церковь 1893 года, после закрытия в 1929-м служившая зернохранилищем. Сегодня почти разрушенный храм всё ещё стоит — но внутрь лучше не заходить.",
+          "address": "село Каменка, Обоянский район, Курская область"
+        }
+      }
     }
   ]
 }
