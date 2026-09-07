@@ -10,7 +10,7 @@ const places = [
     properties: {
       id: "chalet",
       categories: ["chalet"],
-      balloonContent: { name: "Шале", description: "Домик", address: "Курский район" }
+      balloonContent: { name: "Шале", description: "Домик", address: "Курский район", image: "/place-images/test.jpg", mapThumbnail: "/place-map-thumbnails/test.webp" }
     }
   },
   {
@@ -19,7 +19,7 @@ const places = [
     geometry: { type: "Point", coordinates: [36.2, 51.8] },
     properties: {
       id: "city",
-      balloonContent: { name: "Городское место", description: "В центре", address: "Курск" }
+      balloonContent: { name: "Городское место", description: "В центре", address: "Курск", image: "/place-images/test.jpg", mapThumbnail: "/place-map-thumbnails/test.webp" }
     }
   }
 ] satisfies PlaceFeature[];

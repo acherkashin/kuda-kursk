@@ -8,15 +8,16 @@ import { dirname, join, resolve } from "node:path";
 import process from "node:process";
 import { pathToFileURL } from "node:url";
 
-const PROCESSOR_VERSION = "place-assets-v1";
+const PROCESSOR_VERSION = "place-assets-v2";
 const COVER_MAX_EDGE = 1600;
-const THUMBNAIL_SIZE = 480;
-const WEBP_QUALITY = 82;
+const MAP_THUMBNAIL_SIZE = 320;
+const MAP_THUMBNAIL_QUALITY = 82;
+const COVER_WEBP_QUALITY = 82;
 const REQUIRED_TOOLS = ["qlmanage", "sips", "cwebp"];
 
 function usage() {
   return `Usage:
-  node tools/generate-place-assets.mjs --image /path/photo.heic --id 1410 --name "Place name" [--project-root /path/project] [--dry-run]
+  node tools/generate-place-assets.mjs --image /path/photo.heic --id 1410 --name "Place name" [--project-root /path/project] [--map-thumbnail-size 320] [--map-thumbnail-quality 82] [--dry-run]
 
 Required:
   --image          Local source image
@@ -25,6 +26,8 @@ Required:
 
 Optional:
   --project-root   Project root containing public/. Defaults to the current directory
+  --map-thumbnail-size       Centered square marker image size. Defaults to 320px
+  --map-thumbnail-quality    WebP quality for the marker image. Defaults to 82
   --dry-run        Print planned WebP paths without writing files
   --help, -h       Show this help`;
 }
@@ -97,8 +100,28 @@ function requirePlaceId(value) {
   return normalized;
 }
 
+function parsePositiveInteger(value, option) {
+  const number = Number(value);
+
+  if (!Number.isInteger(number) || number <= 0) {
+    throw new Error(`${option} must be a positive integer`);
+  }
+
+  return number;
+}
+
+function parseWebpQuality(value, option) {
+  const quality = parsePositiveInteger(value, option);
+
+  if (quality > 100) {
+    throw new Error(`${option} must be between 1 and 100`);
+  }
+
+  return quality;
+}
+
 function parseArgs(argv) {
-  const args = { dryRun: false };
+  const args = { dryRun: false, mapThumbnailQuality: MAP_THUMBNAIL_QUALITY, mapThumbnailSize: MAP_THUMBNAIL_SIZE };
 
   for (let index = 0; index < argv.length; index += 1) {
     const argument = argv[index];
@@ -114,7 +137,7 @@ function parseArgs(argv) {
       continue;
     }
 
-    if (["--image", "--id", "--name", "--project-root"].includes(argument)) {
+    if (["--image", "--id", "--name", "--project-root", "--map-thumbnail-size", "--map-thumbnail-quality"].includes(argument)) {
       if (!next || next.startsWith("--")) {
         throw new Error(`${argument} requires a value`);
       }
@@ -123,9 +146,16 @@ function parseArgs(argv) {
         "--id": "placeId",
         "--image": "imagePath",
         "--name": "placeName",
-        "--project-root": "projectRoot"
+        "--project-root": "projectRoot",
+        "--map-thumbnail-size": "mapThumbnailSize",
+        "--map-thumbnail-quality": "mapThumbnailQuality"
       }[argument];
-      args[key] = next;
+      args[key] =
+        argument === "--map-thumbnail-size"
+          ? parsePositiveInteger(next, argument)
+          : argument === "--map-thumbnail-quality"
+            ? parseWebpQuality(next, argument)
+            : next;
       index += 1;
       continue;
     }
@@ -212,6 +242,13 @@ async function publishPair(imageTemporaryPath, imageOutputPath, thumbnailTempora
   }
 }
 
+function mapThumbnailOptions({ mapThumbnailQuality = MAP_THUMBNAIL_QUALITY, mapThumbnailSize = MAP_THUMBNAIL_SIZE } = {}) {
+  return {
+    mapThumbnailQuality: parseWebpQuality(mapThumbnailQuality, "mapThumbnailQuality"),
+    mapThumbnailSize: parsePositiveInteger(mapThumbnailSize, "mapThumbnailSize")
+  };
+}
+
 export async function planPlaceAssets({ imagePath, placeId, placeName, projectRoot = process.cwd() }) {
   const sourcePath = resolve(projectRoot, requireText(imagePath, "imagePath"));
   const source = await readFile(sourcePath);
@@ -223,18 +260,77 @@ export async function planPlaceAssets({ imagePath, placeId, placeName, projectRo
     .digest("hex")
     .slice(0, 10);
   const imageFileName = `${id}-image-${slug}-${contentHash}.webp`;
-  const thumbnailFileName = `${id}-thumbnail-${slug}-${contentHash}.webp`;
+  const mapThumbnailFileName = `${id}-map-thumbnail-${slug}-${contentHash}.webp`;
   const imagePublicPath = `/place-images/${imageFileName}`;
-  const thumbnailPublicPath = `/place-thumbnails/${thumbnailFileName}`;
+  const mapThumbnailPublicPath = `/place-map-thumbnails/${mapThumbnailFileName}`;
 
   return {
     contentHash,
     imageOutputPath: resolve(projectRoot, "public", imagePublicPath.slice(1)),
     imagePublicPath,
     sourcePath,
-    thumbnailOutputPath: resolve(projectRoot, "public", thumbnailPublicPath.slice(1)),
-    thumbnailPublicPath
+    mapThumbnailOutputPath: resolve(projectRoot, "public", mapThumbnailPublicPath.slice(1)),
+    mapThumbnailPublicPath
   };
+}
+
+export async function planMapThumbnail({ imagePath, placeId, placeName, projectRoot = process.cwd() }) {
+  const plan = await planPlaceAssets({ imagePath, placeId, placeName, projectRoot });
+
+  return {
+    contentHash: plan.contentHash,
+    mapThumbnailOutputPath: plan.mapThumbnailOutputPath,
+    mapThumbnailPublicPath: plan.mapThumbnailPublicPath,
+    sourcePath: plan.sourcePath
+  };
+}
+
+async function generateMapThumbnailFromPlan(plan, options) {
+  const { mapThumbnailQuality, mapThumbnailSize } = mapThumbnailOptions(options);
+
+  if (await pathExists(plan.mapThumbnailOutputPath)) {
+    return { ...plan, created: false };
+  }
+
+  await mkdir(dirname(plan.mapThumbnailOutputPath), { recursive: true });
+  const workingDirectory = await mkdtemp(join(tmpdir(), "place-map-thumbnail-"));
+  const temporaryPath = `${plan.mapThumbnailOutputPath}.${process.pid}-${randomUUID()}.tmp`;
+
+  try {
+    const previewPath = await renderOrientedPreview(plan.sourcePath, workingDirectory);
+    const thumbnailPngPath = join(workingDirectory, "map-thumbnail.png");
+    await copyFile(previewPath, thumbnailPngPath);
+    const previewDimensions = readDimensions(previewPath);
+    const cropSize = Math.min(previewDimensions.width, previewDimensions.height);
+    const outputSize = Math.min(mapThumbnailSize, cropSize);
+
+    run("sips", ["-c", String(cropSize), String(cropSize), thumbnailPngPath]);
+    run("sips", ["-z", String(outputSize), String(outputSize), thumbnailPngPath]);
+    run("cwebp", ["-quiet", "-q", String(mapThumbnailQuality), "-metadata", "none", thumbnailPngPath, "-o", temporaryPath]);
+
+    const dimensions = readDimensions(temporaryPath);
+
+    if (dimensions.width !== outputSize || dimensions.height !== outputSize) {
+      throw new Error(`Generated map thumbnail is not ${outputSize}x${outputSize}`);
+    }
+
+    await rename(temporaryPath, plan.mapThumbnailOutputPath);
+    return { ...plan, created: true };
+  } finally {
+    await rm(workingDirectory, { force: true, recursive: true });
+    await unlink(temporaryPath).catch(() => undefined);
+  }
+}
+
+export async function generateMapThumbnail(options) {
+  assertImageTools();
+  const plan = await planMapThumbnail(options);
+
+  if (options.dryRun) {
+    return { ...plan, created: false };
+  }
+
+  return generateMapThumbnailFromPlan(plan, options);
 }
 
 export async function generatePlaceAssets(options) {
@@ -246,54 +342,56 @@ export async function generatePlaceAssets(options) {
 
   assertImageTools();
   const imageExists = await pathExists(plan.imageOutputPath);
-  const thumbnailExists = await pathExists(plan.thumbnailOutputPath);
+  const mapThumbnailExists = await pathExists(plan.mapThumbnailOutputPath);
 
-  if (imageExists && thumbnailExists) {
+  if (imageExists && mapThumbnailExists) {
     return { ...plan, created: false };
   }
 
-  if (imageExists !== thumbnailExists) {
+  if (imageExists !== mapThumbnailExists) {
     throw new Error("Place asset output pair is incomplete; remove the conflicting file before retrying");
   }
 
   await mkdir(dirname(plan.imageOutputPath), { recursive: true });
-  await mkdir(dirname(plan.thumbnailOutputPath), { recursive: true });
+  await mkdir(dirname(plan.mapThumbnailOutputPath), { recursive: true });
 
   const workingDirectory = await mkdtemp(join(tmpdir(), "place-assets-"));
   const uniqueSuffix = `${process.pid}-${randomUUID()}`;
   const imageTemporaryPath = `${plan.imageOutputPath}.${uniqueSuffix}.tmp`;
-  const thumbnailTemporaryPath = `${plan.thumbnailOutputPath}.${uniqueSuffix}.tmp`;
+  const mapThumbnailTemporaryPath = `${plan.mapThumbnailOutputPath}.${uniqueSuffix}.tmp`;
 
   try {
     const previewPath = await renderOrientedPreview(plan.sourcePath, workingDirectory);
-    const thumbnailPngPath = join(workingDirectory, "thumbnail.png");
-    await copyFile(previewPath, thumbnailPngPath);
+    const mapThumbnailPngPath = join(workingDirectory, "map-thumbnail.png");
+    await copyFile(previewPath, mapThumbnailPngPath);
 
     const previewDimensions = readDimensions(previewPath);
-    const thumbnailCropSize = Math.min(previewDimensions.width, previewDimensions.height);
-    run("sips", ["-c", String(thumbnailCropSize), String(thumbnailCropSize), thumbnailPngPath]);
-    run("sips", ["-z", String(THUMBNAIL_SIZE), String(THUMBNAIL_SIZE), thumbnailPngPath]);
+    const mapThumbnailCropSize = Math.min(previewDimensions.width, previewDimensions.height);
+    const { mapThumbnailQuality, mapThumbnailSize } = mapThumbnailOptions(options);
+    const mapThumbnailOutputSize = Math.min(mapThumbnailSize, mapThumbnailCropSize);
+    run("sips", ["-c", String(mapThumbnailCropSize), String(mapThumbnailCropSize), mapThumbnailPngPath]);
+    run("sips", ["-z", String(mapThumbnailOutputSize), String(mapThumbnailOutputSize), mapThumbnailPngPath]);
 
-    run("cwebp", ["-quiet", "-q", String(WEBP_QUALITY), "-metadata", "none", previewPath, "-o", imageTemporaryPath]);
-    run("cwebp", ["-quiet", "-q", String(WEBP_QUALITY), "-metadata", "none", thumbnailPngPath, "-o", thumbnailTemporaryPath]);
+    run("cwebp", ["-quiet", "-q", String(COVER_WEBP_QUALITY), "-metadata", "none", previewPath, "-o", imageTemporaryPath]);
+    run("cwebp", ["-quiet", "-q", String(mapThumbnailQuality), "-metadata", "none", mapThumbnailPngPath, "-o", mapThumbnailTemporaryPath]);
 
     const outputDimensions = readDimensions(imageTemporaryPath);
-    const thumbnailDimensions = readDimensions(thumbnailTemporaryPath);
+    const mapThumbnailDimensions = readDimensions(mapThumbnailTemporaryPath);
 
     if (Math.max(outputDimensions.width, outputDimensions.height) > COVER_MAX_EDGE) {
       throw new Error("Generated cover exceeds the 1600px limit");
     }
 
-    if (thumbnailDimensions.width !== THUMBNAIL_SIZE || thumbnailDimensions.height !== THUMBNAIL_SIZE) {
-      throw new Error("Generated thumbnail is not 480x480");
+    if (mapThumbnailDimensions.width !== mapThumbnailOutputSize || mapThumbnailDimensions.height !== mapThumbnailOutputSize) {
+      throw new Error(`Generated map thumbnail is not ${mapThumbnailOutputSize}x${mapThumbnailOutputSize}`);
     }
 
-    await publishPair(imageTemporaryPath, plan.imageOutputPath, thumbnailTemporaryPath, plan.thumbnailOutputPath);
+    await publishPair(imageTemporaryPath, plan.imageOutputPath, mapThumbnailTemporaryPath, plan.mapThumbnailOutputPath);
     return { ...plan, created: true };
   } finally {
     await rm(workingDirectory, { force: true, recursive: true });
     await unlink(imageTemporaryPath).catch(() => undefined);
-    await unlink(thumbnailTemporaryPath).catch(() => undefined);
+    await unlink(mapThumbnailTemporaryPath).catch(() => undefined);
   }
 }
 
@@ -301,7 +399,7 @@ function printSummary(result, dryRun) {
   const prefix = dryRun ? "Dry run: would generate place assets" : result.created ? "Generated place assets" : "Reused place assets";
   console.log(`${prefix}:`);
   console.log(`- Image: ${result.imagePublicPath}`);
-  console.log(`- Thumbnail: ${result.thumbnailPublicPath}`);
+  console.log(`- Map thumbnail: ${result.mapThumbnailPublicPath}`);
   console.log(`- Content hash: ${result.contentHash}`);
 }
 

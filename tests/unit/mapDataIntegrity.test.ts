@@ -9,7 +9,7 @@ import { filterVisiblePlaces } from "../../src/domain/places";
 
 const projectRoot = process.cwd();
 describe("map data files", () => {
-  it("contain valid canonical places and existing local thumbnails", () => {
+  it("contain valid canonical places and existing local card and marker images", () => {
     for (const map of mapCatalog) {
       const dataPath = join(projectRoot, "public", map.dataPath);
       const raw = JSON.parse(readFileSync(dataPath, "utf8")) as unknown;
@@ -22,7 +22,7 @@ describe("map data files", () => {
       expect(places.length).toBeGreaterThan(0);
 
       for (const place of places) {
-        const thumbnail = place.properties.balloonContent.thumbnail;
+        const mapThumbnail = place.properties.balloonContent.mapThumbnail;
         const image = place.properties.balloonContent.image;
         const legacyUrl = place.properties.balloonContent.url;
         const legacyExternalUrl = place.properties.balloonContent.externalUrl;
@@ -32,7 +32,7 @@ describe("map data files", () => {
         ];
 
         expect(image).toMatch(/^\/place-images\//);
-        expect(thumbnail).toMatch(/^\/place-thumbnails\//);
+        expect(mapThumbnail).toMatch(/^\/place-map-thumbnails\//);
         if (typeof legacyUrl === "string") {
           expect(legacyUrl).not.toMatch(/gokursk\.ru/i);
         }
@@ -45,11 +45,11 @@ describe("map data files", () => {
           expect(link.url).not.toMatch(/gokursk\.ru/i);
         }
 
-        for (const src of [thumbnail, image]) {
+        for (const src of [mapThumbnail, image]) {
           expect(src).not.toMatch(/^https?:\/\//);
           expect(src).not.toMatch(/^\/upload\//);
 
-          if (src?.startsWith("/")) {
+          if (src.startsWith("/")) {
             expect(existsSync(join(projectRoot, "public", src))).toBe(true);
           }
         }

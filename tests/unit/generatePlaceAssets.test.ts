@@ -11,8 +11,8 @@ type PlaceAssetPlan = {
   contentHash: string;
   imageOutputPath: string;
   imagePublicPath: string;
-  thumbnailOutputPath: string;
-  thumbnailPublicPath: string;
+  mapThumbnailOutputPath: string;
+  mapThumbnailPublicPath: string;
 };
 
 type PlaceAssetResult = PlaceAssetPlan & {
@@ -103,7 +103,7 @@ describe("place asset planning", () => {
   it("builds deterministic WebP paths from the place identity and source content", async () => {
     const { imagePath, projectRoot, source } = await makeProject();
     const expectedHash = createHash("sha256")
-      .update("place-assets-v1\0")
+      .update("place-assets-v2\0")
       .update(source)
       .digest("hex")
       .slice(0, 10);
@@ -112,9 +112,9 @@ describe("place asset planning", () => {
 
     expect(plan.contentHash).toBe(expectedHash);
     expect(plan.imagePublicPath).toBe(`/place-images/1410-image-lavandovyy-bereg-${expectedHash}.webp`);
-    expect(plan.thumbnailPublicPath).toBe(`/place-thumbnails/1410-thumbnail-lavandovyy-bereg-${expectedHash}.webp`);
+    expect(plan.mapThumbnailPublicPath).toBe(`/place-map-thumbnails/1410-map-thumbnail-lavandovyy-bereg-${expectedHash}.webp`);
     expect(plan.imageOutputPath).toBe(join(projectRoot, "public", plan.imagePublicPath));
-    expect(plan.thumbnailOutputPath).toBe(join(projectRoot, "public", plan.thumbnailPublicPath));
+    expect(plan.mapThumbnailOutputPath).toBe(join(projectRoot, "public", plan.mapThumbnailPublicPath));
   });
 
   it("keeps dry-run free of filesystem writes", async () => {
@@ -130,7 +130,7 @@ describe("place asset planning", () => {
 
     expect(result.created).toBe(false);
     await expect(readFile(result.imageOutputPath)).rejects.toMatchObject({ code: "ENOENT" });
-    await expect(readFile(result.thumbnailOutputPath)).rejects.toMatchObject({ code: "ENOENT" });
+    await expect(readFile(result.mapThumbnailOutputPath)).rejects.toMatchObject({ code: "ENOENT" });
   });
 });
 
@@ -141,23 +141,23 @@ describe.skipIf(process.platform !== "darwin" || !hasImageTools)("place asset ge
     const result = await generatePlaceAssets({ imagePath, placeId: 1410, placeName: "Лавандовый берег", projectRoot });
 
     expect(imageDimensions(result.imageOutputPath)).toEqual({ height: 800, width: 1600 });
-    expect(imageDimensions(result.thumbnailOutputPath)).toEqual({ height: 480, width: 480 });
+    expect(imageDimensions(result.mapThumbnailOutputPath)).toEqual({ height: 320, width: 320 });
   });
 
-  it("normalizes EXIF orientation and creates a square WebP thumbnail", async () => {
+  it("normalizes EXIF orientation and creates a square WebP map thumbnail", async () => {
     const { imagePath, projectRoot } = await makeOrientedProject();
 
     const result = await generatePlaceAssets({ imagePath, placeId: 1410, placeName: "Лавандовый берег", projectRoot });
     const image = await readFile(result.imageOutputPath);
-    const thumbnail = await readFile(result.thumbnailOutputPath);
+    const mapThumbnail = await readFile(result.mapThumbnailOutputPath);
 
     expect(result.created).toBe(true);
     expect(image.subarray(0, 4).toString("ascii")).toBe("RIFF");
     expect(image.subarray(8, 12).toString("ascii")).toBe("WEBP");
-    expect(thumbnail.subarray(0, 4).toString("ascii")).toBe("RIFF");
-    expect(thumbnail.subarray(8, 12).toString("ascii")).toBe("WEBP");
+    expect(mapThumbnail.subarray(0, 4).toString("ascii")).toBe("RIFF");
+    expect(mapThumbnail.subarray(8, 12).toString("ascii")).toBe("WEBP");
     expect(imageDimensions(result.imageOutputPath)).toEqual({ height: 160, width: 80 });
-    expect(imageDimensions(result.thumbnailOutputPath)).toEqual({ height: 480, width: 480 });
+    expect(imageDimensions(result.mapThumbnailOutputPath)).toEqual({ height: 80, width: 80 });
   });
 
   it("reuses a complete output pair for the same source", async () => {
@@ -169,7 +169,7 @@ describe.skipIf(process.platform !== "darwin" || !hasImageTools)("place asset ge
     expect(first.created).toBe(true);
     expect(second.created).toBe(false);
     expect(second.imageOutputPath).toBe(first.imageOutputPath);
-    expect(second.thumbnailOutputPath).toBe(first.thumbnailOutputPath);
+    expect(second.mapThumbnailOutputPath).toBe(first.mapThumbnailOutputPath);
   });
 
   it("rejects an incomplete existing output pair", async () => {

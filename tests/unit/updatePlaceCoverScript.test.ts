@@ -13,7 +13,7 @@ const jpeg160x80 = Buffer.from(
 );
 const temporaryDirectories: string[] = [];
 
-function makePlace(id: number, name: string, image = "/place-images/old.webp", thumbnail = "/place-thumbnails/old.webp") {
+function makePlace(id: number, name: string, image = "/place-images/old.webp", mapThumbnail = "/place-map-thumbnails/old.webp") {
   return {
     type: "Feature",
     id,
@@ -22,9 +22,9 @@ function makePlace(id: number, name: string, image = "/place-images/old.webp", t
       id,
       balloonContent: {
         image,
-        thumbnail,
+        mapThumbnail,
         images: [
-          { src: image, thumbnail, order: 1, caption: "Старая обложка" },
+          { src: image, order: 1, caption: "Старая обложка" },
           { src: "/place-images/other.webp", order: 2 }
         ],
         name,
@@ -45,7 +45,7 @@ async function makeProject() {
   await mkdir(join(projectRoot, "src", "domain"), { recursive: true });
   await mkdir(join(projectRoot, "public", "data"), { recursive: true });
   await mkdir(join(projectRoot, "public", "place-images"), { recursive: true });
-  await mkdir(join(projectRoot, "public", "place-thumbnails"), { recursive: true });
+  await mkdir(join(projectRoot, "public", "place-map-thumbnails"), { recursive: true });
   await writeFile(
     join(projectRoot, "src", "domain", "mapCatalog.ts"),
     `export const mapCatalog = [
@@ -58,7 +58,7 @@ async function makeProject() {
   await writeJson(mainDataPath, { type: "FeatureCollection", features: [makePlace(1410, "Лавандовый берег")] });
   await writeJson(otherDataPath, { type: "FeatureCollection", features: [] });
   await writeFile(join(projectRoot, "public", "place-images", "old.webp"), "old image");
-  await writeFile(join(projectRoot, "public", "place-thumbnails", "old.webp"), "old thumbnail");
+  await writeFile(join(projectRoot, "public", "place-map-thumbnails", "old.webp"), "old thumbnail");
   await writeFile(join(projectRoot, "public", "place-images", "other.webp"), "other image");
   const imagePath = join(projectRoot, "new-cover.jpg");
   await writeFile(imagePath, jpeg160x80);
@@ -121,7 +121,7 @@ describe.skipIf(process.platform !== "darwin")("update-place-cover helper", () =
     expect(await readFile(mainDataPath, "utf8")).toBe(initialData);
   });
 
-  it("updates image, thumbnail and the cover slide while preserving photo metadata", async () => {
+  it("updates image, mapThumbnail and the cover slide while preserving photo metadata", async () => {
     const { imagePath, mainDataPath, projectRoot } = await makeProject();
 
     const result = runUpdate(projectRoot, imagePath, { id: "1410" });
@@ -130,18 +130,17 @@ describe.skipIf(process.platform !== "darwin")("update-place-cover helper", () =
 
     expect(result.status).toBe(0);
     expect(content.image).toMatch(/^\/place-images\/1410-image-lavandovyy-bereg-[a-f0-9]{10}\.webp$/);
-    expect(content.thumbnail).toMatch(/^\/place-thumbnails\/1410-thumbnail-lavandovyy-bereg-[a-f0-9]{10}\.webp$/);
+    expect(content.mapThumbnail).toMatch(/^\/place-map-thumbnails\/1410-map-thumbnail-lavandovyy-bereg-[a-f0-9]{10}\.webp$/);
     expect(content.images[0]).toEqual({
       src: content.image,
-      thumbnail: content.thumbnail,
       order: 1,
       caption: "Старая обложка"
     });
     expect(content.images[1]).toEqual({ src: "/place-images/other.webp", order: 2 });
     expect(await exists(join(projectRoot, "public", "place-images", "old.webp"))).toBe(false);
-    expect(await exists(join(projectRoot, "public", "place-thumbnails", "old.webp"))).toBe(false);
+    expect(await exists(join(projectRoot, "public", "place-map-thumbnails", "old.webp"))).toBe(false);
     expect(await exists(join(projectRoot, "public", content.image))).toBe(true);
-    expect(await exists(join(projectRoot, "public", content.thumbnail))).toBe(true);
+    expect(await exists(join(projectRoot, "public", content.mapThumbnail))).toBe(true);
   });
 
   it("finds a place by its exact normalized name within the requested map", async () => {
@@ -160,14 +159,14 @@ describe.skipIf(process.platform !== "darwin")("update-place-cover helper", () =
     const { imagePath, otherDataPath, projectRoot } = await makeProject();
     await writeJson(otherDataPath, {
       type: "FeatureCollection",
-      features: [makePlace(77, "Общее фото", "/place-images/old.webp", "/place-thumbnails/shared.webp")]
+      features: [makePlace(77, "Общее фото", "/place-images/old.webp", "/place-map-thumbnails/shared.webp")]
     });
 
     const result = runUpdate(projectRoot, imagePath, { id: "1410" });
 
     expect(result.status).toBe(0);
     expect(await exists(join(projectRoot, "public", "place-images", "old.webp"))).toBe(true);
-    expect(await exists(join(projectRoot, "public", "place-thumbnails", "old.webp"))).toBe(false);
+    expect(await exists(join(projectRoot, "public", "place-map-thumbnails", "old.webp"))).toBe(false);
   });
 
   it("does not report an old asset as removed when deleting it fails", async () => {
@@ -179,7 +178,7 @@ describe.skipIf(process.platform !== "darwin")("update-place-cover helper", () =
     expect(result.status).toBe(0);
     expect(result.stderr).toContain("Warning: could not remove /place-images/old.webp");
     expect(result.stdout).not.toContain("Removed: /place-images/old.webp");
-    expect(result.stdout).toContain("Removed: /place-thumbnails/old.webp");
+    expect(result.stdout).toContain("Removed: /place-map-thumbnails/old.webp");
   });
 
   it("updates the first displayed slide even when the legacy image points to a later photo", async () => {
@@ -198,7 +197,6 @@ describe.skipIf(process.platform !== "darwin")("update-place-cover helper", () =
     expect(result.status).toBe(0);
     expect(content.images[0]).toEqual({
       src: content.image,
-      thumbnail: content.thumbnail,
       order: 1,
       caption: "Фактическая обложка"
     });

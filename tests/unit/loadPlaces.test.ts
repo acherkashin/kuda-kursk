@@ -24,7 +24,8 @@ describe("loadPlaces", () => {
                   name: "КГУ",
                   description: "Учебный корпус",
                   address: "г. Курск",
-                  thumbnail: "/place-thumbnails/sketches/1.jpg"
+                  image: "/place-images/sketches/1.jpg",
+                  mapThumbnail: "/place-map-thumbnails/sketches/1.webp"
                 }
               }
             }
@@ -37,7 +38,7 @@ describe("loadPlaces", () => {
 
     expect(fetch).toHaveBeenCalledWith("/data/illustrator-liza-silakova-objects.json");
     expect(places).toHaveLength(1);
-    expect(places[0]?.properties.balloonContent.thumbnail).toBe("/place-thumbnails/sketches/1.jpg");
+    expect(places[0]?.properties.balloonContent.mapThumbnail).toBe("/place-map-thumbnails/sketches/1.webp");
   });
 
   it("returns only visible places from a GeoJSON FeatureCollection", async () => {
@@ -58,6 +59,8 @@ describe("loadPlaces", () => {
                   name: "Видимое место",
                   description: "Публичная точка",
                   address: "г. Курск",
+                  image: "/place-images/visible.jpg",
+                  mapThumbnail: "/place-map-thumbnails/visible.webp"
                 }
               }
             },
@@ -72,6 +75,8 @@ describe("loadPlaces", () => {
                   name: "Скрытое место",
                   description: "Временно не показывается",
                   address: "г. Курск",
+                  image: "/place-images/hidden.jpg",
+                  mapThumbnail: "/place-map-thumbnails/hidden.webp"
                 }
               }
             },
@@ -86,6 +91,8 @@ describe("loadPlaces", () => {
                   name: "Место по ссылке",
                   description: "Не участвует в общем наборе",
                   address: "г. Курск",
+                  image: "/place-images/link-only.jpg",
+                  mapThumbnail: "/place-map-thumbnails/link-only.webp"
                 }
               }
             }

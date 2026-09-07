@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   AnalyticsConsent,
   readStoredAnalyticsConsent,
@@ -6,10 +6,10 @@ import {
 } from "../components/analytics-consent/AnalyticsConsent";
 import { AboutProjectDialog } from "../components/about-project/AboutProjectDialog";
 import { ResultsSummary } from "../components/filters/ResultsSummary";
-import { KurskMap, type MapFitBoundsRequest } from "../components/map/KurskMap";
+import { MapFallback } from "../components/map/MapFallback";
+import type { MapFitBoundsRequest } from "../components/map/KurskMap";
 import { MapTopControls } from "../components/map/MapTopControls";
 import { PublicMapFallback } from "../components/map/PublicMapFallback";
-import { PlaceDetailsPanel } from "../components/place-details/PlaceDetailsPanel";
 import { PwaInstallNotice } from "../components/pwa/PwaInstallNotice";
 import { ANALYTICS_CONSENT_UI_ENABLED, isAnalyticsSessionOptOutActive } from "../config/analytics";
 import { loadPlaces } from "../data/loadPlaces";
@@ -31,6 +31,9 @@ import { loadYandexMetrika } from "../services/analytics/yandexMetrika";
 import { registerServiceWorker } from "../services/pwa/registerServiceWorker";
 import { usePwaInstallPrompt } from "../services/pwa/usePwaInstallPrompt";
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router";
+
+const KurskMap = lazy(async () => ({ default: (await import("../components/map/KurskMap")).KurskMap }));
+const PlaceDetailsPanel = lazy(async () => ({ default: (await import("../components/place-details/PlaceDetailsPanel")).PlaceDetailsPanel }));
 
 export function App() {
   const [places, setPlaces] = useState<PlaceFeature[]>([]);
@@ -411,15 +414,17 @@ export function App() {
         </div>
       ) : null}
       {currentMap ? (
-        <KurskMap
-          activePlace={activePlace}
-          fitBoundsRequest={fitBoundsRequest}
-          places={visiblePlaces}
-          zoom={mapZoom}
-          onFitPlaces={handleFitPlaces}
-          onZoomChange={handleMapZoomChange}
-          onPlaceSelect={handlePlaceSelect}
-        />
+        <Suspense fallback={<MapFallback state="loading" />}>
+          <KurskMap
+            activePlace={activePlace}
+            fitBoundsRequest={fitBoundsRequest}
+            places={visiblePlaces}
+            zoom={mapZoom}
+            onFitPlaces={handleFitPlaces}
+            onZoomChange={handleMapZoomChange}
+            onPlaceSelect={handlePlaceSelect}
+          />
+        </Suspense>
       ) : null}
       {currentMap ? (
         <>
@@ -456,21 +461,21 @@ export function App() {
           ) : null}
         </>
       ) : null}
-      <PlaceDetailsPanel
-        place={activePlace}
-        onClose={handlePlaceDetailsClose}
-        onRouteOpen={(provider: RouteProvider) => {
-          if (activePlace) {
-            analytics.track({ name: "route_opened", params: { placeId: activePlace.id, provider } });
-          }
-        }}
-        onExternalLinkOpen={(kind) => {
-          if (activePlace) {
-            analytics.track({ name: "external_link_clicked", params: { placeId: activePlace.id, kind } });
-          }
-        }}
-        onOpenMap={handleOpenMap}
-      />
+      {activePlace ? (
+        <Suspense fallback={null}>
+          <PlaceDetailsPanel
+            place={activePlace}
+            onClose={handlePlaceDetailsClose}
+            onRouteOpen={(provider: RouteProvider) => {
+              analytics.track({ name: "route_opened", params: { placeId: activePlace.id, provider } });
+            }}
+            onExternalLinkOpen={(kind) => {
+              analytics.track({ name: "external_link_clicked", params: { placeId: activePlace.id, kind } });
+            }}
+            onOpenMap={handleOpenMap}
+          />
+        </Suspense>
+      ) : null}
       <AboutProjectDialog
         analyticsConsent={analyticsConsent}
         isOpen={isAboutOpen}

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { PlaceFeature } from "../../src/domain/places";
 import { createPlaceFeatureCollection } from "../../src/components/map/placeSource";
 
-function makePlace(id: string, image?: string, thumbnail?: string): PlaceFeature {
+function makePlace(id: string, image = "/place-images/full.jpg", mapThumbnail = "/place-map-thumbnails/thumb.webp"): PlaceFeature {
   return {
     type: "Feature",
     id,
@@ -13,46 +13,46 @@ function makePlace(id: string, image?: string, thumbnail?: string): PlaceFeature
         name: `Место ${id}`,
         description: "Описание",
         address: "Курск",
-        ...(image ? { image } : {}),
-        ...(thumbnail ? { thumbnail } : {})
+        image,
+        mapThumbnail
       }
     }
   };
 }
 
 describe("createPlaceFeatureCollection", () => {
-  it("uses thumbnail as marker image and falls back to image", () => {
+  it("uses only mapThumbnail as marker image", () => {
     const collection = createPlaceFeatureCollection([
-      makePlace("thumb", "/images/full.jpg", "/images/thumb.jpg"),
-      makePlace("image", "/images/only-full.jpg")
+      makePlace("thumb", "/images/full.jpg", "/place-map-thumbnails/thumb.webp"),
+      makePlace("image", "/images/only-full.jpg", "/place-map-thumbnails/image.webp")
     ]);
 
     expect(collection.features[0]?.properties).toMatchObject({
-      markerImage: "/images/thumb.jpg",
+      markerImage: "/place-map-thumbnails/thumb.webp",
       markerImageId: "place-marker-thumb"
     });
     expect(collection.features[1]?.properties).toMatchObject({
-      markerImage: "/images/only-full.jpg",
+      markerImage: "/place-map-thumbnails/image.webp",
       markerImageId: "place-marker-image"
     });
   });
 
-  it("does not expose the full image as the marker when thumbnail exists", () => {
-    const collection = createPlaceFeatureCollection([makePlace("separate", "/place-images/full.jpg", "/place-thumbnails/thumb.jpg")]);
+  it("does not expose the full image as the marker", () => {
+    const collection = createPlaceFeatureCollection([makePlace("separate", "/place-images/full.jpg", "/place-map-thumbnails/thumb.webp")]);
 
-    expect(collection.features[0]?.properties.markerImage).toBe("/place-thumbnails/thumb.jpg");
+    expect(collection.features[0]?.properties.markerImage).toBe("/place-map-thumbnails/thumb.webp");
     expect(collection.features[0]?.properties.markerImage).not.toBe("/place-images/full.jpg");
   });
 
   it("keeps a 500-place publication set in a single GeoJSON source", () => {
-    const places = Array.from({ length: 500 }, (_, index) => makePlace(`place-${index}`, "/pwa/icon-512.png"));
+    const places = Array.from({ length: 500 }, (_, index) => makePlace(`place-${index}`, "/place-images/icon-512.png", "/place-map-thumbnails/icon-512.webp"));
 
     expect(createPlaceFeatureCollection(places).features).toHaveLength(500);
   });
 
   it("adds runtime marker layout properties when they are available", () => {
     const collection = createPlaceFeatureCollection(
-      [makePlace("shifted", "/images/full.jpg")],
+      [makePlace("shifted", "/images/full.jpg", "/place-map-thumbnails/shifted.webp")],
       new Map([
         [
           "shifted",

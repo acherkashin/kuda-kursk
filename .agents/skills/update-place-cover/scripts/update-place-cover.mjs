@@ -162,7 +162,7 @@ function localAssetFile(projectRoot, publicPath) {
     return null;
   }
 
-  const allowedPrefix = publicPath.startsWith("/place-images/") || publicPath.startsWith("/place-thumbnails/");
+  const allowedPrefix = publicPath.startsWith("/place-images/") || publicPath.startsWith("/place-map-thumbnails/");
 
   if (!allowedPrefix || publicPath.includes("..")) {
     return null;
@@ -182,12 +182,12 @@ async function writeJsonAtomically(filePath, data) {
   }
 }
 
-function printSummary({ carouselIndex, dataFilePath, dryRun, newAssets, oldImage, oldThumbnail, place, projectRoot, removable }) {
+function printSummary({ carouselIndex, dataFilePath, dryRun, newAssets, oldImage, oldMapThumbnail, place, projectRoot, removable }) {
   console.log(dryRun ? "Dry run: would update place cover:" : "Updated place cover:");
   console.log(`- Place: ${place.properties.balloonContent.name} (${place.id})`);
   console.log(`- Data file: ${relative(projectRoot, dataFilePath)}`);
   console.log(`- Image: ${oldImage ?? "none"} -> ${newAssets.imagePublicPath}`);
-  console.log(`- Thumbnail: ${oldThumbnail ?? "none"} -> ${newAssets.thumbnailPublicPath}`);
+  console.log(`- Map thumbnail: ${oldMapThumbnail ?? "none"} -> ${newAssets.mapThumbnailPublicPath}`);
   console.log(`- Carousel photo: ${carouselIndex === null ? "none" : carouselIndex + 1}`);
 
   for (const publicPath of removable) {
@@ -251,7 +251,7 @@ async function main() {
   }
 
   const oldImage = typeof content.image === "string" ? content.image : null;
-  const oldThumbnail = typeof content.thumbnail === "string" ? content.thumbnail : null;
+  const oldMapThumbnail = typeof content.mapThumbnail === "string" ? content.mapThumbnail : null;
   const carouselIndex = findCoverPhotoIndex(content.images);
   const newAssets = await planPlaceAssets({
     imagePath,
@@ -261,19 +261,26 @@ async function main() {
   });
 
   content.image = newAssets.imagePublicPath;
-  content.thumbnail = newAssets.thumbnailPublicPath;
+  content.mapThumbnail = newAssets.mapThumbnailPublicPath;
+  delete content.thumbnail;
+
+  if (Array.isArray(content.images)) {
+    content.images = content.images.map((photo) => {
+      const { thumbnail: _thumbnail, ...photoWithoutThumbnail } = photo;
+      return photoWithoutThumbnail;
+    });
+  }
 
   if (carouselIndex !== null) {
     content.images[carouselIndex] = {
       ...content.images[carouselIndex],
-      src: newAssets.imagePublicPath,
-      thumbnail: newAssets.thumbnailPublicPath
+      src: newAssets.imagePublicPath
     };
   }
 
-  const oldPublicPaths = [...new Set([oldImage, oldThumbnail].filter(Boolean))];
+  const oldPublicPaths = [...new Set([oldImage, oldMapThumbnail].filter(Boolean))];
   const removable = oldPublicPaths.filter(
-    (publicPath) => publicPath !== newAssets.imagePublicPath && publicPath !== newAssets.thumbnailPublicPath &&
+    (publicPath) => publicPath !== newAssets.imagePublicPath && publicPath !== newAssets.mapThumbnailPublicPath &&
       localAssetFile(projectRoot, publicPath) && !records.some((candidate) => containsString(candidate.data, publicPath))
   );
 
@@ -284,7 +291,7 @@ async function main() {
       dryRun: true,
       newAssets,
       oldImage,
-      oldThumbnail,
+      oldMapThumbnail,
       place,
       projectRoot,
       removable
@@ -305,7 +312,7 @@ async function main() {
     if (generatedAssets.created) {
       await Promise.all([
         unlink(generatedAssets.imageOutputPath).catch(() => undefined),
-        unlink(generatedAssets.thumbnailOutputPath).catch(() => undefined)
+        unlink(generatedAssets.mapThumbnailOutputPath).catch(() => undefined)
       ]);
     }
 
@@ -332,7 +339,7 @@ async function main() {
     dryRun: false,
     newAssets,
     oldImage,
-    oldThumbnail,
+    oldMapThumbnail,
     place,
     projectRoot,
     removable: removed

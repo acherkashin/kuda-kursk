@@ -3,19 +3,19 @@ import { appPath, appUrlPattern } from "./support/appPath";
 
 test.describe("первый экран карты", () => {
   test("desktop и mobile показывают карту, логотип и публичные маркеры", async ({ page }) => {
-    const firstThumbnailLoaded = page.waitForResponse(
-      (response) => response.url().includes(appPath("/place-thumbnails/320-f29160ce22.webp")) && response.ok()
+    const firstMapThumbnailLoaded = page.waitForResponse(
+      (response) => response.url().includes(appPath("/place-map-thumbnails/")) && response.ok()
     );
 
     await page.goto(appPath("/"));
-    await firstThumbnailLoaded;
+    await firstMapThumbnailLoaded;
 
     await expect(page).toHaveURL(appUrlPattern("/maps/main"));
     await expect(page.getByTestId("map-shell")).toBeVisible();
     await expect
       .poll(async () => Number(await page.getByTestId("map-shell").getAttribute("data-place-count")), { timeout: 15_000 })
       .toBeGreaterThan(0);
-    await expect(page.getByLabel("Куда в Курске")).toBeVisible();
+    await expect(page.getByLabel("Куда в Курске — Путеводитель для местных")).toBeVisible();
     await expect(page.getByAltText("Логотип «Куда в Курске»")).toBeVisible();
     await expect(page.getByTestId("place-marker")).toHaveCount(0);
     await expect(page.getByTestId("map-place-control").first()).toBeAttached();

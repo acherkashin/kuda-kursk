@@ -3,7 +3,7 @@ import { buildPlaceDetails } from "../../src/domain/placeDetails";
 import type { PlaceFeature } from "../../src/domain/places";
 
 describe("buildPlaceDetails", () => {
-  it("uses image as the fallback photo and keeps thumbnail for previews", () => {
+  it("uses image as the fallback photo without exposing mapThumbnail", () => {
     const place = {
       type: "Feature",
       id: "hotel",
@@ -15,38 +15,15 @@ describe("buildPlaceDetails", () => {
           description: "Описание",
           address: "Адрес",
           image: "/place-images/320-image-photo.jpg",
-          thumbnail: "/place-thumbnails/320-f29160ce22.webp"
+          mapThumbnail: "/place-map-thumbnails/320.webp"
         }
       }
     } satisfies PlaceFeature;
 
     expect(buildPlaceDetails(place).photos[0]).toMatchObject({
-      src: "/place-images/320-image-photo.jpg",
-      thumbnail: "/place-thumbnails/320-f29160ce22.webp"
+      src: "/place-images/320-image-photo.jpg"
     });
     expect(buildPlaceDetails(place).photos[0]?.caption).toBeUndefined();
-  });
-
-  it("falls back to thumbnail when image is absent", () => {
-    const place = {
-      type: "Feature",
-      id: "sketch",
-      geometry: { type: "Point", coordinates: [36.191748, 51.735498] },
-      properties: {
-        id: "sketch",
-        balloonContent: {
-          name: "КГУ",
-          description: "Описание",
-          address: "Адрес",
-          thumbnail: "/place-thumbnails/sketches/1.jpg"
-        }
-      }
-    } satisfies PlaceFeature;
-
-    expect(buildPlaceDetails(place).photos[0]).toMatchObject({
-      src: "/place-thumbnails/sketches/1.jpg",
-      thumbnail: "/place-thumbnails/sketches/1.jpg"
-    });
   });
 
   it("ignores legacy balloon content urls instead of building GoKursk details links", () => {
@@ -60,6 +37,8 @@ describe("buildPlaceDetails", () => {
           name: "Парк-отель",
           description: "Описание",
           address: "Адрес",
+          image: "/place-images/hotel.jpg",
+          mapThumbnail: "/place-map-thumbnails/hotel.webp",
           url: "/objects/park-otel-peschanyy/"
         }
       }
@@ -80,6 +59,8 @@ describe("buildPlaceDetails", () => {
           name: "Парк-отель",
           description: "Описание",
           address: "Адрес",
+          image: "/place-images/hotel.jpg",
+          mapThumbnail: "/place-map-thumbnails/hotel.webp",
           url: "/objects/park-otel-peschanyy/",
           externalUrl: "https://example.com/place"
         },

@@ -4,7 +4,6 @@ export type Coordinates = [longitude: number, latitude: number];
 
 export type Photo = {
   src: string;
-  thumbnail?: string;
   caption?: string;
   order?: number;
 };
@@ -17,8 +16,8 @@ export type ExternalLink = {
 };
 
 export type BalloonContent = {
-  image?: string;
-  thumbnail?: string;
+  image: string;
+  mapThumbnail: string;
   images?: Photo[];
   name: string;
   description: string;

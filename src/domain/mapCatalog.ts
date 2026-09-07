@@ -18,7 +18,7 @@ export const mapCatalog = [
     slug: "dozapravka",
     title: "Дозаправка",
     description: "Не шефы и не гурманы. Наш вкус, наше мнение.",
-    logo: "/place-thumbnails/9001-dozapravka.jpg",
+    logo: "/brand/dozapravka-logo.jpg",
     dataPath: "/data/dozapravka-objects.json"
   },
   {
@@ -32,7 +32,7 @@ export const mapCatalog = [
     slug: "elena-koltysheva",
     title: "Елена Колтышева",
     description: "Подборка мест для впечатлений",
-    logo: "/place-thumbnails/elena-koltysheva/portal.webp",
+    logo: "/brand/elena-koltysheva-logo.webp",
     dataPath: "/data/elena-koltysheva-objects.json"
   }
 ] as const satisfies readonly PublicMapConfig[];

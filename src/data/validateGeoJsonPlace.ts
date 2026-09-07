@@ -60,7 +60,9 @@ function validateBalloonContent(value: unknown): BalloonContent {
     ...value,
     name: requireString(value.name, "name"),
     description: requireString(value.description, "description"),
-    address: requireString(value.address, "address")
+    address: requireString(value.address, "address"),
+    image: requireString(value.image, "image"),
+    mapThumbnail: requireString(value.mapThumbnail, "mapThumbnail")
   };
 }
 

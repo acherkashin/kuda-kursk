@@ -175,7 +175,7 @@ export function AboutProjectDialog({
         {isPwaInstallAvailable ? (
           <section className="mt-5 border-t border-[var(--color-line)] pt-4" aria-label="Установка приложения">
             <div className="flex items-start gap-3">
-              <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent)]">
+              <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-[var(--color-accent-soft)] text-[var(--color-accent-strong)]">
                 {isIosManualInstall ? <ShareIcon aria-hidden="true" size={18} /> : <DownloadIcon aria-hidden="true" size={18} />}
               </span>
               <div className="min-w-0 flex-1">

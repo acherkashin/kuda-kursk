@@ -26,17 +26,8 @@ export function buildPlaceDetails(place: PlaceFeature): PlaceDetailsViewModel {
   const [longitude, latitude] = place.geometry.coordinates;
   const photos = [...(content.images ?? [])].sort((left, right) => (left.order ?? 0) - (right.order ?? 0));
 
-  if (photos.length === 0 && (content.image || content.thumbnail)) {
-    const fallbackPhoto: Photo = {
-      src: content.image ?? content.thumbnail ?? "",
-      order: 0
-    };
-
-    if (content.thumbnail) {
-      fallbackPhoto.thumbnail = content.thumbnail;
-    }
-
-    photos.push(fallbackPhoto);
+  if (photos.length === 0) {
+    photos.push({ src: content.image, order: 0 });
   }
 
   const links = [...(place.properties.links ?? [])];

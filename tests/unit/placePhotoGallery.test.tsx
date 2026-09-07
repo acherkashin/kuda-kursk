@@ -117,6 +117,8 @@ describe("PlaceDetailsPanel с фотогалереей", () => {
               name: "Место с фотографиями",
               description: "Описание места",
               address: "Курск",
+              image: "/place-images/first.jpg",
+              mapThumbnail: "/place-map-thumbnails/first.webp",
               images: photos
             }
           }

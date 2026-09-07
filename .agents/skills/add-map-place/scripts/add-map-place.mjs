@@ -213,7 +213,7 @@ async function prepareImagePaths(imagePath, id, name) {
   });
 }
 
-function createFeature({ id, name, address, description, latitude, longitude, imagePublicPath, thumbnailPublicPath }) {
+function createFeature({ id, name, address, description, latitude, longitude, imagePublicPath, mapThumbnailPublicPath }) {
   const formattedLatitude = latitude.toFixed(6);
   const formattedLongitude = longitude.toFixed(6);
 
@@ -228,7 +228,7 @@ function createFeature({ id, name, address, description, latitude, longitude, im
       id,
       balloonContent: {
         image: imagePublicPath,
-        thumbnail: thumbnailPublicPath,
+        mapThumbnail: mapThumbnailPublicPath,
         name,
         description,
         address
@@ -250,7 +250,7 @@ function printSummary({ dryRun, map, dataFilePath, feature, imagePaths }) {
   console.log(`- Address: ${feature.properties.balloonContent.address}`);
   console.log(`- Coordinates: ${formattedCoordinates}`);
   console.log(`- Image: ${imagePaths.imagePublicPath}`);
-  console.log(`- Thumbnail: ${imagePaths.thumbnailPublicPath}`);
+  console.log(`- Map thumbnail: ${imagePaths.mapThumbnailPublicPath}`);
 }
 
 async function main() {
@@ -287,7 +287,7 @@ async function main() {
     latitude,
     longitude,
     imagePublicPath: imagePaths.imagePublicPath,
-    thumbnailPublicPath: imagePaths.thumbnailPublicPath
+    mapThumbnailPublicPath: imagePaths.mapThumbnailPublicPath
   });
 
   if (args.dryRun) {
@@ -309,7 +309,7 @@ async function main() {
     if (generatedAssets.created) {
       await Promise.all([
         unlink(generatedAssets.imageOutputPath).catch(() => undefined),
-        unlink(generatedAssets.thumbnailOutputPath).catch(() => undefined)
+        unlink(generatedAssets.mapThumbnailOutputPath).catch(() => undefined)
       ]);
     }
 

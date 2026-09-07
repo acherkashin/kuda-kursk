@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { addMarkerImages, MARKER_IMAGE_SIZE } from "../../src/components/map/markerImages";
 import type { PlaceFeature } from "../../src/domain/places";
 
-function makePlace(id: string, image?: string, thumbnail?: string): PlaceFeature {
+function makePlace(id: string, image = "/place-images/full.jpg", mapThumbnail = "/place-map-thumbnails/thumb.webp"): PlaceFeature {
   return {
     type: "Feature",
     id,
@@ -13,8 +13,8 @@ function makePlace(id: string, image?: string, thumbnail?: string): PlaceFeature
         name: `Место ${id}`,
         description: "Описание",
         address: "Курск",
-        ...(image ? { image } : {}),
-        ...(thumbnail ? { thumbnail } : {})
+        image,
+        mapThumbnail
       }
     }
   };
@@ -29,7 +29,7 @@ function makeImageData(): ImageData {
 }
 
 describe("addMarkerImages", () => {
-  it("updates an existing placeholder with the place thumbnail", async () => {
+  it("updates an existing placeholder with the place mapThumbnail", async () => {
     const imageData = makeImageData();
     const map = {
       hasImage: vi.fn(() => true),
@@ -39,12 +39,12 @@ describe("addMarkerImages", () => {
     const loadImage = vi.fn(async () => ({ width: 128, height: 128 }) as HTMLImageElement);
     const createMarkerImageData = vi.fn(() => imageData);
 
-    await addMarkerImages(map, [makePlace("thumb", "/place-images/full.jpg", "/place-thumbnails/thumb.jpg")], {
+    await addMarkerImages(map, [makePlace("thumb", "/place-images/full.jpg", "/place-map-thumbnails/thumb.webp")], {
       createMarkerImageData,
       loadImage
     });
 
-    expect(loadImage).toHaveBeenCalledWith("/place-thumbnails/thumb.jpg");
+    expect(loadImage).toHaveBeenCalledWith("/place-map-thumbnails/thumb.webp");
     expect(createMarkerImageData).toHaveBeenCalledWith({ width: 128, height: 128 });
     expect(map.updateImage).toHaveBeenCalledWith("place-marker-thumb", imageData);
     expect(map.addImage).not.toHaveBeenCalled();
@@ -58,7 +58,7 @@ describe("addMarkerImages", () => {
       updateImage: vi.fn()
     };
 
-    await addMarkerImages(map, [makePlace("new", "/place-images/full.jpg", "/place-thumbnails/thumb.jpg")], {
+    await addMarkerImages(map, [makePlace("new", "/place-images/full.jpg", "/place-map-thumbnails/thumb.webp")], {
       createMarkerImageData: () => imageData,
       loadImage: async () => ({ width: 128, height: 128 }) as HTMLImageElement
     });
@@ -67,7 +67,7 @@ describe("addMarkerImages", () => {
     expect(map.updateImage).not.toHaveBeenCalled();
   });
 
-  it("uses image as a fallback marker source when thumbnail is absent", async () => {
+  it("never uses the card image as a marker source", async () => {
     const loadedSources: string[] = [];
 
     await addMarkerImages(
@@ -76,7 +76,7 @@ describe("addMarkerImages", () => {
         addImage: vi.fn(),
         updateImage: vi.fn()
       },
-      [makePlace("fallback", "/place-images/full.jpg")],
+      [makePlace("map-only", "/place-images/full.jpg", "/place-map-thumbnails/map-only.webp")],
       {
         createMarkerImageData: makeImageData,
         loadImage: async (src) => {
@@ -86,6 +86,6 @@ describe("addMarkerImages", () => {
       }
     );
 
-    expect(loadedSources).toEqual(["/place-images/full.jpg"]);
+    expect(loadedSources).toEqual(["/place-map-thumbnails/map-only.webp"]);
   });
 });

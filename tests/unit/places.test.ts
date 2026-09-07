@@ -14,6 +14,8 @@ function makePlace(id: string, visibility?: PlaceFeature["properties"]["visibili
         name: `Место ${id}`,
         description: "Описание",
         address: "Курск",
+        image: "/place-images/test.jpg",
+        mapThumbnail: "/place-map-thumbnails/test.webp"
       }
     }
   };

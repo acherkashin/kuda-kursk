@@ -19,7 +19,7 @@ const variants: Record<ButtonLinkVariant, string> = {
   accent:
     "border-[var(--color-accent)] bg-[var(--color-accent)] text-white hover:shadow-[var(--shadow-raised)]",
   "accent-soft":
-    "border-[var(--color-accent)] bg-[var(--color-accent-soft)] text-[var(--color-accent)] hover:shadow-[var(--shadow-rest)]",
+    "border-[var(--color-accent)] bg-[var(--color-accent-soft)] text-[var(--color-accent-strong)] hover:shadow-[var(--shadow-rest)]",
 };
 
 const sizes: Record<ButtonLinkSize, string> = {

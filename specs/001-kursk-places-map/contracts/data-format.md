@@ -22,8 +22,8 @@ type PlaceFeature = {
 };
 
 type BalloonContent = {
-  image?: string;
-  thumbnail?: string;
+  image: string;
+  mapThumbnail: string;
   images?: Photo[];
   name: string;
   description: string;
@@ -34,7 +34,6 @@ type BalloonContent = {
 
 type Photo = {
   src: string;
-  thumbnail?: string;
   caption?: string;
   order?: number;
 };
@@ -66,11 +65,11 @@ type PlaceVisibility = {
   "properties": {
     "id": 4,
     "balloonContent": {
-      "image": "/upload/resize_cache/iblock/c5c/16av2df104848p5mcomkxbgszonpibwn/640_380_0/180919centrobank77.jpg",
+      "image": "/place-images/4-image-bank.webp",
       "name": "Государственное управление Банка России по Курской области",
       "description": "Курское отделение Государственного банка открыто 8 сентября 1865 года.",
       "address": "г. Курск・ул. Ленина, 83",
-      "thumbnail": "/place-thumbnails/4-5f91ca7cc3.webp"
+      "mapThumbnail": "/place-map-thumbnails/4-map-thumbnail-5f91ca7cc3.webp"
     }
   }
 }
@@ -81,6 +80,8 @@ type PlaceVisibility = {
 - `geometry.coordinates` всегда `[longitude, latitude]`.
 - Если координаты для Курска выглядят как `[latitude, longitude]`, импорт должен завершиться ошибкой валидации.
 - Строка координат для карточки и копирования вычисляется из `geometry.coordinates` в порядке `latitude, longitude`; `balloonContent.coordinates` не используется.
+- Карточка использует только `images` (если массив непустой) или обязательное `image`; `mapThumbnail` используется только MapLibre-маркером и никогда не является fallback фотографией карточки.
+- При переносе исторического `thumbnail` в `mapThumbnail` файл копируется без изменения пикселей, кадрирования или формата; генератор квадратного WebP применяется только к новым местам или подтверждённой замене обложки.
 - Устаревшие поля `properties.section`, `properties.type` и `balloonContent.button` не используются интерфейсом и не должны добавляться в новые записи.
 - Дополнительные поля в `properties` разрешены и должны сохраняться для будущего backend/CMS, но UI показывает только поддержанные поля.
 - Отсутствующие optional поля не создают пустые блоки интерфейса.

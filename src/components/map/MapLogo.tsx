@@ -13,6 +13,7 @@ type MapLogoProps = {
 };
 
 export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, title }: MapLogoProps) {
+  const accessibleName = subtitle ? `${title} — ${subtitle}` : title;
   const content = (
     <>
       <img
@@ -53,7 +54,7 @@ export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, titl
           <a
             className="flex w-max max-w-full min-w-0 flex-auto items-center gap-2 text-[var(--color-text)] no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
             href={import.meta.env.BASE_URL}
-            aria-label={title}
+            aria-label={accessibleName}
           >
             {content}
           </a>
@@ -67,7 +68,7 @@ export function MapLogo({ actionSlot, className, logoSrc, onBack, subtitle, titl
     <a
       className="inline-flex h-12 max-w-[280px] flex-none items-center gap-2.5 overflow-hidden whitespace-nowrap rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] px-3 text-[15px] font-bold text-[var(--color-text)] no-underline shadow-[var(--shadow-rest)] transition-[box-shadow,border-color] duration-150 hover:border-[var(--color-line-strong)] hover:shadow-[var(--shadow-raised)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] max-[700px]:max-w-[210px] max-[520px]:max-w-[170px] max-[520px]:gap-2 max-[520px]:px-2.5"
       href={import.meta.env.BASE_URL}
-      aria-label={title}
+      aria-label={accessibleName}
     >
       {content}
     </a>

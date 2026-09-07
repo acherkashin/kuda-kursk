@@ -7,7 +7,7 @@ type FilterChipProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "aria-press
 
 export function FilterChip({ children, className = "", isSelected, ...props }: FilterChipProps) {
   const selectedClass = isSelected
-    ? "border-[var(--color-accent)] bg-[var(--color-accent-soft)] text-[var(--color-accent)]"
+    ? "border-[var(--color-accent)] bg-[var(--color-accent-soft)] text-[var(--color-accent-strong)]"
     : "border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-text-secondary)] hover:border-[var(--color-line-strong)]";
 
   return (

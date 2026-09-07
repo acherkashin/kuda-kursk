@@ -66,7 +66,7 @@ describe.skipIf(process.platform !== "darwin")("add-map-place image integration"
 
     expect(result.status).toBe(0);
     expect(result.stdout).toMatch(/\/place-images\/1-image-testovoe-mesto-[a-f0-9]{10}\.webp/);
-    expect(result.stdout).toMatch(/\/place-thumbnails\/1-thumbnail-testovoe-mesto-[a-f0-9]{10}\.webp/);
+    expect(result.stdout).toMatch(/\/place-map-thumbnails\/1-map-thumbnail-testovoe-mesto-[a-f0-9]{10}\.webp/);
     expect(await readFile(dataPath, "utf8")).toBe(initialData);
     await expect(readdir(join(projectRoot, "public", "place-images"))).rejects.toMatchObject({ code: "ENOENT" });
   });
@@ -80,9 +80,9 @@ describe.skipIf(process.platform !== "darwin")("add-map-place image integration"
 
     expect(result.status).toBe(0);
     expect(content.image).toMatch(/^\/place-images\/1-image-testovoe-mesto-[a-f0-9]{10}\.webp$/);
-    expect(content.thumbnail).toMatch(/^\/place-thumbnails\/1-thumbnail-testovoe-mesto-[a-f0-9]{10}\.webp$/);
+    expect(content.mapThumbnail).toMatch(/^\/place-map-thumbnails\/1-map-thumbnail-testovoe-mesto-[a-f0-9]{10}\.webp$/);
     expect((await readFile(join(projectRoot, "public", content.image))).subarray(8, 12).toString("ascii")).toBe("WEBP");
-    expect((await readFile(join(projectRoot, "public", content.thumbnail))).subarray(8, 12).toString("ascii")).toBe("WEBP");
+    expect((await readFile(join(projectRoot, "public", content.mapThumbnail))).subarray(8, 12).toString("ascii")).toBe("WEBP");
     expect((await readdir(join(projectRoot, "public", "place-images"))).some((name) => name.endsWith(".jpg"))).toBe(false);
   });
 

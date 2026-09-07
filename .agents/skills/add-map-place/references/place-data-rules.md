@@ -18,7 +18,7 @@
     "id": 123,
     "balloonContent": {
       "image": "/place-images/123-image-name.webp",
-      "thumbnail": "/place-thumbnails/123-thumbnail-name.webp",
+      "mapThumbnail": "/place-map-thumbnails/123-map-thumbnail-name.webp",
       "name": "Название места",
       "description": "Описание места.",
       "address": "Курск, улица Ленина, 1"

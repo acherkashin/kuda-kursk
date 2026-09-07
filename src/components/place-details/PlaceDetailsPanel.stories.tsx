@@ -23,6 +23,8 @@ const placeWithPhotos: PlaceFeature = {
   properties: {
     id: "story-cafe",
     balloonContent: {
+      image: "/place-images/1-image-local-dba58e76a6.jpg",
+      mapThumbnail: "/place-map-thumbnails/story-cafe.webp",
       name: "Кофейня у Красной площади",
       description:
         "Небольшое место для спокойного завтрака и короткой встречи в центре. Внутри тихо, а из окон хорошо видно городское движение.",
@@ -31,13 +33,11 @@ const placeWithPhotos: PlaceFeature = {
       images: [
         {
           src: "/place-images/1-image-local-dba58e76a6.jpg",
-          thumbnail: "/place-thumbnails/2010-thumbnail-dozapravka-589165129.jpg",
           caption: "Зал кофейни",
           order: 1
         },
         {
           src: "/place-images/2-image-local-437bc9a2fd.jpg",
-          thumbnail: "/place-thumbnails/2008-thumbnail-ce6615bef6.jpg",
           caption: "Деталь интерьера",
           order: 2
         }
@@ -86,7 +86,6 @@ const placeWithMultiplePhotos: PlaceFeature = {
       images: [
         {
           src: "/place-images/9006-image-nevesomost.png",
-          thumbnail: "/place-thumbnails/9006-thumbnail-nevesomost.png",
           order: 1
         },
         { src: "/place-images/9006-image-nevesomost-2.jpg", order: 2 },
@@ -109,7 +108,6 @@ const placeWithLandscapePhoto: PlaceFeature = {
       images: [
         {
           src: "/place-images/320-image-1b82889cd9.jpg",
-          thumbnail: "/place-thumbnails/320-f29160ce22.webp",
           caption: "Парк-отель",
           order: 1
         }
@@ -151,7 +149,6 @@ const placeWithMultilineDescription: PlaceFeature = {
       images: [
         {
           src: "/place-images/9005-plyazhnyy-kompleks-gorodskoy.webp",
-          thumbnail: "/place-thumbnails/9005-plyazhnyy-kompleks-gorodskoy.webp",
           caption: "Пляжный комплекс Городской",
           order: 1
         }
@@ -169,13 +166,14 @@ const placeWithoutExternalLinks: PlaceFeature = {
     id: "story-without-external-links",
     links: [],
     balloonContent: {
+      image: "/place-images/13-image-local-d61f833ba8.jpg",
+      mapThumbnail: "/place-map-thumbnails/story-no-links.webp",
       name: "Ул. Ломоносова, 7",
       description: "Историческое здание на улице Ломоносова.",
       address: "ул. Ломоносова, 7",
       images: [
         {
           src: "/place-images/13-image-local-d61f833ba8.jpg",
-          thumbnail: "/place-thumbnails/sketches/13.jpg",
           caption: "Ул. Ломоносова, 7",
           order: 1
         }
@@ -234,6 +232,8 @@ const placeWithoutPhotos: PlaceFeature = {
   properties: {
     id: "story-square",
     balloonContent: {
+      image: "/place-images/13-image-local-d61f833ba8.jpg",
+      mapThumbnail: "/place-map-thumbnails/story-square.webp",
       name: "Тихий двор на Ленина",
       description:
         "Небольшой городской двор рядом с привычным маршрутом по центру. Хороший пример карточки, где у места пока нет фотографии.",
@@ -258,6 +258,8 @@ const portalPlace: PlaceFeature = {
     mapLink: { slug: "dozapravka" },
     routable: false,
     balloonContent: {
+      image: "/place-images/9001-image-dozapravka.webp",
+      mapThumbnail: "/place-map-thumbnails/story-portal.webp",
       name: "Дозаправка",
       description:
         "Сообщество о курских кофейнях и местах, где можно выдохнуть и перезагрузиться. Откройте отдельную карту — мы собрали проверенные точки города.",

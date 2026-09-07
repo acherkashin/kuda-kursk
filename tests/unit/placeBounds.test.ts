@@ -9,7 +9,7 @@ function makePlace(id: string, coordinates: [number, number]): PlaceFeature {
     geometry: { type: "Point", coordinates },
     properties: {
       id,
-      balloonContent: { name: id, description: id, address: id }
+      balloonContent: { name: id, description: id, address: id, image: "/place-images/test.jpg", mapThumbnail: "/place-map-thumbnails/test.webp" }
     }
   };
 }

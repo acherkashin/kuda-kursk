@@ -21,7 +21,7 @@
 }
 ```
 
-Все локальные public-пути приложения (`/data/...`, `/map-styles/...`, `/place-images/...`, `/place-thumbnails/...`, `/pwa/...`, `/sw.js`) должны резолвиться через Vite `BASE_URL`. Для локальной разработки и GitHub Pages production на custom domain `BASE_URL` остаётся `/`.
+Все локальные public-пути приложения (`/data/...`, `/map-styles/...`, `/place-images/...`, `/place-map-thumbnails/...`, `/brand/...`, `/pwa/...`, `/sw.js`) должны резолвиться через Vite `BASE_URL`. Для локальной разработки и GitHub Pages production на custom domain `BASE_URL` остаётся `/`.
 
 `index.html` должен содержать iOS standalone metadata: `apple-mobile-web-app-capable=yes`, `apple-mobile-web-app-title` и `apple-mobile-web-app-status-bar-style`.
 

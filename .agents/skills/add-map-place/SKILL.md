@@ -99,7 +99,7 @@ node .agents/skills/add-map-place/scripts/add-map-place.mjs \
 
 - `geometry.coordinates` всегда записывай как `[longitude, latitude]`.
 - `balloonContent.coordinates` не записывай: строка координат для UI вычисляется из `geometry.coordinates`.
-- `balloonContent.image` и `thumbnail` всегда должны ссылаться на созданные helper-ом WebP-файлы; не сохраняй исходный JPEG, PNG или HEIC в `public/`.
+- `balloonContent.image` и `mapThumbnail` всегда должны ссылаться на созданные helper-ом WebP-файлы; `image` предназначено только для карточки, `mapThumbnail` — только для маркера. Не сохраняй исходный JPEG, PNG или HEIC в `public/`.
 - Не добавляй пустые optional поля.
 - Не меняй существующие места, если задача только добавить новое место.
 - Не трогай чужие незакоммиченные изменения в рабочем дереве.

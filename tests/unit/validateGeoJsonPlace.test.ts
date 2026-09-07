@@ -14,6 +14,8 @@ const validPlace = {
       name: "Площадка на Боевке",
       description: "Спортивная площадка рядом с прогулочными маршрутами.",
       address: "г. Курск, парк Боева дача",
+      image: "/place-images/boevka.webp",
+      mapThumbnail: "/place-map-thumbnails/boevka.webp",
     }
   }
 };
@@ -82,5 +84,15 @@ describe("validateGeoJsonPlace", () => {
         }
       })
     ).toThrow(/address/i);
+
+    expect(() =>
+      validateGeoJsonPlace({
+        ...validPlace,
+        properties: {
+          ...validPlace.properties,
+          balloonContent: { ...validPlace.properties.balloonContent, image: "" }
+        }
+      })
+    ).toThrow(/image/i);
   });
 });

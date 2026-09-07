@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import "../../styles/place-editorial-font.css";
 import { CheckIcon, CopyIcon, MapIcon, MessageCircleWarningIcon, XIcon } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { buildFeedbackUrl } from "../../domain/feedbackLinks";

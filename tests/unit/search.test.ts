@@ -14,6 +14,8 @@ const places = [
         name: "Площадка на Боевке",
         description: "Спортивная зона",
         address: "Парк Боева дача",
+        image: "/place-images/test.jpg",
+        mapThumbnail: "/place-map-thumbnails/test.webp"
       }
     }
   },
@@ -27,6 +29,8 @@ const places = [
         name: "Дозаправка",
         description: "Городское место",
         address: "Центр",
+        image: "/place-images/test.jpg",
+        mapThumbnail: "/place-map-thumbnails/test.webp"
       }
     }
   }
