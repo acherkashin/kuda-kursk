@@ -305,12 +305,12 @@
         "type": "elena-koltysheva",
         "id": 8,
         "balloonContent": {
-          "image": "/place-images/elena-koltysheva/landizayn.webp",
+          "image": "/place-images/8-image-gostevoy-sad-landizayn-076263fea3.webp",
           "name": "Гостевой сад «Ландизайн»",
           "description": "Потрясающе живописное место с изобилием зелени самых разных видов и сортов. Подходит для прогулок, фотосессий и просто приятного и спокойного времяпрепровождения.",
           "address": "Курский район, СНТ имени 1 Мая, участок 221",
           "button": "Открыть подробности",
-          "mapThumbnail": "/place-map-thumbnails/elena-koltysheva/landizayn.webp"
+          "mapThumbnail": "/place-map-thumbnails/8-map-thumbnail-gostevoy-sad-landizayn-076263fea3.webp"
         },
         "links": [
           {
@@ -322,6 +322,11 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/landesign_kursk/",
             "kind": "instagram"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/DcnVR5eo8PZ/?stkn=MXNicHd1MmFuOWp6OQ==",
+            "kind": "details"
           }
         ]
       }
@@ -581,6 +586,153 @@
             "label": "Instagram",
             "url": "https://www.instagram.com/kolokolschool_kursk/",
             "kind": "instagram"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9014,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.145787,
+          51.74144
+        ]
+      },
+      "properties": {
+        "id": 9014,
+        "balloonContent": {
+          "image": "/place-images/9014-image-vr-attraktsiony-7a3d8a1abf.webp",
+          "mapThumbnail": "/place-map-thumbnails/9014-map-thumbnail-vr-attraktsiony-7a3d8a1abf.webp",
+          "name": "VR аттракционы",
+          "description": "Теперь в парке виртуальной реальности WARPOINT есть и аттракционы. Аэрохоккей, VR 360, «Пол - это лава», электронный и механический тиры и другое.",
+          "address": "Курск, ул. Студенческая, 1, ТЦ «Европа 40», 2 этаж"
+        },
+        "links": [
+          {
+            "label": "Сайт",
+            "url": "https://kursk.warpoint.ru/",
+            "kind": "site"
+          },
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.ru/warpoint_kursk",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/warpoint_kursk?stkn=MThxMDg0cDZ5N28xbQ==",
+            "kind": "instagram"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/Ddq3h1IomZR/?stkn=MTl5dDl3cjRzYTM4eA==",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9015,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.177509,
+          51.773151
+        ]
+      },
+      "properties": {
+        "id": 9015,
+        "balloonContent": {
+          "image": "/place-images/9015-image-studiya-mozaiki-94568f2841.webp",
+          "mapThumbnail": "/place-map-thumbnails/9015-map-thumbnail-studiya-mozaiki-94568f2841.webp",
+          "name": "Студия мозаики",
+          "description": "Творческая студия мозаики в Курске, где можно своими руками создать необычное изделие. Мастер-классы подойдут даже тем, кто никогда раньше не работал с мозаикой.",
+          "address": "Курск, проспект Победы, 2"
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.ru/mozaica46",
+            "kind": "vk"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/DcDQ7wCoJtN/?stkn=c2N6dDVvcGRoaWpz",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9016,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.252441,
+          51.738183
+        ]
+      },
+      "properties": {
+        "id": 9016,
+        "balloonContent": {
+          "image": "/place-images/9016-image-ekskursiya-na-retro-tramvae-1733dd7317.webp",
+          "mapThumbnail": "/place-map-thumbnails/9016-map-thumbnail-ekskursiya-na-retro-tramvae-1733dd7317.webp",
+          "name": "Экскурсия на ретро-трамвае",
+          "description": "Необычная экскурсия по улицам Курска на ретро-трамвае с интересными историями о городе и его трамвайном прошлом.",
+          "address": "Курск, остановка «Восточное депо»"
+        },
+        "links": [
+          {
+            "label": "Сайт",
+            "url": "https://ket46.ru/articles/129/",
+            "kind": "site"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/Db5YTJxICdM/?stkn=eDdjNTVsOGZ1d201",
+            "kind": "details"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 9017,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.186164,
+          51.726938
+        ]
+      },
+      "properties": {
+        "id": 9017,
+        "balloonContent": {
+          "image": "/place-images/9017-image-klub-sportivnogo-pokera-6ca502bf0f.webp",
+          "mapThumbnail": "/place-map-thumbnails/9017-map-thumbnail-klub-sportivnogo-pokera-6ca502bf0f.webp",
+          "name": "Клуб спортивного покера",
+          "description": "Клуб спортивного покера в Курске, где проходят турниры по техасскому холдему. Играют не на деньги, а на фишки и очки клубного рейтинга. Подойдёт и новичкам.",
+          "address": "Курск, ул. Дзержинского, 40"
+        },
+        "links": [
+          {
+            "label": "ВКонтакте",
+            "url": "https://vk.ru/klubkoroleva46",
+            "kind": "vk"
+          },
+          {
+            "label": "Instagram",
+            "url": "https://www.instagram.com/klubkoroleva?stkn=MXg5b3BmaTRuYWIyZw==",
+            "kind": "instagram"
+          },
+          {
+            "label": "Мой обзор",
+            "url": "https://www.instagram.com/reel/DbdijjpoSzG/?stkn=MTVhc3RocDUzOHhnOA==",
+            "kind": "details"
           }
         ]
       }
