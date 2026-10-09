@@ -736,6 +736,27 @@
           }
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9018,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.649199,
+          51.960323
+        ]
+      },
+      "properties": {
+        "id": 9018,
+        "balloonContent": {
+          "image": "/place-images/9018-image-ulitochnaya-ferma-ulitkampaniya-d1f011b02b.webp",
+          "mapThumbnail": "/place-map-thumbnails/9018-map-thumbnail-ulitochnaya-ferma-ulitkampaniya-d1f011b02b.webp",
+          "name": "Улиточная ферма «Улиткампания»",
+          "description": "Улиточная ферма «Улиткампания» - необычное место для загородного отдыха, где можно узнать всё о выращивании улиток, познакомиться с обитателями фермы и попробовать оригинальные блюда из улиток на дегустации.",
+          "address": "Фатежский район, Солдатский сельсовет, деревня Поздняково"
+        }
+      }
     }
   ]
 }
