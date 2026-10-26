@@ -1783,6 +1783,27 @@
           "mapThumbnail": "/place-map-thumbnails/9013-thumbnail-derevyannaya-tserkov-pokrova-presvyatoy-bogoroditsy-5489691b6d.webp"
         }
       }
+    },
+    {
+      "type": "Feature",
+      "id": 9014,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          36.31297,
+          51.97253
+        ]
+      },
+      "properties": {
+        "id": 9014,
+        "balloonContent": {
+          "image": "/place-images/9014-image-korennaya-pustyn-03dead8079.webp",
+          "mapThumbnail": "/place-map-thumbnails/9014-thumbnail-korennaya-pustyn-03dead8079.webp",
+          "name": "Коренная пустынь",
+          "description": "Мужской монастырь в посёлке Свобода над рекой Тускарь, основанный в 1597 году на месте обретения Курской Коренной иконы «Знамение».",
+          "address": "Курская область, Золотухинский район, местечко Свобода, Советская улица, 42"
+        }
+      }
     }
   ]
 }
